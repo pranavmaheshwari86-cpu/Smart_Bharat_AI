@@ -1,118 +1,292 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect } from "react";
+import styles from "./schemes.module.css";
+import {
+  Home,
+  Sparkles,
+  Briefcase,
+  FileText,
+  BarChart,
+  Settings,
+  HelpCircle,
+  Bell,
+  User,
+  ArrowRight,
+  Star,
+  File,
+  Target,
+  UploadCloud,
+  ChevronRight,
+  Check,
+  CheckCircle,
+} from "lucide-react";
 import Link from "next/link";
-import { schemes, categories, states } from "@/lib/data";
-import { Search, Filter, ArrowRight, ChevronDown } from "lucide-react";
 
-export default function SchemesPage() {
-  const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedState, setSelectedState] = useState("All");
+export default function SchemesDashboard() {
+  useEffect(() => {
+    function fitStage() {
+      const stage = document.getElementById("stage");
+      const viewport = document.getElementById("viewport");
+      if (stage && viewport) {
+        const scale = Math.min(window.innerWidth / 1600, 1);
+        stage.style.transform = `scale(${scale})`;
+        viewport.style.height = stage.offsetHeight * scale + 48 + "px";
+      }
+    }
+    window.addEventListener("resize", fitStage);
+    fitStage();
+    setTimeout(fitStage, 50);
 
-  const filteredSchemes = schemes.filter(scheme => {
-    const matchesSearch = scheme.name.toLowerCase().includes(search.toLowerCase()) || scheme.description.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || scheme.category === selectedCategory;
-    const matchesState = selectedState === "All" || scheme.state === "All India" || scheme.state === selectedState;
-    return matchesSearch && matchesCategory && matchesState;
-  });
+    return () => window.removeEventListener("resize", fitStage);
+  }, []);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 min-h-[calc(100vh-4rem)]">
-      <div className="mb-12 md:flex md:items-end md:justify-between gap-8">
-        <div className="max-w-2xl">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-normal text-slate-900 mb-4">Government Schemes</h1>
-          <p className="text-lg text-slate-700 leading-relaxed">
-            Discover, filter, and apply for schemes you are eligible for, with real-time updates and transparent tracking.
-          </p>
-        </div>
-      </div>
+    <div className={styles.container}>
+      <div className={styles.viewport} id="viewport">
+        <div className={styles.stage} id="stage">
+          <div className={`${styles.glow} ${styles.glowLavender}`}></div>
+          <div className={`${styles.glow} ${styles.glowPink}`}></div>
+          <div className={`${styles.glow} ${styles.glowBlue}`}></div>
 
-      <div className="mb-12 flex flex-col gap-4 md:flex-row p-2 rounded-lg bg-white border border-slate-300 shadow-sm">
-        <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" aria-hidden="true" />
-          <label htmlFor="search-schemes" className="sr-only">Search schemes</label>
-          <input 
-            id="search-schemes"
-            placeholder="Search schemes..." 
-            className="h-12 w-full rounded-md border-none bg-transparent pl-12 pr-4 text-slate-900 placeholder:text-slate-500 focus-ring transition-colors"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div className="h-px w-full bg-slate-200 md:h-12 md:w-px" />
-        <div className="flex flex-1 flex-col sm:flex-row gap-4 px-2 pb-2 md:p-0">
-          <div className="relative flex-1">
-            <Filter className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500 pointer-events-none" aria-hidden="true" />
-            <label htmlFor="category-filter" className="sr-only">Filter by category</label>
-            <select 
-              id="category-filter"
-              className="h-12 w-full appearance-none rounded-md border-none bg-transparent pl-10 pr-10 text-sm font-medium text-slate-900 focus-ring transition-colors cursor-pointer"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value="All">All Categories</option>
-              {categories.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <ChevronDown className="absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500 pointer-events-none" aria-hidden="true" />
-          </div>
-          <div className="hidden sm:block h-12 w-px bg-slate-200" />
-          <div className="relative flex-1">
-            <label htmlFor="state-filter" className="sr-only">Filter by state</label>
-            <select 
-              id="state-filter"
-              className="h-12 w-full appearance-none rounded-md border-none bg-transparent pl-4 pr-10 text-sm font-medium text-slate-900 focus-ring transition-colors cursor-pointer"
-              value={selectedState}
-              onChange={(e) => setSelectedState(e.target.value)}
-            >
-              <option value="All">All States</option>
-              {states.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
-            <ChevronDown className="absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500 pointer-events-none" aria-hidden="true" />
-          </div>
-        </div>
-      </div>
-
-      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {filteredSchemes.map((scheme) => (
-          <div key={scheme.id}>
-            <Link href={`/schemes/${scheme.id}`} className="block h-full group focus-ring rounded-lg">
-              <div className="flex h-full flex-col accessible-card p-6 border border-slate-200 hover:border-accent-600 transition-colors relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="h-5 w-5 text-accent-700" aria-hidden="true" />
-                </div>
-                
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="inline-flex items-center rounded-sm bg-slate-900 px-3 py-1 text-xs font-semibold tracking-wide text-white">
-                    {scheme.category}
-                  </span>
-                  <span className="text-xs font-medium tracking-wide text-slate-600 uppercase">{scheme.state}</span>
-                </div>
-                
-                <h2 className="text-xl font-bold text-slate-900 mb-2 pr-6 group-hover:text-accent-700 transition-colors">{scheme.name}</h2>
-                <p className="text-base text-slate-700 line-clamp-2 leading-relaxed mb-6 flex-1">{scheme.description}</p>
-                
-                <div className="space-y-3 pt-6 border-t border-slate-200 mt-auto">
-                  <div>
-                    <span className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Eligibility</span>
-                    <span className="block text-sm text-slate-900 line-clamp-1 font-medium">{scheme.eligibility}</span>
-                  </div>
-                  <div>
-                    <span className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Benefits</span>
-                    <span className="block text-sm text-slate-900 line-clamp-1 font-medium">{scheme.benefits}</span>
-                  </div>
-                </div>
+          <div className={styles.page}>
+            {/* ===================== SIDEBAR ===================== */}
+            <aside className={`${styles.sidebar} ${styles.glass}`}>
+              <div className={styles.logo}>
+                <div className={styles.logoSymbol}>C</div>
+                <div className={styles.logoText}>Civic AI</div>
               </div>
-            </Link>
+
+              <nav className={styles.navList}>
+                <button className={styles.navItem}>
+                  <Home /> Home
+                </button>
+                <button className={styles.navItem}>
+                  <Sparkles /> AI Insights
+                </button>
+                <button className={`${styles.navItem} ${styles.active}`}>
+                  <Briefcase /> Schemes
+                </button>
+                <button className={styles.navItem}>
+                  <FileText /> Applications
+                </button>
+                <button className={styles.navItem}>
+                  <BarChart /> Analytics
+                </button>
+              </nav>
+
+              <div className={styles.sidebarFooter}>
+                <button className={styles.navItem}>
+                  <Settings /> Settings
+                </button>
+                <button className={styles.navItem}>
+                  <HelpCircle /> Help
+                </button>
+              </div>
+            </aside>
+
+            {/* ===================== RIGHT SIDE ===================== */}
+            <div className={styles.mainCol}>
+              {/* ---------- Top Navbar ---------- */}
+              <header className={styles.topnav}>
+                <div className={styles.topnavLinks}>
+                  <Link href="/" className={`${styles.topnavLink} ${styles.active}`}>
+                    Dashboard
+                  </Link>
+                  <Link href="/schemes" className={styles.topnavLink}>
+                    Schemes
+                  </Link>
+                  <Link href="/complaints" className={styles.topnavLink}>
+                    Complaints
+                  </Link>
+                  <Link href="#" className={styles.topnavLink}>
+                    Support
+                  </Link>
+                </div>
+                <div className={styles.topnavRight}>
+                  <button className={styles.iconBtn} aria-label="Notifications">
+                    <Bell />
+                    <span className={styles.notifDot}></span>
+                  </button>
+                  <div className={styles.avatar}>
+                    <User />
+                  </div>
+                </div>
+              </header>
+
+              {/* ---------- Main Dashboard ---------- */}
+              <main className={styles.dashboard}>
+                {/* LEFT COLUMN */}
+                <div className={styles.colLeft}>
+                  {/* Hero Card */}
+                  <section className={`${styles.hero} ${styles.glass}`}>
+                    <div className={styles.heroLeft}>
+                      <div className={styles.heroHeadingRow}>
+                        <h1 className={styles.heroHeading}>
+                          AI Insights: PM Kisan Samman Nidhi
+                        </h1>
+                        <span className={`${styles.badge} ${styles.badgeGreen}`}>
+                          High Match
+                        </span>
+                        <span className={`${styles.badge} ${styles.badgeOrange}`}>
+                          Requires 1 Doc
+                        </span>
+                      </div>
+                      <p className={styles.heroDesc}>
+                        Based on your recent land record update, you are now eligible
+                        for the PM Kisan scheme. The AI has pre-filled <b>80%</b> of
+                        your application using verified digital locker data.
+                      </p>
+                      <button className={styles.ctaBtn}>
+                        Review Application
+                        <ArrowRight />
+                      </button>
+                    </div>
+
+                    <div className={styles.heroRight}>
+                      <div className={styles.heroMesh}></div>
+                      <div className={styles.docStack}>
+                        <div className={`${styles.docLayer} ${styles.docLayerL2}`}></div>
+                        <div className={`${styles.docLayer} ${styles.docLayerL1}`}></div>
+                        <div className={styles.docFront}>
+                          <div className={`${styles.docLine} ${styles.docLineW1}`}></div>
+                          <div className={`${styles.docLine} ${styles.docLineW2}`}></div>
+                          <div className={`${styles.docLine} ${styles.docLineW3}`}></div>
+                        </div>
+                        <div className={styles.docBadge}>
+                          <Star fill="currentColor" />
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* Quick Actions */}
+                  <section>
+                    <h2 className={styles.sectionHeading}>Quick Actions</h2>
+                    <div className={styles.quickActionsGrid}>
+                      <div className={`${styles.actionCard} ${styles.glass}`}>
+                        <div className={styles.actionIcon}>
+                          <File />
+                        </div>
+                        <div className={styles.actionBottom}>
+                          <div>
+                            <div className={styles.actionTitle}>Apply for Scheme</div>
+                            <div className={styles.actionSub}>Browse 42+ options</div>
+                          </div>
+                          <div className={styles.arrowCircle}>
+                            <ChevronRight />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className={`${styles.actionCard} ${styles.glass}`}>
+                        <div className={styles.actionIcon}>
+                          <Target />
+                        </div>
+                        <div className={styles.actionBottom}>
+                          <div>
+                            <div className={styles.actionTitle}>Track Complaint</div>
+                            <div className={styles.actionSub}>2 active issues</div>
+                          </div>
+                          <div className={styles.arrowCircle}>
+                            <ChevronRight />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className={`${styles.actionCard} ${styles.glass}`}>
+                        <div className={styles.actionIcon}>
+                          <UploadCloud />
+                        </div>
+                        <div className={styles.actionBottom}>
+                          <div>
+                            <div className={styles.actionTitle}>Upload Documents</div>
+                            <div className={styles.actionSub}>DigiLocker Sync</div>
+                          </div>
+                          <div className={styles.arrowCircle}>
+                            <ChevronRight />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* Recent Activity */}
+                  <section className={`${styles.activityCard} ${styles.glass}`}>
+                    <h2 className={styles.sectionHeading} style={{ marginBottom: 0 }}>
+                      Recent Activity
+                    </h2>
+
+                    <div className={styles.activityList}>
+                      <div className={styles.activityItem}>
+                        <div className={`${styles.activityDot} ${styles.activityDotGreen}`}>
+                          <Check />
+                        </div>
+                        <div className={styles.activityBody}>
+                          <div>
+                            <div className={styles.activityTitle}>
+                              Application Approved: Subsidized Solar
+                            </div>
+                            <div className={styles.activityTime}>
+                              Timestamp at 11:33 PM
+                            </div>
+                          </div>
+                          <span className={styles.activityPill}>Approved</span>
+                        </div>
+                      </div>
+
+                      <div className={styles.activityItem}>
+                        <div className={`${styles.activityDot} ${styles.activityDotBlue}`}>
+                          <FileText />
+                        </div>
+                        <div className={styles.activityBody}>
+                          <div>
+                            <div className={styles.activityTitle}>
+                              Document Synced from DigiLocker
+                            </div>
+                            <div className={styles.activityTime}>
+                              Timestamp at 10:45 PM
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={styles.activityDivider}></div>
+                    <Link href="#" className={styles.activityFooter}>
+                      View All Activity <ArrowRight />
+                    </Link>
+                  </section>
+                </div>
+
+                {/* RIGHT COLUMN */}
+                <div className={styles.colRight}>
+                  <div className={`${styles.statCard} ${styles.glass}`}>
+                    <div className={`${styles.statWave} ${styles.statWaveA}`}></div>
+                    <div className={styles.statTop}>
+                      <div className={styles.statTitle}>Active Applications</div>
+                      <div className={styles.statIcon}>
+                        <File />
+                      </div>
+                    </div>
+                    <div className={styles.statNumber}>03</div>
+                  </div>
+
+                  <div className={`${styles.statCard} ${styles.glass}`}>
+                    <div className={`${styles.statWave} ${styles.statWaveB}`}></div>
+                    <div className={styles.statTop}>
+                      <div className={styles.statTitle}>Resolved Issues</div>
+                      <div className={styles.statIcon}>
+                        <CheckCircle />
+                      </div>
+                    </div>
+                    <div className={styles.statNumber}>12</div>
+                  </div>
+                </div>
+              </main>
+            </div>
           </div>
-        ))}
-        
-        {filteredSchemes.length === 0 && (
-          <div className="col-span-full py-24 text-center">
-            <p className="text-lg font-medium text-slate-900">No schemes found</p>
-            <p className="text-slate-600 mt-1">Try adjusting your search or filters.</p>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );

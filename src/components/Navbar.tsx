@@ -22,6 +22,8 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
+  if (pathname === "/schemes") return null;
+
   return (
     <>
       <div className="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-neutral-950/70 backdrop-blur-xl backdrop-saturate-150">
