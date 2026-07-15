@@ -1,0 +1,6 @@
+{
+  "files": ["src/app/layout.tsx", "src/app/page.tsx", "src/components/**/*.tsx"],
+  "insertBefore": "</body>",
+  "commentSyntax": "{/* IMP_LIVE_START */}...{/* IMP_LIVE_END */}",
+  "cspChecked": true
+}

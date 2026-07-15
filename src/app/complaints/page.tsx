@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { complaintCategories } from "@/lib/data";
 import { DynamicForm } from "@/components/DynamicForm";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, ChevronDown } from "lucide-react";
 
 export default function ComplaintsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -16,37 +15,35 @@ export default function ComplaintsPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">File a Complaint</h1>
-        <p className="mt-2 text-lg text-slate-600">Report civic issues directly to the concerned department.</p>
+    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 min-h-[calc(100vh-4rem)]">
+      <div className="mb-12 max-w-2xl">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-normal text-slate-900 mb-4">File a Complaint</h1>
+        <p className="text-lg text-slate-700 leading-relaxed">
+          Report civic issues directly to the concerned department with complete transparency and tracking.
+        </p>
       </div>
 
-      <div className="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 p-4">
-        <div className="flex">
-          <AlertCircle className="h-5 w-5 text-yellow-600" aria-hidden="true" />
-          <div className="ml-3">
-            <h3 className="text-sm font-medium text-yellow-800">Important Note</h3>
-            <div className="mt-2 text-sm text-yellow-700">
-              <p>For emergencies, please dial 112 (Police) or 108 (Ambulance). This portal is for non-emergency administrative complaints only.</p>
-            </div>
+      <div className="mb-8 rounded-lg border border-accent-200 bg-accent-50 p-5 shadow-sm">
+        <div className="flex gap-4">
+          <AlertCircle className="h-6 w-6 text-accent-700 shrink-0 mt-0.5" aria-hidden="true" />
+          <div>
+            <h3 className="text-base font-semibold text-accent-900">Important Note</h3>
+            <p className="mt-1 text-base text-accent-800 leading-relaxed">
+              For emergencies, please dial 112 (Police) or 108 (Ambulance). This portal is strictly for non-emergency administrative complaints and public grievances.
+            </p>
           </div>
         </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Complaint Details</CardTitle>
-          <CardDescription>Select a category to reveal the necessary fields.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="mb-6 space-y-2">
-            <label htmlFor="category" className="text-sm font-medium text-slate-700">
-              Complaint Category
-            </label>
+      <div className="accessible-card p-6 md:p-10 border border-slate-200 shadow-sm bg-white">
+        <div className="mb-8 space-y-3">
+          <label htmlFor="category" className="block text-base font-semibold text-slate-900">
+            Complaint Category
+          </label>
+          <div className="relative">
             <select
               id="category"
-              className="flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+              className="appearance-none flex h-12 w-full rounded-md border border-slate-300 bg-white px-4 py-2 text-slate-900 focus-ring transition-colors shadow-sm"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
@@ -57,20 +54,21 @@ export default function ComplaintsPage() {
                 </option>
               ))}
             </select>
+            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500 pointer-events-none" aria-hidden="true" />
           </div>
+        </div>
 
-          {activeCategory && (
-            <div className="mt-8 border-t border-slate-100 pt-8">
-              <h3 className="mb-4 text-lg font-medium text-slate-900">Fill Information</h3>
-              <DynamicForm 
-                fields={activeCategory.fields} 
-                onSubmit={handleSubmit} 
-                submitLabel="File Complaint" 
-              />
-            </div>
-          )}
-        </CardContent>
-      </Card>
+        {activeCategory && (
+          <div className="border-t border-slate-200 pt-8 mt-8">
+            <h3 className="mb-6 text-2xl font-bold text-slate-900">Details Required</h3>
+            <DynamicForm 
+              fields={activeCategory.fields} 
+              onSubmit={handleSubmit} 
+              submitLabel="File Complaint" 
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
