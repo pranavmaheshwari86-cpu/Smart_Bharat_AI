@@ -173,6 +173,7 @@ Documentation
 - NEVER finish a task without updating the Code Review Graph — view it before starting, update it after finishing, no exceptions.
 - NEVER hallucinate MCPs, plugins, or skills that aren't in the registry.
 - ALWAYS use the most specific matching skill for each sub-task.
+- ALWAYS incorporate 3D effect animations, micro-interactions, and vibrant color gradients for UI/UX elements when building interfaces to ensure an impeccable premium aesthetic.
 - ALWAYS fall back to `general-assistant` if no skill matches.
 - NEVER claim `ruflo`, `agency-agents`, or the Code Review Graph were used unless they were actually available and accessed.
 - Prefer `ruflo` whenever it is available.

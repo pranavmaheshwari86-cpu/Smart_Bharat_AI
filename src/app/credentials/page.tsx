@@ -1,126 +1,203 @@
 "use client";
 
-import { useState } from "react";
-import { mockCredentials } from "@/lib/data";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { CheckCircle2, ShieldAlert, CloudDrizzle, FileBadge, Upload } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 
 export default function CredentialsPage() {
-  const [isSyncing, setIsSyncing] = useState(false);
-  const [hasSynced, setHasSynced] = useState(false);
-
-  const handleSync = () => {
-    setIsSyncing(true);
-    // Simulate DigiLocker API sync
-    setTimeout(() => {
-      setIsSyncing(false);
-      setHasSynced(true);
-    }, 2000);
-  };
-
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mb-8 md:flex md:items-center md:justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">My Credentials</h1>
-          <p className="mt-2 text-lg text-slate-600">Secure digital vault for your verified documents.</p>
-        </div>
-        <div className="mt-4 md:mt-0 flex gap-4">
-          <Button variant="outline" className="gap-2 bg-white">
-            <Upload className="h-4 w-4" />
-            Upload Document
-          </Button>
-          <Button 
-            onClick={handleSync} 
-            disabled={isSyncing || hasSynced}
-            className="gap-2 bg-[#2E3192] hover:bg-[#1E2060] text-white"
-          >
-            <CloudDrizzle className={`h-4 w-4 ${isSyncing ? 'animate-bounce' : ''}`} />
-            {isSyncing ? "Syncing..." : hasSynced ? "Synced" : "Sync DigiLocker"}
-          </Button>
-        </div>
-      </div>
+    <div className="min-h-screen flex flex-col font-sans" style={{
+      backgroundColor: '#f8f9fa',
+      backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E")`
+    }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        .glass-card-cred {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 28px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-      <AnimatePresence>
-        {hasSynced && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="mb-8 overflow-hidden"
-          >
-            <div className="rounded-lg bg-green-50 p-4 border border-green-200 flex items-center gap-3">
-              <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0" />
-              <p className="text-sm font-medium text-green-800">
-                Successfully synced with DigiLocker. 3 documents were verified and linked.
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        .glass-card-cred:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {mockCredentials.map((cred) => (
-          <Card key={cred.id} className="relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4">
-              {cred.isVerified ? (
-                <div className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-full text-xs font-semibold">
-                  <CheckCircle2 className="h-3 w-3" />
-                  Verified
+        .glass-card-cred::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+      `}} />
+
+      <main className="flex-grow pt-32 pb-20 px-8 max-w-7xl mx-auto w-full text-gray-900">
+        {/* Hero Section */}
+        <section className="text-center mb-16 flex flex-col items-center">
+          <div className="inline-flex items-center justify-center bg-blue-100/50 border border-blue-600/20 rounded-full px-4 py-1.5 mb-6 text-blue-800 font-medium text-sm shadow-sm">
+            <span className="material-symbols-outlined text-base mr-2" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+            Government Verified
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4">Your Verified Identity</h1>
+          <p className="text-gray-600 max-w-2xl text-lg">Manage and share your digital government credentials with complete security and ease.</p>
+        </section>
+
+        {/* Content Grid */}
+        <section className="mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Left Column: Upload */}
+            <div className="glass-card-cred p-8 flex flex-col gap-6">
+              <div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-2">Upload Document</h3>
+                <p className="text-gray-600 text-sm">Manually upload your digital credentials for verification.</p>
+              </div>
+              <div className="flex flex-col gap-4">
+                <select defaultValue="" className="w-full bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-[#0453cd] outline-none transition-all">
+                  <option disabled value="">Select Document Type</option>
+                  <option value="Signature">Signature</option>
+                  <option value="Aadhaar Card">Aadhaar Card</option>
+                  <option value="PAN Card">PAN Card</option>
+                  <option value="Driving License">Driving License</option>
+                  <option value="Educational Certificate">Educational Certificate</option>
+                </select>
+                <div className="border-2 border-dashed border-gray-300 rounded-[28px] p-8 flex flex-col items-center justify-center gap-4 hover:border-[#0453cd]/50 transition-colors cursor-pointer bg-gray-50">
+                  <span className="material-symbols-outlined text-4xl text-gray-400">cloud_upload</span>
+                  <p className="text-sm text-gray-500 text-center">Drag and drop files here or click to browse</p>
+                  <button onClick={() => alert("Opening document upload dialog...")} className="bg-[#D4AF37] hover:bg-[#c29e2f] text-white font-medium px-6 py-2 rounded-lg transition-all shadow-sm flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm">add</span>
+                    Upload Document
+                  </button>
                 </div>
-              ) : (
-                <div className="flex items-center gap-1 text-yellow-600 bg-yellow-50 px-2 py-1 rounded-full text-xs font-semibold">
-                  <ShieldAlert className="h-3 w-3" />
-                  Unverified
-                </div>
-              )}
+              </div>
             </div>
             
-            <CardHeader className="pt-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                <FileBadge className="h-6 w-6" />
-              </div>
-              <CardTitle className="text-xl">{cred.name}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <p className="text-slate-500 text-xs uppercase tracking-wider">Issuer</p>
-                  <p className="font-medium text-slate-900 truncate">{cred.issuer}</p>
+            {/* Right Column: DigiLocker Sync */}
+            <div className="glass-card-cred p-8 flex flex-col justify-between">
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-[28px] bg-[#0453cd]/10 flex items-center justify-center">
+                    <span className="material-symbols-outlined text-3xl text-[#0453cd]">sync</span>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold text-gray-900">DigiLocker Sync</h3>
+                    <p className="text-[#0453cd] font-medium text-sm">Official Government Integration</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-slate-500 text-xs uppercase tracking-wider">Date Issued</p>
-                  <p className="font-medium text-slate-900">{cred.dateIssued}</p>
-                </div>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  Securely fetch and verify your official documents directly from your government DigiLocker account.
+                </p>
               </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-      
-      <div className="mt-12 rounded-2xl bg-slate-50 border border-slate-200 p-6 sm:p-8">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Consent & Auto-fill Logs</h3>
-        <p className="text-sm text-slate-600 mb-6">Track where your credentials have been used to autofill applications.</p>
-        
-        <div className="space-y-4">
-          <div className="flex items-start gap-4 p-4 bg-white rounded-lg border border-slate-100">
-            <div className="mt-0.5 h-2 w-2 rounded-full bg-blue-600 shrink-0" />
-            <div>
-              <p className="text-sm font-medium text-slate-900">Aadhaar Card attached to PM Vidyalakshmi Karyakram</p>
-              <p className="text-xs text-slate-500 mt-1">2026-06-15 • Consent ID: C-90283</p>
+              <div className="mt-8">
+                <button onClick={() => alert("Connecting to DigiLocker...")} className="w-full bg-[#0453cd] hover:bg-[#356ee7] text-white font-semibold py-4 rounded-[28px] transition-all shadow-lg flex items-center justify-center gap-3 group">
+                  <span className="material-symbols-outlined group-hover:rotate-180 transition-transform duration-500">cloud_sync</span>
+                  Connect &amp; Sync
+                </button>
+                <p className="text-center text-xs text-gray-500 mt-4 flex items-center justify-center gap-1">
+                  <span className="material-symbols-outlined text-xs">lock</span>
+                  End-to-end encrypted connection
+                </p>
+              </div>
             </div>
           </div>
-          <div className="flex items-start gap-4 p-4 bg-white rounded-lg border border-slate-100">
-            <div className="mt-0.5 h-2 w-2 rounded-full bg-blue-600 shrink-0" />
+        </section>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Aadhaar Card */}
+          <div className="glass-card-cred p-8 flex flex-col justify-between h-full">
             <div>
-              <p className="text-sm font-medium text-slate-900">PAN Card attached to Passport Application</p>
-              <p className="text-xs text-slate-500 mt-1">2026-05-10 • Consent ID: C-88421</p>
+              <div className="flex justify-between items-start mb-6">
+                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-900">
+                  <span className="material-symbols-outlined text-2xl">badge</span>
+                </div>
+                <div className="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1 border border-emerald-200">
+                  <span className="material-symbols-outlined text-sm">check_circle</span>
+                  Verified
+                </div>
+              </div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">Aadhaar Card</h2>
+              <p className="text-gray-600 text-sm mb-6 uppercase tracking-wider font-semibold">Unique Identification</p>
+              <div className="mb-6">
+                <p className="text-xs text-gray-500 mb-1 uppercase tracking-wider">Aadhaar Number</p>
+                <p className="font-mono text-sm font-medium text-gray-900 tracking-widest">XXXX XXXX 1234</p>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-4 pt-6 border-t border-gray-200">
+              <button onClick={() => alert("Viewing Aadhaar Card...")} className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm">
+                <span className="material-symbols-outlined text-sm">visibility</span> View
+              </button>
+              <button onClick={() => alert("Downloading Aadhaar Card...")} className="flex-1 bg-[#D4AF37] hover:bg-[#c29e2f] text-white font-medium py-2 rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2 text-sm">
+                <span className="material-symbols-outlined text-sm">download</span> Download
+              </button>
+            </div>
+          </div>
+
+          {/* PAN Card */}
+          <div className="glass-card-cred p-8 flex flex-col justify-between h-full">
+            <div>
+              <div className="flex justify-between items-start mb-6">
+                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-900">
+                  <span className="material-symbols-outlined text-2xl">credit_card</span>
+                </div>
+                <div className="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1 border border-emerald-200">
+                  <span className="material-symbols-outlined text-sm">check_circle</span>
+                  Verified
+                </div>
+              </div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">PAN Card</h2>
+              <p className="text-gray-600 text-sm mb-6 uppercase tracking-wider font-semibold">Income Tax Dept</p>
+              <div className="mb-6">
+                <p className="text-xs text-gray-500 mb-1 uppercase tracking-wider">PAN Number</p>
+                <p className="font-mono text-sm font-medium text-gray-900 tracking-widest">ABCDE1234F</p>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-4 pt-6 border-t border-gray-200">
+              <button onClick={() => alert("Viewing PAN Card...")} className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm">
+                <span className="material-symbols-outlined text-sm">visibility</span> View
+              </button>
+              <button onClick={() => alert("Downloading PAN Card...")} className="flex-1 bg-[#D4AF37] hover:bg-[#c29e2f] text-white font-medium py-2 rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2 text-sm">
+                <span className="material-symbols-outlined text-sm">download</span> Download
+              </button>
+            </div>
+          </div>
+
+          {/* Voter ID */}
+          <div className="glass-card-cred p-8 flex flex-col justify-between h-full">
+            <div>
+              <div className="flex justify-between items-start mb-6">
+                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-900">
+                  <span className="material-symbols-outlined text-2xl">how_to_vote</span>
+                </div>
+                <div className="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1 border border-amber-200">
+                  <span className="material-symbols-outlined text-sm">warning</span>
+                  Update Required
+                </div>
+              </div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">Voter ID</h2>
+              <p className="text-gray-600 text-sm mb-6 uppercase tracking-wider font-semibold">Election Commission</p>
+              <div className="mb-6">
+                <p className="text-xs text-gray-500 mb-1 uppercase tracking-wider">EPIC Number</p>
+                <p className="font-mono text-sm font-medium text-gray-900 tracking-widest">XYZ9876543</p>
+              </div>
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2 mb-4">
+                <span className="material-symbols-outlined text-amber-600 text-sm mt-0.5">info</span>
+                <p className="text-xs text-amber-800">Address verification pending. Please update your current residential address.</p>
+              </div>
+            </div>
+            <div className="flex mt-4 pt-6 border-t border-gray-200">
+              <button onClick={() => alert("Starting update process for Voter ID...")} className="w-full bg-[#0453cd] hover:bg-[#356ee7] text-white font-medium py-2 rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2 text-sm">
+                Update Now
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
