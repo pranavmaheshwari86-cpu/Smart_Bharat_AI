@@ -1,0 +1,137 @@
+{
+  "communities": {
+    "0": [
+      "memory_api",
+      "memory_architecture",
+      "memory_bugs",
+      "memory_business_rules",
+      "memory_changelog",
+      "memory_coding_standards",
+      "memory_current_status",
+      "memory_database",
+      "memory_decisions",
+      "memory_deployment",
+      "memory_how_to_run",
+      "memory_project_overview",
+      "memory_readme",
+      "memory_tech_stack",
+      "memory_todo"
+    ]
+  },
+  "cohesion": {
+    "0": 0.13333333333333333
+  },
+  "gods": [
+    {
+      "id": "memory_readme",
+      "label": "Memory System README",
+      "degree": 14
+    },
+    {
+      "id": "memory_project_overview",
+      "label": "Project Overview",
+      "degree": 1
+    },
+    {
+      "id": "memory_architecture",
+      "label": "Architecture",
+      "degree": 1
+    },
+    {
+      "id": "memory_tech_stack",
+      "label": "Tech Stack",
+      "degree": 1
+    },
+    {
+      "id": "memory_api",
+      "label": "API Documentation",
+      "degree": 1
+    },
+    {
+      "id": "memory_database",
+      "label": "Database Documentation",
+      "degree": 1
+    },
+    {
+      "id": "memory_business_rules",
+      "label": "Business Rules",
+      "degree": 1
+    },
+    {
+      "id": "memory_coding_standards",
+      "label": "Coding Standards",
+      "degree": 1
+    },
+    {
+      "id": "memory_current_status",
+      "label": "Current Status",
+      "degree": 1
+    },
+    {
+      "id": "memory_decisions",
+      "label": "Architectural Decisions",
+      "degree": 1
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Memory System README",
+      "target": "API Documentation",
+      "source_files": [
+        "memory/README.md",
+        "memory/api.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `API Documentation` unexpectedly reaches hub `Memory System README`"
+    },
+    {
+      "source": "Memory System README",
+      "target": "Architecture",
+      "source_files": [
+        "memory/README.md",
+        "memory/architecture.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `Architecture` unexpectedly reaches hub `Memory System README`"
+    },
+    {
+      "source": "Memory System README",
+      "target": "Bugs",
+      "source_files": [
+        "memory/README.md",
+        "memory/bugs.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `Bugs` unexpectedly reaches hub `Memory System README`"
+    },
+    {
+      "source": "Memory System README",
+      "target": "Business Rules",
+      "source_files": [
+        "memory/README.md",
+        "memory/business-rules.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `Business Rules` unexpectedly reaches hub `Memory System README`"
+    },
+    {
+      "source": "Memory System README",
+      "target": "Changelog",
+      "source_files": [
+        "memory/README.md",
+        "memory/changelog.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `Changelog` unexpectedly reaches hub `Memory System README`"
+    }
+  ],
+  "tokens": {
+    "input": 4296,
+    "output": 1164
+  }
+}

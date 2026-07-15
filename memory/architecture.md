@@ -1,41 +1,23 @@
-# Architecture
+# System Architecture
 
-## Overall System Architecture
-[Describe the high-level architecture]
+## Frontend Design Philosophy
+- Clean, modern, professional, trustworthy.
+- Mobile-first responsive design.
+- Plain-language labels, clear icons.
+- Glassmorphism, soft shadows, Framer Motion animations.
+- Loading skeletons, empty states, error states, success animations.
 
-## Folder Structure
-```text
-/
-├── src/
-├── memory/
-└── ...
-```
+## Application Services Expectations (Modular)
+- **Application Service**: scheme & government ID application submission, status, lifecycle transitions
+- **Complaint Service**: complaint submission, category-specific fields, lifecycle transitions
+- **Credential Service**: DigiLocker connection, manual uploads, versioning, autofill lookups
+- **AI Service**: conversation handling, platform-knowledge retrieval, context-aware responses
+- **Notification Service**: event ingestion from other services, delivery, read/unread state
+- **Search Service**: indexed lookup across schemes, ID types, and complaint categories
 
-## Frontend Architecture
-[Describe frontend patterns, state management, etc.]
-
-## Backend Architecture
-[Describe backend patterns, API style, etc.]
-
-## Services
-- [Service 1]
-- [Service 2]
-
-## Workers & Queues
-[Describe background processing if any]
-
-## Middleware
-[Describe middleware layers]
-
-## Authentication Flow
-[Describe how auth is handled]
-
-## Data Flow
-[Describe how data moves through the system]
-
-## External Integrations
-- [Integration 1]
-- [Integration 2]
-
-## Architecture Diagrams
-[Mermaid or other markdown diagrams here]
+## Future Integrations
+- Additional government APIs
+- SMS/OTP providers
+- Email notification delivery
+- Payment gateways
+- Appointment booking systems

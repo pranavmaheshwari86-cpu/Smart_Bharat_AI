@@ -1,32 +1,30 @@
 # How to Run
 
 ## Requirements
-- [Requirement 1, e.g., Node.js >= 18]
+- Node.js >= 18
+- npm
 
 ## Installation & Dependencies
 ```bash
-# Command to install dependencies
+npm install
 ```
-
-## Environment Setup
-[Instructions on configuring the environment, e.g., copying `.env.example` to `.env`]
 
 ## Local Development
 ```bash
-# Command to start dev server
+npm run dev
 ```
 
 ## Build
 ```bash
-# Command to build the project
+npm run build
 ```
 
 ## Test, Lint & Debug
 ```bash
-# Commands to run tests, linters, etc.
+npm run lint
 ```
 
 ## Production Startup
 ```bash
-# Command to run in production mode
+npm run start
 ```
