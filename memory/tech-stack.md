@@ -1,11 +1,13 @@
 # Tech Stack
 
 ## Frontend
-- [Framework]
-- [Styling]
+- Next.js 16 (App Router)
+- React 19
+- Tailwind CSS 4
 
 ## Backend
-- [Language/Framework]
+- TypeScript
+- Next.js Server Components / API Routes
 
 ## Database & ORM
 - [Database Engine]
@@ -19,8 +21,8 @@
 - **Cloud:** [Cloud Provider]
 
 ## Libraries & Frameworks
-- [Library 1]
-- [Library 2]
+- UI Components: shadcn/ui, base-ui
+- 3D & Animation: @splinetool/react-spline, three, framer-motion, tw-animate-css
 
 ## Languages
 - [Language 1]

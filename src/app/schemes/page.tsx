@@ -172,11 +172,11 @@ void main() {
               Our AI intelligence layer analyzes your profile to match you with the most relevant schemes, grants, and scholarships instantly.
             </p>
             <div className="pt-4 flex gap-4">
-              <button onClick={() => alert("Redirecting to scheme matcher...")} className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-sm shadow-apple-sm hover:-translate-y-1 transition-transform duration-300 flex items-center gap-2 hover:shadow-[0_0_20px_rgba(0,74,198,0.3)]">
+              <Link href="/ai" className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-sm shadow-apple-sm hover:-translate-y-1 transition-transform duration-300 flex items-center gap-2 hover:shadow-[0_0_20px_rgba(0,74,198,0.3)]">
                 Find My Schemes
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </button>
-              <button onClick={() => alert("Loading all schemes...")} className="bg-surface-container text-on-surface px-8 py-4 rounded-xl font-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
+              </Link>
+              <button onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })} className="bg-surface-container text-on-surface px-8 py-4 rounded-xl font-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
                 <span className="material-symbols-outlined">explore</span>
                 Browse All
               </button>

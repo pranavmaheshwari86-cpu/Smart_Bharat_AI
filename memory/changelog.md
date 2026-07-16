@@ -2,9 +2,11 @@
 
 *(Chronological history of features, improvements, refactors, performance/security fixes, and breaking changes)*
 
-## [Date]
-- **Summary:** [What changed]
+## 2026-07-16
+- **Summary:** Added Interactive 3D Robot using Spline and an animated Spotlight UI component using framer-motion for enhanced premium visuals.
 - **Files Changed:**
-  - `path/to/file1`
-  - `path/to/file2`
-- **Author:** [AI or Developer]
+  - `src/components/ui/spotlight.tsx`
+  - `src/components/ui/interactive-3d-robot.tsx`
+  - `src/components/ui/splite.tsx`
+  - `src/components/ui/input.tsx`
+- **Author:** AI

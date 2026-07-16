@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { HeroShowcase } from "@/components/HeroShowcase";
 
 export default function ComplaintsPage() {
   const shaderCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -301,22 +302,7 @@ void main() {
             </div>
           </div>
           <div className="relative h-[500px] rounded-3xl overflow-hidden glass animate-fade-in-up delay-100 flex items-center justify-center border border-white/40 shadow-xl">
-            {/* Abstract 3D composition placeholder */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center" 
-              style={{ backgroundImage: "url('/smart_city_dashboard.png')" }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-surface/50 to-transparent"></div>
-            {/* Floating Glass Elements inside composition */}
-            <div className="absolute top-1/4 left-1/4 glass-card p-4 rounded-2xl flex items-center gap-3 backdrop-blur-md transform -rotate-6 shadow-lg border border-white">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary">water_drop</span>
-              </div>
-              <div>
-                <p className="font-label-sm text-label-sm text-on-surface">Water Leak Detected</p>
-                <p className="text-xs text-on-surface-variant">Routing to Jal Board...</p>
-              </div>
-            </div>
+            <HeroShowcase />
           </div>
         </section>
 

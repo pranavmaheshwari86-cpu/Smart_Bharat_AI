@@ -52,17 +52,18 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right: 3D Animation */}
-          <div className="w-full lg:w-[800px] h-[500px] lg:h-[800px] relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-[30%] z-0 mt-12 lg:mt-0 flex items-center justify-center mix-blend-normal">
+          {/* Right: AI Showcase */}
+          <div className="w-full lg:w-[600px] h-[500px] lg:h-[700px] relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-[10%] z-0 mt-12 lg:mt-0 flex items-center justify-center mix-blend-normal">
             {/* Atmospheric Gradients */}
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,rgba(37,99,235,0.15)_40%,transparent_70%)] blur-[80px]"></div>
             
-            {/* Spline 3D Container */}
-            <div className="w-full h-full bg-transparent relative z-10 opacity-100 transition-opacity duration-1000 ease-in-out">
-              <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
+            {/* Showcase Container */}
+            <div className="w-full h-full bg-transparent relative z-10 opacity-100 transition-opacity duration-1000 ease-in-out flex items-center justify-center">
+              <SplineScene 
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full"
+              />
             </div>
-
-
           </div>
         </div>
       </section>

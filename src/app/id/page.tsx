@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { DocumentSelector } from "@/components/DocumentSelector";
 
 export default function IDPage() {
   const shaderCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -153,48 +154,50 @@ void main() {
         </div>
       </div>
       
-      <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-gutter">
         <div className="flex flex-col gap-lg lg:col-span-12">
           
           {/* Hero Section */}
           <section className="glass-card rounded-[24px] p-8 md:p-12 relative overflow-hidden">
-            <div className="relative z-10 max-w-[100%] md:max-w-[55%]">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full mb-6 border border-surface-variant">
-                <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>workspace_premium</span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant">Government Approved API Integration</span>
-              </div>
-              <h1 className="font-display-lg text-display-lg text-on-surface mb-4 md:text-[56px] md:leading-[64px]">Apply for <span className="text-primary">Government IDs</span> in Minutes.</h1>
-              <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">Experience a frictionless, AI-guided application process for Aadhaar, PAN, and Passports. Highly secure, incredibly fast.</p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                <button onClick={() => alert("Starting ID application...")} className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-primary-container transition-all shadow-level-1 w-full sm:w-auto justify-center">
-                  Start Application
-                  <span className="material-symbols-outlined">arrow_forward</span>
-                </button>
-                <div className="flex items-center gap-2 text-on-surface-variant">
-                  <span className="material-symbols-outlined text-green-600">verified_user</span>
-                  <span className="font-label-sm text-label-sm">256-bit Encryption Secure</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full mb-6 border border-surface-variant">
+                  <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>workspace_premium</span>
+                  <span className="font-label-sm text-label-sm text-on-surface-variant">Government Approved API Integration</span>
+                </div>
+                <h1 className="font-display-lg text-display-lg text-on-surface mb-4 md:text-[56px] md:leading-[64px] text-balance">Apply for <span className="text-primary">Government IDs</span> in Minutes.</h1>
+                <p className="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-[90%]">Experience a frictionless, AI-guided application process for Aadhaar, PAN, and Passports. Highly secure, incredibly fast.</p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  <button onClick={() => alert("Starting ID application...")} className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-primary-container transition-all shadow-level-1 w-full sm:w-auto justify-center">
+                    Start Application
+                    <span className="material-symbols-outlined">arrow_forward</span>
+                  </button>
+                  <div className="flex items-center gap-2 text-on-surface-variant">
+                    <span className="material-symbols-outlined text-green-600">verified_user</span>
+                    <span className="font-label-sm text-label-sm">256-bit Encryption Secure</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Animated Photo Container */}
-            <div className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 w-[60%] md:w-[55%] opacity-40 md:opacity-100 pointer-events-none z-0">
-              <style dangerouslySetInnerHTML={{ __html: `
-                @theme {
-                  --animate-float-hero: float-hero 8s ease-in-out infinite;
-                  --keyframes-float-hero: {
-                    "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
-                    "50%": { transform: "translateY(-20px) rotate(2deg)" }
-                  };
-                }
-              `}} />
-              <div className="relative w-full aspect-[16/10] animate-float-hero flex items-center justify-center">
-                <img 
-                  src="/hero-ids.png" 
-                  alt="Government IDs" 
-                  className="w-full h-full object-contain drop-shadow-2xl scale-110"
-                />
+              {/* Animated Photo Container */}
+              <div className="relative w-full opacity-40 md:opacity-100 pointer-events-none z-0">
+                <style dangerouslySetInnerHTML={{ __html: `
+                  @theme {
+                    --animate-float-hero: float-hero 8s ease-in-out infinite;
+                    --keyframes-float-hero: {
+                      "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+                      "50%": { transform: "translateY(-20px) rotate(2deg)" }
+                    };
+                  }
+                `}} />
+                <div className="relative w-full aspect-[16/10] animate-float-hero flex items-center justify-center">
+                  <img 
+                    src="/hero-ids.png" 
+                    alt="Government IDs" 
+                    className="w-[110%] h-auto object-contain mix-blend-multiply drop-shadow-2xl md:scale-110 origin-center"
+                  />
+                </div>
               </div>
             </div>
           </section>
@@ -236,11 +239,10 @@ void main() {
 
           <h2 className="font-headline-md text-headline-md text-on-surface mt-4">Select Document Type</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <label className="cursor-pointer group">
               <input defaultChecked className="peer sr-only" name="id_type" type="radio" />
               <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
-                <div className="absolute top-4 right-4 bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold tracking-wider">AI RECOMMENDED</div>
                 <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <span className="material-symbols-outlined text-primary text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>fingerprint</span>
                 </div>
@@ -294,6 +296,47 @@ void main() {
                 <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
                   <span className="material-symbols-outlined text-[16px]">timer</span>
                   <span>Est. completion: 10 mins</span>
+                </div>
+              </div>
+            </label>
+
+            <label className="cursor-pointer group">
+              <input className="peer sr-only" name="id_type" type="radio" value="voter_id" />
+              <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
+                <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <span className="material-symbols-outlined text-on-surface text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>how_to_vote</span>
+                </div>
+                <h3 className="font-headline-md text-headline-md text-on-surface text-[20px] mb-2">Voter ID Card</h3>
+                <p className="font-body-md text-body-md text-on-surface-variant text-sm mb-4 flex-grow">Official identity document issued by the Election Commission of India.</p>
+                <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
+                  <span className="material-symbols-outlined text-[16px]">timer</span>
+                  <span>Est. completion: 12 mins</span>
+                </div>
+              </div>
+            </label>
+
+            <label className="cursor-pointer group relative">
+              <input id="others-radio" className="peer sr-only" name="id_type" type="radio" value="others" />
+              <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
+                <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <span className="material-symbols-outlined text-on-surface text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>more_horiz</span>
+                </div>
+                <h3 className="font-headline-md text-headline-md text-on-surface text-[20px] mb-2">Others</h3>
+                <p className="font-body-md text-body-md text-on-surface-variant text-sm flex-grow">Select another document from the list.</p>
+                
+                <div className="relative mt-2 mb-4 z-20">
+                  <DocumentSelector onSelect={(val) => {
+                    const radio = document.getElementById('others-radio') as HTMLInputElement;
+                    if (radio) {
+                      radio.value = val;
+                      radio.checked = true;
+                    }
+                  }} />
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
+                  <span className="material-symbols-outlined text-[16px]">timer</span>
+                  <span>Est. completion: varies</span>
                 </div>
               </div>
             </label>
