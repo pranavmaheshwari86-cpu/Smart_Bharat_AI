@@ -10,3 +10,12 @@
   - `src/components/ui/splite.tsx`
   - `src/components/ui/input.tsx`
 - **Author:** AI
+
+## 2026-07-16 (Update)
+- **Summary:** Styled background of ID, Complaints, and Credentials page to match AI dashboard. Improved 3D Robot global interaction using Spline's setGlobalEvents.
+- **Files Changed:**
+  - `src/app/id/page.tsx`
+  - `src/app/complaints/page.tsx`
+  - `src/app/credentials/page.tsx`
+  - `src/components/ui/interactive-3d-robot.tsx`
+- **Author:** AI

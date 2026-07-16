@@ -5,8 +5,51 @@ import Link from "next/link";
 import * as THREE from 'three';
 import { InteractiveRobotSpline } from "@/components/ui/interactive-3d-robot";
 
+type Message = {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+};
+
 export default function AIPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
+  const handleSendMessage = (text: string = inputValue) => {
+    if (!text.trim()) return;
+    
+    const newUserMsg: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: text
+    };
+    
+    setMessages(prev => [...prev, newUserMsg]);
+    setInputValue("");
+    setIsTyping(true);
+    
+    // Simulate AI response
+    setTimeout(() => {
+      const newAiMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: "I'm a demo assistant for the Smart Bharat project. I can help you find government schemes, understand official documents, or navigate healthcare options. (This is a simulated response)."
+      };
+      setMessages(prev => [...prev, newAiMsg]);
+      setIsTyping(false);
+    }, 1500);
+  };
 
   useEffect(() => {
     // Input focus state handling
@@ -196,37 +239,40 @@ export default function AIPage() {
 
 
           {/* Scrollable Canvas */}
-          <div className="flex-1 overflow-y-auto pt-24 pb-40 px-4 md:px-12 lg:px-20 flex flex-col">
-            <div className={`w-full max-w-[800px] flex flex-col gap-16 ${isSidebarOpen ? 'mr-auto' : 'mx-auto'}`}>
-              {/* Hero Section */}
-              <section className="flex flex-col md:flex-row items-center justify-between gap-8 mt-8 md:mt-16">
-                <div className="flex-1 space-y-4 text-center md:text-left">
+          <div className="flex-1 overflow-y-auto pt-16 md:pt-24 pb-64 px-4 md:px-12 flex flex-col">
+            <div className={`w-full max-w-[1000px] mx-auto flex flex-col gap-12 md:gap-20`}>
 
-                  <h2 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">
-                    Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary font-bold">Intelligence</span><br/>Core
+              {messages.length === 0 ? (
+                <>
+                  {/* Hero Section */}
+                  <section className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 mt-4 md:mt-12">
+                    <div className="flex-1 space-y-6 text-center md:text-left">
+                  <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-on-surface tracking-tight">
+                    Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Intelligence</span><br/>Core
                   </h2>
-                  <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[500px] mx-auto md:mx-0">
+                  <p className="text-lg md:text-[18px] text-on-surface-variant max-w-[500px] mx-auto md:mx-0 leading-relaxed">
                     How can I help you navigate government services, understand documents, or access benefits today?
                   </p>
                 </div>
 
                 {/* Network Visualization Container */}
-                <div className="w-80 h-80 md:w-[400px] md:h-[400px] lg:w-[450px] lg:h-[450px] relative flex-shrink-0" style={{ perspective: '1000px' }}>
-                  
-                  <InteractiveRobotSpline
-                    scene="https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode"
-                    className="absolute inset-0 w-full h-full z-10 spline-container" 
-                  />
-                  
+                <div className="w-[320px] h-[320px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] relative flex-shrink-0 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20 bg-white/10 backdrop-blur-xl">
+                  {/* Scale up slightly to crop out the Spline watermark at the bottom right */}
+                  <div className="absolute top-0 left-[-5%] w-[110%] h-[110%] z-10">
+                    <InteractiveRobotSpline
+                      scene="https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode"
+                      className="absolute inset-0 w-full h-full spline-container" 
+                    />
+                  </div>
                 </div>
               </section>
 
               {/* Suggested Actions Grid */}
-              <section className="w-full">
+              <section className="w-full mt-4">
                 <h3 className="font-label-sm text-label-sm text-tertiary uppercase tracking-widest mb-4 px-2">Suggested Actions</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Card 1 */}
-                  <button className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage("Find Schemes")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-primary">account_balance</span>
@@ -237,7 +283,7 @@ export default function AIPage() {
                     </div>
                   </button>
                   {/* Card 2 */}
-                  <button className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage("Explain Document")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-secondary">description</span>
@@ -248,7 +294,7 @@ export default function AIPage() {
                     </div>
                   </button>
                   {/* Card 3 */}
-                  <button className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage("Healthcare Nav")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-tertiary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-tertiary">local_hospital</span>
@@ -260,15 +306,59 @@ export default function AIPage() {
                   </button>
                 </div>
               </section>
+                </>
+              ) : (
+                <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto mt-4 md:mt-8 pb-12">
+                  {messages.map((msg) => (
+                    <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      {msg.role === 'assistant' && (
+                        <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mr-4 flex-shrink-0 mt-1 shadow-sm">
+                          <span className="material-symbols-outlined text-[20px] text-primary">smart_toy</span>
+                        </div>
+                      )}
+                      <div className={`max-w-[80%] md:max-w-[70%] rounded-[1.5rem] px-6 py-4 shadow-sm ${
+                        msg.role === 'user' 
+                          ? 'bg-primary text-white rounded-br-sm' 
+                          : 'bg-white/70 backdrop-blur-md border border-outline-variant/40 text-on-surface rounded-bl-sm'
+                      }`}>
+                        <p className="font-body-md text-[15px] leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {isTyping && (
+                    <div className="flex justify-start animate-in fade-in duration-300">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mr-4 flex-shrink-0 mt-1 shadow-sm">
+                        <span className="material-symbols-outlined text-[20px] text-primary">smart_toy</span>
+                      </div>
+                      <div className="bg-white/70 backdrop-blur-md border border-outline-variant/40 rounded-[1.5rem] rounded-bl-sm px-6 py-5 flex items-center gap-1.5 w-[88px] shadow-sm">
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary/50 animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary/50 animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary/50 animate-bounce" style={{ animationDelay: '300ms' }} />
+                      </div>
+                    </div>
+                  )}
+                  <div ref={messagesEndRef} className="h-4" />
+                </div>
+              )}
             </div>
           </div>
 
           {/* Fixed Bottom Composer */}
-          <div className={`absolute bottom-0 left-0 w-full px-4 md:px-12 lg:px-20 pb-8 pt-12 bg-gradient-to-t from-surface via-surface/80 to-transparent z-40 flex ${isSidebarOpen ? 'justify-start' : 'justify-center'} pointer-events-none`}>
-            <div className="w-full max-w-[800px] relative pointer-events-auto">
+          <div className={`absolute bottom-0 left-0 w-full px-4 md:px-12 pb-8 pt-20 bg-gradient-to-t from-surface via-surface/95 to-transparent z-40 flex justify-center pointer-events-none`}>
+            <div className="w-full max-w-[1000px] relative pointer-events-auto">
               {/* Input Container */}
               <div className="glass-input p-2 pl-6 pr-2 flex items-center gap-3 relative z-10">
-                <input className="flex-1 bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-outline py-3 outline-none" placeholder="Ask about schemes, upload documents, or request guidance..." type="text"/>
+                <input 
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-outline py-3 outline-none" 
+                  placeholder="Ask about schemes, upload documents, or request guidance..." 
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSendMessage();
+                  }}
+                />
                 <div className="flex items-center gap-1">
                   <button className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Attach file">
                     <span className="material-symbols-outlined text-[22px]">attach_file</span>
@@ -276,7 +366,7 @@ export default function AIPage() {
                   <button className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Voice input">
                     <span className="material-symbols-outlined text-[22px]">mic</span>
                   </button>
-                  <button className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm ml-1" title="Send message">
+                  <button onClick={() => handleSendMessage()} className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm ml-1" title="Send message">
                     <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>send</span>
                   </button>
                 </div>

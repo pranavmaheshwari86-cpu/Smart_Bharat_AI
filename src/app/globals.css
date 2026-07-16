@@ -59,15 +59,8 @@
   --radius-full: 9999px;
 
   --spacing-container-max: 1280px;
-  --spacing-sm: 8px;
-  --spacing-gutter: 24px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
   --spacing-margin-mobile: 16px;
   --spacing-margin-desktop: 64px;
-  --spacing-xl: 40px;
-  --spacing-xs: 4px;
-  --spacing-unit: 4px;
   --spacing-section: 120px;
   --spacing-section-gap: 120px;
 
@@ -122,6 +115,27 @@
 }
 
 @layer base {
+  :root {
+    /* Aadhaar Card Color Palette */
+    --aadhaar-white: #FCFCFA;
+    --aadhaar-paper: #F8F6F2;
+    --aadhaar-cream: #F4F1EA;
+    --aadhaar-text: #222222;
+    --aadhaar-text-secondary: #5F6368;
+    --aadhaar-saffron: #F58220;
+    --aadhaar-saffron-light: #F9B35D;
+    --aadhaar-maroon: #8B1E3F;
+    --aadhaar-maroon-dark: #7A1835;
+    --aadhaar-green: #2F8F4E;
+    --aadhaar-green-light: #67B76A;
+    --aadhaar-blue: #2F6FB7;
+    --aadhaar-light-blue: #DCEAF8;
+    --aadhaar-border: #E4E7EB;
+    --aadhaar-watermark: #EAF2FB;
+    --aadhaar-shadow: rgba(0,0,0,0.08);
+    --aadhaar-glass: rgba(255,255,255,0.75);
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-on-background);
@@ -151,3 +165,5 @@
     box-shadow: 0 12px 32px rgba(28, 27, 25, 0.06), 0 4px 12px rgba(28, 27, 25, 0.04);
   }
 }
+/* Hide Spline Watermark */
+a[href*="spline.design"], a[href*="splinetool"] { display: none !important; }

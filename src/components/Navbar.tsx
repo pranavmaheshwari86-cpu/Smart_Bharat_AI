@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { AuthModal } from "./AuthModal";
 
 export function Navbar() {
@@ -28,24 +29,36 @@ export function Navbar() {
 
         {/* Center: Navigation Links */}
         <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
-          <Link href="/" className="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300">
-            Dashboard
-          </Link>
-          <Link href="/schemes" className="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300">
-            Schemes
-          </Link>
-          <Link href="/id" className="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300">
-            IDs
-          </Link>
-          <Link href="/complaints" className="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300">
-            Complaints
-          </Link>
-          <Link href="/ai" className="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300">
-            Assistant
-          </Link>
-          <Link href="/credentials" className="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300">
-            Your Credentials
-          </Link>
+          {[
+            { name: "Dashboard", href: "/" },
+            { name: "Schemes", href: "/schemes" },
+            { name: "IDs", href: "/id" },
+            { name: "Complaints", href: "/complaints" },
+            { name: "Assistant", href: "/ai" },
+            { name: "Your Credentials", href: "/credentials" },
+          ].map((link) => {
+            const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+            return (
+              <Link 
+                key={link.name}
+                href={link.href} 
+                className={`font-label-md text-label-md transition-all duration-300 px-4 py-2 relative rounded-full ${
+                  isActive 
+                    ? "text-primary font-semibold" 
+                    : "text-on-surface-variant hover:text-primary hover:bg-surface-container"
+                }`}
+              >
+                {link.name}
+                {isActive && (
+                  <motion.div
+                    layoutId="navbar-active-underline"
+                    className="absolute bottom-1 left-4 right-4 h-0.5 bg-primary rounded-full"
+                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-4">

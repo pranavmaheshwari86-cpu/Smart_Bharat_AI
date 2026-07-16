@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import { Footer } from "@/components/Footer";
+import { AIAssistant } from "@/components/ai/AIAssistant";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <AIAssistant />
       </body>
     </html>
   );

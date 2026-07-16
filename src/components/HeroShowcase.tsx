@@ -91,7 +91,7 @@ export function HeroShowcase() {
               src={showcaseItems[currentIndex].image}
               alt={showcaseItems[currentIndex].title}
               fill
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full mix-blend-multiply"
               priority
             />
             {/* Subtle Gradient Overlay for Text Readability */}

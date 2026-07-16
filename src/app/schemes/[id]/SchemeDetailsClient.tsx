@@ -1,9 +1,11 @@
 "use client";
 
 import { DynamicForm } from "@/components/DynamicForm";
-import { ArrowLeft, CheckCircle2, Info } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Info, Bot } from "lucide-react";
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
+import { EligibilityEngine } from "@/components/EligibilityEngine";
+import { useState } from "react";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -19,6 +21,8 @@ const itemVariants: Variants = {
 };
 
 export default function SchemeDetailsClient({ scheme }: { scheme: any }) {
+  const [showEligibility, setShowEligibility] = useState(false);
+
   const handleSubmit = (data: Record<string, unknown>) => {
     console.log("Submitted scheme application:", data);
   };
@@ -83,12 +87,31 @@ export default function SchemeDetailsClient({ scheme }: { scheme: any }) {
         <motion.div variants={itemVariants} className="lg:col-span-5 xl:col-span-4">
           <div className="sticky top-24 premium-card p-8 border border-border/50">
             <h2 className="text-2xl font-bold text-foreground mb-2 font-heading">Apply Now</h2>
-            <p className="text-base text-muted-foreground mb-8 font-body">Complete the form below to start your application process securely.</p>
+            <p className="text-base text-muted-foreground mb-6 font-body">Complete the form below to start your application process securely.</p>
             
+            <button
+              onClick={() => setShowEligibility(true)}
+              className="w-full mb-8 flex items-center justify-center gap-2 h-12 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold hover:shadow-lg hover:shadow-brand-500/25 transition-all group"
+            >
+              <Bot className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              Am I Eligible? (AI Assistant)
+            </button>
+
             <DynamicForm fields={scheme.fields} onSubmit={handleSubmit} submitLabel="Submit Application" />
           </div>
         </motion.div>
       </motion.div>
+
+      <AnimatePresence>
+        {showEligibility && (
+          <EligibilityEngine 
+            schemeName={scheme.name}
+            rules={scheme.eligibilityRules || {}}
+            onClose={() => setShowEligibility(false)}
+            onApply={() => setShowEligibility(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

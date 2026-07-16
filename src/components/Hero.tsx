@@ -20,8 +20,7 @@ export function Hero() {
 
             
             <h1 className="font-display-lg text-display-lg text-on-surface max-w-[650px] leading-tight drop-shadow-sm">
-              Simplified Access to <span className="text-gradient font-bold italic pr-1">Government Services</span>, <br className="hidden md:block"/>
-              <span className="text-gradient">Powered by AI</span>
+              Simplified Access to <span className="text-gradient font-bold italic pr-1">Government Services</span>
             </h1>
             
             <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[576px] font-medium">

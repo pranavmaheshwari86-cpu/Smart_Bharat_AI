@@ -1,10 +1,150 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HeroShowcase } from "@/components/HeroShowcase";
 
+const SUBCATEGORIES: Record<string, string[]> = {
+  "Roads & Infrastructure": [
+    "Road Damage / Potholes", "Broken Roads", "Road Not Constructed", "Road Needs Repair",
+    "Damaged Footpath", "Broken Divider", "Damaged Flyover", "Bridge Damage",
+    "Road Shoulder Damage", "Missing Road Markings", "Speed Breaker Request",
+    "Illegal Speed Breaker", "Missing Road Signs", "Damaged Road Sign",
+    "Damaged Traffic Signal", "Street Obstruction", "Road Encroachment",
+    "Illegal Construction on Road", "Road Cave-in", "Drain Cover Missing",
+    "Open Manhole", "Dangerous Road Condition"
+  ],
+  "Electricity": [
+    "Power Cut", "Frequent Power Outage", "Low Voltage", "High Voltage",
+    "Street Light Not Working", "Street Light Flickering", "Pole Damage",
+    "Electric Wire Hanging", "Transformer Fault", "Transformer Explosion",
+    "Illegal Electricity Connection", "Electric Shock Hazard", "Broken Electric Pole",
+    "Meter Related Complaint", "Billing Complaint", "Power Theft"
+  ],
+  "Water Supply": [
+    "No Water Supply", "Low Water Pressure", "Dirty Water Supply",
+    "Water Leakage", "Pipeline Burst", "Water Wastage",
+    "Illegal Water Connection", "Water Tank Overflow", "Contaminated Drinking Water",
+    "Water Logging", "Water Connection Request", "Public Tap Not Working", "Hand Pump Repair"
+  ],
+  "Drainage & Sewer": [
+    "Drain Blockage", "Sewer Overflow", "Drain Water Leakage", "Open Drain",
+    "Drain Cleaning Request", "Sewage Leakage", "Bad Smell from Sewer",
+    "Flooded Drain", "Storm Water Drain Blocked", "Septic Tank Overflow"
+  ],
+  "Sanitation & Waste": [
+    "Garbage Not Collected", "Overflowing Dustbin", "Illegal Garbage Dumping", "Construction Waste",
+    "Biomedical Waste", "Dead Animal Removal", "Public Toilet Dirty", "Public Toilet Not Working",
+    "Waste Burning", "Littering Complaint", "Mosquito Breeding", "Cleaning Request", "Sweeping Not Done"
+  ],
+  "Parks & Environment": [
+    "Tree Fallen", "Tree Pruning Request", "Dangerous Tree", "Illegal Tree Cutting", "Park Maintenance",
+    "Park Lights Not Working", "Park Equipment Damaged", "Grass Not Cut", "Water Logging in Park",
+    "Pollution Complaint", "Air Pollution", "Noise Pollution", "Water Pollution", "Dust Pollution", "Illegal Burning"
+  ],
+  "Healthcare": [
+    "Government Hospital Complaint", "Medicine Not Available", "Doctor Absent", "Poor Medical Service",
+    "Ambulance Delay", "Primary Health Centre Complaint", "Vaccination Issue", "Illegal Medical Waste",
+    "Health Camp Request", "Public Health Hazard"
+  ],
+  "Animal Related": [
+    "Stray Dogs", "Dog Bite Complaint", "Stray Cattle", "Monkey Menace", "Pig Menace",
+    "Dead Animal", "Animal Cruelty", "Illegal Animal Shelter", "Snake Rescue Request"
+  ],
+  "Traffic": [
+    "Traffic Signal Not Working", "Traffic Congestion", "Illegal Parking", "Abandoned Vehicle",
+    "Vehicle Blocking Road", "Wrong Side Driving", "Dangerous Driving", "Encroachment on Road",
+    "Missing Zebra Crossing", "Traffic Police Complaint"
+  ],
+  "Property & Building": [
+    "Illegal Construction", "Unauthorized Building", "Building Safety Complaint", "Dangerous Building",
+    "Building Collapse Risk", "Building Permission Issue", "Property Tax Complaint", "House Number Issue",
+    "Building Encroachment", "Construction Noise"
+  ],
+  "Municipal Services": [
+    "Birth Certificate Issue", "Death Certificate Issue", "Marriage Certificate Issue",
+    "Property Mutation", "Trade License Complaint", "Shop License Complaint", "Vendor License Complaint",
+    "Municipal Tax Complaint", "Water Tax Complaint", "House Tax Complaint"
+  ],
+  "Fire & Emergency": [
+    "Fire Hazard", "Blocked Fire Exit", "Illegal Firecracker Storage", "Fire Safety Violation",
+    "Emergency Rescue Request"
+  ],
+  "Agriculture & Rural": [
+    "Canal Damage", "Irrigation Problem", "Crop Damage Complaint", "Government Seed Complaint",
+    "Fertilizer Complaint", "Animal Damage to Crops", "Village Road Complaint", "Panchayat Complaint"
+  ],
+  "Education": [
+    "Government School Complaint", "Teacher Absent", "School Infrastructure Issue",
+    "Mid-Day Meal Complaint", "Scholarship Issue", "School Toilet Complaint"
+  ],
+  "Public Transport": [
+    "Bus Stop Damage", "Bus Service Complaint", "Government Bus Delay", "Auto Stand Issue",
+    "Metro Complaint", "Railway Crossing Issue"
+  ],
+  "Telecom & Digital": [
+    "Internet Connectivity Issue", "Mobile Tower Complaint", "Broadband Cable Damage",
+    "Government WiFi Complaint", "CSC Service Complaint"
+  ],
+  "Public Safety": [
+    "Illegal Encroachment", "Illegal Occupation", "Public Nuisance", "Illegal Hawkers",
+    "Loudspeaker Complaint", "Illegal Advertisement", "Wall Defacement", "Unauthorized Hoardings"
+  ],
+  "Food & Public Distribution": [
+    "Ration Card Complaint", "Fair Price Shop Complaint", "Poor Quality Ration",
+    "Gas Connection Complaint", "Food Safety Complaint", "Food Adulteration"
+  ],
+  "Government Services": [
+    "Aadhaar Related Issue", "PAN Related Issue", "Voter ID Issue", "Passport Complaint",
+    "Driving License Issue", "Vehicle Registration Issue", "Government Office Complaint",
+    "Online Portal Issue", "Corruption Complaint", "Bribery Complaint",
+    "Delay in Government Service", "Officer Misconduct"
+  ],
+  "Disaster & Weather": [
+    "Flooding", "Water Logging", "Storm Damage", "Landslide", "Cyclone Damage",
+    "Heatwave Relief", "Disaster Relief Complaint"
+  ],
+  "Accessibility": [
+    "Ramp Not Available", "Footpath Accessibility", "Public Building Accessibility",
+    "Disabled Parking Issue", "Public Toilet Accessibility"
+  ],
+  "Housing": [
+    "PMAY Complaint", "Housing Board Complaint", "Slum Improvement Complaint",
+    "Government Housing Maintenance", "Rental Housing Complaint"
+  ],
+  "Law & Order (Redirect to Police where applicable)": [
+    "Illegal Activity", "Suspicious Activity", "Public Disturbance", "Vandalism",
+    "Theft Report (Redirect)", "Cyber Fraud (Redirect)", "Women's Safety (Redirect)", "Child Safety (Redirect)"
+  ],
+  "Other": [
+    "General Complaint", "Suggestion", "Feedback", "Department Not Listed", "Other Civic Issue"
+  ]
+};
+
 export default function ComplaintsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedIssue, setSelectedIssue] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const shaderCanvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Reset dropdown when category changes
+  useEffect(() => {
+    setSelectedIssue("");
+    setSearchQuery("");
+    setIsDropdownOpen(false);
+  }, [selectedCategory]);
 
   // Background Shader
   useEffect(() => {
@@ -161,7 +301,7 @@ void main() {
   }, []);
 
   return (
-    <>
+    <div className="font-body-md text-on-surface antialiased overflow-hidden selection:bg-primary/20 selection:text-primary min-h-screen">
       <style dangerouslySetInnerHTML={{
         __html: `
         /* Glassmorphism Utilities */
@@ -264,28 +404,62 @@ void main() {
         .material-symbols-outlined.fill {
             font-variation-settings: 'FILL' 1;
         }
+
+        @theme {
+          --animate-float-1: float 6s ease-in-out infinite, fade 8s ease-in-out infinite;
+          --animate-float-2: float 7s ease-in-out infinite 1s, fade 9s ease-in-out infinite 1s;
+          --animate-float-3: float 5s ease-in-out infinite 2s, fade 7s ease-in-out infinite 2s;
+          --animate-float-4: float 8s ease-in-out infinite 3s, fade 10s ease-in-out infinite 3s;
+          --animate-float-5: float 6.5s ease-in-out infinite 0.5s, fade 8.5s ease-in-out infinite 0.5s;
+          --animate-float-6: float 5.5s ease-in-out infinite 1.5s, fade 7.5s ease-in-out infinite 1.5s;
+          --keyframes-float: {
+            "0%, 100%": { transform: "translateY(0px)" },
+            "50%": { transform: "translateY(-15px)" }
+          };
+          --keyframes-fade: {
+            "0%, 100%": { opacity: "0.3" },
+            "50%": { opacity: "1" }
+          };
+        }
+        
+        .ambient-glow-1 {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 74, 198, 0.08) 0%, rgba(253, 248, 245, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .ambient-glow-2 {
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(120, 89, 38, 0.06) 0%, rgba(253, 248, 245, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
         `
       }} />
 
-      {/* Absolute Shader Background */}
-      <div className="fixed inset-0 w-full h-full -z-10 pointer-events-none" style={{ display: "block" }}>
-        <canvas ref={shaderCanvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
-      </div>
-
-      {/* Dotted Grid Overlay */}
-      <div className="fixed inset-0 dotted-grid -z-10 pointer-events-none"></div>
+      {/* Dashboard Background */}
+      <div className="fixed inset-0 z-[-2] bg-[#fdf8f5]"></div>
+      <div className="ambient-glow-1"></div>
+      <div className="ambient-glow-2"></div>
 
       {/* Main Canvas */}
       <main className="pt-[140px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-section-gap">
         {/* Hero Section */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-6 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass w-max border border-outline-variant/30">
-              <span className="material-symbols-outlined text-primary text-sm">smart_toy</span>
-              <span className="font-label-sm text-label-sm text-on-surface-variant">AI-Powered Resolution System</span>
-            </div>
+
             <h1 className="font-display-lg text-display-lg text-on-surface">
-              Report a <br/> <span className="text-primary italic">Civic Issue</span>
+              Report a <br/> <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text italic">Civic Issue</span>
             </h1>
             <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[600px]">
               Describe your issue naturally. Our AI engine instantly routes it to the correct department, predicts resolution time, and tracks progress securely.
@@ -310,33 +484,33 @@ void main() {
         <section className="flex flex-col gap-8 animate-fade-in-up delay-200">
           <div className="flex items-baseline justify-between">
             <h2 className="font-headline-md text-headline-md text-on-surface">Select Category</h2>
-            <button onClick={() => alert("Viewing all categories...")} className="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1">
+            <button  className="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1">
               View All <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {/* Cards */}
-            <button onClick={() => alert("Selected category: Roads")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {/* 11 Specific Cards */}
+            <button onClick={() => setSelectedCategory("Roads & Infrastructure")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
               <div className="spotlight-content w-full">
                 <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
                   <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">add_road</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Roads</h3>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Roads & Infrastructure</h3>
                 <p className="text-xs text-on-surface-variant mt-1">PWD Department</p>
                 <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 48h</p>
               </div>
             </button>
-            <button onClick={() => alert("Selected category: Water")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Water Supply")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
               <div className="spotlight-content w-full">
                 <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
                   <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">water_drop</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Water</h3>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Water Supply</h3>
                 <p className="text-xs text-on-surface-variant mt-1">Jal Board</p>
                 <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 24h</p>
               </div>
             </button>
-            <button onClick={() => alert("Selected category: Electricity")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Electricity")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
               <div className="spotlight-content w-full">
                 <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
                   <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">electric_bolt</span>
@@ -346,17 +520,27 @@ void main() {
                 <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 12h</p>
               </div>
             </button>
-            <button onClick={() => alert("Selected category: Sanitation")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group border-primary/30 shadow-[0_8px_32px_rgba(37,99,235,0.1)] transform -translate-y-1">
+            <button onClick={() => setSelectedCategory("Drainage & Sewer")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-2">
-                  <span className="material-symbols-outlined text-primary text-2xl fill">delete</span>
+                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">plumbing</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Sanitation</h3>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Drainage & Sewer</h3>
+                <p className="text-xs text-on-surface-variant mt-1">Jal Board</p>
+                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 48h</p>
+              </div>
+            </button>
+            <button onClick={() => setSelectedCategory("Sanitation & Waste")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+              <div className="spotlight-content w-full">
+                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">delete</span>
+                </div>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Sanitation & Waste</h3>
                 <p className="text-xs text-on-surface-variant mt-1">Municipal Corp</p>
                 <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 24h</p>
               </div>
             </button>
-            <button onClick={() => alert("Selected category: Healthcare")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Healthcare")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
               <div className="spotlight-content w-full">
                 <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
                   <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">local_hospital</span>
@@ -366,135 +550,132 @@ void main() {
                 <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 72h</p>
               </div>
             </button>
-          </div>
-        </section>
+            <button onClick={() => setSelectedCategory("Traffic")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+              <div className="spotlight-content w-full">
+                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">traffic</span>
+                </div>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Traffic</h3>
+                <p className="text-xs text-on-surface-variant mt-1">Traffic Police</p>
+                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 12h</p>
+              </div>
+            </button>
+            <button onClick={() => setSelectedCategory("Property & Building")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+              <div className="spotlight-content w-full">
+                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">location_city</span>
+                </div>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Property & Building</h3>
+                <p className="text-xs text-on-surface-variant mt-1">Municipal Corp</p>
+                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 48h</p>
+              </div>
+            </button>
+            <button onClick={() => setSelectedCategory("Municipal Services")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+              <div className="spotlight-content w-full">
+                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">home_work</span>
+                </div>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Municipal Services</h3>
+                <p className="text-xs text-on-surface-variant mt-1">Municipal Corp</p>
+                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 48h</p>
+              </div>
+            </button>
+            <button onClick={() => setSelectedCategory("Law & Order (Redirect to Police where applicable)")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+              <div className="spotlight-content w-full">
+                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">local_police</span>
+                </div>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Law & Order</h3>
+                <p className="text-xs text-on-surface-variant mt-1">Police Dept</p>
+                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 2h</p>
+              </div>
+            </button>
+            <button onClick={() => setSelectedCategory("Public Safety")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+              <div className="spotlight-content w-full">
+                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">security</span>
+                </div>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Public Safety</h3>
+                <p className="text-xs text-on-surface-variant mt-1">Safety Dept</p>
+                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 2h</p>
+              </div>
+            </button>
 
-        {/* Main Form & AI Assistant Grid */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in-up delay-300">
-          {/* Left Column: Form Details */}
-          <div className="lg:col-span-2 flex flex-col gap-8">
-            {/* Complaint Details Form */}
-            <div className="glass-card rounded-3xl p-8 border border-white">
-              <h3 className="font-headline-md text-headline-md text-on-surface mb-6">Issue Details</h3>
-              <div className="flex flex-col gap-6">
-                <div className="relative group">
-                  <input className="input-glass w-full font-body-md text-body-md text-on-surface peer placeholder-transparent" id="title" placeholder="Brief Title" type="text" />
-                  <label className="absolute left-0 top-3 text-on-surface-variant font-body-md transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary peer-valid:-top-4 peer-valid:text-xs" htmlFor="title">Brief Title</label>
+            {/* The 12th card: Other */}
+            <button onClick={() => setSelectedCategory("Other")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+              <div className="spotlight-content w-full">
+                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">more_horiz</span>
                 </div>
-                <div className="relative group mt-4">
-                  <textarea className="input-glass w-full font-body-md text-body-md text-on-surface peer placeholder-transparent resize-none" id="desc" placeholder="Describe the issue..." rows={4}></textarea>
-                  <label className="absolute left-0 top-3 text-on-surface-variant font-body-md transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary peer-valid:-top-4 peer-valid:text-xs" htmlFor="desc">Detailed Description</label>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                  <div className="relative group">
-                    <select className="input-glass w-full font-body-md text-body-md text-on-surface appearance-none bg-transparent" defaultValue="">
-                      <option disabled value="">Select Priority</option>
-                      <option>High - Emergency</option>
-                      <option>Medium - Standard</option>
-                      <option>Low - Informational</option>
-                    </select>
-                    <span className="material-symbols-outlined absolute right-0 top-3 text-outline-variant pointer-events-none">expand_more</span>
-                  </div>
-                </div>
+                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Other</h3>
+                <p className="text-xs text-on-surface-variant mt-1">Various Depts</p>
+                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 72h</p>
               </div>
-            </div>
-
-            {/* Photo & Document Upload */}
-            <div className="glass-card rounded-3xl p-8 border border-white border-dashed border-2 hover:border-primary/50 transition-colors cursor-pointer flex flex-col items-center justify-center min-h-[240px]">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-primary text-3xl">cloud_upload</span>
-              </div>
-              <h4 className="font-body-lg text-body-lg text-on-surface mb-2">Upload Evidence</h4>
-              <p className="font-body-md text-body-md text-on-surface-variant text-center max-w-[320px] mb-6">Drag &amp; drop photos or documents here, or click to browse. Max size 10MB.</p>
-              <button onClick={() => alert("Opening file browser...")} className="bg-surface-container-low border border-outline-variant/30 px-6 py-2 rounded-full font-label-sm text-label-sm hover:bg-surface-container transition-colors">
-                Browse Files
-              </button>
-            </div>
-          </div>
-
-          {/* Right Column: AI Assistant & Routing */}
-          <div className="flex flex-col gap-8">
-            {/* AI Assistant */}
-            <div className="glass-card rounded-3xl p-6 border border-white bg-gradient-to-b from-white/80 to-primary-fixed/20 relative overflow-hidden">
-              {/* Background decor */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
-              
-              <div className="flex items-center gap-3 mb-6 relative z-10">
-                <div className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg">
-                  <span className="material-symbols-outlined text-xl">smart_toy</span>
-                </div>
-                <div>
-                  <h4 className="font-label-sm text-label-sm text-on-surface">AI Assistant</h4>
-                  <p className="text-xs text-primary font-medium">Online</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-4 mb-6 relative z-10">
-                <div className="bg-white/80 rounded-2xl rounded-tl-sm p-4 shadow-sm border border-white">
-                  <p className="font-body-md text-body-md text-on-surface text-sm">Hello! I can help you draft this complaint faster. What seems to be the issue?</p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button onClick={() => alert("Applying suggestion: Streetlight broken")} className="bg-surface-container/50 border border-outline-variant/30 rounded-full px-3 py-1.5 text-xs text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-colors">
-                    &quot;Streetlight broken&quot;
-                  </button>
-                  <button onClick={() => alert("Applying suggestion: Garbage not collected")} className="bg-surface-container/50 border border-outline-variant/30 rounded-full px-3 py-1.5 text-xs text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-colors">
-                    &quot;Garbage not collected&quot;
-                  </button>
-                </div>
-              </div>
-
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md rounded-full p-1 border border-white shadow-inner">
-                  <input className="bg-transparent border-none focus:ring-0 text-sm w-full px-4 py-2" placeholder="Type or speak..." type="text" />
-                  <button onClick={() => alert("Starting voice recording...")} className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors shrink-0">
-                    <span className="material-symbols-outlined text-sm">mic</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* AI Routing Preview */}
-            <div className="glass-card rounded-3xl p-6 border border-white">
-              <h4 className="font-label-sm text-label-sm text-on-surface-variant mb-4 uppercase tracking-wider">AI Routing Analysis</h4>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-on-surface">Target Department</span>
-                  <span className="text-sm font-semibold text-primary bg-primary/10 px-2 py-1 rounded">Municipal Corp</span>
-                </div>
-                <div className="h-px w-full bg-outline-variant/30"></div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-on-surface">Suggested Priority</span>
-                  <span className="text-sm font-semibold text-secondary bg-secondary-container/30 px-2 py-1 rounded">Medium</span>
-                </div>
-                <div className="h-px w-full bg-outline-variant/30"></div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-on-surface">Confidence Score</span>
-                  <span className="text-sm font-semibold text-tertiary">94%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Submit Summary */}
-        <div className="animate-fade-in-up delay-300">
-          <div className="glass-card rounded-2xl p-4 md:p-6 border border-white flex flex-col md:flex-row justify-between items-center gap-4 shadow-[0_20px_40px_rgba(28,27,25,0.08)] backdrop-blur-2xl bg-white/80">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center shrink-0 hidden md:flex">
-                <span className="material-symbols-outlined text-on-surface-variant">check_circle</span>
-              </div>
-              <div>
-                <h4 className="font-body-md text-body-md font-semibold text-on-surface">Ready to Submit</h4>
-                <p className="text-xs text-on-surface-variant">By submitting, you agree to the terms of service.</p>
-              </div>
-            </div>
-            <button onClick={() => alert("Submitting complaint...")} className="w-full md:w-auto bg-primary text-on-primary font-label-sm text-label-sm px-8 py-4 rounded-xl hover:bg-primary-container shadow-lg shadow-primary/30 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
-              Submit Complaint
-              <span className="material-symbols-outlined text-sm">send</span>
             </button>
           </div>
-        </div>
+
+          {/* Subcategory Dropdown */}
+          {selectedCategory && SUBCATEGORIES[selectedCategory] && (
+            <div className="mt-8 max-w-4xl mx-auto w-full animate-fade-in">
+              <div className="glass-card p-6 rounded-2xl flex flex-col gap-4 border-primary/20 shadow-[0_8px_32px_rgba(37,99,235,0.05)]">
+                <label className="text-sm font-medium text-on-surface-variant">Select specific issue for {selectedCategory}</label>
+                <div className="relative" ref={dropdownRef}>
+                  <input
+                    type="text"
+                    value={isDropdownOpen ? searchQuery : selectedIssue || searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setIsDropdownOpen(true);
+                      if (selectedIssue) setSelectedIssue("");
+                    }}
+                    onFocus={() => setIsDropdownOpen(true)}
+                    placeholder="Type to search or select an issue..."
+                    className="w-full bg-surface-container/50 border border-outline-variant/50 rounded-xl px-4 py-3 text-on-surface font-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all cursor-pointer"
+                  />
+                  <span 
+                    className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant cursor-pointer"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  >
+                    {isDropdownOpen ? "expand_less" : "expand_more"}
+                  </span>
+                  
+                  {isDropdownOpen && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-surface border border-outline-variant/50 rounded-xl shadow-lg z-50 max-h-60 overflow-y-auto animate-fade-in">
+                      {SUBCATEGORIES[selectedCategory]
+                        .filter(sub => sub.toLowerCase().includes(searchQuery.toLowerCase()))
+                        .map((sub, idx) => (
+                          <div 
+                            key={idx} 
+                            className="px-4 py-3 hover:bg-surface-container cursor-pointer text-on-surface font-body-sm border-b last:border-b-0 border-outline-variant/20 transition-colors"
+                            onClick={() => {
+                              setSelectedIssue(sub);
+                              setSearchQuery("");
+                              setIsDropdownOpen(false);
+                            }}
+                          >
+                            {sub}
+                          </div>
+                        ))}
+                      {SUBCATEGORIES[selectedCategory].filter(sub => sub.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
+                        <div className="px-4 py-3 text-on-surface-variant text-sm italic">
+                          No matching issues found.
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div className="flex justify-end mt-2">
+                   <button className="bg-primary text-on-primary px-6 py-2 rounded-xl font-medium hover:bg-primary/90 transition-colors">
+                     Proceed to Submit
+                   </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Form elements removed as requested */}
       </main>
-    </>
+    </div>
   );
 }

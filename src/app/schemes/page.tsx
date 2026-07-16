@@ -1,9 +1,20 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { schemes } from "@/lib/data";
 
 export default function SchemesPage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const filteredSchemes = schemes.filter(scheme => {
+    const matchesSearch = scheme.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          scheme.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory ? scheme.category === selectedCategory : true;
+    return matchesSearch && matchesCategory;
+  });
+
   useEffect(() => {
     const canvas = document.getElementById('shader-canvas-ANIMATION_5') as HTMLCanvasElement;
     if (!canvas) return;
@@ -201,6 +212,8 @@ void main() {
               className="flex-1 bg-transparent border-none focus:ring-0 text-body-lg text-on-surface placeholder:text-on-surface-variant/70 py-4 outline-none w-full" 
               placeholder="Describe what you are looking for... e.g. 'Scholarships for girls in Karnataka'" 
               type="text" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button onClick={() => alert("Starting voice search...")} className="p-4 text-on-surface-variant hover:text-primary transition-colors">
               <span className="material-symbols-outlined">mic</span>
@@ -212,14 +225,14 @@ void main() {
           </div>
           <div className="mt-6 flex flex-wrap gap-3 items-center">
             <span className="text-label-sm font-label-sm text-outline uppercase tracking-wider">Suggested:</span>
-            <button onClick={() => alert("Applying Farmer Schemes filter...")} className="px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border border-outline-variant/20 text-on-surface hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300">
+            <button onClick={() => setSelectedCategory(selectedCategory === "Agriculture" ? null : "Agriculture")} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Agriculture' ? 'border-primary text-primary' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
               <span className="material-symbols-outlined text-[14px]">agriculture</span> Farmer Schemes
             </button>
-            <button onClick={() => alert("Applying Student Scholarships filter...")} className="px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border border-outline-variant/20 text-on-surface hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300">
+            <button onClick={() => setSelectedCategory(selectedCategory === "Education" ? null : "Education")} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Education' ? 'border-primary text-primary' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
               <span className="material-symbols-outlined text-[14px]">school</span> Student Scholarships
             </button>
-            <button onClick={() => alert("Applying Startup India filter...")} className="px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border border-outline-variant/20 text-on-surface hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300">
-              <span className="material-symbols-outlined text-[14px]">rocket_launch</span> Startup India
+            <button onClick={() => setSelectedCategory(selectedCategory === "Business" ? null : "Business")} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Business' ? 'border-primary text-primary' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
+              <span className="material-symbols-outlined text-[14px]">rocket_launch</span> Business & Startup
             </button>
           </div>
           <div className="spotlight-overlay pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(37, 99, 235, 0.08), transparent 40%)' }}></div>
@@ -227,60 +240,31 @@ void main() {
 
         <section className="space-y-8">
           <div className="flex items-center justify-between">
-            <h2 className="font-headline-md text-headline-md text-on-surface">Recommended for You</h2>
-            <Link href="/schemes" className="text-primary font-label-sm flex items-center gap-2 hover:underline">
-              View All Recommendations
-              <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-            </Link>
+            <h2 className="font-headline-md text-headline-md text-on-surface">Available Schemes</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-            <div className="glass-panel bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-sm hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group">
-              <div className="flex justify-between items-start">
-                <span className="px-3 py-1 rounded-full bg-primary/5 text-primary font-label-sm text-[12px] uppercase tracking-wider">Agriculture</span>
-                <span className="material-symbols-outlined text-outline opacity-40">bookmark</span>
+            {filteredSchemes.map(scheme => (
+              <div key={scheme.id} className="glass-panel bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-sm hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group">
+                <div className="flex justify-between items-start">
+                  <span className="px-3 py-1 rounded-full bg-primary/5 text-primary font-label-sm text-[12px] uppercase tracking-wider">{scheme.category}</span>
+                  <span className="material-symbols-outlined text-outline opacity-40">bookmark</span>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-headline-sm text-[20px] font-bold text-on-surface group-hover:text-primary transition-colors">{scheme.name}</h3>
+                  <p className="text-body-md text-on-surface-variant text-[14px] line-clamp-2">{scheme.description}</p>
+                </div>
+                <div className="flex items-center gap-2 text-secondary font-bold text-[14px]">
+                  <span className="material-symbols-outlined text-[18px]">payments</span>
+                  {scheme.financialBenefits || "Variable Benefits"}
+                </div>
+                <Link href={`/schemes/${scheme.id}`} className="mt-auto w-full py-3 rounded-xl bg-primary text-on-primary font-label-sm hover:scale-[1.02] transition-transform shadow-md text-center block">View Details</Link>
               </div>
-              <div className="space-y-2">
-                <h3 className="font-headline-sm text-[20px] font-bold text-on-surface group-hover:text-primary transition-colors">PM-Kisan Samman Nidhi</h3>
-                <p className="text-body-md text-on-surface-variant text-[14px]">Direct income support for small and marginal farmers across India.</p>
+            ))}
+            {filteredSchemes.length === 0 && (
+              <div className="col-span-full text-center py-12 text-on-surface-variant">
+                No schemes found matching your criteria.
               </div>
-              <div className="flex items-center gap-2 text-secondary font-bold text-[14px]">
-                <span className="material-symbols-outlined text-[18px]">payments</span>
-                ₹6,000 / year
-              </div>
-              <button onClick={() => alert("Opening application form...")} className="mt-auto w-full py-3 rounded-xl bg-primary text-on-primary font-label-sm hover:scale-[1.02] transition-transform shadow-md">Apply Now</button>
-            </div>
-
-            <div className="glass-panel bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-sm hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group">
-              <div className="flex justify-between items-start">
-                <span className="px-3 py-1 rounded-full bg-primary/5 text-primary font-label-sm text-[12px] uppercase tracking-wider">Education</span>
-                <span className="material-symbols-outlined text-outline opacity-40">bookmark</span>
-              </div>
-              <div className="space-y-2">
-                <h3 className="font-headline-sm text-[20px] font-bold text-on-surface group-hover:text-primary transition-colors">Digital India Scholarship</h3>
-                <p className="text-body-md text-on-surface-variant text-[14px]">Financial assistance for students pursuing higher education in technology.</p>
-              </div>
-              <div className="flex items-center gap-2 text-secondary font-bold text-[14px]">
-                <span className="material-symbols-outlined text-[18px]">school</span>
-                Full Tuition Cover
-              </div>
-              <button onClick={() => alert("Opening application form...")} className="mt-auto w-full py-3 rounded-xl bg-primary text-on-primary font-label-sm hover:scale-[1.02] transition-transform shadow-md">Apply Now</button>
-            </div>
-
-            <div className="glass-panel bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-sm hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group">
-              <div className="flex justify-between items-start">
-                <span className="px-3 py-1 rounded-full bg-primary/5 text-primary font-label-sm text-[12px] uppercase tracking-wider">Healthcare</span>
-                <span className="material-symbols-outlined text-outline opacity-40">bookmark</span>
-              </div>
-              <div className="space-y-2">
-                <h3 className="font-headline-sm text-[20px] font-bold text-on-surface group-hover:text-primary transition-colors">Ayushman Bharat</h3>
-                <p className="text-body-md text-on-surface-variant text-[14px]">World's largest health insurance scheme for secondary and tertiary care.</p>
-              </div>
-              <div className="flex items-center gap-2 text-secondary font-bold text-[14px]">
-                <span className="material-symbols-outlined text-[18px]">health_and_safety</span>
-                ₹5 Lakh / family
-              </div>
-              <button onClick={() => alert("Opening application form...")} className="mt-auto w-full py-3 rounded-xl bg-primary text-on-primary font-label-sm hover:scale-[1.02] transition-transform shadow-md">Apply Now</button>
-            </div>
+            )}
           </div>
         </section>
       </main>

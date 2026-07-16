@@ -1,11 +1,54 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { DocumentSelector } from "@/components/DocumentSelector";
+import { govIds } from "@/lib/data";
+import { Search, Filter, Fingerprint, IdCard, Book, FileText, ArrowRight, IndianRupee, Globe, Plane, Gauge, Archive } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+
+// Helper icon mapper
+const getIconForId = (id: string) => {
+  if (id.includes("aadhaar")) return <Fingerprint className="w-7 h-7 text-[#2F6FB7]" />;
+  if (id.includes("pan")) return <IdCard className="w-7 h-7 text-green-600" />;
+  if (id.includes("passport")) return <Book className="w-7 h-7 text-purple-600" />;
+  return <FileText className="w-7 h-7 text-amber-600" />;
+};
+
+const DocumentBackground = ({ id }: { id: string }) => {
+
+  if (id === "pan") {
+    return <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#f4f7fa]" />;
+  }
+  if (id === "passport") {
+    return <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#f5f3f7]" />;
+  }
+  if (id === "driving-license") {
+    return <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#f6f7f6]" />;
+  }
+  if (id === "voter-id") {
+    return <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#f8f5f4]" />;
+  }
+  return <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#f5f7f9]" />;
+};
 
 export default function IDPage() {
   const shaderCanvasRef = useRef<HTMLCanvasElement>(null);
+  
+  // Search and Filter State
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [showOthersDropdown, setShowOthersDropdown] = useState(false);
+
+  const filteredIds = govIds.filter(doc => {
+    const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          doc.description.toLowerCase().includes(searchQuery.toLowerCase());
+    if (activeFilter === "All") return matchesSearch;
+    if (activeFilter === "Central") return matchesSearch && doc.issuingAuthority?.toLowerCase().includes("india");
+    if (activeFilter === "Free") return matchesSearch && doc.fees?.toLowerCase().includes("free");
+    return matchesSearch;
+  });
 
   // Background Shader
   useEffect(() => {
@@ -141,232 +184,224 @@ void main() {
     };
   }, []);
 
-  // ThreeJS 3D Cards removed to use uploaded photo
-
   return (
-    <main className="pt-32 pb-24 min-h-screen relative">
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <div className="absolute inset-0 w-full h-full" style={{ display: 'block' }}>
-          <canvas
-            ref={shaderCanvasRef}
-            style={{ display: 'block', width: '100%', height: '100%' }}
-          ></canvas>
-        </div>
-      </div>
+    <main className="pt-32 pb-24 min-h-screen relative font-body-md text-on-surface antialiased overflow-hidden selection:bg-primary/20 selection:text-primary">
+      <style dangerouslySetInnerHTML={{ __html: `
+        @theme {
+          --animate-float-1: float 6s ease-in-out infinite, fade 8s ease-in-out infinite;
+          --animate-float-2: float 7s ease-in-out infinite 1s, fade 9s ease-in-out infinite 1s;
+          --animate-float-3: float 5s ease-in-out infinite 2s, fade 7s ease-in-out infinite 2s;
+          --animate-float-4: float 8s ease-in-out infinite 3s, fade 10s ease-in-out infinite 3s;
+          --animate-float-5: float 6.5s ease-in-out infinite 0.5s, fade 8.5s ease-in-out infinite 0.5s;
+          --animate-float-6: float 5.5s ease-in-out infinite 1.5s, fade 7.5s ease-in-out infinite 1.5s;
+          --keyframes-float: {
+            "0%, 100%": { transform: "translateY(0px)" },
+            "50%": { transform: "translateY(-15px)" }
+          };
+          --keyframes-fade: {
+            "0%, 100%": { opacity: "0.3" },
+            "50%": { opacity: "1" }
+          };
+        }
+        
+        .ambient-glow-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 74, 198, 0.08) 0%, rgba(253, 248, 245, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .ambient-glow-2 {
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(120, 89, 38, 0.06) 0%, rgba(253, 248, 245, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+      `}} />
+      <div className="absolute inset-0 z-[-2] bg-[#fdf8f5]"></div>
       
-      <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-        <div className="flex flex-col gap-lg lg:col-span-12">
+      {/* Ambient CSS Glows */}
+      <div className="ambient-glow-1"></div>
+      <div className="ambient-glow-2"></div>
+      
+      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 relative z-10 grid grid-cols-1 gap-12">
+        <div className="flex flex-col gap-12">
           
           {/* Hero Section */}
-          <section className="glass-card rounded-[24px] p-8 md:p-12 relative overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full mb-6 border border-surface-variant">
-                  <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>workspace_premium</span>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant">Government Approved API Integration</span>
-                </div>
-                <h1 className="font-display-lg text-display-lg text-on-surface mb-4 md:text-[56px] md:leading-[64px] text-balance">Apply for <span className="text-primary">Government IDs</span> in Minutes.</h1>
-                <p className="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-[90%]">Experience a frictionless, AI-guided application process for Aadhaar, PAN, and Passports. Highly secure, incredibly fast.</p>
+          <section className="relative overflow-hidden pt-4 pb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center relative z-10">
+              <div className="relative z-10 lg:col-span-5">
+
+                  <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+                    Apply for <br />
+                    <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text">
+                      Government IDs
+                    </span>
+                  </h1>
+                <p className="text-xl text-slate-600 mb-10 max-w-lg leading-relaxed">
+                  Experience a frictionless, AI-guided application process for Aadhaar, PAN, and Passports. Highly secure, incredibly fast.
+                </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                  <button onClick={() => alert("Starting ID application...")} className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-primary-container transition-all shadow-level-1 w-full sm:w-auto justify-center">
-                    Start Application
-                    <span className="material-symbols-outlined">arrow_forward</span>
-                  </button>
-                  <div className="flex items-center gap-2 text-on-surface-variant">
-                    <span className="material-symbols-outlined text-green-600">verified_user</span>
-                    <span className="font-label-sm text-label-sm">256-bit Encryption Secure</span>
-                  </div>
+                  <a href="#id-directory" className="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-sm w-full sm:w-auto justify-center">
+                    Browse Directory
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                  <Link href="/id/track" onClick={(e) => { e.preventDefault(); alert("Tracking portal is currently under development. Coming soon!"); }} className="bg-white text-slate-700 border border-slate-300 px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors w-full sm:w-auto justify-center">
+                    Track Application
+                  </Link>
                 </div>
               </div>
-
-              {/* Animated Photo Container */}
-              <div className="relative w-full opacity-40 md:opacity-100 pointer-events-none z-0">
-                <style dangerouslySetInnerHTML={{ __html: `
-                  @theme {
-                    --animate-float-hero: float-hero 8s ease-in-out infinite;
-                    --keyframes-float-hero: {
-                      "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
-                      "50%": { transform: "translateY(-20px) rotate(2deg)" }
-                    };
-                  }
-                `}} />
-                <div className="relative w-full aspect-[16/10] animate-float-hero flex items-center justify-center">
-                  <img 
-                    src="/hero-ids.png" 
-                    alt="Government IDs" 
-                    className="w-[110%] h-auto object-contain mix-blend-multiply drop-shadow-2xl md:scale-110 origin-center"
-                  />
-                </div>
+              
+              {/* Right Image Column */}
+              <div className="relative z-10 hidden md:flex items-center justify-end lg:col-span-7">
+                <Image 
+                  src="/hero-ids.png" 
+                  alt="Government IDs" 
+                  width={800} 
+                  height={600} 
+                  className="w-full h-auto max-w-[110%] lg:max-w-[115%] object-contain rounded-2xl drop-shadow-2xl animate-float -ml-8 lg:-ml-12" 
+                  priority 
+                />
               </div>
             </div>
           </section>
 
-          {/* Horizontal Luxury Progress Timeline */}
-          <div className="bg-surface-container-lowest rounded-xl p-6 shadow-level-1 border border-surface-container-highest">
-            <div className="flex justify-between items-center relative">
-              <div className="absolute top-1/2 left-[10%] right-[10%] h-0.5 bg-surface-variant -translate-y-1/2 z-0"></div>
-              
-              <div className="flex flex-col items-center gap-2 relative z-10">
-                <div className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
-                  <span className="material-symbols-outlined text-[20px]">badge</span>
-                </div>
-                <span className="font-label-sm text-label-sm text-primary font-bold">Choose ID</span>
+          {/* Directory Section */}
+          <section id="id-directory" className="pt-8 scroll-mt-24">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+              <div>
+                <h2 className="text-3xl font-bold text-slate-900 mb-2">Document Directory</h2>
+                <p className="text-slate-600">Select an ID to view requirements and apply.</p>
               </div>
-              
-              <div className="flex flex-col items-center gap-2 relative z-10">
-                <div className="w-10 h-10 rounded-full bg-surface-container-high border-2 border-surface-variant text-outline flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px]">person</span>
-                </div>
-                <span className="font-label-sm text-label-sm text-on-surface-variant">Details</span>
-              </div>
-              
-              <div className="flex flex-col items-center gap-2 relative z-10">
-                <div className="w-10 h-10 rounded-full bg-surface-container-high border-2 border-surface-variant text-outline flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px]">upload_file</span>
-                </div>
-                <span className="font-label-sm text-label-sm text-on-surface-variant">Uploads</span>
-              </div>
-              
-              <div className="flex flex-col items-center gap-2 relative z-10">
-                <div className="w-10 h-10 rounded-full bg-surface-container-high border-2 border-surface-variant text-outline flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px]">task_alt</span>
-                </div>
-                <span className="font-label-sm text-label-sm text-on-surface-variant">Verify</span>
-              </div>
-            </div>
-          </div>
 
-          <h2 className="font-headline-md text-headline-md text-on-surface mt-4">Select Document Type</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <label className="cursor-pointer group">
-              <input defaultChecked className="peer sr-only" name="id_type" type="radio" />
-              <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
-                <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-primary text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>fingerprint</span>
+              <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                <div className="relative w-full sm:w-64">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Search className="h-5 w-5 text-slate-400" />
+                  </div>
+                  <input
+                    type="text"
+                    className="block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-lg leading-5 bg-white placeholder-slate-500 focus:outline-none focus:placeholder-slate-400 focus:ring-1 focus:ring-blue-600 focus:border-blue-600 sm:text-sm"
+                    placeholder="Search documents..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
                 </div>
-                <h3 className="font-headline-md text-headline-md text-on-surface text-[20px] mb-2">Aadhaar Card</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant text-sm mb-4 flex-grow">Primary identification document containing biometric and demographic data.</p>
-                <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
-                  <span className="material-symbols-outlined text-[16px]">timer</span>
-                  <span>Est. completion: 5 mins</span>
-                </div>
-              </div>
-            </label>
-
-            <label className="cursor-pointer group">
-              <input className="peer sr-only" name="id_type" type="radio" />
-              <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
-                <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-secondary text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>account_balance</span>
-                </div>
-                <h3 className="font-headline-md text-headline-md text-on-surface text-[20px] mb-2">PAN Card</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant text-sm mb-4 flex-grow">Essential for financial transactions and income tax filing.</p>
-                <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
-                  <span className="material-symbols-outlined text-[16px]">timer</span>
-                  <span>Est. completion: 8 mins</span>
-                </div>
-              </div>
-            </label>
-
-            <label className="cursor-pointer group">
-              <input className="peer sr-only" name="id_type" type="radio" />
-              <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
-                <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-on-surface text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>flight_takeoff</span>
-                </div>
-                <h3 className="font-headline-md text-headline-md text-on-surface text-[20px] mb-2">Passport</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant text-sm mb-4 flex-grow">Official travel document issued by the Ministry of External Affairs.</p>
-                <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
-                  <span className="material-symbols-outlined text-[16px]">timer</span>
-                  <span>Est. completion: 15 mins</span>
-                </div>
-              </div>
-            </label>
-
-            <label className="cursor-pointer group">
-              <input className="peer sr-only" name="id_type" type="radio" />
-              <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
-                <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-on-surface text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>directions_car</span>
-                </div>
-                <h3 className="font-headline-md text-headline-md text-on-surface text-[20px] mb-2">Driving License</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant text-sm mb-4 flex-grow">Authorization to drive motor vehicles on public roads.</p>
-                <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
-                  <span className="material-symbols-outlined text-[16px]">timer</span>
-                  <span>Est. completion: 10 mins</span>
-                </div>
-              </div>
-            </label>
-
-            <label className="cursor-pointer group">
-              <input className="peer sr-only" name="id_type" type="radio" value="voter_id" />
-              <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
-                <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-on-surface text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>how_to_vote</span>
-                </div>
-                <h3 className="font-headline-md text-headline-md text-on-surface text-[20px] mb-2">Voter ID Card</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant text-sm mb-4 flex-grow">Official identity document issued by the Election Commission of India.</p>
-                <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
-                  <span className="material-symbols-outlined text-[16px]">timer</span>
-                  <span>Est. completion: 12 mins</span>
-                </div>
-              </div>
-            </label>
-
-            <label className="cursor-pointer group relative">
-              <input id="others-radio" className="peer sr-only" name="id_type" type="radio" value="others" />
-              <div className="bg-surface-container-lowest rounded-[16px] p-6 border border-surface-variant shadow-level-1 peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all relative overflow-hidden h-full flex flex-col">
-                <div className="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-on-surface text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>more_horiz</span>
-                </div>
-                <h3 className="font-headline-md text-headline-md text-on-surface text-[20px] mb-2">Others</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant text-sm flex-grow">Select another document from the list.</p>
                 
-                <div className="relative mt-2 mb-4 z-20">
-                  <DocumentSelector onSelect={(val) => {
-                    const radio = document.getElementById('others-radio') as HTMLInputElement;
-                    if (radio) {
-                      radio.value = val;
-                      radio.checked = true;
-                    }
-                  }} />
-                </div>
-
-                <div className="flex items-center gap-2 text-xs text-on-surface-variant border-t border-surface-variant pt-3 mt-auto">
-                  <span className="material-symbols-outlined text-[16px]">timer</span>
-                  <span>Est. completion: varies</span>
+                <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+                  {["All", "Central", "State", "Free"].map(filter => (
+                    <button
+                      key={filter}
+                      onClick={() => setActiveFilter(filter)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                        activeFilter === filter 
+                          ? "bg-slate-900 text-white" 
+                          : "bg-white text-slate-700 border border-slate-300 hover:bg-slate-50"
+                      }`}
+                    >
+                      {filter}
+                    </button>
+                  ))}
                 </div>
               </div>
-            </label>
-          </div>
-
-          <div className="bg-surface-container-lowest rounded-[20px] p-6 shadow-level-1 border border-surface-variant mt-8">
-            <h4 className="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider mb-4 border-b border-surface-variant pb-2">Application Summary</h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex justify-between items-center md:flex-col md:items-start md:gap-1">
-                    <span className="text-sm text-on-surface-variant">Selected Document</span>
-                    <span className="text-sm font-semibold text-on-surface">Aadhaar Card</span>
-                </div>
-                <div className="flex justify-between items-center md:flex-col md:items-start md:gap-1">
-                    <span className="text-sm text-on-surface-variant">Status</span>
-                    <span className="text-sm font-semibold text-primary flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                        In Progress
-                    </span>
-                </div>
-                <div className="flex flex-col justify-center">
-                    <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs text-on-surface-variant font-medium">Completion Score</span>
-                        <span className="text-xs font-bold text-on-surface">25%</span>
-                    </div>
-                    <div className="w-full bg-surface-variant rounded-full h-1.5">
-                        <div className="bg-primary h-1.5 rounded-full transition-all duration-500" style={{ width: '25%' }}></div>
-                    </div>
-                </div>
             </div>
-          </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredIds.map(doc => {
+                  return (
+                  <Link key={doc.id} href={`/id/${doc.id}`} className="group block h-full">
+                    <div className="relative overflow-hidden bg-[#fcfaf8] border-slate-100 shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-slate-200 rounded-[24px] p-6 pb-20 border transition-all h-full flex flex-col">
+                      <DocumentBackground id={doc.id} />
+                      
+                      <div className="relative z-10 flex flex-col h-full">
+                        <div className="w-16 h-16 flex items-center mb-6 relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                          {getIconForId(doc.id)}
+                        </div>
+                        <h3 className="text-[26px] font-semibold tracking-tight text-[#0f172a] mb-2">{doc.name}</h3>
+                        <p className="text-[#475569] text-base mb-6 flex-grow leading-relaxed">
+                          {doc.description}
+                        </p>
+                      </div>
+                      
+                      {/* Floating Footer Box */}
+                      <div className="absolute bottom-5 left-5 right-5 z-20">
+                        <div className="flex items-center justify-between text-sm bg-white/95 border-slate-100 shadow-sm backdrop-blur-sm rounded-xl p-4 transition-shadow">
+                          <span className="text-[#64748b]">
+                            {doc.processingTime || "Varies"}
+                          </span>
+                          <button className="text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700">
+                            Apply Now <ArrowRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                )})}
+  
+                {filteredIds.length > 0 && (
+                  <div className="group block h-full cursor-pointer relative" onClick={() => setShowOthersDropdown(!showOthersDropdown)}>
+                    <div className="relative overflow-hidden bg-slate-50 rounded-[24px] p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all hover:border-slate-300 h-full flex flex-col">
+                      <DocumentBackground id="others" />
+                    
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="w-14 h-14 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-50/80 transition-colors border border-slate-100 shadow-sm">
+                        <FileText className="w-7 h-7 text-slate-600" />
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-2">Others</h3>
+                      <p className="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
+                        Explore additional government certificates like Birth, Income, and Caste Certificates.
+                      </p>
+                      <div className="flex items-center justify-between text-sm text-slate-500 border-t border-slate-100/50 pt-4 mt-auto">
+                        <span className="flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-md font-medium border border-slate-100">
+                          Multiple
+                        </span>
+                        <span className="flex items-center gap-1 text-blue-600 font-semibold">
+                          View List <ArrowRight className={`w-4 h-4 inline-block transition-transform ${showOthersDropdown ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {showOthersDropdown && (
+                    <div className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl border border-slate-200 shadow-xl z-50 py-2 max-h-60 overflow-y-auto">
+                      {[
+                        "Birth Certificate",
+                        "Death Certificate", 
+                        "Marriage Certificate",
+                        "Domicile Certificate",
+                        "Income Certificate",
+                        "Caste Certificate",
+                        "Learner Licence",
+                        "International Driving Permit"
+                      ].map(cert => (
+                        <Link key={cert} href={`/id/${cert.toLowerCase().replace(/ /g, "-")}`} onClick={(e) => { e.preventDefault(); alert(`Starting application process for ${cert}`); }} className="block px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm transition-colors">
+                          {cert}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {filteredIds.length === 0 && (
+                <div className="col-span-full py-12 text-center bg-white rounded-2xl border border-slate-200 border-dashed">
+                  <Search className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                  <h3 className="text-lg font-medium text-slate-900 mb-1">No documents found</h3>
+                  <p className="text-slate-500">Try adjusting your search or filters.</p>
+                </div>
+              )}
+            </div>
+          </section>
         </div>
       </div>
     </main>

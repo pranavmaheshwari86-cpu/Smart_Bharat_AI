@@ -4,11 +4,48 @@ import React from "react";
 
 export default function CredentialsPage() {
   return (
-    <div className="min-h-screen flex flex-col font-sans" style={{
-      backgroundColor: '#f8f9fa',
-      backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E")`
-    }}>
+    <div className="min-h-screen flex flex-col font-body-md text-on-surface antialiased relative overflow-hidden selection:bg-primary/20 selection:text-primary">
       <style dangerouslySetInnerHTML={{__html: `
+        @theme {
+          --animate-float-1: float 6s ease-in-out infinite, fade 8s ease-in-out infinite;
+          --animate-float-2: float 7s ease-in-out infinite 1s, fade 9s ease-in-out infinite 1s;
+          --animate-float-3: float 5s ease-in-out infinite 2s, fade 7s ease-in-out infinite 2s;
+          --animate-float-4: float 8s ease-in-out infinite 3s, fade 10s ease-in-out infinite 3s;
+          --animate-float-5: float 6.5s ease-in-out infinite 0.5s, fade 8.5s ease-in-out infinite 0.5s;
+          --animate-float-6: float 5.5s ease-in-out infinite 1.5s, fade 7.5s ease-in-out infinite 1.5s;
+          --keyframes-float: {
+            "0%, 100%": { transform: "translateY(0px)" },
+            "50%": { transform: "translateY(-15px)" }
+          };
+          --keyframes-fade: {
+            "0%, 100%": { opacity: "0.3" },
+            "50%": { opacity: "1" }
+          };
+        }
+        
+        .ambient-glow-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 74, 198, 0.08) 0%, rgba(253, 248, 245, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .ambient-glow-2 {
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(120, 89, 38, 0.06) 0%, rgba(253, 248, 245, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
         .glass-card-cred {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(16px);
@@ -38,14 +75,16 @@ export default function CredentialsPage() {
         }
       `}} />
 
+      {/* Dashboard Background */}
+      <div className="fixed inset-0 z-[-2] bg-[#fdf8f5]"></div>
+      <div className="ambient-glow-1"></div>
+      <div className="ambient-glow-2"></div>
+
       <main className="flex-grow pt-32 pb-20 px-8 max-w-7xl mx-auto w-full text-gray-900">
         {/* Hero Section */}
         <section className="text-center mb-16 flex flex-col items-center">
-          <div className="inline-flex items-center justify-center bg-blue-100/50 border border-blue-600/20 rounded-full px-4 py-1.5 mb-6 text-blue-800 font-medium text-sm shadow-sm">
-            <span className="material-symbols-outlined text-base mr-2" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-            Government Verified
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4">Your Verified Identity</h1>
+
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text">Your Verified Identity</h1>
           <p className="text-gray-600 max-w-2xl text-lg">Manage and share your digital government credentials with complete security and ease.</p>
         </section>
 

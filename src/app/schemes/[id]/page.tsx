@@ -8,8 +8,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function SchemeDetailsPage({ params }: { params: { id: string } }) {
-  const scheme = schemes.find(s => s.id === params.id);
+export default async function SchemeDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const scheme = schemes.find(s => s.id === id);
 
   if (!scheme) {
     notFound();
