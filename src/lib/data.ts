@@ -444,6 +444,517 @@ export const govIds: GovId[] = [
       { id: "addressProof", label: "Address Proof", type: "file", required: true, maxSizeMB: 5 }
     ]
   }
+,
+  {
+    id: "ration-card",
+    name: "Ration Card",
+    description: "Official document for Ration Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "npr",
+    name: "National Population Register (NPR) ID",
+    description: "Official document for National Population Register (NPR) ID",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "oci",
+    name: "Overseas Citizen of India (OCI) Card",
+    description: "Official document for Overseas Citizen of India (OCI) Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "pio",
+    name: "Person of Indian Origin (PIO) Card",
+    description: "Official document for Person of Indian Origin (PIO) Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "senior-citizen",
+    name: "Senior Citizen Card (State-issued)",
+    description: "Official document for Senior Citizen Card (State-issued)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "udid",
+    name: "Disability ID Card (UDID)",
+    description: "Official document for Disability ID Card (UDID)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "ex-servicemen",
+    name: "Ex-Servicemen Identity Card",
+    description: "Official document for Ex-Servicemen Identity Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "govt-emp",
+    name: "Government Employee Identity Card",
+    description: "Official document for Government Employee Identity Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "defence",
+    name: "Defence Personnel Identity Card",
+    description: "Official document for Defence Personnel Identity Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "police",
+    name: "Police Identity Card",
+    description: "Official document for Police Identity Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "freedom-fighter",
+    name: "Freedom Fighter Identity Card",
+    description: "Official document for Freedom Fighter Identity Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "tan",
+    name: "TAN (Tax Deduction Account Number)",
+    description: "Official document for TAN (Tax Deduction Account Number)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "gstin",
+    name: "GST Registration Certificate (GSTIN)",
+    description: "Official document for GST Registration Certificate (GSTIN)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "prof-tax",
+    name: "Professional Tax Registration",
+    description: "Official document for Professional Tax Registration",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "iec",
+    name: "Import Export Code (IEC)",
+    description: "Official document for Import Export Code (IEC)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "apaar",
+    name: "APAAR ID (Academic Bank of Credits)",
+    description: "Official document for APAAR ID (Academic Bank of Credits)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "student-id",
+    name: "Student Identity Card",
+    description: "Official document for Student Identity Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "national-scholarship",
+    name: "National Scholarship ID",
+    description: "Official document for National Scholarship ID",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "abha",
+    name: "ABHA Health ID",
+    description: "Official document for ABHA Health ID",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "ayushman",
+    name: "Ayushman Bharat Card (PM-JAY)",
+    description: "Official document for Ayushman Bharat Card (PM-JAY)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "cghs",
+    name: "CGHS Card",
+    description: "Official document for CGHS Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "esic",
+    name: "ESIC Card",
+    description: "Official document for ESIC Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "health-smartcard",
+    name: "Health Insurance Smart Card",
+    description: "Official document for Health Insurance Smart Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "mgnrega",
+    name: "MGNREGA Job Card",
+    description: "Official document for MGNREGA Job Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "labour-card",
+    name: "Labour Card",
+    description: "Official document for Labour Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "construction-worker",
+    name: "Building & Construction Worker Card",
+    description: "Official document for Building & Construction Worker Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "street-vendor",
+    name: "Street Vendor ID Card",
+    description: "Official document for Street Vendor ID Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "farmer-id",
+    name: "Farmer ID Card",
+    description: "Official document for Farmer ID Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "kcc",
+    name: "Kisan Credit Card (KCC)",
+    description: "Official document for Kisan Credit Card (KCC)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "pm-kisan-id",
+    name: "PM-Kisan ID",
+    description: "Official document for PM-Kisan ID",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "shram-suvidha",
+    name: "Shram Suvidha ID",
+    description: "Official document for Shram Suvidha ID",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "eshram",
+    name: "e-Shram Card",
+    description: "Official document for e-Shram Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "ppo",
+    name: "Pension Payment Order (PPO)",
+    description: "Official document for Pension Payment Order (PPO)",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "pensioner-id",
+    name: "Pensioner Identity Card",
+    description: "Official document for Pensioner Identity Card",
+    requirements: ["Aadhaar Card", "Photograph", "Address Proof"],
+    faqs: [
+        { question: "How to apply?", answer: "Apply online or via nearest Seva Kendra." }
+    ],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "dob", label: "Date of Birth", type: "date", required: true, prefillKey: "dob" },
+      { id: "address", label: "Address", type: "address", required: true, prefillKey: "address" },
+      { id: "proof", label: "Proof of Identity", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  }
 ];
 
 export const complaintCategories: ComplaintCategory[] = [

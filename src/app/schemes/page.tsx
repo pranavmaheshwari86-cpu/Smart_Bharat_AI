@@ -1,12 +1,138 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { schemes } from "@/lib/data";
+import { SpotlightCard } from "@/components/SpotlightCard";
+
+const OTHER_SCHEME_CATEGORIES = [
+  "Agriculture", "Animal Husbandry", "Dairy Development", "Fisheries", "Horticulture",
+  "Food Processing", "Rural Development", "Urban Development", "Housing", "Water Resources",
+  "Drinking Water & Sanitation", "Health & Family Welfare", "Medical Assistance", "Nutrition",
+  "Women Empowerment", "Child Welfare", "Senior Citizens", "Persons with Disabilities (Divyangjan)",
+  "Social Welfare", "Social Security", "Education", "School Education", "Higher Education",
+  "Technical Education", "Skill Development", "Employment", "Labour & Workers", "Youth Affairs",
+  "Sports", "Entrepreneurship", "Startups", "MSME", "Industry", "Manufacturing",
+  "Commerce & Trade", "Financial Services", "Banking", "Insurance", "Pension", "Taxation",
+  "Digital India", "Science & Technology", "Innovation", "Research & Development",
+  "Artificial Intelligence", "Electronics & IT", "Telecommunications", "Cyber Security",
+  "Infrastructure", "Road Transport", "Railways", "Civil Aviation", "Shipping & Ports",
+  "Logistics", "Tourism", "Culture", "Heritage", "Minority Welfare", "Scheduled Castes (SC)",
+  "Scheduled Tribes (ST)", "Other Backward Classes (OBC)", "Economically Weaker Sections (EWS)",
+  "Tribal Affairs", "Border Area Development", "North Eastern Region Development",
+  "Jammu & Kashmir Development", "Environment", "Climate Change", "Forest & Wildlife",
+  "Renewable Energy", "Power & Electricity", "Petroleum & Natural Gas", "Mining", "Textiles",
+  "Handloom", "Handicrafts", "Khadi & Village Industries", "Cooperatives", "Consumer Affairs",
+  "Food & Public Distribution", "Legal Aid & Justice", "Police & Internal Security",
+  "Disaster Management", "Civil Defence", "Electoral Services", "Governance & Public Services",
+  "Citizen Services", "Aadhaar & Identity Services", "Digital Governance", "Scholarships",
+  "Fellowships", "Awards & Incentives", "Export Promotion", "Import & Trade Facilitation",
+  "Foreign Affairs", "NRI Services", "Defence", "Veterans & Ex-Servicemen", "Space",
+  "Atomic Energy", "Public Grievances", "Municipal Services", "Smart Cities", "Village Development",
+  "Sanitation", "Cleanliness", "Waste Management", "Water Conservation", "Irrigation",
+  "Afforestation", "Biodiversity", "Pollution Control", "Financial Inclusion",
+  "Self Help Groups (SHGs)", "Cooperative Societies", "Credit & Loans", "Subsidies",
+  "Direct Benefit Transfer (DBT)", "Income Support", "Livelihood", "Price Support",
+  "Public Procurement", "E-Governance", "Legal Documentation", "Certificates & Licenses",
+  "Civil Registration", "Transport Services", "Land Records", "Property Registration",
+  "Judiciary", "Election Services", "Consumer Protection", "Startup Funding", "Innovation Grants",
+  "Export Incentives", "Digital Payments", "Women Entrepreneurship", "Farmer Welfare",
+  "Citizen Welfare", "Public Health", "Community Development", "Volunteer Programs",
+  "Emergency Relief", "Rehabilitation",
+];
 
 export default function SchemesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [otherOpen, setOtherOpen] = useState(false);
+  const [otherSearch, setOtherSearch] = useState("");
+  const otherRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0, width: 0 });
+
+  const filteredOther = OTHER_SCHEME_CATEGORIES.filter(c =>
+    c.toLowerCase().includes(otherSearch.toLowerCase())
+  );
+
+  const openDropdown = () => {
+    // If already open, just close
+    if (otherOpen) {
+      setOtherOpen(false);
+      setOtherSearch("");
+      return;
+    }
+
+    const DROPDOWN_HEIGHT = 380; // max dropdown height + gap
+    const VIEWPORT_H = window.innerHeight;
+    const cardRect = otherRef.current?.getBoundingClientRect();
+
+    if (!cardRect) {
+      setOtherOpen(true);
+      setOtherSearch("");
+      return;
+    }
+
+    const spaceBelow = VIEWPORT_H - cardRect.bottom;
+    const needsScroll = spaceBelow < DROPDOWN_HEIGHT + 24;
+
+    if (needsScroll) {
+      // Scroll page up so the card bottom is ~DROPDOWN_HEIGHT+40px from viewport bottom
+      const scrollBy = DROPDOWN_HEIGHT + 40 - spaceBelow;
+      window.scrollBy({ top: -scrollBy, behavior: "smooth" });
+
+      // Wait for scroll animation (~400ms) then position + open
+      setTimeout(() => {
+        if (otherRef.current) {
+          const rect = otherRef.current.getBoundingClientRect();
+          setDropdownPos({
+            top:   rect.bottom + 12,
+            left:  rect.left,
+            width: rect.width,
+          });
+        }
+        setOtherOpen(true);
+        setOtherSearch("");
+      }, 420);
+    } else {
+      // Enough space — open immediately
+      setDropdownPos({
+        top:   cardRect.bottom + 12,
+        left:  cardRect.left,
+        width: cardRect.width,
+      });
+      setOtherOpen(true);
+      setOtherSearch("");
+    }
+  };
+
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (otherRef.current && !otherRef.current.contains(e.target as Node)) {
+        setOtherOpen(false);
+        setOtherSearch("");
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  // Reposition on scroll / resize
+  useEffect(() => {
+    if (!otherOpen) return;
+    const reposition = () => {
+      if (otherRef.current) {
+        const rect = otherRef.current.getBoundingClientRect();
+        setDropdownPos(prev => ({ ...prev, top: rect.bottom + 12, left: rect.left, width: rect.width }));
+      }
+    };
+    window.addEventListener("scroll", reposition, true);
+    window.addEventListener("resize", reposition);
+    return () => {
+      window.removeEventListener("scroll", reposition, true);
+      window.removeEventListener("resize", reposition);
+    };
+  }, [otherOpen]);
 
   const filteredSchemes = schemes.filter(scheme => {
     const matchesSearch = scheme.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -177,7 +303,8 @@ void main() {
           <div className="space-y-6 pr-4 lg:pr-8">
             <h1 className="font-display-lg text-display-lg text-on-surface leading-tight">
               Discover <br />
-              <span className="text-gradient font-bold italic px-2 -ml-2">Government Schemes</span>
+              <span className="text-gradient font-bold italic px-2 -ml-2">Government</span><br/>
+              <span className="text-gradient font-bold italic px-2 -ml-2">Schemes</span>
             </h1>
             <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[600px]">
               Our AI intelligence layer analyzes your profile to match you with the most relevant schemes, grants, and scholarships instantly.
@@ -244,22 +371,108 @@ void main() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
             {filteredSchemes.map(scheme => (
-              <div key={scheme.id} className="glass-panel bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-sm hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group">
-                <div className="flex justify-between items-start">
+              <SpotlightCard key={scheme.id} className="glass-panel bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group" spotlightColor="rgba(37, 99, 235, 0.08)">
+                <div className="flex justify-between items-start relative z-10">
                   <span className="px-3 py-1 rounded-full bg-primary/5 text-primary font-label-sm text-[12px] uppercase tracking-wider">{scheme.category}</span>
-                  <span className="material-symbols-outlined text-outline opacity-40">bookmark</span>
+                  <span className="material-symbols-outlined text-outline opacity-40 group-hover:text-primary group-hover:opacity-100 transition-colors">bookmark</span>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 relative z-10">
                   <h3 className="font-headline-sm text-[20px] font-bold text-on-surface group-hover:text-primary transition-colors">{scheme.name}</h3>
                   <p className="text-body-md text-on-surface-variant text-[14px] line-clamp-2">{scheme.description}</p>
                 </div>
-                <div className="flex items-center gap-2 text-secondary font-bold text-[14px]">
+                <div className="flex items-center gap-2 text-secondary font-bold text-[14px] relative z-10">
                   <span className="material-symbols-outlined text-[18px]">payments</span>
                   {scheme.financialBenefits || "Variable Benefits"}
                 </div>
-                <Link href={`/schemes/${scheme.id}`} className="mt-auto w-full py-3 rounded-xl bg-primary text-on-primary font-label-sm hover:scale-[1.02] transition-transform shadow-md text-center block">View Details</Link>
-              </div>
+                <Link href={`/schemes/${scheme.id}`} className="mt-auto w-full py-3 rounded-xl bg-primary text-on-primary font-label-sm hover:scale-[1.02] transition-transform shadow-[0_4px_14px_0_rgba(0,118,255,0.39)] hover:shadow-[0_6px_20px_rgba(0,118,255,0.23)] text-center block relative z-10">View Details</Link>
+              </SpotlightCard>
             ))}
+            
+            {filteredSchemes.length > 0 && (
+              <div ref={otherRef} className="relative">
+                <SpotlightCard
+                  className="glass-panel bg-gradient-to-br from-white/60 to-primary/5 backdrop-blur-md rounded-3xl p-6 border border-primary/20 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group justify-center items-center text-center cursor-pointer h-full"
+                  spotlightColor="rgba(37, 99, 235, 0.12)"
+                >
+                  <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-primary/10">
+                    <span className="material-symbols-outlined text-primary text-3xl">apps</span>
+                  </div>
+                  <div className="space-y-1 relative z-10">
+                    <h3 className="font-headline-sm text-[20px] font-bold text-on-surface group-hover:text-primary transition-colors">Other Schemes</h3>
+                    <p className="text-body-md text-primary/70 text-[14px] max-w-[200px]">Explore {OTHER_SCHEME_CATEGORIES.length}+ government scheme categories</p>
+                  </div>
+                  <button
+                    ref={buttonRef}
+                    onClick={openDropdown}
+                    className="mt-4 px-8 py-3 rounded-xl bg-white border border-primary/20 text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300 shadow-sm relative z-10 flex items-center gap-2 group-hover:shadow-[0_4px_14px_0_rgba(0,118,255,0.39)]"
+                  >
+                    Explore All
+                    <span className={`material-symbols-outlined text-[18px] transition-transform duration-300 ${otherOpen ? "rotate-90" : ""}`}>arrow_forward</span>
+                  </button>
+                </SpotlightCard>
+
+                {/* Dropdown — fixed position so it escapes stacking context / footer */}
+                {otherOpen && typeof window !== "undefined" && (
+                  <div
+                    style={{
+                      position: "fixed",
+                      top: dropdownPos.top,
+                      left: dropdownPos.left,
+                      width: dropdownPos.width,
+                      zIndex: 9999,
+                    }}
+                    className="bg-white/98 backdrop-blur-xl rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-gray-100 overflow-hidden"
+                  >
+                    {/* Header */}
+                    <div className="px-4 pt-4 pb-3 border-b border-gray-100">
+                      <p className="text-[11px] font-bold tracking-widest text-primary/60 uppercase mb-2">Scheme Categories</p>
+                      <div className="relative">
+                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-gray-400">search</span>
+                        <input
+                          autoFocus
+                          type="text"
+                          placeholder="Search categories..."
+                          value={otherSearch}
+                          onChange={e => setOtherSearch(e.target.value)}
+                          className="w-full pl-9 pr-3 py-2 text-[13px] bg-gray-50 rounded-xl border border-gray-100 outline-none focus:border-primary/40 focus:bg-white transition-all text-gray-700 placeholder:text-gray-400"
+                        />
+                      </div>
+                    </div>
+
+                    {/* List */}
+                    <div className="overflow-y-auto max-h-[240px] py-2">
+                      {filteredOther.length > 0 ? filteredOther.map(cat => (
+                        <button
+                          key={cat}
+                          onClick={() => {
+                            setSelectedCategory(cat);
+                            setOtherOpen(false);
+                            setOtherSearch("");
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }}
+                          className="w-full text-left px-4 py-2.5 text-[13px] text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3 group/item"
+                        >
+                          <span className="material-symbols-outlined text-[16px] text-primary/40 group-hover/item:text-primary transition-colors">chevron_right</span>
+                          {cat}
+                        </button>
+                      )) : (
+                        <div className="px-4 py-6 text-center text-[13px] text-gray-400">
+                          No categories found
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Footer */}
+                    <div className="px-4 py-2.5 border-t border-gray-100 bg-gray-50/80">
+                      <p className="text-[11px] text-gray-400">
+                        {filteredOther.length} of {OTHER_SCHEME_CATEGORIES.length} categories
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {filteredSchemes.length === 0 && (
               <div className="col-span-full text-center py-12 text-on-surface-variant">
                 No schemes found matching your criteria.

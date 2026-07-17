@@ -5,6 +5,8 @@ import { Navbar } from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import { Footer } from "@/components/Footer";
 import { AIAssistant } from "@/components/ai/AIAssistant";
+import { AuthProvider } from "@/context/AuthContext";
+import { RouteGuard } from "@/components/RouteGuard";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -42,11 +44,16 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-[100dvh] bg-background text-foreground font-sans overflow-x-hidden">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <AIAssistant />
+        <AuthProvider>
+          <RouteGuard>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+            <AIAssistant />
+          </RouteGuard>
+        </AuthProvider>
       </body>
     </html>
   );
 }
+

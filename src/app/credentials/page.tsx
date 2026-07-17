@@ -2,7 +2,79 @@
 
 import React from "react";
 
+type UploadedDoc = {
+  name: string;
+  type: string;
+  size: string;
+  uploadedAt: string;
+};
+
 export default function CredentialsPage() {
+  const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
+  const [uploadStatus, setUploadStatus] = React.useState<'idle' | 'uploading' | 'success'>('idle');
+  const [selectedDocType, setSelectedDocType] = React.useState<string>('');
+  const [uploadedDocs, setUploadedDocs] = React.useState<UploadedDoc[]>([]);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0]);
+      setUploadStatus('idle');
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      setSelectedFile(e.dataTransfer.files[0]);
+      setUploadStatus('idle');
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const formatBytes = (bytes: number) => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(1) + ' MB';
+  };
+
+  const handleUpload = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!selectedFile) {
+      fileInputRef.current?.click();
+      return;
+    }
+
+    setUploadStatus('uploading');
+    setTimeout(() => {
+      setUploadStatus('success');
+      const now = new Date();
+      const label = selectedDocType || 'Document';
+      setUploadedDocs(prev => [
+        {
+          name: selectedFile.name,
+          type: label,
+          size: formatBytes(selectedFile.size),
+          uploadedAt: now.toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        },
+        ...prev,
+      ]);
+      setTimeout(() => {
+        setSelectedFile(null);
+        setSelectedDocType('');
+        setUploadStatus('idle');
+      }, 2000);
+    }, 1500);
+  };
+
+  const handleRemoveDoc = (idx: number) => {
+    setUploadedDocs(prev => prev.filter((_, i) => i !== idx));
+  };
+
+
   return (
     <div className="min-h-screen flex flex-col font-body-md text-on-surface antialiased relative overflow-hidden selection:bg-primary/20 selection:text-primary">
       <style dangerouslySetInnerHTML={{__html: `
@@ -98,21 +170,84 @@ export default function CredentialsPage() {
                 <p className="text-gray-600 text-sm">Manually upload your digital credentials for verification.</p>
               </div>
               <div className="flex flex-col gap-4">
-                <select defaultValue="" className="w-full bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-[#0453cd] outline-none transition-all">
-                  <option disabled value="">Select Document Type</option>
-                  <option value="Signature">Signature</option>
+                <select
+                  value={selectedDocType}
+                  onChange={e => setSelectedDocType(e.target.value)}
+                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-[#0453cd] outline-none transition-all"
+                >
+                  <option value="" disabled>Select Document Type</option>
                   <option value="Aadhaar Card">Aadhaar Card</option>
                   <option value="PAN Card">PAN Card</option>
+                  <option value="Voter ID">Voter ID</option>
                   <option value="Driving License">Driving License</option>
+                  <option value="Passport">Passport</option>
+                  <option value="Birth Certificate">Birth Certificate</option>
+                  <option value="Income Certificate">Income Certificate</option>
+                  <option value="Caste Certificate">Caste Certificate</option>
+                  <option value="Domicile Certificate">Domicile Certificate</option>
                   <option value="Educational Certificate">Educational Certificate</option>
+                  <option value="Land Record">Land Record</option>
+                  <option value="Property Document">Property Document</option>
+                  <option value="Signature">Signature</option>
+                  <option value="Other">Other</option>
                 </select>
-                <div className="border-2 border-dashed border-gray-300 rounded-[28px] p-8 flex flex-col items-center justify-center gap-4 hover:border-[#0453cd]/50 transition-colors cursor-pointer bg-gray-50">
-                  <span className="material-symbols-outlined text-4xl text-gray-400">cloud_upload</span>
-                  <p className="text-sm text-gray-500 text-center">Drag and drop files here or click to browse</p>
-                  <button onClick={() => alert("Opening document upload dialog...")} className="bg-[#D4AF37] hover:bg-[#c29e2f] text-white font-medium px-6 py-2 rounded-lg transition-all shadow-sm flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm">add</span>
-                    Upload Document
-                  </button>
+                <div 
+                  className="border-2 border-dashed border-gray-300 rounded-[28px] p-8 flex flex-col items-center justify-center gap-4 hover:border-[#0453cd]/50 transition-colors cursor-pointer bg-gray-50 relative"
+                  onClick={() => !selectedFile && fileInputRef.current?.click()}
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
+                >
+                  <input 
+                    type="file" 
+                    className="hidden" 
+                    ref={fileInputRef} 
+                    onChange={handleFileChange}
+                    accept=".pdf,.jpg,.jpeg,.png"
+                  />
+                  
+                  {uploadStatus === 'success' ? (
+                    <>
+                      <span className="material-symbols-outlined text-4xl text-emerald-500">check_circle</span>
+                      <p className="text-sm text-emerald-600 font-medium text-center">Document uploaded successfully!</p>
+                    </>
+                  ) : selectedFile ? (
+                    <>
+                      <span className="material-symbols-outlined text-4xl text-[#0453cd]">description</span>
+                      <p className="text-sm text-gray-700 font-medium text-center truncate max-w-[200px]">{selectedFile.name}</p>
+                      <button 
+                        onClick={handleUpload}
+                        disabled={uploadStatus === 'uploading'} 
+                        className="bg-[#0453cd] hover:bg-[#356ee7] disabled:opacity-50 text-white font-medium px-6 py-2 rounded-lg transition-all shadow-sm flex items-center gap-2 mt-2"
+                      >
+                        {uploadStatus === 'uploading' ? (
+                          <>
+                            <span className="material-symbols-outlined text-sm animate-spin">sync</span>
+                            Uploading...
+                          </>
+                        ) : (
+                          <>
+                            <span className="material-symbols-outlined text-sm">upload</span>
+                            Confirm Upload
+                          </>
+                        )}
+                      </button>
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); setSelectedFile(null); }} 
+                        className="text-xs text-gray-500 hover:text-red-500 underline"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span className="material-symbols-outlined text-4xl text-gray-400">cloud_upload</span>
+                      <p className="text-sm text-gray-500 text-center">Drag and drop files here or click to browse</p>
+                      <button onClick={handleUpload} className="bg-[#D4AF37] hover:bg-[#c29e2f] text-white font-medium px-6 py-2 rounded-lg transition-all shadow-sm flex items-center gap-2">
+                        <span className="material-symbols-outlined text-sm">add</span>
+                        Select Document
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -236,6 +371,56 @@ export default function CredentialsPage() {
             </div>
           </div>
         </div>
+
+        {/* Your Documents Section */}
+        {uploadedDocs.length > 0 && (
+          <section className="mt-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                <span className="material-symbols-outlined text-[#0453cd]">folder_open</span>
+                Your Documents
+                <span className="text-sm font-normal text-gray-500 ml-1 bg-gray-100 px-2 py-0.5 rounded-full">{uploadedDocs.length}</span>
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {uploadedDocs.map((doc, idx) => (
+                <div key={idx} className="glass-card-cred p-6 flex flex-col gap-4 group">
+                  <div className="flex items-start justify-between">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0453cd]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="material-symbols-outlined text-2xl text-[#0453cd]">
+                        {doc.name.endsWith('.pdf') ? 'picture_as_pdf' : 'image'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="bg-emerald-100 text-emerald-700 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                        <span className="material-symbols-outlined text-sm">check_circle</span>
+                        Uploaded
+                      </span>
+                      <button
+                        onClick={() => handleRemoveDoc(idx)}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-red-500"
+                        title="Remove"
+                      >
+                        <span className="material-symbols-outlined text-base">delete</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 truncate" title={doc.name}>{doc.name}</p>
+                    <p className="text-xs text-[#0453cd] font-medium mt-0.5">{doc.type}</p>
+                  </div>
+                  <div className="flex items-center justify-between pt-3 border-t border-gray-100 text-xs text-gray-500">
+                    <span className="flex items-center gap-1">
+                      <span className="material-symbols-outlined text-sm">schedule</span>
+                      {doc.uploadedAt}
+                    </span>
+                    <span>{doc.size}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );

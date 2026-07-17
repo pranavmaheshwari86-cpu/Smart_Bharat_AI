@@ -7,6 +7,7 @@ import { govIds } from "@/lib/data";
 import { Search, Filter, Fingerprint, IdCard, Book, FileText, ArrowRight, IndianRupee, Globe, Plane, Gauge, Archive } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { SpotlightCard } from "@/components/SpotlightCard";
 
 // Helper icon mapper
 const getIconForId = (id: string) => {
@@ -41,14 +42,19 @@ export default function IDPage() {
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [showOthersDropdown, setShowOthersDropdown] = useState(false);
 
-  const filteredIds = govIds.filter(doc => {
-    const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          doc.description.toLowerCase().includes(searchQuery.toLowerCase());
-    if (activeFilter === "All") return matchesSearch;
-    if (activeFilter === "Central") return matchesSearch && doc.issuingAuthority?.toLowerCase().includes("india");
-    if (activeFilter === "Free") return matchesSearch && doc.fees?.toLowerCase().includes("free");
-    return matchesSearch;
-  });
+  // Only show the primary IDs as cards on the main directory page
+  const featuredIds = ["aadhaar", "pan", "passport", "driving-license", "voter-id"];
+
+  const filteredIds = govIds
+    .filter(doc => featuredIds.includes(doc.id))
+    .filter(doc => {
+      const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            doc.description.toLowerCase().includes(searchQuery.toLowerCase());
+      if (activeFilter === "All") return matchesSearch;
+      if (activeFilter === "Central") return matchesSearch && doc.issuingAuthority?.toLowerCase().includes("india");
+      if (activeFilter === "Free") return matchesSearch && doc.fees?.toLowerCase().includes("free");
+      return matchesSearch;
+    });
 
   // Background Shader
   useEffect(() => {
@@ -185,7 +191,7 @@ void main() {
   }, []);
 
   return (
-    <main className="pt-32 pb-24 min-h-screen relative font-body-md text-on-surface antialiased overflow-hidden selection:bg-primary/20 selection:text-primary">
+    <main className="pt-32 pb-24 min-h-screen relative font-body-md text-on-surface antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary">
       <style dangerouslySetInnerHTML={{ __html: `
         @theme {
           --animate-float-1: float 6s ease-in-out infinite, fade 8s ease-in-out infinite;
@@ -277,7 +283,7 @@ void main() {
           </section>
 
           {/* Directory Section */}
-          <section id="id-directory" className="pt-8 scroll-mt-24">
+          <section id="id-directory" className="pt-8 pb-40 scroll-mt-24">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
               <div>
                 <h2 className="text-3xl font-bold text-slate-900 mb-2">Document Directory</h2>
@@ -285,17 +291,8 @@ void main() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                <div className="relative w-full sm:w-64">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 text-slate-400" />
-                  </div>
-                  <input
-                    type="text"
-                    className="block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-lg leading-5 bg-white placeholder-slate-500 focus:outline-none focus:placeholder-slate-400 focus:ring-1 focus:ring-blue-600 focus:border-blue-600 sm:text-sm"
-                    placeholder="Search documents..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
+                <div className="relative w-full sm:w-72 z-[100]">
+                  <DocumentSelector mode="navigate" />
                 </div>
                 
                 <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
@@ -320,10 +317,13 @@ void main() {
                 {filteredIds.map(doc => {
                   return (
                   <Link key={doc.id} href={`/id/${doc.id}`} className="group block h-full">
-                    <div className="relative overflow-hidden bg-[#fcfaf8] border-slate-100 shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-slate-200 rounded-[24px] p-6 pb-20 border transition-all h-full flex flex-col">
-                      <DocumentBackground id={doc.id} />
-                      
-                      <div className="relative z-10 flex flex-col h-full">
+                    <SpotlightCard 
+                      className="relative overflow-hidden bg-[#fcfaf8] border-slate-100 shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-slate-200 rounded-[24px] p-6 pb-20 border transition-all h-full flex flex-col"
+                      spotlightColor="rgba(37, 99, 235, 0.08)"
+                    >
+                        <DocumentBackground id={doc.id} />
+                        
+                        <div className="relative z-10 flex flex-col h-full">
                         <div className="w-16 h-16 flex items-center mb-6 relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
                           {getIconForId(doc.id)}
                         </div>
@@ -344,48 +344,42 @@ void main() {
                           </button>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                )})}
+                    </SpotlightCard>
+                </Link>
+              )})}
   
                 {filteredIds.length > 0 && (
                   <div className="group block h-full cursor-pointer relative" onClick={() => setShowOthersDropdown(!showOthersDropdown)}>
-                    <div className="relative overflow-hidden bg-slate-50 rounded-[24px] p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all hover:border-slate-300 h-full flex flex-col">
-                      <DocumentBackground id="others" />
-                    
-                    <div className="relative z-10 flex flex-col h-full">
-                      <div className="w-14 h-14 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-50/80 transition-colors border border-slate-100 shadow-sm">
-                        <FileText className="w-7 h-7 text-slate-600" />
-                      </div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-2">Others</h3>
-                      <p className="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
-                        Explore additional government certificates like Birth, Income, and Caste Certificates.
-                      </p>
-                      <div className="flex items-center justify-between text-sm text-slate-500 border-t border-slate-100/50 pt-4 mt-auto">
-                        <span className="flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-md font-medium border border-slate-100">
-                          Multiple
-                        </span>
-                        <span className="flex items-center gap-1 text-blue-600 font-semibold">
-                          View List <ArrowRight className={`w-4 h-4 inline-block transition-transform ${showOthersDropdown ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                      <SpotlightCard 
+                        className="relative overflow-hidden bg-slate-50 rounded-[24px] p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all hover:border-slate-300 h-full flex flex-col"
+                        spotlightColor="rgba(37, 99, 235, 0.08)"
+                      >
+                        <DocumentBackground id="others" />
+                      
+                        <div className="relative z-10 flex flex-col h-full">
+                          <div className="w-14 h-14 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-50/80 transition-colors border border-slate-100 shadow-sm">
+                            <FileText className="w-7 h-7 text-slate-600" />
+                          </div>
+                          <h3 className="text-xl font-bold text-slate-900 mb-2">Others</h3>
+                          <p className="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
+                            Explore additional government certificates like Birth, Income, and Caste Certificates.
+                          </p>
+                          <div className="flex items-center justify-between text-sm text-slate-500 border-t border-slate-100/50 pt-4 mt-auto">
+                            <span className="flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-md font-medium border border-slate-100">
+                              Multiple
+                            </span>
+                            <span className="flex items-center gap-1 text-blue-600 font-semibold">
+                              View List <ArrowRight className={`w-4 h-4 inline-block transition-transform ${showOthersDropdown ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+                            </span>
+                          </div>
+                        </div>
+                      </SpotlightCard>
                   
                   {showOthersDropdown && (
                     <div className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl border border-slate-200 shadow-xl z-50 py-2 max-h-60 overflow-y-auto">
-                      {[
-                        "Birth Certificate",
-                        "Death Certificate", 
-                        "Marriage Certificate",
-                        "Domicile Certificate",
-                        "Income Certificate",
-                        "Caste Certificate",
-                        "Learner Licence",
-                        "International Driving Permit"
-                      ].map(cert => (
-                        <Link key={cert} href={`/id/${cert.toLowerCase().replace(/ /g, "-")}`} onClick={(e) => { e.preventDefault(); alert(`Starting application process for ${cert}`); }} className="block px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm transition-colors">
-                          {cert}
+                      {govIds.filter(doc => !featuredIds.includes(doc.id)).map(doc => (
+                        <Link key={doc.id} href={`/id/${doc.id}`} className="block px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm transition-colors">
+                          {doc.name}
                         </Link>
                       ))}
                     </div>

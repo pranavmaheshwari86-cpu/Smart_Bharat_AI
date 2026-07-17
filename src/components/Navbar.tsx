@@ -1,16 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { AuthModal } from "./AuthModal";
+
+const PUBLIC_ROUTES = ["/", "/signup"];
+
+const NAV_LINKS = [
+  { name: "Dashboard", href: "/" },
+  { name: "Schemes", href: "/schemes" },
+  { name: "IDs", href: "/id" },
+  { name: "Complaints", href: "/complaints" },
+  { name: "Assistant", href: "/ai" },
+  { name: "Your Credentials", href: "/credentials" },
+];
 
 export function Navbar() {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, signOut } = useAuth();
   const pathname = usePathname();
+  const router = useRouter();
 
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    if (!PUBLIC_ROUTES.includes(href) && !isAuthenticated) {
+      e.preventDefault();
+      router.push("/signup");
+    }
+  };
 
   return (
     <>
@@ -29,22 +45,16 @@ export function Navbar() {
 
         {/* Center: Navigation Links */}
         <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
-          {[
-            { name: "Dashboard", href: "/" },
-            { name: "Schemes", href: "/schemes" },
-            { name: "IDs", href: "/id" },
-            { name: "Complaints", href: "/complaints" },
-            { name: "Assistant", href: "/ai" },
-            { name: "Your Credentials", href: "/credentials" },
-          ].map((link) => {
+          {NAV_LINKS.map((link) => {
             const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
             return (
-              <Link 
+              <Link
                 key={link.name}
-                href={link.href} 
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`font-label-md text-label-md transition-all duration-300 px-4 py-2 relative rounded-full ${
-                  isActive 
-                    ? "text-primary font-semibold" 
+                  isActive
+                    ? "text-primary font-semibold"
                     : "text-on-surface-variant hover:text-primary hover:bg-surface-container"
                 }`}
               >
@@ -63,31 +73,28 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           {!isAuthenticated ? (
-            <button 
-              onClick={() => setIsAuthModalOpen(true)}
+            <Link
+              href="/signup"
               className="hidden md:block text-on-surface font-label-md text-label-md hover:text-primary transition-colors"
             >
               Sign In
-            </button>
+            </Link>
           ) : (
-            <button 
-              onClick={() => setIsAuthenticated(false)}
+            <button
+              onClick={signOut}
               className="hidden md:block text-on-surface font-label-md text-label-md hover:text-primary transition-colors"
             >
               Sign Out
             </button>
           )}
-          <button className="bg-primary hover:bg-primary/90 text-white font-label-md text-label-md px-5 py-2 rounded-full transition-all hover:shadow-apple-sm">
+          <Link
+            href={!isAuthenticated ? "/signup" : "/"}
+            className="bg-primary hover:bg-primary/90 text-white font-label-md text-label-md px-5 py-2 rounded-full transition-all hover:shadow-apple-sm"
+          >
             Get Started
-          </button>
+          </Link>
         </div>
       </nav>
-
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        onSuccess={() => setIsAuthenticated(true)}
-      />
     </>
   );
 }

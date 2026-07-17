@@ -177,7 +177,7 @@ export default function AIPage() {
 
           
           {/* Sidebar Navigation/History */}
-          <div className="flex-1 overflow-y-auto px-4 pt-[104px] pb-6 space-y-8">
+          <div className="flex-1 overflow-y-auto px-4 pt-[64px] pb-6 space-y-8">
             {/* Main Nav removed per user request */}
             
             {/* Recent Contexts */}
@@ -229,7 +229,7 @@ export default function AIPage() {
           {/* Sidebar Toggle Button */}
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="hidden md:flex absolute top-[104px] left-4 z-50 w-10 h-10 rounded-full bg-surface/50 backdrop-blur border border-outline-variant/30 items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all shadow-sm group"
+            className="hidden md:flex absolute top-[64px] left-4 z-50 w-10 h-10 rounded-full bg-surface/50 backdrop-blur border border-outline-variant/30 items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all shadow-sm group"
             title={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
           >
             <span className="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">
@@ -239,13 +239,13 @@ export default function AIPage() {
 
 
           {/* Scrollable Canvas */}
-          <div className="flex-1 overflow-y-auto pt-16 md:pt-24 pb-64 px-4 md:px-12 flex flex-col">
-            <div className={`w-full max-w-[1000px] mx-auto flex flex-col gap-12 md:gap-20`}>
+          <div className="flex-1 overflow-y-auto pt-[56px] md:pt-[64px] pb-64 px-4 md:px-12 flex flex-col">
+            <div className={`w-full max-w-[1000px] mx-auto flex flex-col gap-6 md:gap-8`}>
 
               {messages.length === 0 ? (
                 <>
                   {/* Hero Section */}
-                  <section className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 mt-4 md:mt-12">
+                  <section className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 mt-0">
                     <div className="flex-1 space-y-6 text-center md:text-left">
                   <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-on-surface tracking-tight">
                     Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Intelligence</span><br/>Core
@@ -256,7 +256,7 @@ export default function AIPage() {
                 </div>
 
                 {/* Network Visualization Container */}
-                <div className="w-[320px] h-[320px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] relative flex-shrink-0 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20 bg-white/10 backdrop-blur-xl">
+                <div className="w-[320px] h-[320px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] relative flex-shrink-0 overflow-hidden">
                   {/* Scale up slightly to crop out the Spline watermark at the bottom right */}
                   <div className="absolute top-0 left-[-5%] w-[110%] h-[110%] z-10">
                     <InteractiveRobotSpline

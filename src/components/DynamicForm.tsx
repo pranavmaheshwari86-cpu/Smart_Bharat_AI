@@ -216,9 +216,6 @@ export function DynamicForm({ fields, onSubmit, submitLabel = "Submit Applicatio
           {field.type !== "file" && field.type !== "image" && field.type !== "signature" && field.type !== "checkbox" && field.type !== "radio" && field.type !== "group" && (
             <label htmlFor={field.id} className="block text-sm font-semibold text-slate-800 flex items-center flex-wrap gap-2">
               <span>{field.label} {field.required && <span className="text-red-500">*</span>}</span>
-              {field.prefillKey && MOCK_USER_PROFILE[field.prefillKey] && (
-                <span className="text-[10px] uppercase font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">Auto-filled</span>
-              )}
               {formData[field.id] && (formData[field.id] as any).fromVault && (
                 <span className="text-[10px] uppercase font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-200">From Vault</span>
               )}

@@ -55,16 +55,6 @@ const SUBCATEGORIES: Record<string, string[]> = {
     "Vehicle Blocking Road", "Wrong Side Driving", "Dangerous Driving", "Encroachment on Road",
     "Missing Zebra Crossing", "Traffic Police Complaint"
   ],
-  "Property & Building": [
-    "Illegal Construction", "Unauthorized Building", "Building Safety Complaint", "Dangerous Building",
-    "Building Collapse Risk", "Building Permission Issue", "Property Tax Complaint", "House Number Issue",
-    "Building Encroachment", "Construction Noise"
-  ],
-  "Municipal Services": [
-    "Birth Certificate Issue", "Death Certificate Issue", "Marriage Certificate Issue",
-    "Property Mutation", "Trade License Complaint", "Shop License Complaint", "Vendor License Complaint",
-    "Municipal Tax Complaint", "Water Tax Complaint", "House Tax Complaint"
-  ],
   "Fire & Emergency": [
     "Fire Hazard", "Blocked Fire Exit", "Illegal Firecracker Storage", "Fire Safety Violation",
     "Emergency Rescue Request"
@@ -84,10 +74,6 @@ const SUBCATEGORIES: Record<string, string[]> = {
   "Telecom & Digital": [
     "Internet Connectivity Issue", "Mobile Tower Complaint", "Broadband Cable Damage",
     "Government WiFi Complaint", "CSC Service Complaint"
-  ],
-  "Public Safety": [
-    "Illegal Encroachment", "Illegal Occupation", "Public Nuisance", "Illegal Hawkers",
-    "Loudspeaker Complaint", "Illegal Advertisement", "Wall Defacement", "Unauthorized Hoardings"
   ],
   "Food & Public Distribution": [
     "Ration Card Complaint", "Fair Price Shop Complaint", "Poor Quality Ration",
@@ -111,14 +97,16 @@ const SUBCATEGORIES: Record<string, string[]> = {
     "PMAY Complaint", "Housing Board Complaint", "Slum Improvement Complaint",
     "Government Housing Maintenance", "Rental Housing Complaint"
   ],
-  "Law & Order (Redirect to Police where applicable)": [
-    "Illegal Activity", "Suspicious Activity", "Public Disturbance", "Vandalism",
-    "Theft Report (Redirect)", "Cyber Fraud (Redirect)", "Women's Safety (Redirect)", "Child Safety (Redirect)"
-  ],
   "Other": [
     "General Complaint", "Suggestion", "Feedback", "Department Not Listed", "Other Civic Issue"
   ]
 };
+
+// Populate "Other" with all possible complaints for an exhaustive search
+SUBCATEGORIES["Other"] = [
+  ...SUBCATEGORIES["Other"],
+  ...Array.from(new Set(Object.entries(SUBCATEGORIES).flatMap(([key, issues]) => key !== "Other" ? issues : []))).sort()
+];
 
 export default function ComplaintsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -453,13 +441,13 @@ void main() {
       <div className="ambient-glow-2"></div>
 
       {/* Main Canvas */}
-      <main className="pt-[140px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-section-gap">
+      <main className="pt-[100px] pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-12 lg:gap-16">
         {/* Hero Section */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-6 animate-fade-in-up">
 
             <h1 className="font-display-lg text-display-lg text-on-surface">
-              Report a <br/> <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text italic">Civic Issue</span>
+              Report a <br/> <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text italic pr-2">Civic Issue</span>
             </h1>
             <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[600px]">
               Describe your issue naturally. Our AI engine instantly routes it to the correct department, predicts resolution time, and tracks progress securely.
@@ -481,7 +469,7 @@ void main() {
         </section>
 
         {/* Category Selection */}
-        <section className="flex flex-col gap-8 animate-fade-in-up delay-200">
+        <section className="flex flex-col gap-8 animate-fade-in-up delay-200 pb-20">
           <div className="flex items-baseline justify-between">
             <h2 className="font-headline-md text-headline-md text-on-surface">Select Category</h2>
             <button  className="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1">
@@ -558,46 +546,6 @@ void main() {
                 <h3 className="font-body-md text-body-md font-semibold text-on-surface">Traffic</h3>
                 <p className="text-xs text-on-surface-variant mt-1">Traffic Police</p>
                 <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 12h</p>
-              </div>
-            </button>
-            <button onClick={() => setSelectedCategory("Property & Building")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
-              <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">location_city</span>
-                </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Property & Building</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Municipal Corp</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 48h</p>
-              </div>
-            </button>
-            <button onClick={() => setSelectedCategory("Municipal Services")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
-              <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">home_work</span>
-                </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Municipal Services</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Municipal Corp</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 48h</p>
-              </div>
-            </button>
-            <button onClick={() => setSelectedCategory("Law & Order (Redirect to Police where applicable)")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
-              <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">local_police</span>
-                </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Law & Order</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Police Dept</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 2h</p>
-              </div>
-            </button>
-            <button onClick={() => setSelectedCategory("Public Safety")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
-              <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">security</span>
-                </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Public Safety</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Safety Dept</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 2h</p>
               </div>
             </button>
 
