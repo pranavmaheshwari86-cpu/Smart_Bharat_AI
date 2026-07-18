@@ -30,7 +30,8 @@ Same rule as v2: nothing gets appended without being checked for overlap first. 
 
 | New Capability | Type | Decision | Rationale |
 |---|---|---|---|
-| `context-optimizer` | SK | **Restored to Global Layer** | This was in v1's original always-on table ("Context Optimizer — run before every model call") and was dropped by mistake in v2. Per-call context pruning is cheap and universal — it belongs alongside `token-saver`. |
+| `opencode-token-optimization` | SK | **MERGE/REPLACE** `token-saver` | Deploys TOE v2 (Token Optimization Engine). Supersedes the basic `token-saver` with a global cognitive framework governing input, output, reasoning, and tool-call token efficiency. |
+| `context-optimizer` | SK | **Restored to Global Layer** | This was in v1's original always-on table ("Context Optimizer — run before every model call") and was dropped by mistake in v2. Per-call context pruning is cheap and universal — it belongs alongside `opencode-token-optimization`. |
 | `memory-history` | SK | **Restored to Global Layer**, coupled with the `memory` resource | Matches v1's "Memory/History" global row. `memory-history` is the skill that manages the cache; `memory` (§5) remains the underlying data store it reads/writes. |
 | `session-persistence` | SK | **Restored to Global Layer** | Matches v1's "Session Persistence" global row. Cheap rehydration check that skips expensive re-discovery — same cost profile as the other globals. |
 | `sequential-thinking` (MCP) | MCP | **Add, cross-stage** — not owned by one stage | Triggered whenever Planning, Architecture, Debugging root-cause, or Security threat-modeling work is high-complexity/ambiguous. Distinct from `writing-plans`: this is the reasoning process, `writing-plans` is the resulting artifact. They feed each other, not compete. |
@@ -104,11 +105,11 @@ If the task touched code, changed architecture, or produced a reusable finding: 
 
 These seven are the sole global capabilities. Everything else is stage-triggered (§4–§5). All seven share the same qualifying property: cheap per-turn cost, no code-dependency required to fire.
 
-### `token-saver`
-- **Purpose**: keep output concise; stop once the goal is met.
+### `opencode-token-optimization`
+- **Purpose**: Global Token Optimization Engine (TOE v2). Eliminates waste across input, output, context, tool calls, reasoning, and formatting while preserving correctness. Supersedes basic `token-saver`.
 - **Trigger**: every task, no exception.
 - **Skip condition**: none.
-- **Token cost**: negligible (a response-shaping constraint, not a separate call).
+- **Token cost**: negligible (a response-shaping constraint that *saves* massive tokens, not a separate call).
 - **Automation**: fully automatic.
 
 ### `verification-before-completion`
@@ -288,6 +289,7 @@ Sub-topics from the original routing tree (React, Tailwind, Docker, Playwright, 
 
 | Overlap | Decision | Rationale |
 |---|---|---|
+| `token-saver` vs. `opencode-token-optimization` | **REPLACE** — `opencode-token-optimization` (TOE v2) completely supersedes the basic `token-saver`. | `token-saver` was a simple prompt to be concise; TOE v2 is a comprehensive cognitive framework governing all forms of token efficiency (input, output, reasoning, tools). Keeping both is redundant. |
 | `ponytail` vs. `vibe-code-auditor` vs. `code-reviewer` vs. `bugs-are-annoying` | **MERGE** — `ponytail`'s rules become the shared baseline standard the three Review-stage skills reference; `ponytail` no longer runs as its own standalone step. | Four skills doing "code quality" independently means the same code gets the same checks repeated. One baseline, three lenses (architecture, VCS/PR, edge cases) — no duplicate passes. |
 | `ruflo` (MCP) vs. `workflow-automation` vs. `agency-agents` | **KEEP all three, boundaries clarified**: `ruflo` = execution/memory substrate, `workflow-automation` = the automation-design skill, `agency-agents` = the parallel-dispatch mechanism for independent sub-tasks. | They were overlapping only because v1 called all three "orchestration." Each now owns a distinct layer: knowledge → tool → dispatcher. |
 | `security-audit` vs. `vulnerability-scanner` | **MERGE** — scanner becomes a sub-tool invoked by the audit, not a parallel top-level skill. | Running both independently duplicated the automated-scan portion of the audit. |
@@ -311,7 +313,7 @@ Sub-topics from the original routing tree (React, Tailwind, Docker, Playwright, 
 ## 7. Auto-Run Rules
 
 ### Always Auto-Run (every meaningful task, no exception)
-- `token-saver`
+- `opencode-token-optimization` (replaces `token-saver`)
 - `context-optimizer` (per model call)
 - `verification-before-completion`
 - `safety-guardrails` (gate check — only *acts* if a destructive operation is detected)
@@ -393,7 +395,7 @@ Sub-topics from the original routing tree (React, Tailwind, Docker, Playwright, 
 ## 10. Strict System Rules
 
 - Never load skills, MCPs, or agents globally "by default" outside §3's Global Always-On Layer — Step 3 selection is mandatory every task.
-- Never skip `token-saver`, `verification-before-completion`, or `safety-guardrails` — they are unconditional.
+- Never skip `opencode-token-optimization`, `verification-before-completion`, or `safety-guardrails` — they are unconditional.
 - `writing-plans` is unconditional in trigger-check but conditional in action — always evaluate triviality, only produce a plan when non-trivial.
 - Never update `.code-review-graph`/`memory`/`graphify-out` on a turn that touched no code and made no architectural decision — log that the update was intentionally skipped rather than performing a no-op write.
 - Never hallucinate a skill, MCP, or agent not in §5's roster.
