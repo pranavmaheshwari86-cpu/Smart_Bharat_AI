@@ -1,0 +1,73 @@
+{
+  "users": [
+    {
+      "id": "usr_1784695551028_23mrd",
+      "full_name": "Pranav Maheshwari",
+      "email": "pranavmaheshwari86@gmail.com",
+      "email_verified": true,
+      "phone_number": "+918266954052",
+      "phone_verified": false,
+      "auth_provider": "EMAIL",
+      "password_hash": "$2b$10$H0fuj0TEhcvN/4d8FmeB/u68QYtW5nw06zPRcEI35gXcxm5.H0fdW",
+      "role": "CITIZEN",
+      "status": "ACTIVE",
+      "profile_completed": false,
+      "created_at": "2026-07-22T04:45:51.028Z",
+      "updated_at": "2026-07-22T04:45:51.028Z",
+      "last_login": "2026-07-22T04:45:51.028Z",
+      "last_active": "2026-07-22T04:45:51.028Z",
+      "failed_login_attempts": 0,
+      "account_locked": false
+    }
+  ],
+  "sessions": [],
+  "otps": [
+    {
+      "id": "otp_1784695551270_6pf4s",
+      "identifier": "+918266954052",
+      "otp_hash": "$2b$08$m1OwLdE2dcYlUUmwuJbnG.Ym6BiGk30yxjxA4TWpITaXHCrz7QgKO",
+      "purpose": "PHONE_VERIFICATION",
+      "expires_at": "2026-07-22T04:50:51.270Z",
+      "resend_available_at": "2026-07-22T04:46:21.270Z",
+      "attempts": 1,
+      "verified": false,
+      "created_at": "2026-07-22T04:45:51.270Z"
+    }
+  ],
+  "password_resets": [],
+  "audit_logs": [
+    {
+      "user_id": null,
+      "action": "EMAIL_LOGIN_FAILED",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "metadata": "{\"email\":\"pranavmaheshwari86@gmail.com\",\"reason\":\"USER_NOT_FOUND_OR_NO_PASSWORD\"}",
+      "id": "log_1784695489797_n4h40",
+      "created_at": "2026-07-22T04:44:49.797Z"
+    },
+    {
+      "user_id": "usr_1784695551028_23mrd",
+      "action": "EMAIL_REGISTER_SUCCESS",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "id": "log_1784695551031_izhe4",
+      "created_at": "2026-07-22T04:45:51.031Z"
+    },
+    {
+      "action": "OTP_SENT",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "metadata": "{\"phone\":\"+918266954052\",\"purpose\":\"PHONE_VERIFICATION\"}",
+      "id": "log_1784695551293_4m5bh",
+      "created_at": "2026-07-22T04:45:51.293Z"
+    },
+    {
+      "action": "OTP_VERIFY_FAILED",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "metadata": "{\"phone\":\"+918266954052\",\"attempts\":1}",
+      "id": "log_1784695569122_z6n7l",
+      "created_at": "2026-07-22T04:46:09.122Z"
+    }
+  ]
+}
