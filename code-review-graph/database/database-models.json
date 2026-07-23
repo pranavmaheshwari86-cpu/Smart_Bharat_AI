@@ -1,0 +1,49 @@
+[
+  {
+    "model": "UserRecord",
+    "table": "users",
+    "fields": [
+      "id",
+      "name",
+      "email",
+      "passwordHash",
+      "googleId",
+      "phone",
+      "role",
+      "createdAt"
+    ]
+  },
+  {
+    "model": "SessionRecord",
+    "table": "sessions",
+    "fields": [
+      "id",
+      "userId",
+      "token",
+      "expiresAt",
+      "createdAt"
+    ]
+  },
+  {
+    "model": "OtpRecord",
+    "table": "otps",
+    "fields": [
+      "id",
+      "phone",
+      "code",
+      "expiresAt",
+      "verified"
+    ]
+  },
+  {
+    "model": "PasswordResetRecord",
+    "table": "password_resets",
+    "fields": [
+      "id",
+      "userId",
+      "token",
+      "expiresAt",
+      "used"
+    ]
+  }
+]

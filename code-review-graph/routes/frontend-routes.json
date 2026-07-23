@@ -1,0 +1,132 @@
+[
+  {
+    "file": "frontend/src/app/admin/ids/page.tsx",
+    "route": "/admin/ids",
+    "isProtected": true
+  },
+  {
+    "file": "frontend/src/app/admin/page.tsx",
+    "route": "/admin",
+    "isProtected": true
+  },
+  {
+    "file": "frontend/src/app/ai/page.tsx",
+    "route": "/ai",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/assistant/page.tsx",
+    "route": "/assistant",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/complaints/page.tsx",
+    "route": "/complaints",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/credentials/page.tsx",
+    "route": "/credentials",
+    "isProtected": true
+  },
+  {
+    "file": "frontend/src/app/forgot-password/page.tsx",
+    "route": "/forgot-password",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/framework/page.tsx",
+    "route": "/framework",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/id/page.tsx",
+    "route": "/id",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/id/track/page.tsx",
+    "route": "/id/track",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/id/[id]/page.tsx",
+    "route": "/id/[id]",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/layout.tsx",
+    "route": "/layout.tsx",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/login/page.tsx",
+    "route": "/login",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/page.tsx",
+    "route": "/",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/privacy/page.tsx",
+    "route": "/privacy",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/profile/page.tsx",
+    "route": "/profile",
+    "isProtected": true
+  },
+  {
+    "file": "frontend/src/app/reset-password/page.tsx",
+    "route": "/reset-password",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/schemes/page.tsx",
+    "route": "/schemes",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/schemes/track/page.tsx",
+    "route": "/schemes/track",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/schemes/[id]/page.tsx",
+    "route": "/schemes/[id]",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/security/page.tsx",
+    "route": "/security",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/signup/page.tsx",
+    "route": "/signup",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/standards/page.tsx",
+    "route": "/standards",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/terms/page.tsx",
+    "route": "/terms",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/track/page.tsx",
+    "route": "/track",
+    "isProtected": false
+  },
+  {
+    "file": "frontend/src/app/vault/page.tsx",
+    "route": "/vault",
+    "isProtected": true
+  }
+]

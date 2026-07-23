@@ -2,18 +2,35 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import * as THREE from 'three';
-import { InteractiveRobotSpline } from "@/components/ui/interactive-3d-robot";
+import dynamic from "next/dynamic";
+import { useAuth } from "@/context/AuthContext";
+import { getUserDisplayName } from "@/lib/utils";
+import { useChatHistory, formatRelativeTime, Message } from "@/lib/useChatHistory";
 
-type Message = {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-};
+// Dynamically import the heavy Spline 3D component — defers ~1.9MB runtime
+// to after the page's interactive shell has loaded. Shows a lightweight
+// animated fallback while the scene loads.
+const InteractiveRobotSpline = dynamic(
+  () => import("@/components/ui/interactive-3d-robot").then((m) => ({ default: m.InteractiveRobotSpline })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-20 h-20 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center animate-pulse">
+          <span className="material-symbols-outlined text-[36px] text-primary/60" style={{ fontVariationSettings: "'FILL' 1" }}>
+            smart_toy
+          </span>
+        </div>
+      </div>
+    ),
+  }
+);
 
 export default function AIPage() {
+  const { user } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [messages, setMessages] = useState<Message[]>([]);
+
+  const { isMounted, sessions, currentSessionId, messages, setMessages, startNewChat, selectSession, deleteSession } = useChatHistory();
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -26,8 +43,27 @@ export default function AIPage() {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSendMessage = (text: string = inputValue) => {
-    if (!text.trim()) return;
+  const callAI = async (history: Message[]): Promise<string> => {
+    try {
+      const res = await fetch("/api/assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: history.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "AI error");
+      return data.content;
+    } catch (err) {
+      console.error("AI call failed:", err);
+      return "I'm sorry, I couldn't reach the AI service right now. Please try again in a moment.";
+    }
+  };
+
+  const handleSendMessage = async (textToSend?: string) => {
+    const text = typeof textToSend === "string" ? textToSend.trim() : inputValue.trim();
+    if (!text) return;
     
     const newUserMsg: Message = {
       id: Date.now().toString(),
@@ -35,20 +71,19 @@ export default function AIPage() {
       content: text
     };
     
-    setMessages(prev => [...prev, newUserMsg]);
+    const updatedHistory = [...messages, newUserMsg];
+    setMessages(updatedHistory);
     setInputValue("");
     setIsTyping(true);
     
-    // Simulate AI response
-    setTimeout(() => {
-      const newAiMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: "I'm a demo assistant for the Smart Bharat project. I can help you find government schemes, understand official documents, or navigate healthcare options. (This is a simulated response)."
-      };
-      setMessages(prev => [...prev, newAiMsg]);
-      setIsTyping(false);
-    }, 1500);
+    const aiContent = await callAI(updatedHistory);
+    const newAiMsg: Message = {
+      id: (Date.now() + 1).toString(),
+      role: 'assistant',
+      content: aiContent
+    };
+    setMessages([...updatedHistory, newAiMsg]);
+    setIsTyping(false);
   };
 
   useEffect(() => {
@@ -182,29 +217,47 @@ export default function AIPage() {
             
             {/* Recent Contexts */}
             <div>
-              <h3 className="px-4 font-label-sm text-label-sm text-tertiary uppercase tracking-widest mb-3">Recent Contexts</h3>
+              <div className="flex items-center justify-between px-4 mb-3">
+                <h3 className="font-label-sm text-label-sm text-tertiary uppercase tracking-widest">Recent Chats</h3>
+                <button
+                  onClick={startNewChat}
+                  title="New Chat"
+                  className="flex items-center gap-1 text-[12px] font-medium text-primary hover:text-primary/80 transition-colors"
+                >
+                  <span className="material-symbols-outlined text-[16px]">add</span> New
+                </button>
+              </div>
               <div className="space-y-1">
-                <button className="w-full text-left flex items-start gap-3 px-4 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group">
-                  <span className="material-symbols-outlined text-[18px] text-outline mt-0.5 group-hover:text-primary transition-colors">chat_bubble</span>
-                  <div>
-                    <p className="font-body-md text-[14px] text-on-surface line-clamp-1">PM-Kisan Eligibility Check</p>
-                    <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">2 hours ago</p>
-                  </div>
-                </button>
-                <button className="w-full text-left flex items-start gap-3 px-4 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group">
-                  <span className="material-symbols-outlined text-[18px] text-outline mt-0.5 group-hover:text-primary transition-colors">chat_bubble</span>
-                  <div>
-                    <p className="font-body-md text-[14px] text-on-surface line-clamp-1">Aadhaar Address Update Process</p>
-                    <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Yesterday</p>
-                  </div>
-                </button>
-                <button className="w-full text-left flex items-start gap-3 px-4 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group">
-                  <span className="material-symbols-outlined text-[18px] text-outline mt-0.5 group-hover:text-primary transition-colors">chat_bubble</span>
-                  <div>
-                    <p className="font-body-md text-[14px] text-on-surface line-clamp-1">Ayushman Bharat Healthcare Benefits Overview</p>
-                    <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Last week</p>
-                  </div>
-                </button>
+                {!isMounted || sessions.length === 0 ? (
+                  <p className="px-4 py-3 text-[13px] text-on-surface-variant/70 italic">No recent chats yet.</p>
+                ) : (
+                  sessions.map((s) => (
+                    <div
+                      key={s.id}
+                      onClick={() => selectSession(s.id)}
+                      className={`w-full text-left flex items-center justify-between px-4 py-2.5 rounded-lg cursor-pointer transition-colors group ${
+                        currentSessionId === s.id ? 'bg-primary/10 border border-primary/20' : 'hover:bg-surface-container-low'
+                      }`}
+                    >
+                      <div className="flex items-start gap-3 min-w-0 flex-1">
+                        <span className={`material-symbols-outlined text-[18px] mt-0.5 ${currentSessionId === s.id ? 'text-primary' : 'text-outline group-hover:text-primary'}`}>
+                          chat_bubble
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="font-body-md text-[14px] text-on-surface line-clamp-1">{s.title}</p>
+                          <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">{formatRelativeTime(s.timestamp)}</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={(e) => deleteSession(s.id, e)}
+                        title="Delete Chat"
+                        className="opacity-0 group-hover:opacity-100 p-1 hover:text-error transition-all"
+                      >
+                        <span className="material-symbols-outlined text-[16px]">delete</span>
+                      </button>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>
@@ -212,14 +265,21 @@ export default function AIPage() {
           {/* User Profile Area */}
           <div className="p-4 border-t border-outline-variant/20">
             <Link href="/profile" className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-surface-container transition-colors">
-              <img className="w-10 h-10 rounded-full object-cover border border-outline-variant/30" alt="Rajesh Kumar Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVzDw4lMPV5BICoU6B7r4TyeNw9m5VL0voMFVNuWc7zJ4MorqTfGla2uuXv50bAwnHc850ed_L0IdM26f7HqrCxp6od4978oU0wpEeJTNAOLlaeNHFXD_12-nAqVTP-NSD3Vx8CmsApuMuB4OMVimLXk2r8iC6fJJnX3LL8v4dFY-AEEBOBxThdDxsYYNovYqOAR9By0E6fYIFl3xbiCOkqWWEYoTtgHTextqEg7riu2isGed6TJ7-Kw" />
-              <div className="text-left flex-1">
-                <p className="font-body-md text-[14px] font-medium text-on-surface">Rajesh Kumar</p>
-                <p className="font-label-sm text-[12px] text-on-surface-variant">Citizen Profile</p>
+              {user?.profilePhoto ? (
+                <img className="w-10 h-10 rounded-full object-cover border border-outline-variant/30" alt={getUserDisplayName(user)} src={user.profilePhoto} />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm border border-primary/20">
+                  {getUserDisplayName(user).charAt(0).toUpperCase()}
+                </div>
+              )}
+              <div className="text-left flex-1 min-w-0">
+                <p className="font-body-md text-[14px] font-medium text-on-surface truncate">{getUserDisplayName(user)}</p>
+                <p className="font-label-sm text-[12px] text-on-surface-variant truncate">{user?.email || "Citizen Profile"}</p>
               </div>
               <span className="material-symbols-outlined text-outline">settings</span>
             </Link>
           </div>
+
           </aside>
         </div>
 
@@ -347,30 +407,34 @@ export default function AIPage() {
           {/* Fixed Bottom Composer */}
           <div className={`absolute bottom-0 left-0 w-full px-4 md:px-12 pb-8 pt-20 bg-gradient-to-t from-surface via-surface/95 to-transparent z-40 flex justify-center pointer-events-none`}>
             <div className="w-full max-w-[1000px] relative pointer-events-auto">
-              {/* Input Container */}
-              <div className="glass-input p-2 pl-6 pr-2 flex items-center gap-3 relative z-10">
+              {/* Input Container Form */}
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleSendMessage(inputValue);
+                }}
+                className="glass-input p-2 pl-6 pr-2 flex items-center gap-3 relative z-10 pointer-events-auto"
+              >
                 <input 
                   className="flex-1 bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-outline py-3 outline-none" 
                   placeholder="Ask about schemes, upload documents, or request guidance..." 
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') handleSendMessage();
-                  }}
                 />
                 <div className="flex items-center gap-1">
-                  <button className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Attach file">
+                  <button type="button" className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Attach file">
                     <span className="material-symbols-outlined text-[22px]">attach_file</span>
                   </button>
-                  <button className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Voice input">
+                  <button type="button" className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Voice input">
                     <span className="material-symbols-outlined text-[22px]">mic</span>
                   </button>
-                  <button onClick={() => handleSendMessage()} className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm ml-1" title="Send message">
+                  <button type="submit" className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm ml-1 cursor-pointer" title="Send message">
                     <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>send</span>
                   </button>
                 </div>
-              </div>
+              </form>
               
               {/* Footer Info */}
               <div className="text-center mt-3">

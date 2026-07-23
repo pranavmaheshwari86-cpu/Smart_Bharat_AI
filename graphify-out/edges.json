@@ -1,0 +1,242 @@
+[
+  {
+    "source": "backend/src/app.ts",
+    "target": "backend/src/routes/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/app.ts",
+    "target": "backend/src/config/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/controllers/auth.controller.ts",
+    "target": "backend/src/services/auth.service.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/controllers/auth.controller.ts",
+    "target": "backend/src/repositories/user.repository.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/controllers/auth.controller.ts",
+    "target": "backend/src/repositories/session.repository.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/controllers/auth.controller.ts",
+    "target": "backend/src/utils/jwt.util.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/database/db.ts",
+    "target": "shared/src/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/repositories/otp.repository.ts",
+    "target": "backend/src/database/db.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/repositories/otp.repository.ts",
+    "target": "shared/src/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/repositories/password-reset.repository.ts",
+    "target": "backend/src/database/db.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/repositories/password-reset.repository.ts",
+    "target": "shared/src/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/repositories/session.repository.ts",
+    "target": "backend/src/database/db.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/repositories/session.repository.ts",
+    "target": "shared/src/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/repositories/user.repository.ts",
+    "target": "backend/src/database/db.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/repositories/user.repository.ts",
+    "target": "shared/src/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/routes/auth.routes.ts",
+    "target": "backend/src/controllers/auth.controller.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/routes/index.ts",
+    "target": "backend/src/routes/auth.routes.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/routes/index.ts",
+    "target": "backend/src/routes/govid.routes.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/server.ts",
+    "target": "backend/src/app.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/server.ts",
+    "target": "backend/src/config/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/server.ts",
+    "target": "backend/src/database/db.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "backend/src/repositories/user.repository.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "backend/src/repositories/otp.repository.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "backend/src/repositories/session.repository.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "backend/src/repositories/password-reset.repository.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "backend/src/utils/hash.util.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "backend/src/utils/otp.util.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "shared/src/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "backend/src/config/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/services/auth.service.ts",
+    "target": "backend/src/utils/jwt.util.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/utils/jwt.util.ts",
+    "target": "backend/src/config/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/app/layout.tsx",
+    "target": "frontend/src/app/globals.css",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/app/schemes/[id]/page.tsx",
+    "target": "frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/components/auth/CompleteProfileModal.tsx",
+    "target": "frontend/src/components/auth/OtpInput.tsx",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
+    "target": "shared/src/index.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/components/DynamicForm.tsx",
+    "target": "frontend/src/components/SmartUpload.tsx",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/components/SmartUpload.tsx",
+    "target": "frontend/src/components/DocumentSelector.tsx",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/components/SpotlightCard.tsx",
+    "target": "frontend/src/components/SpotlightCard.css",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/api/auth.api.ts",
+    "target": "frontend/src/lib/api/client.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/auth.ts",
+    "target": "frontend/src/lib/firebase.ts",
+    "type": "imports",
+    "weight": 1
+  }
+]

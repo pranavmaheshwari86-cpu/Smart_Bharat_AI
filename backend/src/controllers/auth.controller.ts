@@ -91,13 +91,20 @@ export class AuthController {
     try {
       const { phone, countryCode, purpose } = req.body;
       const result = await this.authService.sendPhoneOtp(phone, countryCode, purpose);
-      res.status(200).json({
+      
+      const responsePayload: any = {
         success: true,
         message: `OTP sent to ${result.fullPhone}.`,
         resendInSeconds: 30,
         expiresInSeconds: 300,
-        debugOtp: result.rawOtp,
-      });
+      };
+
+      // Only expose debugOtp in development mode for simulation testing
+      if (process.env.NODE_ENV !== "production") {
+        responsePayload.debugOtp = result.rawOtp;
+      }
+
+      res.status(200).json(responsePayload);
     } catch (error: any) {
       res.status(400).json({ success: false, error: error.message || "Failed to send OTP." });
     }

@@ -33,4 +33,6 @@ next-env.d.ts
 *.tmp*
 
 # environment files
-.env*.local
+.env
+.env.*
+*.env

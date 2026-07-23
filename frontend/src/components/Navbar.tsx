@@ -1,21 +1,15 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { User, LogOut } from "lucide-react";
+import { getUserDisplayName } from "@/lib/utils";
 
-const PUBLIC_ROUTES = [
-  "/",
-  "/signup",
-  "/login",
-  "/forgot-password",
-  "/reset-password",
-  "/privacy",
-  "/terms",
-];
 const AUTH_ROUTES = ["/login", "/signup", "/forgot-password", "/reset-password"];
+const PUBLIC_ROUTES = ["/", "/signup", "/login", "/forgot-password", "/reset-password", "/privacy", "/terms"];
 
 const NAV_LINKS = [
   { name: "Dashboard", href: "/" },
@@ -30,11 +24,13 @@ export function Navbar() {
   const { user, isAuthenticated, signOut } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
 
-  // Hide Navbar on authentication & recovery pages
-  if (AUTH_ROUTES.includes(pathname)) {
-    return null;
-  }
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (AUTH_ROUTES.includes(pathname)) return null;
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
     if (!PUBLIC_ROUTES.includes(href) && !isAuthenticated) {
@@ -43,13 +39,24 @@ export function Navbar() {
     }
   };
 
+  const isUserLoggedIn = mounted && isAuthenticated;
+
   return (
-    <>
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-container-max rounded-full bg-white/75 backdrop-blur-[24px] border border-white/60 shadow-[0_20px_60px_rgba(0,0,0,0.08),inset_0_2px_8px_rgba(255,255,255,0.9)] supports-[backdrop-filter]:bg-white/60 z-[100] flex justify-between items-center px-6 py-3">
+    <header suppressHydrationWarning className="fixed top-0 left-0 right-0 w-full z-[100] bg-white/75 backdrop-blur-[24px] border-b border-surface-container-highest/60 shadow-[0_4px_24px_rgba(0,0,0,0.03)] supports-[backdrop-filter]:bg-white/65">
+      <nav
+        suppressHydrationWarning
+        aria-label="Main Navigation"
+        className="w-full h-16 flex justify-between items-center px-6 md:px-10 relative"
+      >
         {/* Left: Logo */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
+          <Link
+            href="/"
+            prefetch={true}
+            className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary/40 rounded-full px-2 py-1"
+            aria-label="Smart Bharat AI Homepage"
+          >
+            <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }} aria-hidden="true">
               assured_workload
             </span>
             <span className="font-display-lg text-body-lg font-bold tracking-tight text-on-surface">
@@ -66,21 +73,22 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
+                prefetch={true}
+                aria-current={isActive ? "page" : undefined}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`font-label-md text-label-md transition-all duration-300 px-4 py-2 relative rounded-full ${
+                className={`font-label-md text-label-md transition-all duration-300 px-4 py-2 relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/40 ${
                   isActive
                     ? "text-primary font-semibold"
                     : "text-on-surface-variant hover:text-primary hover:bg-surface-container"
                 }`}
               >
                 {link.name}
-                {isActive && (
-                  <motion.div
-                    layoutId="navbar-active-underline"
-                    className="absolute bottom-1 left-4 right-4 h-0.5 bg-primary rounded-full"
-                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
-                  />
-                )}
+                <span
+                  className={`absolute bottom-1 left-4 right-4 h-0.5 bg-primary rounded-full transition-opacity duration-200 ${
+                    isActive ? "opacity-100" : "opacity-0"
+                  }`}
+                  aria-hidden="true"
+                />
               </Link>
             );
           })}
@@ -88,17 +96,19 @@ export function Navbar() {
 
         {/* Right: Auth Controls */}
         <div className="flex items-center gap-3">
-          {!isAuthenticated ? (
+          {!isUserLoggedIn ? (
             <>
               <Link
                 href="/login"
-                className="hidden md:block text-on-surface font-label-md text-label-md hover:text-primary transition-colors px-3 py-1.5"
+                prefetch={true}
+                className="hidden md:block text-on-surface font-label-md text-label-md hover:text-primary transition-colors px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary/40 rounded-full"
               >
                 Sign In
               </Link>
               <Link
                 href="/signup"
-                className="bg-primary hover:bg-primary/90 text-white font-label-md text-label-md px-5 py-2 rounded-full transition-all hover:shadow-apple-sm"
+                prefetch={true}
+                className="bg-primary hover:bg-primary/90 text-white font-label-md text-label-md px-5 py-2 rounded-full transition-all hover:shadow-apple-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
               >
                 Get Started
               </Link>
@@ -106,36 +116,43 @@ export function Navbar() {
           ) : (
             <div className="flex items-center gap-3">
               {/* User Profile Badge */}
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-surface-container border border-outline-variant/50 rounded-full">
+              <div
+                className="flex items-center gap-2 px-3 py-1.5 bg-surface-container border border-outline-variant/50 rounded-full cursor-default"
+                title={user?.email ? `${getUserDisplayName(user)} (${user.email})` : getUserDisplayName(user)}
+              >
                 {user?.profilePhoto ? (
-                  <img
+                  <Image
                     src={user.profilePhoto}
-                    alt={user.fullName}
-                    className="w-6 h-6 rounded-full object-cover"
+                    alt={getUserDisplayName(user)}
+                    width={24}
+                    height={24}
+                    className="rounded-full object-cover"
+                    referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center" aria-hidden="true">
                     <User className="w-3.5 h-3.5" />
                   </div>
                 )}
-                <span className="text-xs font-semibold text-on-surface max-w-[120px] truncate">
-                  {user?.fullName || "Citizen"}
+                <span className="text-xs font-semibold text-on-surface max-w-[130px] truncate">
+                  {getUserDisplayName(user)}
                 </span>
               </div>
 
               {/* Sign Out Button */}
               <button
                 onClick={() => signOut()}
-                className="flex items-center gap-1.5 text-xs font-semibold text-on-surface-variant hover:text-error transition-colors px-3 py-1.5 rounded-full hover:bg-error/10 cursor-pointer"
+                aria-label="Sign Out"
+                className="flex items-center gap-1.5 text-xs font-semibold text-on-surface-variant hover:text-error transition-colors px-3 py-1.5 rounded-full hover:bg-error/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-error/40"
                 title="Sign Out"
               >
-                <LogOut className="w-4 h-4" />
+                <LogOut className="w-4 h-4" aria-hidden="true" />
                 <span className="hidden sm:inline">Sign Out</span>
               </button>
             </div>
           )}
         </div>
       </nav>
-    </>
+    </header>
   );
 }

@@ -14,7 +14,11 @@
     "build:shared": "npm --prefix shared run build",
     "build:backend": "npm --prefix backend run build",
     "build:frontend": "npm --prefix frontend run build",
-    "build": "npm run build:shared && npm run build:backend && npm run build:frontend"
+    "build": "npm run build:shared && npm run build:backend && npm run build:frontend",
+    "graphify": "node scripts/graphify.js",
+    "review:graph": "node scripts/build-review-graph.js",
+    "graph:all": "npm run graphify && npm run review:graph",
+    "validate:graph": "node scripts/validate-graph-output.js"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

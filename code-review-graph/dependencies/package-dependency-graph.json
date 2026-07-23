@@ -1,0 +1,28 @@
+{
+  "monorepoPackages": [
+    {
+      "name": "smart-bharat-ai-monorepo",
+      "path": "package.json",
+      "role": "Root workspace manager"
+    },
+    {
+      "name": "@smart-bharat/shared",
+      "path": "shared/package.json",
+      "role": "Shared domain DTOs & validations"
+    },
+    {
+      "name": "smart-bharat-backend",
+      "path": "backend/package.json",
+      "role": "Express REST API"
+    },
+    {
+      "name": "smart-bharat-frontend",
+      "path": "frontend/package.json",
+      "role": "Next.js App Router client"
+    }
+  ],
+  "sharedDependencies": {
+    "frontendToShared": true,
+    "backendToShared": true
+  }
+}

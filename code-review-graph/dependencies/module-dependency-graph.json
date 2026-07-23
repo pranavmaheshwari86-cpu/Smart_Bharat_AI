@@ -1,0 +1,993 @@
+{
+  "totalModules": 141,
+  "totalDependencies": 40,
+  "modules": [
+    {
+      "id": ".code-review-graph/.gitignore",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": ".code-review-graph/graph.db",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": ".code-review-graph/graph.db-shm",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": ".code-review-graph/graph.db-wal",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": ".env",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": ".env.example",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": ".env.local",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": ".gitignore",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "AGENTS.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "backend/.env",
+      "layer": "backend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "backend/package.json",
+      "layer": "backend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "backend/src/app.ts",
+      "layer": "backend",
+      "type": "module",
+      "importsCount": 2,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/config/index.ts",
+      "layer": "backend",
+      "type": "config",
+      "importsCount": 0,
+      "importedByCount": 4
+    },
+    {
+      "id": "backend/src/controllers/auth.controller.ts",
+      "layer": "backend",
+      "type": "controller",
+      "importsCount": 4,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/database/db.ts",
+      "layer": "backend",
+      "type": "model",
+      "importsCount": 1,
+      "importedByCount": 5
+    },
+    {
+      "id": "backend/src/repositories/otp.repository.ts",
+      "layer": "backend",
+      "type": "repository",
+      "importsCount": 2,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/repositories/password-reset.repository.ts",
+      "layer": "backend",
+      "type": "repository",
+      "importsCount": 2,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/repositories/session.repository.ts",
+      "layer": "backend",
+      "type": "repository",
+      "importsCount": 2,
+      "importedByCount": 2
+    },
+    {
+      "id": "backend/src/repositories/user.repository.ts",
+      "layer": "backend",
+      "type": "repository",
+      "importsCount": 2,
+      "importedByCount": 2
+    },
+    {
+      "id": "backend/src/routes/auth.routes.ts",
+      "layer": "backend",
+      "type": "route",
+      "importsCount": 1,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/routes/govid.routes.ts",
+      "layer": "backend",
+      "type": "route",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/routes/index.ts",
+      "layer": "backend",
+      "type": "route",
+      "importsCount": 2,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/server.ts",
+      "layer": "backend",
+      "type": "module",
+      "importsCount": 3,
+      "importedByCount": 0
+    },
+    {
+      "id": "backend/src/services/auth.service.ts",
+      "layer": "backend",
+      "type": "service",
+      "importsCount": 9,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/utils/hash.util.ts",
+      "layer": "backend",
+      "type": "util",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/utils/jwt.util.ts",
+      "layer": "backend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 2
+    },
+    {
+      "id": "backend/src/utils/otp.util.ts",
+      "layer": "backend",
+      "type": "util",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/tsconfig.json",
+      "layer": "backend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "data/smart_bharat_db.json",
+      "layer": "data",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "DESIGN.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "docs/firebase-auth.md",
+      "layer": "docs",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "e2e/button_audit.spec.ts",
+      "layer": "e2e",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/.env",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/.env.local",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/components.json",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/eslint.config.mjs",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/next-env.d.ts",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/next.config.ts",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/package-lock.json",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/package.json",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/postcss.config.mjs",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/admin/ids/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/admin/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/ai/loading.tsx",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/ai/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/api/chat/route.ts",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/assistant/loading.tsx",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/assistant/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/complaints/loading.tsx",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/complaints/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/credentials/loading.tsx",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/credentials/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/forgot-password/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/framework/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/globals.css",
+      "layer": "frontend",
+      "type": "style",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/app/id/loading.tsx",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/id/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/id/track/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/id/[id]/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/layout.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/login/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/privacy/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/profile/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/reset-password/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/schemes/loading.tsx",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/schemes/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/schemes/track/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/schemes/[id]/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/app/security/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/signup/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/standards/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/terms/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/track/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/vault/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ai/AIAssistant.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ai/AssistantThreeScene.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/auth/CompleteProfileModal.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/auth/GoogleSignInButton.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/auth/OtpInput.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/components/auth/OtpVerificationForm.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ClientShells.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/DocumentSelector.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/components/DynamicForm.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/EligibilityEngine.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/Footer.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/Hero.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/HeroShowcase.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/Navbar.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/PageWrapper.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/RouteGuard.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/SmartUpload.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 1,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/components/SpotlightCard.css",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/components/SpotlightCard.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ui/button.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ui/card.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ui/input.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ui/interactive-3d-robot.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ui/label.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ui/splite.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/context/AuthContext.tsx",
+      "layer": "frontend",
+      "type": "context",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/lib/api/auth.api.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/lib/api/client.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/lib/auth.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/lib/data.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/lib/firebase.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/lib/knowledge.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/lib/utils.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/tsconfig.json",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/tsconfig.tsbuildinfo",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/api.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/architecture.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/bugs.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/business-rules.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/changelog.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/coding-standards.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/current-status.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/database.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/decisions.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/deployment.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/how-to-run.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/module-government-ids.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/production-implementation-spec.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/project-overview.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/README.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/tech-stack.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "memory/todo.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "package-lock.json",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "package.json",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "PRODUCT.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "README.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "scripts/build-review-graph.js",
+      "layer": "root",
+      "type": "script",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "scripts/graphify.js",
+      "layer": "root",
+      "type": "script",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "scripts/validate-graph-output.js",
+      "layer": "root",
+      "type": "script",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "shared/package.json",
+      "layer": "shared",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "shared/src/index.ts",
+      "layer": "shared",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 7
+    },
+    {
+      "id": "shared/src/types/auth.ts",
+      "layer": "shared",
+      "type": "type",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "shared/src/validations/password.ts",
+      "layer": "shared",
+      "type": "validation",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "shared/tsconfig.json",
+      "layer": "shared",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    }
+  ]
+}

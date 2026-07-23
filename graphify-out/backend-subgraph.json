@@ -1,0 +1,404 @@
+{
+  "nodes": [
+    {
+      "id": "backend/.env",
+      "type": "module",
+      "layer": "backend",
+      "name": ".env",
+      "path": "backend/.env",
+      "language": "plaintext",
+      "size": 359,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "backend/package.json",
+      "type": "module",
+      "layer": "backend",
+      "name": "package",
+      "path": "backend/package.json",
+      "language": "json",
+      "size": 893,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "backend/src/app.ts",
+      "type": "module",
+      "layer": "backend",
+      "name": "app",
+      "path": "backend/src/app.ts",
+      "language": "typescript",
+      "size": 2650,
+      "complexity": 9,
+      "exports": [
+        "app"
+      ]
+    },
+    {
+      "id": "backend/src/config/index.ts",
+      "type": "config",
+      "layer": "backend",
+      "name": "index",
+      "path": "backend/src/config/index.ts",
+      "language": "typescript",
+      "size": 828,
+      "complexity": 2,
+      "exports": [
+        "config"
+      ]
+    },
+    {
+      "id": "backend/src/controllers/auth.controller.ts",
+      "type": "controller",
+      "layer": "backend",
+      "name": "auth.controller",
+      "path": "backend/src/controllers/auth.controller.ts",
+      "language": "typescript",
+      "size": 8330,
+      "complexity": 23,
+      "exports": [
+        "AuthController"
+      ]
+    },
+    {
+      "id": "backend/src/database/db.ts",
+      "type": "model",
+      "layer": "backend",
+      "name": "db",
+      "path": "backend/src/database/db.ts",
+      "language": "typescript",
+      "size": 1421,
+      "complexity": 4,
+      "exports": [
+        "ensureDbExists",
+        "readDb",
+        "writeDb"
+      ]
+    },
+    {
+      "id": "backend/src/repositories/otp.repository.ts",
+      "type": "repository",
+      "layer": "backend",
+      "name": "otp.repository",
+      "path": "backend/src/repositories/otp.repository.ts",
+      "language": "typescript",
+      "size": 1019,
+      "complexity": 3,
+      "exports": [
+        "OtpRepository"
+      ]
+    },
+    {
+      "id": "backend/src/repositories/password-reset.repository.ts",
+      "type": "repository",
+      "layer": "backend",
+      "name": "password-reset.repository",
+      "path": "backend/src/repositories/password-reset.repository.ts",
+      "language": "typescript",
+      "size": 988,
+      "complexity": 5,
+      "exports": [
+        "PasswordResetRepository"
+      ]
+    },
+    {
+      "id": "backend/src/repositories/session.repository.ts",
+      "type": "repository",
+      "layer": "backend",
+      "name": "session.repository",
+      "path": "backend/src/repositories/session.repository.ts",
+      "language": "typescript",
+      "size": 1096,
+      "complexity": 5,
+      "exports": [
+        "SessionRepository"
+      ]
+    },
+    {
+      "id": "backend/src/repositories/user.repository.ts",
+      "type": "repository",
+      "layer": "backend",
+      "name": "user.repository",
+      "path": "backend/src/repositories/user.repository.ts",
+      "language": "typescript",
+      "size": 1618,
+      "complexity": 4,
+      "exports": [
+        "UserRepository"
+      ]
+    },
+    {
+      "id": "backend/src/routes/auth.routes.ts",
+      "type": "route",
+      "layer": "backend",
+      "name": "auth.routes",
+      "path": "backend/src/routes/auth.routes.ts",
+      "language": "typescript",
+      "size": 1731,
+      "complexity": 3,
+      "exports": [
+        "router"
+      ]
+    },
+    {
+      "id": "backend/src/routes/govid.routes.ts",
+      "type": "route",
+      "layer": "backend",
+      "name": "govid.routes",
+      "path": "backend/src/routes/govid.routes.ts",
+      "language": "typescript",
+      "size": 512,
+      "complexity": 1,
+      "exports": [
+        "router"
+      ]
+    },
+    {
+      "id": "backend/src/routes/index.ts",
+      "type": "route",
+      "layer": "backend",
+      "name": "index",
+      "path": "backend/src/routes/index.ts",
+      "language": "typescript",
+      "size": 235,
+      "complexity": 1,
+      "exports": [
+        "router"
+      ]
+    },
+    {
+      "id": "backend/src/server.ts",
+      "type": "module",
+      "layer": "backend",
+      "name": "server",
+      "path": "backend/src/server.ts",
+      "language": "typescript",
+      "size": 567,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "backend/src/services/auth.service.ts",
+      "type": "service",
+      "layer": "backend",
+      "name": "auth.service",
+      "path": "backend/src/services/auth.service.ts",
+      "language": "typescript",
+      "size": 13822,
+      "complexity": 43,
+      "exports": [
+        "AuthService"
+      ]
+    },
+    {
+      "id": "backend/src/utils/hash.util.ts",
+      "type": "util",
+      "layer": "backend",
+      "name": "hash.util",
+      "path": "backend/src/utils/hash.util.ts",
+      "language": "typescript",
+      "size": 1020,
+      "complexity": 2,
+      "exports": [
+        "generateRandomToken",
+        "hashToken",
+        "constantTimeCompare"
+      ]
+    },
+    {
+      "id": "backend/src/utils/jwt.util.ts",
+      "type": "util",
+      "layer": "backend",
+      "name": "jwt.util",
+      "path": "backend/src/utils/jwt.util.ts",
+      "language": "typescript",
+      "size": 1328,
+      "complexity": 2,
+      "exports": [
+        "JwtPayload",
+        "generateAccessToken",
+        "generateRefreshToken",
+        "verifyJwtToken",
+        "setAuthCookies",
+        "clearAuthCookies"
+      ]
+    },
+    {
+      "id": "backend/src/utils/otp.util.ts",
+      "type": "util",
+      "layer": "backend",
+      "name": "otp.util",
+      "path": "backend/src/utils/otp.util.ts",
+      "language": "typescript",
+      "size": 113,
+      "complexity": 1,
+      "exports": [
+        "generate6DigitOtp"
+      ]
+    },
+    {
+      "id": "backend/tsconfig.json",
+      "type": "module",
+      "layer": "backend",
+      "name": "tsconfig",
+      "path": "backend/tsconfig.json",
+      "language": "json",
+      "size": 337,
+      "complexity": 1,
+      "exports": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "backend/src/app.ts",
+      "target": "backend/src/routes/index.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/app.ts",
+      "target": "backend/src/config/index.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/controllers/auth.controller.ts",
+      "target": "backend/src/services/auth.service.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/controllers/auth.controller.ts",
+      "target": "backend/src/repositories/user.repository.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/controllers/auth.controller.ts",
+      "target": "backend/src/repositories/session.repository.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/controllers/auth.controller.ts",
+      "target": "backend/src/utils/jwt.util.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/repositories/otp.repository.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/repositories/password-reset.repository.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/repositories/session.repository.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/repositories/user.repository.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/routes/auth.routes.ts",
+      "target": "backend/src/controllers/auth.controller.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/routes/index.ts",
+      "target": "backend/src/routes/auth.routes.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/routes/index.ts",
+      "target": "backend/src/routes/govid.routes.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/server.ts",
+      "target": "backend/src/app.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/server.ts",
+      "target": "backend/src/config/index.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/server.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/services/auth.service.ts",
+      "target": "backend/src/repositories/user.repository.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/services/auth.service.ts",
+      "target": "backend/src/repositories/otp.repository.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/services/auth.service.ts",
+      "target": "backend/src/repositories/session.repository.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/services/auth.service.ts",
+      "target": "backend/src/repositories/password-reset.repository.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/services/auth.service.ts",
+      "target": "backend/src/utils/hash.util.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/services/auth.service.ts",
+      "target": "backend/src/utils/otp.util.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/services/auth.service.ts",
+      "target": "backend/src/config/index.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/services/auth.service.ts",
+      "target": "backend/src/utils/jwt.util.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/utils/jwt.util.ts",
+      "target": "backend/src/config/index.ts",
+      "type": "imports",
+      "weight": 1
+    }
+  ]
+}

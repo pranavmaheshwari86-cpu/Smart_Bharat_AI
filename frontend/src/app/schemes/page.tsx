@@ -369,7 +369,7 @@ void main() {
           <div className="flex items-center justify-between">
             <h2 className="font-headline-md text-headline-md text-on-surface">Available Schemes</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {filteredSchemes.map(scheme => (
               <SpotlightCard key={scheme.id} className="glass-panel bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group" spotlightColor="rgba(37, 99, 235, 0.08)">
                 <div className="flex justify-between items-start relative z-10">

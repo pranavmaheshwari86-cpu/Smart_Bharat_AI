@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <graph id="SmartBharatAI" edgedefault="directed">
+    <node id=".code-review-graph/.gitignore" />
+    <node id=".code-review-graph/graph.db" />
+    <node id=".code-review-graph/graph.db-shm" />
+    <node id=".code-review-graph/graph.db-wal" />
+    <node id=".env" />
+    <node id=".env.example" />
+    <node id=".env.local" />
+    <node id=".gitignore" />
+    <node id="AGENTS.md" />
+    <node id="backend/.env" />
+    <node id="backend/package.json" />
+    <node id="backend/src/app.ts" />
+    <node id="backend/src/config/index.ts" />
+    <node id="backend/src/controllers/auth.controller.ts" />
+    <node id="backend/src/database/db.ts" />
+    <node id="backend/src/repositories/otp.repository.ts" />
+    <node id="backend/src/repositories/password-reset.repository.ts" />
+    <node id="backend/src/repositories/session.repository.ts" />
+    <node id="backend/src/repositories/user.repository.ts" />
+    <node id="backend/src/routes/auth.routes.ts" />
+    <node id="backend/src/routes/govid.routes.ts" />
+    <node id="backend/src/routes/index.ts" />
+    <node id="backend/src/server.ts" />
+    <node id="backend/src/services/auth.service.ts" />
+    <node id="backend/src/utils/hash.util.ts" />
+    <node id="backend/src/utils/jwt.util.ts" />
+    <node id="backend/src/utils/otp.util.ts" />
+    <node id="backend/tsconfig.json" />
+    <node id="data/smart_bharat_db.json" />
+    <node id="DESIGN.md" />
+    <node id="docs/firebase-auth.md" />
+    <node id="e2e/button_audit.spec.ts" />
+    <node id="frontend/.env" />
+    <node id="frontend/.env.local" />
+    <node id="frontend/components.json" />
+    <node id="frontend/eslint.config.mjs" />
+    <node id="frontend/next-env.d.ts" />
+    <node id="frontend/next.config.ts" />
+    <node id="frontend/package-lock.json" />
+    <node id="frontend/package.json" />
+    <node id="frontend/postcss.config.mjs" />
+    <node id="frontend/src/app/admin/ids/page.tsx" />
+    <node id="frontend/src/app/admin/page.tsx" />
+    <node id="frontend/src/app/ai/loading.tsx" />
+    <node id="frontend/src/app/ai/page.tsx" />
+    <node id="frontend/src/app/api/chat/route.ts" />
+    <node id="frontend/src/app/assistant/loading.tsx" />
+    <node id="frontend/src/app/assistant/page.tsx" />
+    <node id="frontend/src/app/complaints/loading.tsx" />
+    <node id="frontend/src/app/complaints/page.tsx" />
+    <node id="frontend/src/app/credentials/loading.tsx" />
+    <node id="frontend/src/app/credentials/page.tsx" />
+    <node id="frontend/src/app/forgot-password/page.tsx" />
+    <node id="frontend/src/app/framework/page.tsx" />
+    <node id="frontend/src/app/globals.css" />
+    <node id="frontend/src/app/id/loading.tsx" />
+    <node id="frontend/src/app/id/page.tsx" />
+    <node id="frontend/src/app/id/track/page.tsx" />
+    <node id="frontend/src/app/id/[id]/page.tsx" />
+    <node id="frontend/src/app/layout.tsx" />
+    <node id="frontend/src/app/login/page.tsx" />
+    <node id="frontend/src/app/page.tsx" />
+    <node id="frontend/src/app/privacy/page.tsx" />
+    <node id="frontend/src/app/profile/page.tsx" />
+    <node id="frontend/src/app/reset-password/page.tsx" />
+    <node id="frontend/src/app/schemes/loading.tsx" />
+    <node id="frontend/src/app/schemes/page.tsx" />
+    <node id="frontend/src/app/schemes/track/page.tsx" />
+    <node id="frontend/src/app/schemes/[id]/page.tsx" />
+    <node id="frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx" />
+    <node id="frontend/src/app/security/page.tsx" />
+    <node id="frontend/src/app/signup/page.tsx" />
+    <node id="frontend/src/app/standards/page.tsx" />
+    <node id="frontend/src/app/terms/page.tsx" />
+    <node id="frontend/src/app/track/page.tsx" />
+    <node id="frontend/src/app/vault/page.tsx" />
+    <node id="frontend/src/components/ai/AIAssistant.tsx" />
+    <node id="frontend/src/components/ai/AssistantThreeScene.tsx" />
+    <node id="frontend/src/components/auth/CompleteProfileModal.tsx" />
+    <node id="frontend/src/components/auth/GoogleSignInButton.tsx" />
+    <node id="frontend/src/components/auth/OtpInput.tsx" />
+    <node id="frontend/src/components/auth/OtpVerificationForm.tsx" />
+    <node id="frontend/src/components/auth/PasswordStrengthMeter.tsx" />
+    <node id="frontend/src/components/ClientShells.tsx" />
+    <node id="frontend/src/components/DocumentSelector.tsx" />
+    <node id="frontend/src/components/DynamicForm.tsx" />
+    <node id="frontend/src/components/EligibilityEngine.tsx" />
+    <node id="frontend/src/components/Footer.tsx" />
+    <node id="frontend/src/components/Hero.tsx" />
+    <node id="frontend/src/components/HeroShowcase.tsx" />
+    <node id="frontend/src/components/Navbar.tsx" />
+    <node id="frontend/src/components/PageWrapper.tsx" />
+    <node id="frontend/src/components/RouteGuard.tsx" />
+    <node id="frontend/src/components/SmartUpload.tsx" />
+    <node id="frontend/src/components/SpotlightCard.css" />
+    <node id="frontend/src/components/SpotlightCard.tsx" />
+    <node id="frontend/src/components/ui/button.tsx" />
+    <node id="frontend/src/components/ui/card.tsx" />
+    <node id="frontend/src/components/ui/input.tsx" />
+    <node id="frontend/src/components/ui/interactive-3d-robot.tsx" />
+    <node id="frontend/src/components/ui/label.tsx" />
+    <node id="frontend/src/components/ui/splite.tsx" />
+    <node id="frontend/src/context/AuthContext.tsx" />
+    <node id="frontend/src/lib/api/auth.api.ts" />
+    <node id="frontend/src/lib/api/client.ts" />
+    <node id="frontend/src/lib/auth.ts" />
+    <node id="frontend/src/lib/data.ts" />
+    <node id="frontend/src/lib/firebase.ts" />
+    <node id="frontend/src/lib/knowledge.ts" />
+    <node id="frontend/src/lib/utils.ts" />
+    <node id="frontend/tsconfig.json" />
+    <node id="frontend/tsconfig.tsbuildinfo" />
+    <node id="memory/api.md" />
+    <node id="memory/architecture.md" />
+    <node id="memory/bugs.md" />
+    <node id="memory/business-rules.md" />
+    <node id="memory/changelog.md" />
+    <node id="memory/coding-standards.md" />
+    <node id="memory/current-status.md" />
+    <node id="memory/database.md" />
+    <node id="memory/decisions.md" />
+    <node id="memory/deployment.md" />
+    <node id="memory/how-to-run.md" />
+    <node id="memory/module-government-ids.md" />
+    <node id="memory/production-implementation-spec.md" />
+    <node id="memory/project-overview.md" />
+    <node id="memory/README.md" />
+    <node id="memory/tech-stack.md" />
+    <node id="memory/todo.md" />
+    <node id="package-lock.json" />
+    <node id="package.json" />
+    <node id="PRODUCT.md" />
+    <node id="README.md" />
+    <node id="scripts/build-review-graph.js" />
+    <node id="scripts/graphify.js" />
+    <node id="scripts/validate-graph-output.js" />
+    <node id="shared/package.json" />
+    <node id="shared/src/index.ts" />
+    <node id="shared/src/types/auth.ts" />
+    <node id="shared/src/validations/password.ts" />
+    <node id="shared/tsconfig.json" />
+    <edge id="e0" source="backend/src/app.ts" target="backend/src/routes/index.ts" />
+    <edge id="e1" source="backend/src/app.ts" target="backend/src/config/index.ts" />
+    <edge id="e2" source="backend/src/controllers/auth.controller.ts" target="backend/src/services/auth.service.ts" />
+    <edge id="e3" source="backend/src/controllers/auth.controller.ts" target="backend/src/repositories/user.repository.ts" />
+    <edge id="e4" source="backend/src/controllers/auth.controller.ts" target="backend/src/repositories/session.repository.ts" />
+    <edge id="e5" source="backend/src/controllers/auth.controller.ts" target="backend/src/utils/jwt.util.ts" />
+    <edge id="e6" source="backend/src/database/db.ts" target="shared/src/index.ts" />
+    <edge id="e7" source="backend/src/repositories/otp.repository.ts" target="backend/src/database/db.ts" />
+    <edge id="e8" source="backend/src/repositories/otp.repository.ts" target="shared/src/index.ts" />
+    <edge id="e9" source="backend/src/repositories/password-reset.repository.ts" target="backend/src/database/db.ts" />
+    <edge id="e10" source="backend/src/repositories/password-reset.repository.ts" target="shared/src/index.ts" />
+    <edge id="e11" source="backend/src/repositories/session.repository.ts" target="backend/src/database/db.ts" />
+    <edge id="e12" source="backend/src/repositories/session.repository.ts" target="shared/src/index.ts" />
+    <edge id="e13" source="backend/src/repositories/user.repository.ts" target="backend/src/database/db.ts" />
+    <edge id="e14" source="backend/src/repositories/user.repository.ts" target="shared/src/index.ts" />
+    <edge id="e15" source="backend/src/routes/auth.routes.ts" target="backend/src/controllers/auth.controller.ts" />
+    <edge id="e16" source="backend/src/routes/index.ts" target="backend/src/routes/auth.routes.ts" />
+    <edge id="e17" source="backend/src/routes/index.ts" target="backend/src/routes/govid.routes.ts" />
+    <edge id="e18" source="backend/src/server.ts" target="backend/src/app.ts" />
+    <edge id="e19" source="backend/src/server.ts" target="backend/src/config/index.ts" />
+    <edge id="e20" source="backend/src/server.ts" target="backend/src/database/db.ts" />
+    <edge id="e21" source="backend/src/services/auth.service.ts" target="backend/src/repositories/user.repository.ts" />
+    <edge id="e22" source="backend/src/services/auth.service.ts" target="backend/src/repositories/otp.repository.ts" />
+    <edge id="e23" source="backend/src/services/auth.service.ts" target="backend/src/repositories/session.repository.ts" />
+    <edge id="e24" source="backend/src/services/auth.service.ts" target="backend/src/repositories/password-reset.repository.ts" />
+    <edge id="e25" source="backend/src/services/auth.service.ts" target="backend/src/utils/hash.util.ts" />
+    <edge id="e26" source="backend/src/services/auth.service.ts" target="backend/src/utils/otp.util.ts" />
+    <edge id="e27" source="backend/src/services/auth.service.ts" target="shared/src/index.ts" />
+    <edge id="e28" source="backend/src/services/auth.service.ts" target="backend/src/config/index.ts" />
+    <edge id="e29" source="backend/src/services/auth.service.ts" target="backend/src/utils/jwt.util.ts" />
+    <edge id="e30" source="backend/src/utils/jwt.util.ts" target="backend/src/config/index.ts" />
+    <edge id="e31" source="frontend/src/app/layout.tsx" target="frontend/src/app/globals.css" />
+    <edge id="e32" source="frontend/src/app/schemes/[id]/page.tsx" target="frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx" />
+    <edge id="e33" source="frontend/src/components/auth/CompleteProfileModal.tsx" target="frontend/src/components/auth/OtpInput.tsx" />
+    <edge id="e34" source="frontend/src/components/auth/PasswordStrengthMeter.tsx" target="shared/src/index.ts" />
+    <edge id="e35" source="frontend/src/components/DynamicForm.tsx" target="frontend/src/components/SmartUpload.tsx" />
+    <edge id="e36" source="frontend/src/components/SmartUpload.tsx" target="frontend/src/components/DocumentSelector.tsx" />
+    <edge id="e37" source="frontend/src/components/SpotlightCard.tsx" target="frontend/src/components/SpotlightCard.css" />
+    <edge id="e38" source="frontend/src/lib/api/auth.api.ts" target="frontend/src/lib/api/client.ts" />
+    <edge id="e39" source="frontend/src/lib/auth.ts" target="frontend/src/lib/firebase.ts" />
+  </graph>
+</graphml>

@@ -1,6 +1,7 @@
 'use client';
 
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, Component, ReactNode } from 'react';
+
 const Spline = lazy(() => import('@splinetool/react-spline'));
 import type { Application } from '@splinetool/runtime';
 
@@ -9,9 +10,65 @@ interface InteractiveRobotSplineProps {
   className?: string;
 }
 
+// ─── Error Boundary ───────────────────────────────────────────────────────────
+// Catches "Failed to fetch" and other Spline load errors so the AI page
+// doesn't crash when the Spline CDN is unreachable or the scene fails to load.
+interface EBState { hasError: boolean }
+class SplineErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, EBState> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(err: Error) {
+    // Silence the noisy Spline fetch error from the console in production
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn('[Spline] Scene failed to load:', err.message);
+    }
+  }
+  render() {
+    if (this.state.hasError) return this.props.fallback;
+    return this.props.children;
+  }
+}
+
+// ─── Animated Fallback ────────────────────────────────────────────────────────
+function SplineFallback() {
+  return (
+    <div className="w-full h-full flex items-center justify-center bg-transparent">
+      <div className="relative w-48 h-48 flex items-center justify-center">
+        {/* Pulsing outer ring */}
+        <div className="absolute inset-0 rounded-full border-2 border-primary/20 animate-ping" style={{ animationDuration: '2s' }} />
+        <div className="absolute inset-4 rounded-full border border-primary/10 animate-ping" style={{ animationDuration: '2.5s', animationDelay: '0.3s' }} />
+        {/* AI icon */}
+        <div className="w-20 h-20 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shadow-lg backdrop-blur-sm">
+          <span className="material-symbols-outlined text-[42px] text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
+            smart_toy
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Loading Spinner ──────────────────────────────────────────────────────────
+function SplineLoading() {
+  return (
+    <div className="w-full h-full flex items-center justify-center bg-transparent">
+      <div className="w-20 h-20 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center animate-pulse">
+        <span className="material-symbols-outlined text-[36px] text-primary/60" style={{ fontVariationSettings: "'FILL' 1" }}>
+          smart_toy
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
 export function InteractiveRobotSpline({ scene, className }: InteractiveRobotSplineProps) {
   function handleLoad(splineApp: Application) {
-    // Enable global events so the robot tracks the mouse even when it's outside the canvas
     if (typeof splineApp.setGlobalEvents === 'function') {
       splineApp.setGlobalEvents(true);
     }
@@ -19,19 +76,11 @@ export function InteractiveRobotSpline({ scene, className }: InteractiveRobotSpl
 
   return (
     <div className={`relative w-full h-full ${className || ''} pointer-events-auto`}>
-      <Suspense
-        fallback={
-          <div className="w-full h-full flex items-center justify-center bg-transparent">
-            <svg className="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l2-2.647z"></path>
-            </svg>
-          </div>
-        }
-      >
-        <Spline scene={scene} className="w-full h-full" onLoad={handleLoad} />
-      </Suspense>
+      <SplineErrorBoundary fallback={<SplineFallback />}>
+        <Suspense fallback={<SplineLoading />}>
+          <Spline scene={scene} className="w-full h-full" onLoad={handleLoad} />
+        </Suspense>
+      </SplineErrorBoundary>
     </div>
   );
 }
-

@@ -88,6 +88,170 @@ export const states = ["All India", "Uttar Pradesh", "Maharashtra", "Karnataka",
 
 export const schemes: Scheme[] = [
   {
+    id: "pm-vidya-lakshmi",
+    name: "PM Vidya Lakshmi Education Loan Scheme",
+    description: "Financial support & collateral-free education loans for students pursuing higher education.",
+    overview: "PM Vidya Lakshmi is a single-window portal for students seeking educational loans and government scholarships. It provides collateral-free loans up to ₹10 Lakh for higher education in top Indian institutions, with a 3% interest subvention for families earning up to ₹8 Lakh/year.",
+    department: "Department of Higher Education, Ministry of Education",
+    objectives: [
+      "Ensure no deserving student is denied higher education due to financial constraints",
+      "Provide collateral-free and third-party guarantee-free education loans",
+      "Offer 3% interest subvention during the moratorium period"
+    ],
+    benefits: [
+      "Collateral-free loans up to ₹10 Lakh for higher education in eligible HEIs",
+      "3% interest subvention for students with annual family income up to ₹8 Lakh",
+      "Full interest waiver for students with annual family income up to ₹4.5 Lakh",
+      "Single portal to apply across 40+ scheduled banks"
+    ],
+    eligibility: [
+      "Must be an Indian citizen student",
+      "Must have secured admission in higher education course in recognized Indian or foreign institution",
+      "Family income criteria applies for interest subvention benefits (up to ₹8 Lakh/year)"
+    ],
+    whoCannotApply: [
+      "Non-Indian citizens",
+      "Students pursuing unrecognized distance education degrees without approval"
+    ],
+    requiredDocs: ["Aadhaar Card", "Class 10 & 12 Mark Sheets", "Admission Offer Letter & Fee Structure", "Income Certificate / ITR of Parents", "Bank Account Details"],
+    applicationProcess: [
+      "Register on Vidyalakshmi portal (vidyalakshmi.co.in)",
+      "Fill Common Educational Loan Application Form (CELAF)",
+      "Upload academic and income documents",
+      "Apply to preferred banks and track loan status"
+    ],
+    processingTimeline: "15-30 Days",
+    financialBenefits: "Loan up to ₹10 Lakh + 3% Interest Subvention",
+    officialAuthority: "Ministry of Education & NSDL e-Governance",
+    officialWebsite: "https://www.vidyalakshmi.co.in",
+    category: "Students",
+    state: "Central",
+    eligibilityRules: {
+      isStudent: true,
+      minEducation: "Class 12",
+      incomeLimit: 800000
+    },
+    fields: []
+  },
+  {
+    id: "central-sector-scholarship",
+    name: "Central Sector Scheme of Scholarship for College and University Students (CSSS)",
+    description: "Financial assistance for meritorious students from low-income families for higher studies.",
+    overview: "CSSS provides financial assistance to meritorious students who have scored above the 80th percentile in Class 12 exams and are pursuing regular graduate or postgraduate courses.",
+    department: "Department of Higher Education, Ministry of Education",
+    objectives: [
+      "Support meritorious students from low-income families to meet day-to-day college expenses",
+      "Award 82,000 fresh scholarships every year (50% reserved for female students)"
+    ],
+    benefits: [
+      "₹12,000 per year at Graduation level for first 3 years",
+      "₹20,000 per year at Post-Graduation level for 2 years",
+      "₹20,000 per year for 5-year integrated professional courses",
+      "Direct Bank Transfer (DBT) into student's Aadhaar-seeded bank account"
+    ],
+    eligibility: [
+      "Must be in the top 80th percentile of successful candidates in Class 12 board examination",
+      "Pursuing regular (non-correspondence) degree course in a recognized college/university",
+      "Annual parental/family income must not exceed ₹4.5 Lakh",
+      "Not receiving any other scholarship support"
+    ],
+    whoCannotApply: [
+      "Students pursuing diploma courses or distance learning",
+      "Students receiving other government scholarships"
+    ],
+    requiredDocs: ["Class 12 Marksheet", "Aadhaar Card", "Income Certificate (issued by competent authority)", "College Admission Fee Receipt", "Bank Passbook"],
+    applicationProcess: [
+      "Apply on National Scholarship Portal (scholarships.gov.in)",
+      "Upload Class 12 mark sheet and income certificate",
+      "College / Institute verification",
+      "Nodal Officer approval and DBT disbursal"
+    ],
+    processingTimeline: "30-45 Days",
+    financialBenefits: "₹12,000 - ₹20,000/year",
+    officialAuthority: "Ministry of Education",
+    officialWebsite: "https://scholarships.gov.in",
+    category: "Students",
+    state: "Central",
+    eligibilityRules: {
+      isStudent: true,
+      incomeLimit: 450000,
+      minPercentile: 80
+    },
+    fields: []
+  },
+  {
+    id: "pm-yasasvi",
+    name: "PM YASASVI Scholarship Scheme",
+    description: "Scholarship for OBC, EBC, and DNT students studying in Class 9 to 12.",
+    overview: "PM Young Achievers Scholarship Award Scheme for Vibrant India (YASASVI) offers top-class education scholarships to meritorious OBC, EBC, and DNT students studying in designated top-schools.",
+    department: "Ministry of Social Justice and Empowerment",
+    benefits: [
+      "Scholarship of ₹75,000 per year for Class 9 and Class 10 students",
+      "Scholarship of ₹1,25,000 per year for Class 11 and Class 12 students",
+      "Covers school tuition fees, hostel fees, and computer purchase"
+    ],
+    eligibility: [
+      "Must belong to OBC, EBC, or DNT category",
+      "Studying in Class 9, 10, 11, or 12 in identified top schools",
+      "Annual income of parents/guardians from all sources not exceeding ₹2.5 Lakh"
+    ],
+    requiredDocs: ["Aadhaar Card", "Caste / Category Certificate (OBC/EBC/DNT)", "Income Certificate", "Class 8 / 10 Marksheet", "School Identity Card & Fee Receipt"],
+    applicationProcess: [
+      "Register on National Scholarship Portal (NSP)",
+      "Select PM YASASVI Scheme",
+      "Upload category certificate and marksheets",
+      "Verification by school and district nodal officer"
+    ],
+    processingTimeline: "30-45 Days",
+    financialBenefits: "₹75,000 - ₹1,25,000/year",
+    officialAuthority: "Ministry of Social Justice and Empowerment",
+    officialWebsite: "https://yet.nta.ac.in",
+    category: "Students",
+    state: "Central",
+    eligibilityRules: {
+      isStudent: true,
+      category: ["OBC", "EBC", "DNT"],
+      incomeLimit: 250000
+    },
+    fields: []
+  },
+  {
+    id: "post-matric-scholarship",
+    name: "Post Matric Scholarship for SC/ST/OBC Students",
+    description: "Complete fee reimbursement and maintenance allowance for post-secondary education.",
+    overview: "Centrally sponsored scheme providing complete financial assistance to SC, ST, and OBC students studying at post-matriculation or post-secondary stage to enable them to complete their education.",
+    department: "Ministry of Social Justice & Empowerment / Ministry of Tribal Affairs",
+    benefits: [
+      "100% tuition fee reimbursement for government and private colleges",
+      "Monthly maintenance allowance up to ₹1,200/month for day scholars and ₹4,000/month for hostellers",
+      "Additional allowance for disabled students and study tours"
+    ],
+    eligibility: [
+      "Indian national student belonging to SC, ST, or OBC category",
+      "Pursuing post-matriculation courses (Class 11, 12, ITI, Diploma, Graduation, Post-Graduation, PhD)",
+      "Annual family income not exceeding ₹2.5 Lakh (SC/ST) or ₹1.5 Lakh (OBC)"
+    ],
+    requiredDocs: ["Aadhaar Card", "Caste Certificate", "Income Certificate", "Previous Exam Marksheets", "College Fee Receipt", "Bank Passbook"],
+    applicationProcess: [
+      "Apply online on State Scholarship Portal or NSP",
+      "Submit physical copy to college scholarship cell",
+      "Verification by college & district welfare officer",
+      "Direct Benefit Transfer into bank account"
+    ],
+    processingTimeline: "30-60 Days",
+    financialBenefits: "Full Fee Waiver + Maintenance Allowance",
+    officialAuthority: "Ministry of Social Justice & Empowerment",
+    officialWebsite: "https://scholarships.gov.in",
+    category: "Students",
+    state: "Central",
+    eligibilityRules: {
+      isStudent: true,
+      category: ["SC", "ST", "OBC"],
+      incomeLimit: 250000
+    },
+    fields: []
+  },
+  {
     id: "pm-kisan",
     name: "PM Kisan Samman Nidhi",
     description: "Income support scheme for all landholding farmer families.",
@@ -242,6 +406,222 @@ export const schemes: Scheme[] = [
       { id: "consumerNumber", label: "Consumer Number", type: "text", required: true },
       { id: "roofArea", label: "Available Roof Area (sq ft)", type: "text", required: true },
       { id: "latestBill", label: "Latest Electricity Bill", type: "file", required: true, acceptedFormats: [".pdf", ".jpg", ".png"] }
+    ]
+  },
+  {
+    id: "kcc",
+    name: "Kisan Credit Card (KCC)",
+    description: "Short-term formal loans at low interest rates for crop production and farm equipment.",
+    overview: "The Kisan Credit Card (KCC) scheme was introduced to provide adequate and timely credit support from the banking system to farmers for their cultivation and other needs, including agriculture inputs, equipment, and allied activities.",
+    department: "Department of Agriculture & Farmers Welfare / RBI / NABARD",
+    objectives: [
+      "Provide short-term formal credit for crop cultivation",
+      "Subsidized interest rate of 4% per annum upon prompt repayment",
+      "Provide collateral-free loans up to ₹1.6 Lakh (extendable to ₹3 Lakh)",
+      "Cover post-harvest expenses and allied activities (dairy, fisheries, poultry)"
+    ],
+    benefits: [
+      "Interest subvention of 2% and additional 3% prompt repayment incentive (effective rate 4%)",
+      "Flexible credit limits based on land holding and crop pattern",
+      "Revolving credit facility valid for 5 years",
+      "Collateral-free loan limit up to ₹1,60,000"
+    ],
+    eligibility: [
+      "Individual farmers who are owner-cultivators",
+      "Joint borrowers / tenant farmers / oral lessees / sharecroppers",
+      "Self Help Groups (SHGs) or Joint Liability Groups (JLGs) of farmers"
+    ],
+    requiredDocs: [
+      "Duly filled KCC Application Form",
+      "Aadhaar Card & PAN / Voter ID",
+      "Land Ownership Documents (Khasra/Khatauni) or Tenancy Lease Certificate",
+      "Passport-size Photographs"
+    ],
+    applicationProcess: [
+      "Fill online application form or visit nearest bank branch",
+      "Submit land ownership or tenancy proof",
+      "Aadhaar e-KYC verification",
+      "Sanction and issue of KCC smart card / passbook"
+    ],
+    processingTimeline: "7-14 Working Days",
+    financialBenefits: "Up to ₹3,00,000 credit limit @ 4% interest rate",
+    officialAuthority: "Reserve Bank of India & NABARD",
+    officialWebsite: "https://pmkisan.gov.in",
+    category: "Farmers",
+    state: "Central",
+    eligibilityRules: {
+      isFarmer: true,
+      requiresLandOrTenancy: true
+    },
+    fields: [
+      { id: "fullName", label: "Full Name (as per Aadhaar)", type: "text", required: true, prefillKey: "fullName" },
+      { id: "aadhaar", label: "Aadhaar Number", type: "text", required: true, prefillKey: "aadhaar" },
+      { id: "farmerType", label: "Category", type: "radio", required: true, options: [
+        { value: "owner", label: "Land Owner" },
+        { value: "tenant", label: "Tenant Farmer / Sharecropper" },
+        { value: "shg", label: "SHG / Joint Borrower" }
+      ]},
+      { id: "requestedAmount", label: "Requested Credit Amount (₹)", type: "text", required: true },
+      { id: "landProof", label: "Land Record / Tenancy Certificate", type: "file", required: true, acceptedFormats: [".pdf", ".jpg", ".png"] }
+    ]
+  },
+  {
+    id: "pmfby",
+    name: "PMFBY (Pradhan Mantri Fasal Bima Yojana)",
+    description: "Crop insurance protecting farmers against natural disasters, pests, and diseases.",
+    overview: "Pradhan Mantri Fasal Bima Yojana (PMFBY) aims at supporting sustainable production in agriculture by providing financial support to farmers suffering crop loss/damage arising out of unforeseen events and natural calamities.",
+    department: "Ministry of Agriculture & Farmers Welfare",
+    objectives: [
+      "Provide financial support to farmers suffering crop loss",
+      "Stabilize income of farmers to ensure continuance in farming",
+      "Encourage farmers to adopt innovative and modern agricultural practices",
+      "Ensure flow of credit to agriculture sector"
+    ],
+    benefits: [
+      "Maximum premium paid by farmers is 2% for Kharif crops, 1.5% for Rabi crops, and 5% for commercial/horticultural crops",
+      "Balance premium subsidized 100% by Central and State Governments",
+      "Covers pre-sowing, standing crop losses, post-harvest losses, and localized calamities",
+      "Direct Benefit Transfer (DBT) claim settlement directly to bank accounts"
+    ],
+    eligibility: [
+      "All farmers including sharecroppers and tenant farmers growing notified crops in notified areas",
+      "Compulsory for loanee farmers, voluntary for non-loanee farmers"
+    ],
+    requiredDocs: [
+      "Aadhaar Card",
+      "Land Ownership Document (Khasra/Khatauni) or Land Possession Certificate",
+      "Sowing Certificate issued by Patwari / Gram Sevak",
+      "Bank Account Passbook (Aadhaar seeded)"
+    ],
+    applicationProcess: [
+      "Apply through PMFBY portal, CSC center, or bank branch",
+      "Select state, district, crop season (Kharif/Rabi), and crop type",
+      "Upload land and sowing certificates",
+      "Pay nominal farmer premium online"
+    ],
+    processingTimeline: "Claim settlement within 30 days of damage assessment",
+    financialBenefits: "Up to 100% sum insured against crop damage",
+    officialAuthority: "Ministry of Agriculture & Farmers Welfare",
+    officialWebsite: "https://pmfby.gov.in",
+    category: "Farmers",
+    state: "Central",
+    eligibilityRules: {
+      isFarmer: true,
+      hasNotifiedCrop: true
+    },
+    fields: [
+      { id: "fullName", label: "Farmer Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "aadhaar", label: "Aadhaar Number", type: "text", required: true, prefillKey: "aadhaar" },
+      { id: "cropSeason", label: "Crop Season", type: "select", required: true, options: [
+        { value: "kharif", label: "Kharif (Monsoon)" },
+        { value: "rabi", label: "Rabi (Winter)" },
+        { value: "commercial", label: "Commercial / Horticultural" }
+      ]},
+      { id: "cropName", label: "Crop Name", type: "text", required: true },
+      { id: "sowingDoc", label: "Sowing Certificate / Land Record", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "smam",
+    name: "SMAM (Sub-Mission on Agricultural Mechanization)",
+    description: "Subsidies covering 50% to 80% on farm machines, equipment, and custom hiring centers.",
+    overview: "Sub-Mission on Agricultural Mechanization (SMAM) aims to increase the reach of farm mechanization to small and marginal farmers and to regions where availability of farm power is low.",
+    department: "Department of Agriculture & Farmers Welfare",
+    objectives: [
+      "Promote farm mechanization to improve crop productivity",
+      "Provide 50% to 80% subsidies on tractors, tillers, harvesters, and tools",
+      "Establish Custom Hiring Centers (CHCs) for renting machinery to small farmers"
+    ],
+    benefits: [
+      "50% to 80% direct subsidy on agricultural machinery purchase",
+      "Financial assistance up to ₹10 Lakhs for setting up Custom Hiring Centers",
+      "Special higher subsidy rates for SC/ST, women, and small/marginal farmers"
+    ],
+    eligibility: [
+      "Small and marginal farmers",
+      "Women farmers, SC/ST category farmers",
+      "Farmer Producer Organizations (FPOs), SHGs, and registered farmer groups"
+    ],
+    requiredDocs: [
+      "Aadhaar Card",
+      "Land Ownership Proof (Khasra / Khatauni)",
+      "Bank Account Passbook",
+      "Caste Certificate (for SC/ST quota subsidy)",
+      "Quotation / Invoice of Agricultural Machine"
+    ],
+    applicationProcess: [
+      "Register on AGRI MACHINERY portal (agrimachinery.nic.in)",
+      "Select machinery type and manufacturer dealer",
+      "Upload land & identity documents",
+      "Direct Benefit Transfer of subsidy after physical verification"
+    ],
+    processingTimeline: "15-30 Days",
+    financialBenefits: "50% to 80% subsidy on equipment cost",
+    officialAuthority: "Ministry of Agriculture & Farmers Welfare",
+    officialWebsite: "https://agrimachinery.nic.in",
+    category: "Farmers",
+    state: "Central",
+    fields: [
+      { id: "fullName", label: "Applicant Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "aadhaar", label: "Aadhaar Number", type: "text", required: true, prefillKey: "aadhaar" },
+      { id: "machineType", label: "Machinery / Equipment Type", type: "select", required: true, options: [
+        { value: "tractor", label: "Tractor / Power Tiller" },
+        { value: "seeder", label: "Seed Drill / Planter" },
+        { value: "harvester", label: "Combine Harvester / Thresher" },
+        { value: "sprayer", label: "Power Sprayer / Drone" },
+        { value: "chc", label: "Custom Hiring Center (CHC)" }
+      ]},
+      { id: "landProof", label: "Land Record (Khasra)", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
+    ]
+  },
+  {
+    id: "pmksy",
+    name: "PMKSY (Pradhan Mantri Krishi Sinchayee Yojana)",
+    description: "Improves farm water access and expands drip & sprinkler micro-irrigation with up to 55% subsidy.",
+    overview: "Pradhan Mantri Krishi Sinchayee Yojana (PMKSY) has been formulated with the vision of extending the coverage of irrigation 'Har Khet Ko Pani' and improving water use efficiency 'More Crop Per Drop' in a focused manner.",
+    department: "Department of Agriculture and Farmers Welfare",
+    objectives: [
+      "Expand cultivable area under assured irrigation ('Har Khet Ko Pani')",
+      "Improve on-farm water use efficiency via drip and sprinkler irrigation ('Per Drop More Crop')",
+      "Enhance recharge of aquifers and introduce sustainable water conservation practices"
+    ],
+    benefits: [
+      "Up to 55% subsidy for small & marginal farmers and 45% for other farmers on micro-irrigation systems",
+      "Subsidized solar water pumps under PM-KUSUM integration",
+      "Financial aid for farm ponds, check dams, and pipeline installation"
+    ],
+    eligibility: [
+      "All farmers owning agricultural land with a reliable water source",
+      "Members of Water User Associations, SHGs, or tenant farmers with registered lease"
+    ],
+    requiredDocs: [
+      "Aadhaar Card",
+      "Land Ownership Documents (Khasra/Khatauni)",
+      "Proof of Water Source / Electricity Connection Bill",
+      "Bank Account Details"
+    ],
+    applicationProcess: [
+      "Apply through PMKSY portal or District Agriculture Office",
+      "Submit land records and water source verification",
+      "Technical survey by horticulture / agriculture department",
+      "Installation of drip/sprinkler system with subsidized vendor"
+    ],
+    processingTimeline: "20-45 Days",
+    financialBenefits: "Up to 55% subsidy on drip/sprinkler irrigation systems",
+    officialAuthority: "Ministry of Agriculture & Farmers Welfare",
+    officialWebsite: "https://pmksy.gov.in",
+    category: "Farmers",
+    state: "Central",
+    fields: [
+      { id: "fullName", label: "Farmer Name", type: "text", required: true, prefillKey: "fullName" },
+      { id: "aadhaar", label: "Aadhaar Number", type: "text", required: true, prefillKey: "aadhaar" },
+      { id: "systemType", label: "Irrigation System Requested", type: "radio", required: true, options: [
+        { value: "drip", label: "Drip Irrigation System (Up to 55% Subsidy)" },
+        { value: "sprinkler", label: "Sprinkler Irrigation System (Up to 55% Subsidy)" },
+        { value: "pump", label: "Solar / Electric Pump Integration" }
+      ]},
+      { id: "landArea", label: "Land Area (in Hectares)", type: "text", required: true },
+      { id: "landDoc", label: "Land Record Document", type: "file", required: true, acceptedFormats: [".pdf", ".jpg"] }
     ]
   }
 ];

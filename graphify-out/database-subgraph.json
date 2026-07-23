@@ -1,0 +1,97 @@
+{
+  "nodes": [
+    {
+      "id": "backend/src/database/db.ts",
+      "type": "model",
+      "layer": "backend",
+      "name": "db",
+      "path": "backend/src/database/db.ts",
+      "language": "typescript",
+      "size": 1421,
+      "complexity": 4,
+      "exports": [
+        "ensureDbExists",
+        "readDb",
+        "writeDb"
+      ]
+    },
+    {
+      "id": "backend/src/repositories/otp.repository.ts",
+      "type": "repository",
+      "layer": "backend",
+      "name": "otp.repository",
+      "path": "backend/src/repositories/otp.repository.ts",
+      "language": "typescript",
+      "size": 1019,
+      "complexity": 3,
+      "exports": [
+        "OtpRepository"
+      ]
+    },
+    {
+      "id": "backend/src/repositories/password-reset.repository.ts",
+      "type": "repository",
+      "layer": "backend",
+      "name": "password-reset.repository",
+      "path": "backend/src/repositories/password-reset.repository.ts",
+      "language": "typescript",
+      "size": 988,
+      "complexity": 5,
+      "exports": [
+        "PasswordResetRepository"
+      ]
+    },
+    {
+      "id": "backend/src/repositories/session.repository.ts",
+      "type": "repository",
+      "layer": "backend",
+      "name": "session.repository",
+      "path": "backend/src/repositories/session.repository.ts",
+      "language": "typescript",
+      "size": 1096,
+      "complexity": 5,
+      "exports": [
+        "SessionRepository"
+      ]
+    },
+    {
+      "id": "backend/src/repositories/user.repository.ts",
+      "type": "repository",
+      "layer": "backend",
+      "name": "user.repository",
+      "path": "backend/src/repositories/user.repository.ts",
+      "language": "typescript",
+      "size": 1618,
+      "complexity": 4,
+      "exports": [
+        "UserRepository"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "backend/src/repositories/otp.repository.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/repositories/password-reset.repository.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/repositories/session.repository.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/repositories/user.repository.ts",
+      "target": "backend/src/database/db.ts",
+      "type": "imports",
+      "weight": 1
+    }
+  ]
+}

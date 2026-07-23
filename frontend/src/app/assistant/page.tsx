@@ -1,12 +1,82 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import Link from "next/link";
-import * as THREE from 'three';
+import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { getUserDisplayName } from "@/lib/utils";
+import { useChatHistory, formatRelativeTime, Message } from "@/lib/useChatHistory";
 
-export default function AssistantPage() {
+const AssistantThreeScene = dynamic(
+  () => import("@/components/ai/AssistantThreeScene").then((m) => ({ default: m.AssistantThreeScene })),
+  { ssr: false }
+);
+
+function AssistantPageContent() {
+  const { user } = useAuth();
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q");
+
   const shaderCanvasRef = useRef<HTMLCanvasElement>(null);
-  const threeContainerRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const { isMounted, sessions, currentSessionId, messages, setMessages, startNewChat, selectSession, deleteSession } = useChatHistory();
+  const [inputValue, setInputValue] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
+  const callAI = async (history: Message[]): Promise<string> => {
+    try {
+      const res = await fetch("/api/assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: history.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "AI error");
+      return data.content;
+    } catch (err) {
+      console.error("AI call failed:", err);
+      return "I'm sorry, I couldn't reach the AI service right now. Please try again in a moment.";
+    }
+  };
+
+  const handleSendMessage = async (textToSend?: string) => {
+    const text = typeof textToSend === "string" ? textToSend.trim() : inputValue.trim();
+    if (!text) return;
+    const newUserMsg: Message = { id: Date.now().toString(), role: 'user', content: text };
+    const updatedHistory = [...messages, newUserMsg];
+    setMessages(updatedHistory);
+    setInputValue("");
+    setIsTyping(true);
+    const aiContent = await callAI(updatedHistory);
+    const newAiMsg: Message = { id: (Date.now() + 1).toString(), role: 'assistant', content: aiContent };
+    setMessages([...updatedHistory, newAiMsg]);
+    setIsTyping(false);
+  };
+
+  useEffect(() => {
+    if (!initialQuery?.trim()) return;
+    const qText = initialQuery.trim();
+    const userMsg: Message = { id: Date.now().toString(), role: 'user', content: qText };
+    setMessages([userMsg]);
+    setIsTyping(true);
+    callAI([userMsg]).then((aiContent) => {
+      setMessages([userMsg, { id: (Date.now() + 1).toString(), role: 'assistant', content: aiContent }]);
+      setIsTyping(false);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialQuery]);
 
   useEffect(() => {
     // Input focus state handling
@@ -158,168 +228,7 @@ export default function AssistantPage() {
     };
   }, []);
 
-  useEffect(() => {
-    // Three.js Scene
-    const container = threeContainerRef.current;
-    if (!container) return;
-
-    let width = container.clientWidth || window.innerWidth;
-    let height = container.clientHeight || window.innerHeight;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 8;
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
-
-    // COLORS
-    const colorBlue = new THREE.Color(0x2563EB);
-    const colorGold = new THREE.Color(0xB8935A);
-    const colorWhite = new THREE.Color(0xFFFFFF);
-
-    // --- AI CORE ---
-    const coreGeometry = new THREE.IcosahedronGeometry(1.2, 4);
-    const coreMaterial = new THREE.MeshPhongMaterial({
-      color: colorBlue,
-      emissive: colorBlue,
-      emissiveIntensity: 0.5,
-      transparent: true,
-      opacity: 0.8,
-      shininess: 100
-    });
-    const core = new THREE.Mesh(coreGeometry, coreMaterial);
-    scene.add(core);
-
-    // Core Wireframe
-    const wireGeometry = new THREE.IcosahedronGeometry(1.21, 4);
-    const wireMaterial = new THREE.MeshBasicMaterial({
-      color: colorWhite,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.1
-    });
-    const coreWire = new THREE.Mesh(wireGeometry, wireMaterial);
-    core.add(coreWire);
-
-    // --- NEURAL NETWORK NODES ---
-    const nodeCount = 150;
-    const nodes: any[] = [];
-    const nodeGeometry = new THREE.SphereGeometry(0.04, 8, 8);
-    const nodeMaterialBlue = new THREE.MeshBasicMaterial({ color: colorBlue });
-    const nodeMaterialGold = new THREE.MeshBasicMaterial({ color: colorGold });
-
-    for (let i = 0; i < nodeCount; i++) {
-      const node: any = new THREE.Mesh(nodeGeometry, Math.random() > 0.8 ? nodeMaterialGold : nodeMaterialBlue);
-      const radius = 3 + Math.random() * 3;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos((Math.random() * 2) - 1);
-      
-      node.position.set(
-        radius * Math.sin(phi) * Math.cos(theta),
-        radius * Math.sin(phi) * Math.sin(theta),
-        radius * Math.cos(phi)
-      );
-      node.originalPos = node.position.clone();
-      node.phase = Math.random() * Math.PI * 2;
-      scene.add(node);
-      nodes.push(node);
-    }
-
-    // --- CONNECTING LINES ---
-    const lineMaterial = new THREE.LineBasicMaterial({
-      color: colorBlue,
-      transparent: true,
-      opacity: 0.1,
-      vertexColors: true
-    });
-
-    const maxDistance = 2.5;
-    const lines: any[] = [];
-
-    // Create links between nearby nodes
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const d = nodes[i].position.distanceTo(nodes[j].position);
-        if (d < maxDistance && Math.random() > 0.7) {
-          const geometry = new THREE.BufferGeometry().setFromPoints([nodes[i].position, nodes[j].position]);
-          const line: any = new THREE.Line(geometry, lineMaterial.clone());
-          line.userData = { from: i, to: j };
-          scene.add(line);
-          lines.push(line);
-        }
-      }
-    }
-
-    // --- LIGHTING ---
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-    scene.add(ambientLight);
-
-    const pointLight = new THREE.PointLight(colorBlue, 1.5, 15);
-    pointLight.position.set(2, 3, 4);
-    scene.add(pointLight);
-
-    let animationId: number;
-    // --- ANIMATION LOOP ---
-    function animate(t: number) {
-      animationId = requestAnimationFrame(animate);
-
-      const time = t * 0.001;
-
-      // Rotate scene slightly
-      scene.rotation.y = time * 0.1;
-      scene.rotation.x = Math.sin(time * 0.05) * 0.1;
-
-      // Pulse core
-      const s = 1 + Math.sin(time * 2) * 0.05;
-      core.scale.set(s, s, s);
-      core.rotation.y += 0.005;
-
-      // Node movement & Highlighting
-      nodes.forEach((node, i) => {
-        node.position.y = node.originalPos.y + Math.sin(time + node.phase) * 0.1;
-        node.position.x = node.originalPos.x + Math.cos(time + node.phase) * 0.1;
-      });
-
-      // Pulse lines
-      lines.forEach((line, i) => {
-        // Random "reasoning" path highlight
-        const pulseSpeed = 2.0;
-        const pulseVal = Math.sin(time * pulseSpeed + i * 0.5);
-        line.material.opacity = 0.05 + (pulseVal > 0.9 ? 0.4 : 0);
-        
-        // Update line positions if nodes move
-        const from = nodes[line.userData.from].position;
-        const to = nodes[line.userData.to].position;
-        line.geometry.setFromPoints([from, to]);
-      });
-
-      renderer.render(scene, camera);
-    }
-
-    const handleResize = () => {
-      if (!container) return;
-      const w = container.clientWidth || window.innerWidth;
-      const h = container.clientHeight || window.innerHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    };
-    window.addEventListener('resize', handleResize);
-
-    animate(0);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationId);
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-    };
-  }, []);
+  // Note: Three.js background scene is dynamically imported via AssistantThreeScene below.
 
   return (
     <div className="font-body-md text-on-surface antialiased overflow-hidden selection:bg-primary/20 selection:text-primary">
@@ -457,66 +366,73 @@ export default function AssistantPage() {
             
             {/* Recent Contexts */}
             <div>
-              <h3 className="px-4 font-label-sm text-label-sm text-tertiary uppercase tracking-widest mb-3">Recent Contexts</h3>
+              <div className="flex items-center justify-between px-4 mb-3">
+                <h3 className="font-label-sm text-label-sm text-tertiary uppercase tracking-widest">Recent Chats</h3>
+                <button
+                  onClick={startNewChat}
+                  title="New Chat"
+                  className="flex items-center gap-1 text-[12px] font-medium text-primary hover:text-primary/80 transition-colors"
+                >
+                  <span className="material-symbols-outlined text-[16px]">add</span> New
+                </button>
+              </div>
               <div className="space-y-1">
-                <button onClick={() => alert("Loading context: PM-Kisan Eligibility Check")} className="w-full text-left flex items-start gap-3 px-4 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group">
-                  <span className="material-symbols-outlined text-[18px] text-outline mt-0.5 group-hover:text-primary transition-colors">chat_bubble</span>
-                  <div>
-                    <p className="font-body-md text-[14px] text-on-surface line-clamp-1">PM-Kisan Eligibility Check</p>
-                    <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">2 hours ago</p>
-                  </div>
-                </button>
-                <button onClick={() => alert("Loading context: Aadhaar Address Update Process")} className="w-full text-left flex items-start gap-3 px-4 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group">
-                  <span className="material-symbols-outlined text-[18px] text-outline mt-0.5 group-hover:text-primary transition-colors">chat_bubble</span>
-                  <div>
-                    <p className="font-body-md text-[14px] text-on-surface line-clamp-1">Aadhaar Address Update Process</p>
-                    <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Yesterday</p>
-                  </div>
-                </button>
-                <button onClick={() => alert("Loading context: Ayushman Bharat Healthcare Benefits Overview")} className="w-full text-left flex items-start gap-3 px-4 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group">
-                  <span className="material-symbols-outlined text-[18px] text-outline mt-0.5 group-hover:text-primary transition-colors">chat_bubble</span>
-                  <div>
-                    <p className="font-body-md text-[14px] text-on-surface line-clamp-1">Ayushman Bharat Healthcare Benefits Overview</p>
-                    <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Last week</p>
-                  </div>
-                </button>
+                {!isMounted || sessions.length === 0 ? (
+                  <p className="px-4 py-3 text-[13px] text-on-surface-variant/70 italic">No recent chats yet.</p>
+                ) : (
+                  sessions.map((s) => (
+                    <div
+                      key={s.id}
+                      onClick={() => selectSession(s.id)}
+                      className={`w-full text-left flex items-center justify-between px-4 py-2.5 rounded-lg cursor-pointer transition-colors group ${
+                        currentSessionId === s.id ? 'bg-primary/10 border border-primary/20' : 'hover:bg-surface-container-low'
+                      }`}
+                    >
+                      <div className="flex items-start gap-3 min-w-0 flex-1">
+                        <span className={`material-symbols-outlined text-[18px] mt-0.5 ${currentSessionId === s.id ? 'text-primary' : 'text-outline group-hover:text-primary'}`}>
+                          chat_bubble
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="font-body-md text-[14px] text-on-surface line-clamp-1">{s.title}</p>
+                          <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">{formatRelativeTime(s.timestamp)}</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={(e) => deleteSession(s.id, e)}
+                        title="Delete Chat"
+                        className="opacity-0 group-hover:opacity-100 p-1 hover:text-error transition-all"
+                      >
+                        <span className="material-symbols-outlined text-[16px]">delete</span>
+                      </button>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>
           
           {/* User Profile Area */}
           <div className="p-4 border-t border-outline-variant/20">
-            <button onClick={() => alert("Opening profile settings...")} className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-surface-container transition-colors">
-              <img className="w-10 h-10 rounded-full object-cover border border-outline-variant/30" alt="Rajesh Kumar Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVzDw4lMPV5BICoU6B7r4TyeNw9m5VL0voMFVNuWc7zJ4MorqTfGla2uuXv50bAwnHc850ed_L0IdM26f7HqrCxp6od4978oU0wpEeJTNAOLlaeNHFXD_12-nAqVTP-NSD3Vx8CmsApuMuB4OMVimLXk2r8iC6fJJnX3LL8v4dFY-AEEBOBxThdDxsYYNovYqOAR9By0E6fYIFl3xbiCOkqWWEYoTtgHTextqEg7riu2isGed6TJ7-Kw" />
-              <div className="text-left flex-1">
-                <p className="font-body-md text-[14px] font-medium text-on-surface">Rajesh Kumar</p>
-                <p className="font-label-sm text-[12px] text-on-surface-variant">Citizen Profile</p>
+            <Link href="/profile" className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-surface-container transition-colors">
+              {user?.profilePhoto ? (
+                <img className="w-10 h-10 rounded-full object-cover border border-outline-variant/30" alt={getUserDisplayName(user)} src={user.profilePhoto} />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm border border-primary/20">
+                  {getUserDisplayName(user).charAt(0).toUpperCase()}
+                </div>
+              )}
+              <div className="text-left flex-1 min-w-0">
+                <p className="font-body-md text-[14px] font-medium text-on-surface truncate">{getUserDisplayName(user)}</p>
+                <p className="font-label-sm text-[12px] text-on-surface-variant truncate">{user?.email || "Citizen Profile"}</p>
               </div>
               <span className="material-symbols-outlined text-outline">settings</span>
-            </button>
+            </Link>
           </div>
+
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 flex flex-col relative h-full">
-          {/* Floating TopNavBar */}
-          <header className="absolute top-0 left-0 w-full z-30 px-6 py-4 flex justify-between items-center bg-surface/40 backdrop-blur-md border-b border-outline-variant/10">
-            <div className="flex items-center gap-4">
-              <button onClick={() => alert("Opening mobile menu...")} className="md:hidden p-2 rounded-full text-on-surface-variant hover:bg-surface-container transition-colors">
-                <span className="material-symbols-outlined">menu</span>
-              </button>
-              <h1 className="font-headline-md text-[20px] font-medium text-on-surface">Smart Bharat AI</h1>
-            </div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => alert("Opening history...")} className="p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200">
-                <span className="material-symbols-outlined">history</span>
-              </button>
-              <button onClick={() => alert("Opening settings...")} className="p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200">
-                <span className="material-symbols-outlined">settings</span>
-              </button>
-            </div>
-          </header>
-
+        <main className="flex-1 flex flex-col relative h-full pt-16">
           {/* Scrollable Canvas */}
           <div className="flex-1 overflow-y-auto pt-24 pb-40 px-4 md:px-8 flex flex-col items-center">
             <div className="w-full max-w-[768px] mx-auto flex flex-col gap-16">
@@ -540,8 +456,8 @@ export default function AssistantPage() {
                   {/* Shader Background */}
                   <canvas ref={shaderCanvasRef} className="absolute inset-0 w-full h-full rounded-full mix-blend-multiply opacity-80"></canvas>
                   
-                  {/* ThreeJS Overlay */}
-                  <div ref={threeContainerRef} className="absolute inset-0 w-full h-full drop-shadow-2xl"></div>
+                  {/* ThreeJS Overlay (Dynamically loaded) */}
+                  <AssistantThreeScene />
                   
                   {/* Floating Service Cards */}
                   <div className="absolute -top-4 -left-8 animate-float-1 z-20">
@@ -583,12 +499,12 @@ export default function AssistantPage() {
                 </div>
               </section>
 
-              {/* Suggested Actions Grid */}
+              {/* Suggested Actions Grid — shown only when no messages */}
+              {messages.length === 0 && (
               <section className="w-full">
                 <h3 className="font-label-sm text-label-sm text-tertiary uppercase tracking-widest mb-4 px-2">Suggested Actions</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Card 1 */}
-                  <button onClick={() => alert("Finding schemes...")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage("Find Schemes")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-primary">account_balance</span>
@@ -598,8 +514,7 @@ export default function AssistantPage() {
                       <p className="font-body-md text-[14px] text-on-surface-variant">Discover eligibility for state &amp; central programs.</p>
                     </div>
                   </button>
-                  {/* Card 2 */}
-                  <button onClick={() => alert("Opening document explainer...")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage("Explain Document")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-secondary">description</span>
@@ -609,8 +524,7 @@ export default function AssistantPage() {
                       <p className="font-body-md text-[14px] text-on-surface-variant">Upload official forms for simple explanations.</p>
                     </div>
                   </button>
-                  {/* Card 3 */}
-                  <button onClick={() => alert("Opening healthcare navigator...")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage("Healthcare Nav")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-tertiary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-tertiary">local_hospital</span>
@@ -622,27 +536,71 @@ export default function AssistantPage() {
                   </button>
                 </div>
               </section>
+              )}
+
+              {/* Chat Messages */}
+              {messages.length > 0 && (
+                <div className="flex flex-col gap-6 w-full pb-8">
+                  {messages.map((msg) => (
+                    <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      {msg.role === 'assistant' && (
+                        <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mr-4 flex-shrink-0 mt-1 shadow-sm">
+                          <span className="material-symbols-outlined text-[20px] text-primary">smart_toy</span>
+                        </div>
+                      )}
+                      <div className={`max-w-[80%] md:max-w-[70%] rounded-[1.5rem] px-6 py-4 shadow-sm ${
+                        msg.role === 'user'
+                          ? 'bg-primary text-white rounded-br-sm'
+                          : 'bg-white/70 backdrop-blur-md border border-outline-variant/40 text-on-surface rounded-bl-sm'
+                      }`}>
+                        <p className="font-body-md text-[15px] leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                      </div>
+                    </div>
+                  ))}
+                  {isTyping && (
+                    <div className="flex justify-start animate-in fade-in duration-300">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mr-4 flex-shrink-0 mt-1 shadow-sm">
+                        <span className="material-symbols-outlined text-[20px] text-primary">smart_toy</span>
+                      </div>
+                      <div className="bg-white/70 backdrop-blur-md border border-outline-variant/40 rounded-[1.5rem] rounded-bl-sm px-6 py-5 flex items-center gap-1.5 w-[88px] shadow-sm">
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary/50 animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary/50 animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary/50 animate-bounce" style={{ animationDelay: '300ms' }} />
+                      </div>
+                    </div>
+                  )}
+                  <div ref={messagesEndRef} className="h-4" />
+                </div>
+              )}
             </div>
           </div>
 
           {/* Fixed Bottom Composer */}
           <div className="absolute bottom-0 left-0 w-full px-4 md:px-8 pb-8 pt-12 bg-gradient-to-t from-surface via-surface/80 to-transparent z-40 flex justify-center pointer-events-none">
             <div className="w-full max-w-[768px] relative pointer-events-auto">
-              {/* Input Container */}
-              <div className="glass-input p-2 pl-6 pr-2 flex items-center gap-3 relative z-10">
-                <input className="flex-1 bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-outline py-3 outline-none" placeholder="Ask about schemes, upload documents, or request guidance..." type="text"/>
+              <form
+                onSubmit={(e) => { e.preventDefault(); handleSendMessage(inputValue); }}
+                className="glass-input p-2 pl-6 pr-2 flex items-center gap-3 relative z-10"
+              >
+                <input
+                  className="flex-1 bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-outline py-3 outline-none"
+                  placeholder="Ask about schemes, upload documents, or request guidance..."
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
                 <div className="flex items-center gap-1">
-                  <button onClick={() => alert("Attaching file...")} className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Attach file">
+                  <button type="button" className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Attach file">
                     <span className="material-symbols-outlined text-[22px]">attach_file</span>
                   </button>
-                  <button onClick={() => alert("Starting voice input...")} className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Voice input">
+                  <button type="button" className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Voice input">
                     <span className="material-symbols-outlined text-[22px]">mic</span>
                   </button>
-                  <button onClick={() => alert("Sending message...")} className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm ml-1" title="Send message">
+                  <button type="submit" className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm ml-1 cursor-pointer" title="Send message">
                     <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>send</span>
                   </button>
                 </div>
-              </div>
+              </form>
               
               {/* Footer Info */}
               <div className="text-center mt-3">
@@ -653,5 +611,13 @@ export default function AssistantPage() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function AssistantPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-surface flex items-center justify-center text-on-surface">Loading Smart Bharat AI...</div>}>
+      <AssistantPageContent />
+    </Suspense>
   );
 }

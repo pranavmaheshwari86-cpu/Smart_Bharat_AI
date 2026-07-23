@@ -1,0 +1,242 @@
+[
+  {
+    "path": ".code-review-graph/.gitignore",
+    "size": 145,
+    "type": "module"
+  },
+  {
+    "path": ".code-review-graph/graph.db",
+    "size": 1081344,
+    "type": "module"
+  },
+  {
+    "path": ".code-review-graph/graph.db-shm",
+    "size": 32768,
+    "type": "module"
+  },
+  {
+    "path": ".code-review-graph/graph.db-wal",
+    "size": 0,
+    "type": "module"
+  },
+  {
+    "path": ".env",
+    "size": 2042,
+    "type": "module"
+  },
+  {
+    "path": ".env.example",
+    "size": 2165,
+    "type": "module"
+  },
+  {
+    "path": ".env.local",
+    "size": 1787,
+    "type": "module"
+  },
+  {
+    "path": ".gitignore",
+    "size": 384,
+    "type": "module"
+  },
+  {
+    "path": "backend/.env",
+    "size": 359,
+    "type": "module"
+  },
+  {
+    "path": "e2e/button_audit.spec.ts",
+    "size": 1994,
+    "type": "module"
+  },
+  {
+    "path": "frontend/.env",
+    "size": 1774,
+    "type": "module"
+  },
+  {
+    "path": "frontend/.env.local",
+    "size": 1936,
+    "type": "module"
+  },
+  {
+    "path": "frontend/eslint.config.mjs",
+    "size": 468,
+    "type": "module"
+  },
+  {
+    "path": "frontend/next-env.d.ts",
+    "size": 211,
+    "type": "module"
+  },
+  {
+    "path": "frontend/next.config.ts",
+    "size": 2420,
+    "type": "module"
+  },
+  {
+    "path": "frontend/postcss.config.mjs",
+    "size": 94,
+    "type": "module"
+  },
+  {
+    "path": "frontend/src/components/ai/AIAssistant.tsx",
+    "size": 8510,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/ai/AssistantThreeScene.tsx",
+    "size": 4400,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/auth/CompleteProfileModal.tsx",
+    "size": 9467,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/auth/GoogleSignInButton.tsx",
+    "size": 2189,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/auth/OtpVerificationForm.tsx",
+    "size": 9005,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
+    "size": 2725,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/ClientShells.tsx",
+    "size": 446,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/DynamicForm.tsx",
+    "size": 18913,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/EligibilityEngine.tsx",
+    "size": 10856,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/Footer.tsx",
+    "size": 1751,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/Hero.tsx",
+    "size": 11620,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/HeroShowcase.tsx",
+    "size": 5141,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/Navbar.tsx",
+    "size": 6530,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/PageWrapper.tsx",
+    "size": 610,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/RouteGuard.tsx",
+    "size": 1590,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/SpotlightCard.tsx",
+    "size": 991,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/ui/button.tsx",
+    "size": 2856,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/ui/card.tsx",
+    "size": 1793,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/ui/input.tsx",
+    "size": 886,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/ui/interactive-3d-robot.tsx",
+    "size": 3854,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/ui/label.tsx",
+    "size": 521,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/components/ui/splite.tsx",
+    "size": 540,
+    "type": "component"
+  },
+  {
+    "path": "frontend/src/context/AuthContext.tsx",
+    "size": 10507,
+    "type": "context"
+  },
+  {
+    "path": "frontend/src/lib/api/auth.api.ts",
+    "size": 1582,
+    "type": "util"
+  },
+  {
+    "path": "frontend/src/lib/auth.ts",
+    "size": 9516,
+    "type": "util"
+  },
+  {
+    "path": "frontend/src/lib/data.ts",
+    "size": 51829,
+    "type": "util"
+  },
+  {
+    "path": "frontend/src/lib/knowledge.ts",
+    "size": 12730,
+    "type": "util"
+  },
+  {
+    "path": "frontend/src/lib/utils.ts",
+    "size": 863,
+    "type": "util"
+  },
+  {
+    "path": "frontend/tsconfig.tsbuildinfo",
+    "size": 155114,
+    "type": "module"
+  },
+  {
+    "path": "scripts/validate-graph-output.js",
+    "size": 4264,
+    "type": "script"
+  },
+  {
+    "path": "shared/src/types/auth.ts",
+    "size": 1899,
+    "type": "type"
+  },
+  {
+    "path": "shared/src/validations/password.ts",
+    "size": 1048,
+    "type": "validation"
+  }
+]

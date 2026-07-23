@@ -1,85 +1,29 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 interface GoogleSignInButtonProps {
   onGoogleSuccess: (credential?: string, demoProfile?: any) => Promise<void>;
   isLoading?: boolean;
 }
 
-declare global {
-  interface Window {
-    google?: {
-      accounts: {
-        id: {
-          initialize: (config: any) => void;
-          prompt: (notification?: any) => void;
-          renderButton: (parent: HTMLElement, options: any) => void;
-        };
-      };
-    };
-  }
-}
-
 export function GoogleSignInButton({ onGoogleSuccess, isLoading = false }: GoogleSignInButtonProps) {
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-
-  useEffect(() => {
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-
-    // Load Google GIS script dynamically if not present
-    if (!document.getElementById("google-gis-script")) {
-      const script = document.createElement("script");
-      script.id = "google-gis-script";
-      script.src = "https://accounts.google.com/gsi/client";
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        setScriptLoaded(true);
-        if (clientId && window.google?.accounts?.id) {
-          window.google.accounts.id.initialize({
-            client_id: clientId,
-            callback: (response: any) => {
-              if (response.credential) {
-                onGoogleSuccess(response.credential);
-              }
-            },
-          });
-        }
-      };
-      document.body.appendChild(script);
-    } else {
-      setScriptLoaded(true);
-    }
-  }, [onGoogleSuccess]);
-
-  const handleGoogleButtonClick = async () => {
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-
-    if (clientId && window.google?.accounts?.id) {
-      window.google.accounts.id.prompt();
-    } else {
-      // In development / demo environment without live Client ID:
-      // Provide instant account chooser simulation matching Google Account Chooser
-      await onGoogleSuccess(undefined, {
-        sub: `google_cit_${Date.now()}`,
-        name: "Pranav Maheshwari",
-        email: "pranav.maheshwari@smartbharat.gov.in",
-        picture: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-        email_verified: true,
-      });
-    }
+  const handleClick = async () => {
+    // Calling with no arguments triggers the Firebase signInWithPopup path
+    // in AuthContext → signInWithGooglePopup() → opens full Google Account Chooser
+    await onGoogleSuccess();
   };
 
   return (
     <button
       type="button"
-      onClick={handleGoogleButtonClick}
+      id="google-signin-btn"
+      onClick={handleClick}
       disabled={isLoading}
       className="w-full h-12 rounded-xl border border-[#E8E8E5] bg-[#FFFFFF] hover:bg-[#F5F5F2] active:bg-[#EBEBE8] text-[#111111] text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-3 shadow-2xs hover:shadow-xs cursor-pointer group disabled:opacity-75"
     >
       {/* Official Google Color G Logo */}
-      <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" aria-hidden="true">
         <path
           fill="#4285F4"
           d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -98,7 +42,14 @@ export function GoogleSignInButton({ onGoogleSuccess, isLoading = false }: Googl
         />
       </svg>
 
-      <span>Continue with Google</span>
+      {isLoading ? (
+        <span className="inline-flex items-center gap-2">
+          <span className="w-4 h-4 border-2 border-[#111111]/20 border-t-[#111111] rounded-full animate-spin" />
+          <span>Connecting to Google...</span>
+        </span>
+      ) : (
+        <span>Continue with Google</span>
+      )}
     </button>
   );
 }

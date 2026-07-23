@@ -1,33 +1,29 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
-import * as THREE from "three";
-import { SplineScene } from "@/components/ui/splite";
+import { HeroShowcase } from "@/components/HeroShowcase";
 
 export function Hero() {
   return (
-    <main className="flex-grow pt-[40px]">
+    <main className="flex-grow pt-16">
       {/* Background Shader (Simulated with simple div for now as per template) */}
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-80 mix-blend-multiply"></div>
 
       {/* Hero Section */}
       <section className="max-w-container-max mx-auto px-margin-mobile md:px-gutter pt-8 pb-section relative">
-        <div className="flex flex-col lg:flex-row items-center relative">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 relative">
           
           {/* Left: Content */}
-          <div className="w-full lg:w-[60%] flex flex-col items-start gap-6 z-10 relative py-12">
-
-            
-            <h1 className="font-display-lg text-display-lg text-on-surface max-w-[650px] leading-tight drop-shadow-sm">
+          <div className="w-full lg:w-[45%] flex flex-col items-start gap-6 z-10 relative py-8">
+            <h1 className="font-display-lg text-display-lg text-on-surface leading-tight drop-shadow-sm">
               Simplified Access to <span className="text-gradient font-bold italic pr-1">Government Services</span>
             </h1>
             
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[576px] font-medium">
+            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[500px] font-medium">
               Navigate bureaucracy instantly. Find the exact schemes you qualify for, generate required documents, and track applications without the wait.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-4 mt-2 w-full sm:w-auto">
               <Link href="/schemes" className="w-full sm:w-auto bg-primary text-white px-10 py-4 rounded-full font-semibold text-lg shadow-apple-sm hover:shadow-apple-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3">
                 Get Started
                 <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
@@ -35,7 +31,7 @@ export function Hero() {
             </div>
             
             {/* Trust Indicators */}
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-6 flex flex-wrap items-center gap-4">
               <div className="flex items-center gap-1.5 px-3 py-1 bg-surface-container-lowest/80 backdrop-blur-md rounded-full border border-surface-container-highest text-label-sm font-label-sm text-on-surface-variant shadow-sm">
                 <span className="material-symbols-outlined text-[14px] text-green-600">verified</span>
                 Government Verified
@@ -46,22 +42,15 @@ export function Hero() {
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1 bg-surface-container-lowest/80 backdrop-blur-md rounded-full border border-surface-container-highest text-label-sm font-label-sm text-on-surface-variant shadow-sm">
                 <span className="material-symbols-outlined text-[14px] text-tertiary">lock</span>
-                Secure & Private
+                Secure &amp; Private
               </div>
             </div>
           </div>
 
-          {/* Right: AI Showcase */}
-          <div className="w-full lg:w-[600px] h-[500px] lg:h-[700px] relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-[10%] z-0 mt-12 lg:mt-0 flex items-center justify-center mix-blend-normal">
-            {/* Atmospheric Gradients */}
-            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,rgba(37,99,235,0.15)_40%,transparent_70%)] blur-[80px]"></div>
-            
-            {/* Showcase Container */}
-            <div className="w-full h-full bg-transparent relative z-10 opacity-100 transition-opacity duration-1000 ease-in-out flex items-center justify-center">
-              <SplineScene 
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-full"
-              />
+          {/* Right: AI Showcase Video */}
+          <div className="w-full lg:w-[55%] flex items-center justify-center lg:justify-end z-10 mt-8 lg:mt-0">
+            <div className="w-full max-w-[720px] bg-transparent relative z-10 flex items-center justify-center">
+              <HeroShowcase />
             </div>
           </div>
         </div>

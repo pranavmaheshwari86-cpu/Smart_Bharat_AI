@@ -1,0 +1,227 @@
+{
+  "nodes": [
+    {
+      "id": "frontend/src/lib/data.ts",
+      "type": "util",
+      "layer": "frontend",
+      "name": "data",
+      "path": "frontend/src/lib/data.ts",
+      "language": "typescript",
+      "size": 51829,
+      "complexity": 146,
+      "exports": [
+        "FieldType",
+        "FormField",
+        "Scheme",
+        "ApplicationType",
+        "FAQ",
+        "GovId",
+        "ComplaintCategory",
+        "categories",
+        "states",
+        "schemes",
+        "govIds",
+        "complaintCategories",
+        "ApplicationStatus",
+        "mockUserApplications",
+        "Credential",
+        "vaultCategories",
+        "mockCredentials"
+      ]
+    },
+    {
+      "id": "scripts/graphify.js",
+      "type": "script",
+      "layer": "root",
+      "name": "graphify",
+      "path": "scripts/graphify.js",
+      "language": "javascript",
+      "size": 14632,
+      "complexity": 84,
+      "exports": []
+    },
+    {
+      "id": ".code-review-graph/graph.db",
+      "type": "module",
+      "layer": "root",
+      "name": "graph",
+      "path": ".code-review-graph/graph.db",
+      "language": "plaintext",
+      "size": 1081344,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "frontend/src/app/schemes/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/schemes/page.tsx",
+      "language": "typescript",
+      "size": 26398,
+      "complexity": 37,
+      "exports": [
+        "SchemesPage"
+      ]
+    },
+    {
+      "id": "frontend/src/components/DocumentSelector.tsx",
+      "type": "component",
+      "layer": "frontend",
+      "name": "DocumentSelector",
+      "path": "frontend/src/components/DocumentSelector.tsx",
+      "language": "typescript",
+      "size": 16838,
+      "complexity": 54,
+      "exports": [
+        "DocumentSelector"
+      ]
+    },
+    {
+      "id": "frontend/src/components/DynamicForm.tsx",
+      "type": "component",
+      "layer": "frontend",
+      "name": "DynamicForm",
+      "path": "frontend/src/components/DynamicForm.tsx",
+      "language": "typescript",
+      "size": 18913,
+      "complexity": 47,
+      "exports": [
+        "DynamicForm"
+      ]
+    },
+    {
+      "id": "frontend/src/app/assistant/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/assistant/page.tsx",
+      "language": "typescript",
+      "size": 31784,
+      "complexity": 27,
+      "exports": [
+        "AssistantPage"
+      ]
+    },
+    {
+      "id": "frontend/src/app/complaints/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/complaints/page.tsx",
+      "language": "typescript",
+      "size": 30873,
+      "complexity": 24,
+      "exports": [
+        "ComplaintsPage"
+      ]
+    },
+    {
+      "id": "frontend/src/app/id/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/id/page.tsx",
+      "language": "typescript",
+      "size": 18585,
+      "complexity": 32,
+      "exports": [
+        "IDPage"
+      ]
+    },
+    {
+      "id": "backend/src/services/auth.service.ts",
+      "type": "service",
+      "layer": "backend",
+      "name": "auth.service",
+      "path": "backend/src/services/auth.service.ts",
+      "language": "typescript",
+      "size": 13822,
+      "complexity": 43,
+      "exports": [
+        "AuthService"
+      ]
+    },
+    {
+      "id": "frontend/src/lib/auth.ts",
+      "type": "util",
+      "layer": "frontend",
+      "name": "auth",
+      "path": "frontend/src/lib/auth.ts",
+      "language": "typescript",
+      "size": 9516,
+      "complexity": 62,
+      "exports": [
+        "FirebaseAuthUser",
+        "OTPResponse",
+        "formatIndianPhoneNumber",
+        "isValidIndianPhone",
+        "initInvisibleRecaptcha",
+        "sendOTP",
+        "verifyOTP",
+        "logoutFirebase",
+        "signInWithGooglePopup",
+        "getCurrentFirebaseUser",
+        "listenForAuthChanges",
+        "refreshFirebaseUser",
+        "transformFirebaseError",
+        "isFirebaseConfigured"
+      ]
+    },
+    {
+      "id": "frontend/src/app/login/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/login/page.tsx",
+      "language": "typescript",
+      "size": 22327,
+      "complexity": 25,
+      "exports": [
+        "LoginPage"
+      ]
+    },
+    {
+      "id": "frontend/src/context/AuthContext.tsx",
+      "type": "context",
+      "layer": "frontend",
+      "name": "AuthContext",
+      "path": "frontend/src/context/AuthContext.tsx",
+      "language": "typescript",
+      "size": 10507,
+      "complexity": 50,
+      "exports": [
+        "UserProfile",
+        "AuthProvider",
+        "useAuth"
+      ]
+    },
+    {
+      "id": "frontend/src/app/ai/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/ai/page.tsx",
+      "language": "typescript",
+      "size": 22697,
+      "complexity": 21,
+      "exports": [
+        "AIPage"
+      ]
+    },
+    {
+      "id": "frontend/src/lib/knowledge.ts",
+      "type": "util",
+      "layer": "frontend",
+      "name": "knowledge",
+      "path": "frontend/src/lib/knowledge.ts",
+      "language": "typescript",
+      "size": 12730,
+      "complexity": 34,
+      "exports": [
+        "PLATFORM_KNOWLEDGE"
+      ]
+    }
+  ],
+  "edges": []
+}

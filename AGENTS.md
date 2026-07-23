@@ -103,13 +103,27 @@ If the task touched code, changed architecture, or produced a reusable finding: 
 
 ## 3. Global Always-On Layer (the only unconditional entries)
 
-These seven are the sole global capabilities. Everything else is stage-triggered (§4–§5). All seven share the same qualifying property: cheap per-turn cost, no code-dependency required to fire.
+These global capabilities fire on every task. All share the same qualifying property: cheap per-turn cost, zero code-dependency required to fire, and massive token savings.
 
 ### `opencode-token-optimization`
-- **Purpose**: Global Token Optimization Engine (TOE v2). Eliminates waste across input, output, context, tool calls, reasoning, and formatting while preserving correctness. Supersedes basic `token-saver`.
+- **Purpose**: Global Token Optimization Engine (TOE v2). Eliminates waste across input, output, context, tool calls, reasoning, and formatting while preserving correctness.
 - **Trigger**: every task, no exception.
 - **Skip condition**: none.
-- **Token cost**: negligible (a response-shaping constraint that *saves* massive tokens, not a separate call).
+- **Token cost**: negligible (response-shaping constraint that saves tokens).
+- **Automation**: fully automatic.
+
+### `ponytail`
+- **Purpose**: Lazy Senior Engineer Discipline. Enforces YAGNI, stdlib over custom code, native platform features before dependencies, smallest working diffs, zero unrequested fluff/boilerplate.
+- **Trigger**: every task, no exception.
+- **Skip condition**: none. (Default level: `full`).
+- **Token cost**: negligible (architectural & code-shaping constraint that saves tokens).
+- **Automation**: fully automatic.
+
+### `ruflo` (MCP)
+- **Purpose**: Universal Orchestration & Memory Persistence Substrate. Manages cross-task memory persistence, workflow execution graphs, state tracking, and sub-task coordination.
+- **Trigger**: every task, no exception.
+- **Skip condition**: none.
+- **Token cost**: low–medium.
 - **Automation**: fully automatic.
 
 ### `verification-before-completion`
@@ -312,8 +326,10 @@ Sub-topics from the original routing tree (React, Tailwind, Docker, Playwright, 
 
 ## 7. Auto-Run Rules
 
-### Always Auto-Run (every meaningful task, no exception)
-- `opencode-token-optimization` (replaces `token-saver`)
+### Always Auto-Run (every task, no exception)
+- `opencode-token-optimization`
+- `ponytail`
+- `ruflo` (MCP)
 - `context-optimizer` (per model call)
 - `verification-before-completion`
 - `safety-guardrails` (gate check — only *acts* if a destructive operation is detected)

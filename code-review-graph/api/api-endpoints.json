@@ -1,0 +1,56 @@
+[
+  {
+    "endpoint": "/api/auth/register",
+    "method": "POST",
+    "controller": "AuthController.register",
+    "access": "Public"
+  },
+  {
+    "endpoint": "/api/auth/login",
+    "method": "POST",
+    "controller": "AuthController.login",
+    "access": "Public"
+  },
+  {
+    "endpoint": "/api/auth/google",
+    "method": "POST",
+    "controller": "AuthController.googleAuth",
+    "access": "Public"
+  },
+  {
+    "endpoint": "/api/auth/otp/send",
+    "method": "POST",
+    "controller": "AuthController.sendOtp",
+    "access": "Public"
+  },
+  {
+    "endpoint": "/api/auth/otp/verify",
+    "method": "POST",
+    "controller": "AuthController.verifyOtp",
+    "access": "Public"
+  },
+  {
+    "endpoint": "/api/auth/password-reset/request",
+    "method": "POST",
+    "controller": "AuthController.requestPasswordReset",
+    "access": "Public"
+  },
+  {
+    "endpoint": "/api/auth/password-reset/confirm",
+    "method": "POST",
+    "controller": "AuthController.confirmPasswordReset",
+    "access": "Public"
+  },
+  {
+    "endpoint": "/api/auth/me",
+    "method": "GET",
+    "controller": "AuthController.getCurrentUser",
+    "access": "Protected (JWT Cookie)"
+  },
+  {
+    "endpoint": "/api/auth/logout",
+    "method": "POST",
+    "controller": "AuthController.logout",
+    "access": "Protected (JWT Cookie)"
+  }
+]

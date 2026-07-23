@@ -1,0 +1,71 @@
+{
+  "nodes": [
+    {
+      "id": "shared/package.json",
+      "type": "module",
+      "layer": "shared",
+      "name": "package",
+      "path": "shared/package.json",
+      "language": "json",
+      "size": 225,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "shared/src/index.ts",
+      "type": "module",
+      "layer": "shared",
+      "name": "index",
+      "path": "shared/src/index.ts",
+      "language": "typescript",
+      "size": 70,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "shared/src/types/auth.ts",
+      "type": "type",
+      "layer": "shared",
+      "name": "auth",
+      "path": "shared/src/types/auth.ts",
+      "language": "typescript",
+      "size": 1899,
+      "complexity": 16,
+      "exports": [
+        "UserRecord",
+        "UserProfile",
+        "SessionRecord",
+        "OtpRecord",
+        "PasswordResetRecord",
+        "AuditLogRecord",
+        "ApiResponse"
+      ]
+    },
+    {
+      "id": "shared/src/validations/password.ts",
+      "type": "validation",
+      "layer": "shared",
+      "name": "password",
+      "path": "shared/src/validations/password.ts",
+      "language": "typescript",
+      "size": 1048,
+      "complexity": 11,
+      "exports": [
+        "PasswordValidationResult",
+        "validatePasswordComplexity"
+      ]
+    },
+    {
+      "id": "shared/tsconfig.json",
+      "type": "module",
+      "layer": "shared",
+      "name": "tsconfig",
+      "path": "shared/tsconfig.json",
+      "language": "json",
+      "size": 287,
+      "complexity": 1,
+      "exports": []
+    }
+  ],
+  "edges": []
+}

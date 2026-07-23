@@ -1,0 +1,1784 @@
+[
+  {
+    "id": ".code-review-graph/.gitignore",
+    "type": "module",
+    "layer": "root",
+    "name": ".gitignore",
+    "path": ".code-review-graph/.gitignore",
+    "language": "plaintext",
+    "size": 145,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": ".code-review-graph/graph.db",
+    "type": "module",
+    "layer": "root",
+    "name": "graph",
+    "path": ".code-review-graph/graph.db",
+    "language": "plaintext",
+    "size": 1081344,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": ".code-review-graph/graph.db-shm",
+    "type": "module",
+    "layer": "root",
+    "name": "graph",
+    "path": ".code-review-graph/graph.db-shm",
+    "language": "plaintext",
+    "size": 32768,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": ".code-review-graph/graph.db-wal",
+    "type": "module",
+    "layer": "root",
+    "name": "graph",
+    "path": ".code-review-graph/graph.db-wal",
+    "language": "plaintext",
+    "size": 0,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": ".env",
+    "type": "module",
+    "layer": "root",
+    "name": ".env",
+    "path": ".env",
+    "language": "plaintext",
+    "size": 2042,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": ".env.example",
+    "type": "module",
+    "layer": "root",
+    "name": ".env",
+    "path": ".env.example",
+    "language": "plaintext",
+    "size": 2165,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": ".env.local",
+    "type": "module",
+    "layer": "root",
+    "name": ".env",
+    "path": ".env.local",
+    "language": "plaintext",
+    "size": 1787,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": ".gitignore",
+    "type": "module",
+    "layer": "root",
+    "name": ".gitignore",
+    "path": ".gitignore",
+    "language": "plaintext",
+    "size": 384,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "AGENTS.md",
+    "type": "document",
+    "layer": "root",
+    "name": "AGENTS",
+    "path": "AGENTS.md",
+    "language": "markdown",
+    "size": 44556,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "backend/.env",
+    "type": "module",
+    "layer": "backend",
+    "name": ".env",
+    "path": "backend/.env",
+    "language": "plaintext",
+    "size": 359,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "backend/package.json",
+    "type": "module",
+    "layer": "backend",
+    "name": "package",
+    "path": "backend/package.json",
+    "language": "json",
+    "size": 893,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "backend/src/app.ts",
+    "type": "module",
+    "layer": "backend",
+    "name": "app",
+    "path": "backend/src/app.ts",
+    "language": "typescript",
+    "size": 2650,
+    "complexity": 9,
+    "exports": [
+      "app"
+    ]
+  },
+  {
+    "id": "backend/src/config/index.ts",
+    "type": "config",
+    "layer": "backend",
+    "name": "index",
+    "path": "backend/src/config/index.ts",
+    "language": "typescript",
+    "size": 828,
+    "complexity": 2,
+    "exports": [
+      "config"
+    ]
+  },
+  {
+    "id": "backend/src/controllers/auth.controller.ts",
+    "type": "controller",
+    "layer": "backend",
+    "name": "auth.controller",
+    "path": "backend/src/controllers/auth.controller.ts",
+    "language": "typescript",
+    "size": 8330,
+    "complexity": 23,
+    "exports": [
+      "AuthController"
+    ]
+  },
+  {
+    "id": "backend/src/database/db.ts",
+    "type": "model",
+    "layer": "backend",
+    "name": "db",
+    "path": "backend/src/database/db.ts",
+    "language": "typescript",
+    "size": 1421,
+    "complexity": 4,
+    "exports": [
+      "ensureDbExists",
+      "readDb",
+      "writeDb"
+    ]
+  },
+  {
+    "id": "backend/src/repositories/otp.repository.ts",
+    "type": "repository",
+    "layer": "backend",
+    "name": "otp.repository",
+    "path": "backend/src/repositories/otp.repository.ts",
+    "language": "typescript",
+    "size": 1019,
+    "complexity": 3,
+    "exports": [
+      "OtpRepository"
+    ]
+  },
+  {
+    "id": "backend/src/repositories/password-reset.repository.ts",
+    "type": "repository",
+    "layer": "backend",
+    "name": "password-reset.repository",
+    "path": "backend/src/repositories/password-reset.repository.ts",
+    "language": "typescript",
+    "size": 988,
+    "complexity": 5,
+    "exports": [
+      "PasswordResetRepository"
+    ]
+  },
+  {
+    "id": "backend/src/repositories/session.repository.ts",
+    "type": "repository",
+    "layer": "backend",
+    "name": "session.repository",
+    "path": "backend/src/repositories/session.repository.ts",
+    "language": "typescript",
+    "size": 1096,
+    "complexity": 5,
+    "exports": [
+      "SessionRepository"
+    ]
+  },
+  {
+    "id": "backend/src/repositories/user.repository.ts",
+    "type": "repository",
+    "layer": "backend",
+    "name": "user.repository",
+    "path": "backend/src/repositories/user.repository.ts",
+    "language": "typescript",
+    "size": 1618,
+    "complexity": 4,
+    "exports": [
+      "UserRepository"
+    ]
+  },
+  {
+    "id": "backend/src/routes/auth.routes.ts",
+    "type": "route",
+    "layer": "backend",
+    "name": "auth.routes",
+    "path": "backend/src/routes/auth.routes.ts",
+    "language": "typescript",
+    "size": 1731,
+    "complexity": 3,
+    "exports": [
+      "router"
+    ]
+  },
+  {
+    "id": "backend/src/routes/govid.routes.ts",
+    "type": "route",
+    "layer": "backend",
+    "name": "govid.routes",
+    "path": "backend/src/routes/govid.routes.ts",
+    "language": "typescript",
+    "size": 512,
+    "complexity": 1,
+    "exports": [
+      "router"
+    ]
+  },
+  {
+    "id": "backend/src/routes/index.ts",
+    "type": "route",
+    "layer": "backend",
+    "name": "index",
+    "path": "backend/src/routes/index.ts",
+    "language": "typescript",
+    "size": 235,
+    "complexity": 1,
+    "exports": [
+      "router"
+    ]
+  },
+  {
+    "id": "backend/src/server.ts",
+    "type": "module",
+    "layer": "backend",
+    "name": "server",
+    "path": "backend/src/server.ts",
+    "language": "typescript",
+    "size": 567,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "backend/src/services/auth.service.ts",
+    "type": "service",
+    "layer": "backend",
+    "name": "auth.service",
+    "path": "backend/src/services/auth.service.ts",
+    "language": "typescript",
+    "size": 13822,
+    "complexity": 43,
+    "exports": [
+      "AuthService"
+    ]
+  },
+  {
+    "id": "backend/src/utils/hash.util.ts",
+    "type": "util",
+    "layer": "backend",
+    "name": "hash.util",
+    "path": "backend/src/utils/hash.util.ts",
+    "language": "typescript",
+    "size": 1020,
+    "complexity": 2,
+    "exports": [
+      "generateRandomToken",
+      "hashToken",
+      "constantTimeCompare"
+    ]
+  },
+  {
+    "id": "backend/src/utils/jwt.util.ts",
+    "type": "util",
+    "layer": "backend",
+    "name": "jwt.util",
+    "path": "backend/src/utils/jwt.util.ts",
+    "language": "typescript",
+    "size": 1328,
+    "complexity": 2,
+    "exports": [
+      "JwtPayload",
+      "generateAccessToken",
+      "generateRefreshToken",
+      "verifyJwtToken",
+      "setAuthCookies",
+      "clearAuthCookies"
+    ]
+  },
+  {
+    "id": "backend/src/utils/otp.util.ts",
+    "type": "util",
+    "layer": "backend",
+    "name": "otp.util",
+    "path": "backend/src/utils/otp.util.ts",
+    "language": "typescript",
+    "size": 113,
+    "complexity": 1,
+    "exports": [
+      "generate6DigitOtp"
+    ]
+  },
+  {
+    "id": "backend/tsconfig.json",
+    "type": "module",
+    "layer": "backend",
+    "name": "tsconfig",
+    "path": "backend/tsconfig.json",
+    "language": "json",
+    "size": 337,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "data/smart_bharat_db.json",
+    "type": "module",
+    "layer": "data",
+    "name": "smart_bharat_db",
+    "path": "data/smart_bharat_db.json",
+    "language": "json",
+    "size": 3536,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "DESIGN.md",
+    "type": "document",
+    "layer": "root",
+    "name": "DESIGN",
+    "path": "DESIGN.md",
+    "language": "markdown",
+    "size": 1160,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "docs/firebase-auth.md",
+    "type": "document",
+    "layer": "docs",
+    "name": "firebase-auth",
+    "path": "docs/firebase-auth.md",
+    "language": "markdown",
+    "size": 4007,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "e2e/button_audit.spec.ts",
+    "type": "module",
+    "layer": "e2e",
+    "name": "button_audit.spec",
+    "path": "e2e/button_audit.spec.ts",
+    "language": "typescript",
+    "size": 1994,
+    "complexity": 13,
+    "exports": []
+  },
+  {
+    "id": "frontend/.env",
+    "type": "module",
+    "layer": "frontend",
+    "name": ".env",
+    "path": "frontend/.env",
+    "language": "plaintext",
+    "size": 1774,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "frontend/.env.local",
+    "type": "module",
+    "layer": "frontend",
+    "name": ".env",
+    "path": "frontend/.env.local",
+    "language": "plaintext",
+    "size": 1936,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "frontend/components.json",
+    "type": "module",
+    "layer": "frontend",
+    "name": "components",
+    "path": "frontend/components.json",
+    "language": "json",
+    "size": 520,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "frontend/eslint.config.mjs",
+    "type": "module",
+    "layer": "frontend",
+    "name": "eslint.config",
+    "path": "frontend/eslint.config.mjs",
+    "language": "javascript",
+    "size": 468,
+    "complexity": 1,
+    "exports": [
+      "eslintConfig"
+    ]
+  },
+  {
+    "id": "frontend/next-env.d.ts",
+    "type": "module",
+    "layer": "frontend",
+    "name": "next-env.d",
+    "path": "frontend/next-env.d.ts",
+    "language": "typescript",
+    "size": 211,
+    "complexity": 2,
+    "exports": []
+  },
+  {
+    "id": "frontend/next.config.ts",
+    "type": "module",
+    "layer": "frontend",
+    "name": "next.config",
+    "path": "frontend/next.config.ts",
+    "language": "typescript",
+    "size": 2420,
+    "complexity": 3,
+    "exports": [
+      "nextConfig"
+    ]
+  },
+  {
+    "id": "frontend/package-lock.json",
+    "type": "module",
+    "layer": "frontend",
+    "name": "package-lock",
+    "path": "frontend/package-lock.json",
+    "language": "json",
+    "size": 289999,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "frontend/package.json",
+    "type": "module",
+    "layer": "frontend",
+    "name": "package",
+    "path": "frontend/package.json",
+    "language": "json",
+    "size": 1154,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "frontend/postcss.config.mjs",
+    "type": "module",
+    "layer": "frontend",
+    "name": "postcss.config",
+    "path": "frontend/postcss.config.mjs",
+    "language": "javascript",
+    "size": 94,
+    "complexity": 1,
+    "exports": [
+      "config"
+    ]
+  },
+  {
+    "id": "frontend/src/app/admin/ids/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/admin/ids/page.tsx",
+    "language": "typescript",
+    "size": 9717,
+    "complexity": 5,
+    "exports": [
+      "AdminApplicationsPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/admin/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/admin/page.tsx",
+    "language": "typescript",
+    "size": 11319,
+    "complexity": 6,
+    "exports": [
+      "AdminDashboard"
+    ]
+  },
+  {
+    "id": "frontend/src/app/ai/loading.tsx",
+    "type": "module",
+    "layer": "frontend",
+    "name": "loading",
+    "path": "frontend/src/app/ai/loading.tsx",
+    "language": "typescript",
+    "size": 2374,
+    "complexity": 1,
+    "exports": [
+      "AILoading"
+    ]
+  },
+  {
+    "id": "frontend/src/app/ai/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/ai/page.tsx",
+    "language": "typescript",
+    "size": 22697,
+    "complexity": 21,
+    "exports": [
+      "AIPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/api/chat/route.ts",
+    "type": "module",
+    "layer": "frontend",
+    "name": "route",
+    "path": "frontend/src/app/api/chat/route.ts",
+    "language": "typescript",
+    "size": 5017,
+    "complexity": 29,
+    "exports": []
+  },
+  {
+    "id": "frontend/src/app/assistant/loading.tsx",
+    "type": "module",
+    "layer": "frontend",
+    "name": "loading",
+    "path": "frontend/src/app/assistant/loading.tsx",
+    "language": "typescript",
+    "size": 1562,
+    "complexity": 1,
+    "exports": [
+      "AssistantLoading"
+    ]
+  },
+  {
+    "id": "frontend/src/app/assistant/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/assistant/page.tsx",
+    "language": "typescript",
+    "size": 31784,
+    "complexity": 27,
+    "exports": [
+      "AssistantPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/complaints/loading.tsx",
+    "type": "module",
+    "layer": "frontend",
+    "name": "loading",
+    "path": "frontend/src/app/complaints/loading.tsx",
+    "language": "typescript",
+    "size": 1115,
+    "complexity": 1,
+    "exports": [
+      "ComplaintsLoading"
+    ]
+  },
+  {
+    "id": "frontend/src/app/complaints/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/complaints/page.tsx",
+    "language": "typescript",
+    "size": 30873,
+    "complexity": 24,
+    "exports": [
+      "ComplaintsPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/credentials/loading.tsx",
+    "type": "module",
+    "layer": "frontend",
+    "name": "loading",
+    "path": "frontend/src/app/credentials/loading.tsx",
+    "language": "typescript",
+    "size": 1720,
+    "complexity": 1,
+    "exports": [
+      "CredentialsLoading"
+    ]
+  },
+  {
+    "id": "frontend/src/app/credentials/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/credentials/page.tsx",
+    "language": "typescript",
+    "size": 22010,
+    "complexity": 14,
+    "exports": [
+      "CredentialsPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/forgot-password/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/forgot-password/page.tsx",
+    "language": "typescript",
+    "size": 7321,
+    "complexity": 6,
+    "exports": [
+      "ForgotPasswordPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/framework/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/framework/page.tsx",
+    "language": "typescript",
+    "size": 614,
+    "complexity": 2,
+    "exports": [
+      "FrameworkPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/globals.css",
+    "type": "style",
+    "layer": "frontend",
+    "name": "globals",
+    "path": "frontend/src/app/globals.css",
+    "language": "css",
+    "size": 6286,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "frontend/src/app/id/loading.tsx",
+    "type": "module",
+    "layer": "frontend",
+    "name": "loading",
+    "path": "frontend/src/app/id/loading.tsx",
+    "language": "typescript",
+    "size": 1925,
+    "complexity": 1,
+    "exports": [
+      "IDsLoading"
+    ]
+  },
+  {
+    "id": "frontend/src/app/id/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/id/page.tsx",
+    "language": "typescript",
+    "size": 18585,
+    "complexity": 32,
+    "exports": [
+      "IDPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/id/track/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/id/track/page.tsx",
+    "language": "typescript",
+    "size": 7591,
+    "complexity": 12,
+    "exports": [
+      "TrackApplicationPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/id/[id]/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/id/[id]/page.tsx",
+    "language": "typescript",
+    "size": 14737,
+    "complexity": 10,
+    "exports": [
+      "GovIdDetailsPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/layout.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "layout",
+    "path": "frontend/src/app/layout.tsx",
+    "language": "typescript",
+    "size": 2988,
+    "complexity": 4,
+    "exports": [
+      "RootLayout",
+      "metadata"
+    ]
+  },
+  {
+    "id": "frontend/src/app/login/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/login/page.tsx",
+    "language": "typescript",
+    "size": 22327,
+    "complexity": 25,
+    "exports": [
+      "LoginPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/page.tsx",
+    "language": "typescript",
+    "size": 97,
+    "complexity": 1,
+    "exports": [
+      "Home"
+    ]
+  },
+  {
+    "id": "frontend/src/app/privacy/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/privacy/page.tsx",
+    "language": "typescript",
+    "size": 593,
+    "complexity": 2,
+    "exports": [
+      "PrivacyPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/profile/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/profile/page.tsx",
+    "language": "typescript",
+    "size": 4051,
+    "complexity": 10,
+    "exports": [
+      "ProfilePage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/reset-password/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/reset-password/page.tsx",
+    "language": "typescript",
+    "size": 8190,
+    "complexity": 9,
+    "exports": [
+      "ResetPasswordPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/schemes/loading.tsx",
+    "type": "module",
+    "layer": "frontend",
+    "name": "loading",
+    "path": "frontend/src/app/schemes/loading.tsx",
+    "language": "typescript",
+    "size": 1796,
+    "complexity": 1,
+    "exports": [
+      "SchemesLoading"
+    ]
+  },
+  {
+    "id": "frontend/src/app/schemes/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/schemes/page.tsx",
+    "language": "typescript",
+    "size": 26398,
+    "complexity": 37,
+    "exports": [
+      "SchemesPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/schemes/track/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/schemes/track/page.tsx",
+    "language": "typescript",
+    "size": 3780,
+    "complexity": 10,
+    "exports": [
+      "ApplicationTrackingPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/schemes/[id]/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/schemes/[id]/page.tsx",
+    "language": "typescript",
+    "size": 516,
+    "complexity": 2,
+    "exports": [
+      "async",
+      "generateStaticParams"
+    ]
+  },
+  {
+    "id": "frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx",
+    "type": "module",
+    "layer": "frontend",
+    "name": "SchemeDetailsClient",
+    "path": "frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx",
+    "language": "typescript",
+    "size": 5830,
+    "complexity": 2,
+    "exports": [
+      "SchemeDetailsClient"
+    ]
+  },
+  {
+    "id": "frontend/src/app/security/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/security/page.tsx",
+    "language": "typescript",
+    "size": 589,
+    "complexity": 2,
+    "exports": [
+      "SecurityPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/signup/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/signup/page.tsx",
+    "language": "typescript",
+    "size": 15362,
+    "complexity": 17,
+    "exports": [
+      "SignUpPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/standards/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/standards/page.tsx",
+    "language": "typescript",
+    "size": 606,
+    "complexity": 2,
+    "exports": [
+      "StandardsPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/terms/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/terms/page.tsx",
+    "language": "typescript",
+    "size": 595,
+    "complexity": 2,
+    "exports": [
+      "TermsPage"
+    ]
+  },
+  {
+    "id": "frontend/src/app/track/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/track/page.tsx",
+    "language": "typescript",
+    "size": 10235,
+    "complexity": 9,
+    "exports": [
+      "TrackApplication"
+    ]
+  },
+  {
+    "id": "frontend/src/app/vault/page.tsx",
+    "type": "page",
+    "layer": "frontend",
+    "name": "page",
+    "path": "frontend/src/app/vault/page.tsx",
+    "language": "typescript",
+    "size": 4844,
+    "complexity": 3,
+    "exports": [
+      "VaultPage"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ai/AIAssistant.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "AIAssistant",
+    "path": "frontend/src/components/ai/AIAssistant.tsx",
+    "language": "typescript",
+    "size": 8510,
+    "complexity": 25,
+    "exports": [
+      "AIAssistant"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ai/AssistantThreeScene.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "AssistantThreeScene",
+    "path": "frontend/src/components/ai/AssistantThreeScene.tsx",
+    "language": "typescript",
+    "size": 4400,
+    "complexity": 6,
+    "exports": [
+      "AssistantThreeScene"
+    ]
+  },
+  {
+    "id": "frontend/src/components/auth/CompleteProfileModal.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "CompleteProfileModal",
+    "path": "frontend/src/components/auth/CompleteProfileModal.tsx",
+    "language": "typescript",
+    "size": 9467,
+    "complexity": 15,
+    "exports": [
+      "CompleteProfileModal"
+    ]
+  },
+  {
+    "id": "frontend/src/components/auth/GoogleSignInButton.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "GoogleSignInButton",
+    "path": "frontend/src/components/auth/GoogleSignInButton.tsx",
+    "language": "typescript",
+    "size": 2189,
+    "complexity": 5,
+    "exports": [
+      "GoogleSignInButton"
+    ]
+  },
+  {
+    "id": "frontend/src/components/auth/OtpInput.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "OtpInput",
+    "path": "frontend/src/components/auth/OtpInput.tsx",
+    "language": "typescript",
+    "size": 9006,
+    "complexity": 41,
+    "exports": [
+      "OtpInput"
+    ]
+  },
+  {
+    "id": "frontend/src/components/auth/OtpVerificationForm.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "OtpVerificationForm",
+    "path": "frontend/src/components/auth/OtpVerificationForm.tsx",
+    "language": "typescript",
+    "size": 9005,
+    "complexity": 28,
+    "exports": [
+      "OtpVerificationForm"
+    ]
+  },
+  {
+    "id": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "PasswordStrengthMeter",
+    "path": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
+    "language": "typescript",
+    "size": 2725,
+    "complexity": 12,
+    "exports": [
+      "PasswordStrengthMeter"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ClientShells.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "ClientShells",
+    "path": "frontend/src/components/ClientShells.tsx",
+    "language": "typescript",
+    "size": 446,
+    "complexity": 2,
+    "exports": [
+      "ClientShells"
+    ]
+  },
+  {
+    "id": "frontend/src/components/DocumentSelector.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "DocumentSelector",
+    "path": "frontend/src/components/DocumentSelector.tsx",
+    "language": "typescript",
+    "size": 16838,
+    "complexity": 54,
+    "exports": [
+      "DocumentSelector"
+    ]
+  },
+  {
+    "id": "frontend/src/components/DynamicForm.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "DynamicForm",
+    "path": "frontend/src/components/DynamicForm.tsx",
+    "language": "typescript",
+    "size": 18913,
+    "complexity": 47,
+    "exports": [
+      "DynamicForm"
+    ]
+  },
+  {
+    "id": "frontend/src/components/EligibilityEngine.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "EligibilityEngine",
+    "path": "frontend/src/components/EligibilityEngine.tsx",
+    "language": "typescript",
+    "size": 10856,
+    "complexity": 14,
+    "exports": [
+      "EligibilityEngine"
+    ]
+  },
+  {
+    "id": "frontend/src/components/Footer.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "Footer",
+    "path": "frontend/src/components/Footer.tsx",
+    "language": "typescript",
+    "size": 1751,
+    "complexity": 2,
+    "exports": [
+      "Footer"
+    ]
+  },
+  {
+    "id": "frontend/src/components/Hero.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "Hero",
+    "path": "frontend/src/components/Hero.tsx",
+    "language": "typescript",
+    "size": 11620,
+    "complexity": 6,
+    "exports": [
+      "Hero"
+    ]
+  },
+  {
+    "id": "frontend/src/components/HeroShowcase.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "HeroShowcase",
+    "path": "frontend/src/components/HeroShowcase.tsx",
+    "language": "typescript",
+    "size": 5141,
+    "complexity": 3,
+    "exports": [
+      "HeroShowcase"
+    ]
+  },
+  {
+    "id": "frontend/src/components/Navbar.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "Navbar",
+    "path": "frontend/src/components/Navbar.tsx",
+    "language": "typescript",
+    "size": 6530,
+    "complexity": 13,
+    "exports": [
+      "Navbar"
+    ]
+  },
+  {
+    "id": "frontend/src/components/PageWrapper.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "PageWrapper",
+    "path": "frontend/src/components/PageWrapper.tsx",
+    "language": "typescript",
+    "size": 610,
+    "complexity": 2,
+    "exports": [
+      "PageWrapper"
+    ]
+  },
+  {
+    "id": "frontend/src/components/RouteGuard.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "RouteGuard",
+    "path": "frontend/src/components/RouteGuard.tsx",
+    "language": "typescript",
+    "size": 1590,
+    "complexity": 6,
+    "exports": [
+      "RouteGuard"
+    ]
+  },
+  {
+    "id": "frontend/src/components/SmartUpload.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "SmartUpload",
+    "path": "frontend/src/components/SmartUpload.tsx",
+    "language": "typescript",
+    "size": 5771,
+    "complexity": 21,
+    "exports": [
+      "SmartUpload"
+    ]
+  },
+  {
+    "id": "frontend/src/components/SpotlightCard.css",
+    "type": "component",
+    "layer": "frontend",
+    "name": "SpotlightCard",
+    "path": "frontend/src/components/SpotlightCard.css",
+    "language": "css",
+    "size": 602,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "frontend/src/components/SpotlightCard.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "SpotlightCard",
+    "path": "frontend/src/components/SpotlightCard.tsx",
+    "language": "typescript",
+    "size": 991,
+    "complexity": 4,
+    "exports": [
+      "SpotlightCard"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ui/button.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "button",
+    "path": "frontend/src/components/ui/button.tsx",
+    "language": "typescript",
+    "size": 2856,
+    "complexity": 2,
+    "exports": [
+      "ButtonProps",
+      "Button",
+      "buttonVariants"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ui/card.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "card",
+    "path": "frontend/src/components/ui/card.tsx",
+    "language": "typescript",
+    "size": 1793,
+    "complexity": 1,
+    "exports": [
+      "Card",
+      "CardHeader",
+      "CardFooter",
+      "CardTitle",
+      "CardDescription",
+      "CardContent"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ui/input.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "input",
+    "path": "frontend/src/components/ui/input.tsx",
+    "language": "typescript",
+    "size": 886,
+    "complexity": 1,
+    "exports": [
+      "InputProps",
+      "Input"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ui/interactive-3d-robot.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "interactive-3d-robot",
+    "path": "frontend/src/components/ui/interactive-3d-robot.tsx",
+    "language": "typescript",
+    "size": 3854,
+    "complexity": 5,
+    "exports": [
+      "InteractiveRobotSpline"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ui/label.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "label",
+    "path": "frontend/src/components/ui/label.tsx",
+    "language": "typescript",
+    "size": 521,
+    "complexity": 1,
+    "exports": [
+      "LabelProps",
+      "Label"
+    ]
+  },
+  {
+    "id": "frontend/src/components/ui/splite.tsx",
+    "type": "component",
+    "layer": "frontend",
+    "name": "splite",
+    "path": "frontend/src/components/ui/splite.tsx",
+    "language": "typescript",
+    "size": 540,
+    "complexity": 2,
+    "exports": [
+      "SplineScene"
+    ]
+  },
+  {
+    "id": "frontend/src/context/AuthContext.tsx",
+    "type": "context",
+    "layer": "frontend",
+    "name": "AuthContext",
+    "path": "frontend/src/context/AuthContext.tsx",
+    "language": "typescript",
+    "size": 10507,
+    "complexity": 50,
+    "exports": [
+      "UserProfile",
+      "AuthProvider",
+      "useAuth"
+    ]
+  },
+  {
+    "id": "frontend/src/lib/api/auth.api.ts",
+    "type": "util",
+    "layer": "frontend",
+    "name": "auth.api",
+    "path": "frontend/src/lib/api/auth.api.ts",
+    "language": "typescript",
+    "size": 1582,
+    "complexity": 3,
+    "exports": [
+      "authApi"
+    ]
+  },
+  {
+    "id": "frontend/src/lib/api/client.ts",
+    "type": "util",
+    "layer": "frontend",
+    "name": "client",
+    "path": "frontend/src/lib/api/client.ts",
+    "language": "typescript",
+    "size": 794,
+    "complexity": 5,
+    "exports": []
+  },
+  {
+    "id": "frontend/src/lib/auth.ts",
+    "type": "util",
+    "layer": "frontend",
+    "name": "auth",
+    "path": "frontend/src/lib/auth.ts",
+    "language": "typescript",
+    "size": 9516,
+    "complexity": 62,
+    "exports": [
+      "FirebaseAuthUser",
+      "OTPResponse",
+      "formatIndianPhoneNumber",
+      "isValidIndianPhone",
+      "initInvisibleRecaptcha",
+      "sendOTP",
+      "verifyOTP",
+      "logoutFirebase",
+      "signInWithGooglePopup",
+      "getCurrentFirebaseUser",
+      "listenForAuthChanges",
+      "refreshFirebaseUser",
+      "transformFirebaseError",
+      "isFirebaseConfigured"
+    ]
+  },
+  {
+    "id": "frontend/src/lib/data.ts",
+    "type": "util",
+    "layer": "frontend",
+    "name": "data",
+    "path": "frontend/src/lib/data.ts",
+    "language": "typescript",
+    "size": 51829,
+    "complexity": 146,
+    "exports": [
+      "FieldType",
+      "FormField",
+      "Scheme",
+      "ApplicationType",
+      "FAQ",
+      "GovId",
+      "ComplaintCategory",
+      "categories",
+      "states",
+      "schemes",
+      "govIds",
+      "complaintCategories",
+      "ApplicationStatus",
+      "mockUserApplications",
+      "Credential",
+      "vaultCategories",
+      "mockCredentials"
+    ]
+  },
+  {
+    "id": "frontend/src/lib/firebase.ts",
+    "type": "util",
+    "layer": "frontend",
+    "name": "firebase",
+    "path": "frontend/src/lib/firebase.ts",
+    "language": "typescript",
+    "size": 1366,
+    "complexity": 6,
+    "exports": [
+      "isFirebaseConfigured",
+      "app",
+      "auth"
+    ]
+  },
+  {
+    "id": "frontend/src/lib/knowledge.ts",
+    "type": "util",
+    "layer": "frontend",
+    "name": "knowledge",
+    "path": "frontend/src/lib/knowledge.ts",
+    "language": "typescript",
+    "size": 12730,
+    "complexity": 34,
+    "exports": [
+      "PLATFORM_KNOWLEDGE"
+    ]
+  },
+  {
+    "id": "frontend/src/lib/utils.ts",
+    "type": "util",
+    "layer": "frontend",
+    "name": "utils",
+    "path": "frontend/src/lib/utils.ts",
+    "language": "typescript",
+    "size": 863,
+    "complexity": 8,
+    "exports": [
+      "cn",
+      "getUserDisplayName"
+    ]
+  },
+  {
+    "id": "frontend/tsconfig.json",
+    "type": "module",
+    "layer": "frontend",
+    "name": "tsconfig",
+    "path": "frontend/tsconfig.json",
+    "language": "json",
+    "size": 669,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "frontend/tsconfig.tsbuildinfo",
+    "type": "module",
+    "layer": "frontend",
+    "name": "tsconfig",
+    "path": "frontend/tsconfig.tsbuildinfo",
+    "language": "plaintext",
+    "size": 155114,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/api.md",
+    "type": "document",
+    "layer": "root",
+    "name": "api",
+    "path": "memory/api.md",
+    "language": "markdown",
+    "size": 430,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/architecture.md",
+    "type": "document",
+    "layer": "root",
+    "name": "architecture",
+    "path": "memory/architecture.md",
+    "language": "markdown",
+    "size": 7538,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/bugs.md",
+    "type": "document",
+    "layer": "root",
+    "name": "bugs",
+    "path": "memory/bugs.md",
+    "language": "markdown",
+    "size": 370,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/business-rules.md",
+    "type": "document",
+    "layer": "root",
+    "name": "business-rules",
+    "path": "memory/business-rules.md",
+    "language": "markdown",
+    "size": 2276,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/changelog.md",
+    "type": "document",
+    "layer": "root",
+    "name": "changelog",
+    "path": "memory/changelog.md",
+    "language": "markdown",
+    "size": 2832,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/coding-standards.md",
+    "type": "document",
+    "layer": "root",
+    "name": "coding-standards",
+    "path": "memory/coding-standards.md",
+    "language": "markdown",
+    "size": 597,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/current-status.md",
+    "type": "document",
+    "layer": "root",
+    "name": "current-status",
+    "path": "memory/current-status.md",
+    "language": "markdown",
+    "size": 1421,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/database.md",
+    "type": "document",
+    "layer": "root",
+    "name": "database",
+    "path": "memory/database.md",
+    "language": "markdown",
+    "size": 1069,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/decisions.md",
+    "type": "document",
+    "layer": "root",
+    "name": "decisions",
+    "path": "memory/decisions.md",
+    "language": "markdown",
+    "size": 613,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/deployment.md",
+    "type": "document",
+    "layer": "root",
+    "name": "deployment",
+    "path": "memory/deployment.md",
+    "language": "markdown",
+    "size": 574,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/how-to-run.md",
+    "type": "document",
+    "layer": "root",
+    "name": "how-to-run",
+    "path": "memory/how-to-run.md",
+    "language": "markdown",
+    "size": 287,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/module-government-ids.md",
+    "type": "document",
+    "layer": "root",
+    "name": "module-government-ids",
+    "path": "memory/module-government-ids.md",
+    "language": "markdown",
+    "size": 5129,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/production-implementation-spec.md",
+    "type": "document",
+    "layer": "root",
+    "name": "production-implementation-spec",
+    "path": "memory/production-implementation-spec.md",
+    "language": "markdown",
+    "size": 5956,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/project-overview.md",
+    "type": "document",
+    "layer": "root",
+    "name": "project-overview",
+    "path": "memory/project-overview.md",
+    "language": "markdown",
+    "size": 1142,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/README.md",
+    "type": "document",
+    "layer": "root",
+    "name": "README",
+    "path": "memory/README.md",
+    "language": "markdown",
+    "size": 2414,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/tech-stack.md",
+    "type": "document",
+    "layer": "root",
+    "name": "tech-stack",
+    "path": "memory/tech-stack.md",
+    "language": "markdown",
+    "size": 732,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "memory/todo.md",
+    "type": "document",
+    "layer": "root",
+    "name": "todo",
+    "path": "memory/todo.md",
+    "language": "markdown",
+    "size": 1067,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "package-lock.json",
+    "type": "module",
+    "layer": "root",
+    "name": "package-lock",
+    "path": "package-lock.json",
+    "language": "json",
+    "size": 316896,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "package.json",
+    "type": "module",
+    "layer": "root",
+    "name": "package",
+    "path": "package.json",
+    "language": "json",
+    "size": 888,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "PRODUCT.md",
+    "type": "document",
+    "layer": "root",
+    "name": "PRODUCT",
+    "path": "PRODUCT.md",
+    "language": "markdown",
+    "size": 1099,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "README.md",
+    "type": "document",
+    "layer": "root",
+    "name": "README",
+    "path": "README.md",
+    "language": "markdown",
+    "size": 1450,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "scripts/build-review-graph.js",
+    "type": "script",
+    "layer": "root",
+    "name": "build-review-graph",
+    "path": "scripts/build-review-graph.js",
+    "language": "javascript",
+    "size": 17578,
+    "complexity": 17,
+    "exports": []
+  },
+  {
+    "id": "scripts/graphify.js",
+    "type": "script",
+    "layer": "root",
+    "name": "graphify",
+    "path": "scripts/graphify.js",
+    "language": "javascript",
+    "size": 14632,
+    "complexity": 84,
+    "exports": []
+  },
+  {
+    "id": "scripts/validate-graph-output.js",
+    "type": "script",
+    "layer": "root",
+    "name": "validate-graph-output",
+    "path": "scripts/validate-graph-output.js",
+    "language": "javascript",
+    "size": 4264,
+    "complexity": 8,
+    "exports": []
+  },
+  {
+    "id": "shared/package.json",
+    "type": "module",
+    "layer": "shared",
+    "name": "package",
+    "path": "shared/package.json",
+    "language": "json",
+    "size": 225,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "shared/src/index.ts",
+    "type": "module",
+    "layer": "shared",
+    "name": "index",
+    "path": "shared/src/index.ts",
+    "language": "typescript",
+    "size": 70,
+    "complexity": 1,
+    "exports": []
+  },
+  {
+    "id": "shared/src/types/auth.ts",
+    "type": "type",
+    "layer": "shared",
+    "name": "auth",
+    "path": "shared/src/types/auth.ts",
+    "language": "typescript",
+    "size": 1899,
+    "complexity": 16,
+    "exports": [
+      "UserRecord",
+      "UserProfile",
+      "SessionRecord",
+      "OtpRecord",
+      "PasswordResetRecord",
+      "AuditLogRecord",
+      "ApiResponse"
+    ]
+  },
+  {
+    "id": "shared/src/validations/password.ts",
+    "type": "validation",
+    "layer": "shared",
+    "name": "password",
+    "path": "shared/src/validations/password.ts",
+    "language": "typescript",
+    "size": 1048,
+    "complexity": 11,
+    "exports": [
+      "PasswordValidationResult",
+      "validatePasswordComplexity"
+    ]
+  },
+  {
+    "id": "shared/tsconfig.json",
+    "type": "module",
+    "layer": "shared",
+    "name": "tsconfig",
+    "path": "shared/tsconfig.json",
+    "language": "json",
+    "size": 287,
+    "complexity": 1,
+    "exports": []
+  }
+]
