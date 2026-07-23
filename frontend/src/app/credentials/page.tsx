@@ -200,10 +200,10 @@ export default function CredentialsPage() {
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-10 relative z-10">
         {/* Upload & Sync Section */}
-        <section className="mb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <section className="mb-16 md:mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
             {/* Left Column: Smart File Dropzone */}
-            <div className="lg:col-span-2 glass-card-cred p-8 flex flex-col justify-between">
+            <div className="lg:col-span-2 glass-card-cred p-8 flex flex-col justify-between h-full">
               <div>
                 <div className="flex justify-between items-center mb-6">
                   <div>
@@ -297,7 +297,7 @@ export default function CredentialsPage() {
             </div>
 
             {/* Right Column: DigiLocker Sync */}
-            <div className="glass-card-cred p-8 flex flex-col justify-between">
+            <div className="glass-card-cred p-8 flex flex-col justify-between h-full">
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-[#0453cd]/10 flex items-center justify-center">
@@ -331,7 +331,7 @@ export default function CredentialsPage() {
         </section>
 
         {/* Your Stored Credentials Grid */}
-        <section>
+        <section className="pt-4">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#0453cd]">folder_special</span>
