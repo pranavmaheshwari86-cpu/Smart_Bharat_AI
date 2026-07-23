@@ -103,6 +103,9 @@ export class AuthService {
   }
 
   public async emailLogin(email: string, password: string) {
+    if (!email || typeof email !== "string" || !password || typeof password !== "string") {
+      throw new Error("Email and password are required.");
+    }
     const normalizedEmail = email.trim().toLowerCase();
     const user = this.userRepo.findByEmail(normalizedEmail);
 

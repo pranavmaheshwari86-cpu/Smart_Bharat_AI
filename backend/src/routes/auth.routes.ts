@@ -32,6 +32,8 @@ const otpLimiter = rateLimit({
 });
 
 router.post("/google", authLimiter, authController.googleSignIn);
+router.post("/login", authLimiter, authController.emailLogin);
+router.post("/register", authLimiter, authController.emailRegister);
 router.post("/email/login", authLimiter, authController.emailLogin);
 router.post("/email/register", authLimiter, authController.emailRegister);
 router.post("/phone/send-otp", otpLimiter, authController.sendPhoneOtp);
