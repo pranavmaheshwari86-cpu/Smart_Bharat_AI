@@ -305,29 +305,24 @@ void main() {
 
   return (
     <>
-      <div className="fixed inset-0 z-[-1] pointer-events-none opacity-40">
-        <div className="absolute inset-0 w-full h-full" style={{ display: 'block' }}>
-          <canvas id="shader-canvas-ANIMATION_5" style={{ display: 'block', width: '100%', height: '100%' }}></canvas>
-        </div>
-      </div>
+      <canvas id="shader-canvas-ANIMATION_5" className="fixed inset-0 pointer-events-none z-[-1]" />
       
-      <main className="pt-[104px] pb-16 px-4 md:px-8 max-w-[1400px] mx-auto space-y-12 md:space-y-16 relative z-10">
-        <section className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16 mt-8">
-          <div className="space-y-6 pr-4 lg:pr-8">
+      <main className="max-w-container-max mx-auto px-margin-mobile md:px-gutter pt-24 pb-section space-y-12">
+        {/* Hero Section */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
             <h1 className="font-display-lg text-display-lg text-on-surface leading-tight">
-              Discover <br />
-              <span className="text-gradient font-bold italic px-2 -ml-2">Government</span><br/>
-              <span className="text-gradient font-bold italic px-2 -ml-2">Schemes</span>
+              Discover <span className="text-gradient font-bold italic">Government Schemes</span> matched for you
             </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[600px]">
+            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[500px]">
               Our AI intelligence layer analyzes your profile to match you with the most relevant schemes, grants, and scholarships instantly.
             </p>
-            <div className="pt-4 flex gap-4">
-              <Link href="/ai" className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-sm shadow-apple-sm hover:-translate-y-1 transition-transform duration-300 flex items-center gap-2 hover:shadow-[0_0_20px_rgba(0,74,198,0.3)]">
+            <div className="flex items-center gap-4">
+              <button onClick={() => resultsRef.current?.scrollIntoView({ behavior: 'smooth' })} className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-sm shadow-md hover:scale-105 transition-transform flex items-center gap-2">
                 Find My Schemes
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
-              <button onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })} className="bg-surface-container text-on-surface px-8 py-4 rounded-xl font-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
+              </button>
+              <button onClick={() => setOtherOpen(true)} className="bg-surface-container text-on-surface px-8 py-4 rounded-xl font-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
                 <span className="material-symbols-outlined">explore</span>
                 Browse All
               </button>
@@ -344,49 +339,78 @@ void main() {
           </div>
         </section>
 
+        {/* Global AI Search Box */}
         <section className="glass-panel rounded-3xl p-8 shadow-apple-lg border-t border-white/80 relative overflow-hidden hover:shadow-[0_20px_50px_rgba(0,74,198,0.15)] group">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-          <div className="relative z-10 flex flex-col md:flex-row items-center gap-4 bg-white/40 rounded-2xl p-2 border border-outline-variant/20 shadow-sm focus-within:ring-2 focus-within:ring-primary/50 transition-all">
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-4 bg-white/60 rounded-2xl p-2 border border-outline-variant/30 shadow-sm focus-within:ring-2 focus-within:ring-primary/50 transition-all">
             <span className="material-symbols-outlined text-on-surface pl-4">search</span>
             <input 
               className="flex-1 bg-transparent border-none focus:ring-0 text-body-lg text-on-surface placeholder:text-on-surface-variant/70 py-4 outline-none w-full" 
-              placeholder="Describe what you are looking for... e.g. 'Scholarships for girls in Karnataka'" 
+              placeholder="Search all government schemes... (e.g., 'Central Sector Scholarship', 'PM Vidya Lakshmi', 'Farmer Loans')" 
               type="text" 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
-            <button onClick={() => alert("Starting voice search...")} className="p-4 text-on-surface-variant hover:text-primary transition-colors">
+            <button
+              onClick={handleVoiceSearch}
+              className={`p-4 transition-colors rounded-xl flex items-center justify-center ${isListening ? "text-red-500 bg-red-50 animate-pulse" : "text-on-surface-variant hover:text-primary"}`}
+              title="Voice Search"
+            >
               <span className="material-symbols-outlined">mic</span>
             </button>
-            <button onClick={() => alert("Searching schemes...")} className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-sm shadow-md hover:scale-105 transition-transform flex items-center gap-2 hover:shadow-[0_0_20px_rgba(0,74,198,0.3)]">
+            <button 
+              onClick={handleSearch} 
+              className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-sm shadow-md hover:scale-105 transition-transform flex items-center gap-2 hover:shadow-[0_0_20px_rgba(0,74,198,0.3)]"
+            >
               <span className="material-symbols-outlined">auto_awesome</span>
               Search
             </button>
           </div>
+
           <div className="mt-6 flex flex-wrap gap-3 items-center">
             <span className="text-label-sm font-label-sm text-outline uppercase tracking-wider">Suggested:</span>
-            <button onClick={() => setSelectedCategory(selectedCategory === "Agriculture" ? null : "Agriculture")} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Agriculture' ? 'border-primary text-primary' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
+            <button onClick={() => { setSelectedCategory(selectedCategory === "Agriculture" ? null : "Agriculture"); handleSearch(); }} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Agriculture' ? 'border-primary text-primary font-bold' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
               <span className="material-symbols-outlined text-[14px]">agriculture</span> Farmer Schemes
             </button>
-            <button onClick={() => setSelectedCategory(selectedCategory === "Education" ? null : "Education")} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Education' ? 'border-primary text-primary' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
+            <button onClick={() => { setSelectedCategory(selectedCategory === "Students" ? null : "Students"); handleSearch(); }} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Students' ? 'border-primary text-primary font-bold' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
               <span className="material-symbols-outlined text-[14px]">school</span> Student Scholarships
             </button>
-            <button onClick={() => setSelectedCategory(selectedCategory === "Business" ? null : "Business")} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Business' ? 'border-primary text-primary' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
+            <button onClick={() => { setSelectedCategory(selectedCategory === "Business" ? null : "Business"); handleSearch(); }} className={`px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border ${selectedCategory === 'Business' ? 'border-primary text-primary font-bold' : 'border-outline-variant/20 text-on-surface'} hover:border-primary hover:text-primary transition-colors text-label-sm flex items-center gap-2 hover:shadow-[inset_0_0_12px_rgba(0,74,198,0.1)] duration-300`}>
               <span className="material-symbols-outlined text-[14px]">rocket_launch</span> Business & Startup
             </button>
+            {selectedCategory && (
+              <button onClick={() => setSelectedCategory(null)} className="px-3 py-1.5 text-xs text-red-600 bg-red-50 hover:bg-red-100 rounded-full font-medium transition-colors">
+                Clear Filter
+              </button>
+            )}
           </div>
           <div className="spotlight-overlay pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(37, 99, 235, 0.08), transparent 40%)' }}></div>
         </section>
 
-        <section className="space-y-8">
-          <div className="flex items-center justify-between">
-            <h2 className="font-headline-md text-headline-md text-on-surface">Available Schemes</h2>
+        {/* Schemes Results Grid */}
+        <section ref={resultsRef} className="space-y-8 scroll-mt-24">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 className="font-headline-md text-headline-md text-on-surface">
+                {searchQuery ? `Search Results for "${searchQuery}"` : selectedCategory ? `${selectedCategory} Schemes` : "Available Schemes"}
+              </h2>
+              <p className="text-sm text-on-surface-variant mt-1">
+                Showing {filteredSchemes.length} schemes matched across National & State Databases
+              </p>
+            </div>
+            {selectedCategory && (
+              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary font-semibold text-xs border border-primary/20">
+                Filtered by: {selectedCategory}
+              </span>
+            )}
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {filteredSchemes.map(scheme => (
               <SpotlightCard key={scheme.id} className="glass-panel bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group" spotlightColor="rgba(37, 99, 235, 0.08)">
                 <div className="flex justify-between items-start relative z-10">
-                  <span className="px-3 py-1 rounded-full bg-primary/5 text-primary font-label-sm text-[12px] uppercase tracking-wider">{scheme.category}</span>
+                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-label-sm text-[12px] uppercase tracking-wider font-semibold">{scheme.category}</span>
                   <span className="material-symbols-outlined text-outline opacity-40 group-hover:text-primary group-hover:opacity-100 transition-colors">bookmark</span>
                 </div>
                 <div className="space-y-2 relative z-10">
@@ -397,103 +421,123 @@ void main() {
                   <span className="material-symbols-outlined text-[18px]">payments</span>
                   {scheme.financialBenefits || "Variable Benefits"}
                 </div>
-                <Link href={`/schemes/${scheme.id}`} className="mt-auto w-full py-3 rounded-xl bg-primary text-on-primary font-label-sm hover:scale-[1.02] transition-transform shadow-[0_4px_14px_0_rgba(0,118,255,0.39)] hover:shadow-[0_6px_20px_rgba(0,118,255,0.23)] text-center block relative z-10">View Details</Link>
+                <Link href={`/schemes/${scheme.id}`} className="mt-auto w-full py-3 rounded-xl bg-primary text-on-primary font-label-sm hover:scale-[1.02] transition-transform shadow-[0_4px_14px_0_rgba(0,118,255,0.39)] hover:shadow-[0_6px_20px_rgba(0,118,255,0.23)] text-center block relative z-10 font-bold">
+                  View Details
+                </Link>
               </SpotlightCard>
             ))}
             
-            {filteredSchemes.length > 0 && (
-              <div ref={otherRef} className="relative">
-                <SpotlightCard
-                  className="glass-panel bg-gradient-to-br from-white/60 to-primary/5 backdrop-blur-md rounded-3xl p-6 border border-primary/20 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group justify-center items-center text-center cursor-pointer h-full"
-                  spotlightColor="rgba(37, 99, 235, 0.12)"
-                >
-                  <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-primary/10">
-                    <span className="material-symbols-outlined text-primary text-3xl">apps</span>
-                  </div>
-                  <div className="space-y-1 relative z-10">
-                    <h3 className="font-headline-sm text-[20px] font-bold text-on-surface group-hover:text-primary transition-colors">Other Schemes</h3>
-                    <p className="text-body-md text-primary/70 text-[14px] max-w-[200px]">Explore {OTHER_SCHEME_CATEGORIES.length}+ government scheme categories</p>
-                  </div>
-                  <button
-                    ref={buttonRef}
-                    onClick={openDropdown}
-                    className="mt-4 px-8 py-3 rounded-xl bg-white border border-primary/20 text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300 shadow-sm relative z-10 flex items-center gap-2 group-hover:shadow-[0_4px_14px_0_rgba(0,118,255,0.39)]"
-                  >
-                    Explore All
-                    <span className={`material-symbols-outlined text-[18px] transition-transform duration-300 ${otherOpen ? "rotate-90" : ""}`}>arrow_forward</span>
-                  </button>
-                </SpotlightCard>
-
-                {/* Dropdown — fixed position so it escapes stacking context / footer */}
-                {otherOpen && typeof window !== "undefined" && (
-                  <div
-                    ref={dropdownRef}
-                    style={{
-                      position: "fixed",
-                      top: dropdownPos.top,
-                      left: dropdownPos.left,
-                      width: dropdownPos.width,
-                      zIndex: 9999,
-                    }}
-                    className="bg-white/98 backdrop-blur-xl rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] border border-gray-200 overflow-hidden animate-fade-in"
-                  >
-                    {/* Header */}
-                    <div className="px-4 pt-4 pb-3 border-b border-gray-100">
-                      <p className="text-[11px] font-bold tracking-widest text-primary/60 uppercase mb-2">Scheme Categories</p>
-                      <div className="relative">
-                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-gray-400">search</span>
-                        <input
-                          autoFocus
-                          type="text"
-                          placeholder="Search categories..."
-                          value={otherSearch}
-                          onChange={e => setOtherSearch(e.target.value)}
-                          className="w-full pl-9 pr-3 py-2 text-[13px] bg-gray-50 rounded-xl border border-gray-100 outline-none focus:border-primary/40 focus:bg-white transition-all text-gray-700 placeholder:text-gray-400"
-                        />
-                      </div>
-                    </div>
-
-                    {/* List */}
-                    <div className="overflow-y-auto max-h-[240px] py-2">
-                      {filteredOther.length > 0 ? filteredOther.map(cat => (
-                        <button
-                          key={cat}
-                          onClick={() => {
-                            setSelectedCategory(cat);
-                            setOtherOpen(false);
-                            setOtherSearch("");
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                          }}
-                          className="w-full text-left px-4 py-2.5 text-[13px] text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3 group/item"
-                        >
-                          <span className="material-symbols-outlined text-[16px] text-primary/40 group-hover/item:text-primary transition-colors">chevron_right</span>
-                          {cat}
-                        </button>
-                      )) : (
-                        <div className="px-4 py-6 text-center text-[13px] text-gray-400">
-                          No categories found
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Footer */}
-                    <div className="px-4 py-2.5 border-t border-gray-100 bg-gray-50/80">
-                      <p className="text-[11px] text-gray-400">
-                        {filteredOther.length} of {OTHER_SCHEME_CATEGORIES.length} categories
-                      </p>
-                    </div>
-                  </div>
-                )}
+            <SpotlightCard
+              className="glass-panel bg-gradient-to-br from-white/60 to-primary/5 backdrop-blur-md rounded-3xl p-6 border border-primary/20 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-apple-lg transition-all duration-300 flex flex-col gap-4 group justify-center items-center text-center cursor-pointer h-full"
+              spotlightColor="rgba(37, 99, 235, 0.12)"
+            >
+              <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-primary/10">
+                <span className="material-symbols-outlined text-primary text-3xl">apps</span>
               </div>
-            )}
+              <div className="space-y-1 relative z-10">
+                <h3 className="font-headline-sm text-[20px] font-bold text-on-surface group-hover:text-primary transition-colors">Other Schemes</h3>
+                <p className="text-body-md text-primary/70 text-[14px] max-w-[200px]">Explore {OTHER_SCHEME_CATEGORIES.length}+ government scheme categories</p>
+              </div>
+              <button
+                onClick={() => setOtherOpen(true)}
+                className="mt-4 px-8 py-3 rounded-xl bg-white border border-primary/20 text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300 shadow-sm relative z-10 flex items-center gap-2 group-hover:shadow-[0_4px_14px_0_rgba(0,118,255,0.39)]"
+              >
+                Explore All
+                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </button>
+            </SpotlightCard>
 
             {filteredSchemes.length === 0 && (
-              <div className="col-span-full text-center py-12 text-on-surface-variant">
-                No schemes found matching your criteria.
+              <div className="col-span-full text-center py-16 glass-panel rounded-3xl p-8 border border-gray-100">
+                <span className="material-symbols-outlined text-5xl text-gray-400 mb-3">search_off</span>
+                <h3 className="text-lg font-bold text-gray-800">No schemes found matching "{searchQuery}"</h3>
+                <p className="text-sm text-gray-500 mt-1 max-w-md mx-auto">
+                  Try searching with broader terms like "Scholarship", "Loan", "Farmer", or browse our 144+ scheme categories.
+                </p>
+                <button
+                  onClick={() => { setSearchQuery(""); setSelectedCategory(null); }}
+                  className="mt-4 px-6 py-2.5 bg-primary text-white text-xs font-bold rounded-xl shadow-sm hover:bg-primary/90 transition-colors"
+                >
+                  Clear Search & View All
+                </button>
               </div>
             )}
           </div>
         </section>
+
+        {/* Scheme Categories Modal Overlay — Centered, No Viewport Clipping */}
+        {otherOpen && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-fade-in">
+            <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 w-full max-w-3xl overflow-hidden flex flex-col max-h-[85vh]">
+              {/* Header */}
+              <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">All Scheme Categories</h3>
+                  <p className="text-xs text-gray-500 mt-0.5">Explore {OTHER_SCHEME_CATEGORIES.length}+ government scheme domains</p>
+                </div>
+                <button
+                  onClick={() => { setOtherOpen(false); setOtherSearch(""); }}
+                  className="p-2 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-200/60 transition-colors"
+                >
+                  <span className="material-symbols-outlined text-2xl">close</span>
+                </button>
+              </div>
+
+              {/* Search Bar inside Modal */}
+              <div className="p-4 border-b border-gray-100 bg-white">
+                <div className="relative">
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl">search</span>
+                  <input
+                    autoFocus
+                    type="text"
+                    placeholder="Search categories (e.g., Scholarship, Higher Education, Agriculture...)"
+                    value={otherSearch}
+                    onChange={(e) => setOtherSearch(e.target.value)}
+                    className="w-full pl-11 pr-4 py-3 text-sm bg-gray-50 rounded-2xl border border-gray-200 outline-none focus:border-primary focus:bg-white transition-all text-gray-800 placeholder:text-gray-400"
+                  />
+                </div>
+              </div>
+
+              {/* Category Grid */}
+              <div className="p-6 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-[50vh]">
+                {filteredOther.length > 0 ? (
+                  filteredOther.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => {
+                        setSelectedCategory(cat);
+                        setOtherOpen(false);
+                        setOtherSearch("");
+                        if (resultsRef.current) {
+                          resultsRef.current.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }}
+                      className="text-left px-4 py-3 rounded-2xl bg-gray-50 hover:bg-primary/10 hover:text-primary border border-gray-100 hover:border-primary/30 transition-all font-medium text-xs sm:text-sm text-gray-700 flex items-center justify-between group"
+                    >
+                      <span>{cat}</span>
+                      <span className="material-symbols-outlined text-base text-gray-400 group-hover:text-primary transition-colors">chevron_right</span>
+                    </button>
+                  ))
+                ) : (
+                  <div className="col-span-full py-12 text-center text-sm text-gray-400">
+                    No matching categories found for "{otherSearch}"
+                  </div>
+                )}
+              </div>
+
+              {/* Modal Footer */}
+              <div className="p-4 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between text-xs text-gray-500">
+                <span>Showing {filteredOther.length} of {OTHER_SCHEME_CATEGORIES.length} categories</span>
+                <button
+                  onClick={() => { setOtherOpen(false); setOtherSearch(""); }}
+                  className="px-5 py-2 bg-primary text-white font-semibold rounded-xl text-xs hover:bg-primary/90 transition-colors shadow-sm"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </>
   );
