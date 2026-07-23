@@ -42,10 +42,29 @@ const Footer = dynamic(
   { ssr: true }
 );
 
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://smart-bharat-ai.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Smart Bharat AI — Intelligent Government Services",
+  metadataBase: new URL(appUrl),
+  title: {
+    default: "Smart Bharat AI — Intelligent Government Services",
+    template: "%s | Smart Bharat AI",
+  },
   description:
     "AI-powered platform to discover government schemes, apply for foundational IDs, file civic complaints, and get 24/7 policy guidance.",
+  openGraph: {
+    title: "Smart Bharat AI — Next-Gen Citizen Platform",
+    description: "Discover government schemes, track applications, and consult 24/7 AI policy assistant.",
+    url: appUrl,
+    siteName: "Smart Bharat AI",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Smart Bharat AI",
+    description: "Intelligent citizen service platform powered by AI.",
+  },
 };
 
 export default function RootLayout({

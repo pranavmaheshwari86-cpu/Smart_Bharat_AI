@@ -85,7 +85,7 @@ export async function dispatchLLMRequest(
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${openRouterKey}`,
-          "HTTP-Referer": "http://localhost:3000",
+          "HTTP-Referer": process.env.NEXT_PUBLIC_APP_URL || "https://smart-bharat-ai.vercel.app",
           "X-Title": "Smart Bharat AI",
         },
         body: JSON.stringify({
