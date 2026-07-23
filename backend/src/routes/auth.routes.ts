@@ -11,6 +11,7 @@ const authLimiter = rateLimit({
   max: 30, // Limit each IP to 30 authentication requests per windowMs
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { trustProxy: false },
   message: {
     success: false,
     error: "Too many authentication requests from this IP. Please try again after 15 minutes.",
@@ -23,6 +24,7 @@ const otpLimiter = rateLimit({
   max: 10, // Limit each IP to 10 OTP send requests per 15 minutes
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { trustProxy: false },
   message: {
     success: false,
     error: "Too many OTP requests. Please wait before requesting another OTP.",

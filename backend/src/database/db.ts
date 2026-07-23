@@ -53,12 +53,19 @@ export function ensureDbExists(): void {
     }
     if (!fs.existsSync(dbFile)) {
       // Seed initial data if available in project
-      const seedFile = path.join(process.cwd(), "data/smart_bharat_db.json");
+      const seedCandidates = [
+        path.join(process.cwd(), "data/smart_bharat_db.json"),
+        path.join(__dirname, "../../../data/smart_bharat_db.json"),
+        path.join(__dirname, "../../data/smart_bharat_db.json"),
+      ];
       let seedContent = JSON.stringify(initialSchema(), null, 2);
-      if (fs.existsSync(seedFile)) {
-        try {
-          seedContent = fs.readFileSync(seedFile, "utf-8");
-        } catch (_) {}
+      for (const candidate of seedCandidates) {
+        if (fs.existsSync(candidate)) {
+          try {
+            seedContent = fs.readFileSync(candidate, "utf-8");
+            break;
+          } catch (_) {}
+        }
       }
       fs.writeFileSync(dbFile, seedContent, "utf-8");
     }

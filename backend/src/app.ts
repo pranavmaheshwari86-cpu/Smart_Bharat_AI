@@ -8,6 +8,9 @@ import { config } from "./config";
 
 const app = express();
 
+// Enable trust proxy for Vercel reverse proxy environment
+app.set("trust proxy", 1);
+
 // Dynamic CORS origin — in dev, allow any localhost port so Next.js hot-reload port changes never break login
 const corsOrigin =
   config.nodeEnv === "production"
