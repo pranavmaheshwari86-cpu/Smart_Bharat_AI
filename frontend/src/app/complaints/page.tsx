@@ -444,22 +444,74 @@ void main() {
       <main className="pt-[100px] pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-12 lg:gap-16">
         {/* Hero Section */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col gap-6 animate-fade-in-up">
+          <div className="flex flex-col gap-6 animate-fade-in-up py-4">
+            {/* Top Category Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold w-fit shadow-sm">
+              <span className="material-symbols-outlined text-sm">auto_awesome</span>
+              Smart Bharat AI Civic Portal 2.0
+            </div>
 
-            <h1 className="font-display-lg text-display-lg text-on-surface">
-              Report a <br/> <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text italic pr-2">Civic Issue</span>
+            <h1 className="font-display-lg text-display-lg text-on-surface leading-tight">
+              Report a <br/> <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text italic pr-2 font-bold">Civic Issue</span>
             </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[600px]">
-              Describe your issue naturally. Our AI engine instantly routes it to the correct department, predicts resolution time, and tracks progress securely.
+
+            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[600px] font-medium leading-relaxed">
+              Describe your issue naturally in English or Hindi. Our AI engine automatically extracts geolocation, routes your request to Jal Board, PWD, or Power Corp, and tracks real-time status.
             </p>
-            <div className="flex gap-4 mt-4">
-              <div className="flex items-center gap-2 bg-surface-container-low px-4 py-3 rounded-xl border border-surface-variant">
-                <span className="material-symbols-outlined text-secondary fill">verified_user</span>
-                <span className="font-label-sm text-label-sm text-on-surface">Secure</span>
+
+            {/* Quick Action CTAs */}
+            <div className="flex flex-wrap items-center gap-4 mt-2">
+              <button
+                onClick={() => {
+                  const el = document.getElementById("category-section");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="bg-primary text-white px-8 py-4 rounded-2xl font-bold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:scale-105 transition-all flex items-center gap-3"
+              >
+                File New Complaint
+                <span className="material-symbols-outlined text-xl">arrow_downward</span>
+              </button>
+              <button
+                onClick={() => {
+                  const el = document.getElementById("category-section");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="bg-white/80 backdrop-blur-md text-on-surface px-7 py-4 rounded-2xl font-bold text-base border border-outline-variant/40 hover:bg-white hover:border-primary/40 transition-all flex items-center gap-2 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-xl text-primary">search</span>
+                Track Status
+              </button>
+            </div>
+
+            {/* AI Live Stats Row */}
+            <div className="grid grid-cols-3 gap-3 mt-3 pt-4 border-t border-outline-variant/20">
+              <div className="bg-white/60 backdrop-blur-md p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col">
+                <span className="text-xl font-extrabold text-primary">99.4%</span>
+                <span className="text-[11px] font-medium text-on-surface-variant">AI Route Accuracy</span>
               </div>
-              <div className="flex items-center gap-2 bg-surface-container-low px-4 py-3 rounded-xl border border-surface-variant">
-                <span className="material-symbols-outlined text-primary fill">bolt</span>
-                <span className="font-label-sm text-label-sm text-on-surface">Fast Routing</span>
+              <div className="bg-white/60 backdrop-blur-md p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col">
+                <span className="text-xl font-extrabold text-secondary">&lt; 12h</span>
+                <span className="text-[11px] font-medium text-on-surface-variant font-sans">Avg Dispatch</span>
+              </div>
+              <div className="bg-white/60 backdrop-blur-md p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col">
+                <span className="text-xl font-extrabold text-tertiary">50,000+</span>
+                <span className="text-[11px] font-medium text-on-surface-variant">Issues Solved</span>
+              </div>
+            </div>
+
+            {/* Feature Pills */}
+            <div className="flex flex-wrap gap-2.5 mt-1">
+              <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/80 text-xs font-semibold text-on-surface shadow-xs">
+                <span className="material-symbols-outlined text-secondary text-base fill">verified_user</span>
+                Encrypted & Secure
+              </div>
+              <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/80 text-xs font-semibold text-on-surface shadow-xs">
+                <span className="material-symbols-outlined text-primary text-base fill">bolt</span>
+                Instant Department Dispatch
+              </div>
+              <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/80 text-xs font-semibold text-on-surface shadow-xs">
+                <span className="material-symbols-outlined text-green-600 text-base">my_location</span>
+                GPS Auto-Tagging
               </div>
             </div>
           </div>
@@ -469,7 +521,7 @@ void main() {
         </section>
 
         {/* Category Selection */}
-        <section className="flex flex-col gap-8 animate-fade-in-up delay-200 pb-20">
+        <section id="category-section" className="flex flex-col gap-8 animate-fade-in-up delay-200 pb-20 scroll-mt-24">
           <div className="flex items-baseline justify-between">
             <h2 className="font-headline-md text-headline-md text-on-surface">Select Category</h2>
             <button  className="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1">
