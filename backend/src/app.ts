@@ -57,7 +57,16 @@ app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(cookieParser());
 
-// Health Check Endpoint
+// Health & Root Check Endpoints
+app.get("/", (req, res) => {
+  res.status(200).json({
+    service: "Smart Bharat AI Backend API",
+    status: "ONLINE",
+    health: "/health",
+    api: "/api",
+  });
+});
+
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "UP", timestamp: new Date().toISOString() });
 });

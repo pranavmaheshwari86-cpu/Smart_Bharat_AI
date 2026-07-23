@@ -19,16 +19,16 @@ function getDbFilePath(): { dbDir: string; dbFile: string } {
     process.env.AWS_LAMBDA_FUNCTION_NAME !== undefined ||
     process.env.NODE_ENV === "production";
 
+  if (isServerless) {
+    const tmpDir = os.tmpdir();
+    return { dbDir: tmpDir, dbFile: path.join(tmpDir, "smart_bharat_db.json") };
+  }
+
   if (process.env.DATABASE_PATH) {
     const fullPath = path.isAbsolute(process.env.DATABASE_PATH)
       ? process.env.DATABASE_PATH
       : path.join(process.cwd(), process.env.DATABASE_PATH);
     return { dbDir: path.dirname(fullPath), dbFile: fullPath };
-  }
-
-  if (isServerless) {
-    const tmpDir = os.tmpdir();
-    return { dbDir: tmpDir, dbFile: path.join(tmpDir, "smart_bharat_db.json") };
   }
 
   const localDir = path.join(__dirname, "../../../data");
