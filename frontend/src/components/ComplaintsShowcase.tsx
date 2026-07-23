@@ -37,12 +37,12 @@ const CIVIC_SLIDES = [
     alt: "Garbage overflow sanitation complaint",
   },
   {
-    id: "routing",
-    title: "AI Geolocation & Issue Routing",
-    department: "Smart Bharat AI Engine",
-    estTime: "Realtime",
-    src: "/showcase/map-routing.jpg",
-    alt: "Smart Bharat AI map routing",
+    id: "waste-management",
+    title: "Municipal Waste & Collection",
+    department: "Clean Bharat Sanitation",
+    estTime: "Est. 18h",
+    src: "/showcase/garbage-truck.jpg",
+    alt: "Municipal garbage collection dispatch",
   },
 ];
 

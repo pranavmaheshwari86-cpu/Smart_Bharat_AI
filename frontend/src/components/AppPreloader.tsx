@@ -7,7 +7,7 @@ const PRELOAD_IMAGES = [
   "/showcase/water-leakage.png",
   "/showcase/streetlight-repair.png",
   "/showcase/garbage-overflow.png",
-  "/showcase/map-routing.jpg",
+  "/showcase/garbage-truck.jpg",
 ];
 
 export function AppPreloader() {
