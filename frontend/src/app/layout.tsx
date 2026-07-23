@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/context/AuthContext";
 import { RouteGuard } from "@/components/RouteGuard";
 import { ClientShells } from "@/components/ClientShells";
+import { AppPreloader } from "@/components/AppPreloader";
 import dynamic from "next/dynamic";
 
 // ─── next/font: self-hosted, zero layout shift, no external CDN blocking ──────
@@ -84,7 +85,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Priority 1: Instant Dashboard Hero Video Preload */}
         <link rel="preload" href="/videos/hero-video.mp4" as="video" type="video/mp4" />
+
+        {/* Priority 2: Instant Background Image Preload */}
+        <link rel="preload" href="/showcase/pothole-repair.png" as="image" />
+        <link rel="preload" href="/showcase/water-leakage.png" as="image" />
+        <link rel="preload" href="/showcase/streetlight-repair.png" as="image" />
+        <link rel="preload" href="/showcase/garbage-overflow.png" as="image" />
+        <link rel="preload" href="/showcase/map-routing.jpg" as="image" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
@@ -100,6 +110,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning className="min-h-[100dvh] bg-background text-foreground font-sans overflow-x-hidden">
         <AuthProvider>
+          <AppPreloader />
           <RouteGuard>
             <Navbar />
             <main>{children}</main>
