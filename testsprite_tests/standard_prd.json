@@ -1,0 +1,73 @@
+{
+  "name": "Smart Bharat AI",
+  "version": "2.0.0",
+  "overview": "Next-Gen AI-powered Citizen Platform for discovering government schemes, filing civic complaints, managing foundational IDs, and receiving 24/7 policy assistance.",
+  "tech_stack": {
+    "frontend": "Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion, WebGL Shaders",
+    "backend": "Node.js, Express, TypeScript, JWT Auth, REST APIs",
+    "shared": "@smart-bharat/shared"
+  },
+  "modules": [
+    {
+      "id": "dashboard",
+      "name": "Dashboard & Hero Showcase",
+      "requirements": [
+        "Render interactive 3D hero video on the right column of the landing page.",
+        "Display quick trust metrics, service search bar, and direct navigation links.",
+        "Ensure instant initial load with non-blocking preloading."
+      ]
+    },
+    {
+      "id": "schemes",
+      "name": "Government Schemes Discovery Engine",
+      "requirements": [
+        "Multi-word real-time search across scheme names, descriptions, eligibility, and benefits.",
+        "Centered backdrop-blurred category modal drawer featuring 144+ scheme categories.",
+        "Smooth scroll to search results upon query submission or category selection.",
+        "Support native Web Speech API for voice search."
+      ]
+    },
+    {
+      "id": "ids",
+      "name": "Foundational Government IDs Portal",
+      "requirements": [
+        "Comprehensive guide and wizard for Aadhaar, PAN, Voter ID, Passport, Driving License, Ration Card.",
+        "Pre-fill capabilities and interactive field validation for application submission."
+      ]
+    },
+    {
+      "id": "complaints",
+      "name": "Civic Complaints & Issue Auto-Routing",
+      "requirements": [
+        "5-slide auto-rotating showcase displaying exclusively real civic issue photos.",
+        "Remove outer frame platform container to maximize image canvas size.",
+        "Category selection grid for Roads, Water, Electricity, Drainage, Sanitation, Healthcare, etc.",
+        "AI auto-routing to PWD, Jal Board, and Power Corp with resolution time estimation."
+      ]
+    },
+    {
+      "id": "assistant",
+      "name": "24/7 AI Policy Assistant",
+      "requirements": [
+        "Conversational AI interface for citizen queries, scheme recommendations, and policy guidance.",
+        "Voice input support and suggested query chips."
+      ]
+    },
+    {
+      "id": "credentials",
+      "name": "Verified Credential Vault",
+      "requirements": [
+        "Digital wallet for storing verified document numbers and tracking application status."
+      ]
+    }
+  ],
+  "security_requirements": [
+    "JWT token authentication on protected endpoints.",
+    "Input sanitization against XSS, SQL, and NoSQL injections.",
+    "CORS headers and security middleware enforcement."
+  ],
+  "performance_requirements": [
+    "Sub-second initial page load and route transitions.",
+    "0ms blocking on main thread during background asset caching."
+  ]
+}

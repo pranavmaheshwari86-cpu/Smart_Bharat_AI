@@ -1,0 +1,17 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "Smart_Bharat_AI",
+    "projectPath": "c:\\Users\\Pranav\\Desktop\\Smart Bharat AI",
+    "testIds": [],
+    "additionalInstruction": "Comprehensive enterprise QA audit covering frontend, backend, security, APIs, performance, accessibility, responsiveness, edge cases, input validation, and routing.",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-7_BZ1xQtlxSrN5MtPriMqKkg7Lw3vepqlPypzaBP0VB94oOPQGGOBlSHD0ZkjmYO3ujc-KDxVw-wK4bnfVzpg7fhSy8Nn2NdSkhgpehOwqO_j2OfA_WwOiBTSm6On7RjDjU"
+    }
+  },
+  "serverPort": 52940
+}

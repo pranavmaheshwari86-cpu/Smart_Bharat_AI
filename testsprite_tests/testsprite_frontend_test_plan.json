@@ -1,0 +1,202 @@
+[
+  {
+    "id": "TC-FE-001",
+    "title": "Dashboard Hero Video & Header Navigation",
+    "description": "Verify Dashboard page loads instantly with 3D hero video playing, navbar items active, and system metrics visible.",
+    "path": "/",
+    "category": "Frontend UI",
+    "priority": "High",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Navigate to /",
+        "expected": "Dashboard hero video renders and plays cleanly on the right column."
+      },
+      {
+        "step": 2,
+        "action": "Inspect navigation header bar",
+        "expected": "All nav links (Schemes, Foundational IDs, Complaints, AI Assistant, Credentials) are present and active."
+      }
+    ]
+  },
+  {
+    "id": "TC-FE-002",
+    "title": "Government Schemes Search & Category Modal",
+    "description": "Verify schemes page multi-word search, clear filter button, and 144+ category modal drawer without edge clipping.",
+    "path": "/schemes",
+    "category": "Frontend UI",
+    "priority": "High",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Navigate to /schemes",
+        "expected": "Search input and category pills render properly."
+      },
+      {
+        "step": 2,
+        "action": "Type query 'Vidya Lakshmi' into search bar and press Enter",
+        "expected": "Page scrolls smoothly to results and filters PM Vidya Lakshmi scheme."
+      },
+      {
+        "step": 3,
+        "action": "Click 'Other Schemes' category button",
+        "expected": "Centered backdrop-blurred Scheme Categories Modal opens displaying 144+ scheme categories."
+      }
+    ]
+  },
+  {
+    "id": "TC-FE-003",
+    "title": "Scheme Detail Page & Application Process",
+    "description": "Verify scheme detail page for PM Vidya Lakshmi with eligibility rules, required documents, and official portal link.",
+    "path": "/schemes/pm-vidya-lakshmi",
+    "category": "Frontend UI",
+    "priority": "Medium",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Navigate to /schemes/pm-vidya-lakshmi",
+        "expected": "Scheme title, financial benefits, eligibility criteria, and required documents render."
+      },
+      {
+        "step": 2,
+        "action": "Click 'Apply on Official Portal' CTA",
+        "expected": "External link opens official government application site."
+      }
+    ]
+  },
+  {
+    "id": "TC-FE-004",
+    "title": "Foundational Government IDs Portal & Wizard",
+    "description": "Verify Foundational IDs portal listing Aadhaar, PAN, Voter ID, Passport, Driving License, Ration Card and detail form navigation.",
+    "path": "/ids",
+    "category": "Frontend UI",
+    "priority": "High",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Navigate to /ids",
+        "expected": "All 6 identity cards render with descriptions and action buttons."
+      },
+      {
+        "step": 2,
+        "action": "Click on 'Aadhaar Card' card",
+        "expected": "Navigates to /ids/aadhaar-card with application field wizard."
+      }
+    ]
+  },
+  {
+    "id": "TC-FE-005",
+    "title": "Civic Complaints Showcase & Category Grid",
+    "description": "Verify complaints page 5-slide auto-rotating civic issue image carousel (no orb graphic), category quick selection grid, and issue form.",
+    "path": "/complaints",
+    "category": "Frontend UI",
+    "priority": "High",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Navigate to /complaints",
+        "expected": "Hero section renders CTAs, 3 live AI counter stats, and 5-slide civic carousel with zero 3D orb graphics."
+      },
+      {
+        "step": 2,
+        "action": "Select 'Roads & Infrastructure' category button",
+        "expected": "Scrolls down to complaint submission form with category pre-selected."
+      }
+    ]
+  },
+  {
+    "id": "TC-FE-006",
+    "title": "24/7 AI Policy Assistant Conversational Interface",
+    "description": "Verify AI Policy Assistant page with prompt input, suggested policy questions, and instant response streaming.",
+    "path": "/assistant",
+    "category": "Frontend UI",
+    "priority": "High",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Navigate to /assistant",
+        "expected": "AI assistant chat view opens with welcome message and suggestion chips."
+      },
+      {
+        "step": 2,
+        "action": "Submit query 'How do I apply for PM Awas Yojana?'",
+        "expected": "AI streams step-by-step policy response."
+      }
+    ]
+  },
+  {
+    "id": "TC-FE-007",
+    "title": "User Credential Vault & Digital Wallet",
+    "description": "Verify credentials page digital wallet displaying verified government document numbers, status tracking, and export features.",
+    "path": "/credentials",
+    "category": "Frontend UI",
+    "priority": "Medium",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Navigate to /credentials",
+        "expected": "Displays document wallet cards for Aadhaar, PAN, Ration Card."
+      }
+    ]
+  },
+  {
+    "id": "TC-FE-008",
+    "title": "Mobile Responsiveness & Viewport Scaling",
+    "description": "Verify mobile layout behavior across 375px (iPhone), 768px (Tablet), and 1440px (Desktop) viewports.",
+    "path": "/",
+    "category": "Responsive",
+    "priority": "Medium",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Set viewport to 375px width",
+        "expected": "Mobile hamburger menu and stacked single-column layout render without horizontal scroll overflow."
+      }
+    ]
+  },
+  {
+    "id": "TC-BE-001",
+    "title": "Health Check API Endpoint",
+    "description": "Test GET /api/health endpoint returning 200 OK and uptime metadata.",
+    "path": "/api/health",
+    "category": "Backend API",
+    "priority": "High",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Send HTTP GET request to /api/health",
+        "expected": "Returns HTTP 200 JSON with status: ok and timestamp."
+      }
+    ]
+  },
+  {
+    "id": "TC-BE-002",
+    "title": "User Authentication & JWT Profile Verification",
+    "description": "Test POST /api/auth/login and GET /api/auth/me token authentication.",
+    "path": "/api/auth/me",
+    "category": "Backend Security",
+    "priority": "High",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Send HTTP GET to /api/auth/me without Authorization header",
+        "expected": "Returns HTTP 401 Unauthorized."
+      }
+    ]
+  },
+  {
+    "id": "TC-SEC-001",
+    "title": "Input Sanitization & Injection Prevention",
+    "description": "Test search inputs and forms against XSS payloads and SQL/NoSQL injection attempts.",
+    "path": "/schemes",
+    "category": "Security",
+    "priority": "High",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Submit query '<script>alert(1)</script>' in schemes search bar",
+        "expected": "Input is sanitized or escaped without script execution."
+      }
+    ]
+  }
+]
