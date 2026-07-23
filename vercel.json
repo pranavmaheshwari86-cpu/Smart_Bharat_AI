@@ -2,11 +2,13 @@
   "services": {
     "frontend": {
       "root": "frontend",
-      "framework": "nextjs"
+      "framework": "nextjs",
+      "buildCommand": "cd .. && npm run build:shared && cd frontend && next build"
     },
     "backend": {
       "root": "backend",
-      "entrypoint": "api/index.ts"
+      "entrypoint": "api/index.ts",
+      "buildCommand": "cd .. && npm run build:shared && cd backend && tsc"
     }
   }
 }
