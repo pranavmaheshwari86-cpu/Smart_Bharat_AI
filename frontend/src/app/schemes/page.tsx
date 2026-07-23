@@ -46,6 +46,8 @@ export default function SchemesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [otherOpen, setOtherOpen] = useState(false);
   const [otherSearch, setOtherSearch] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
   const otherRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -54,6 +56,42 @@ export default function SchemesPage() {
   const filteredOther = OTHER_SCHEME_CATEGORIES.filter(c =>
     c.toLowerCase().includes(otherSearch.toLowerCase())
   );
+
+  const handleSearch = () => {
+    if (resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const handleVoiceSearch = () => {
+    if (typeof window !== "undefined" && ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-IN";
+      recognition.continuous = false;
+
+      recognition.onstart = () => setIsListening(true);
+      recognition.onend = () => setIsListening(false);
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0]?.[0]?.transcript;
+        if (transcript) {
+          setSearchQuery(transcript);
+          if (resultsRef.current) {
+            resultsRef.current.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      };
+      recognition.start();
+    } else {
+      alert("Voice search activated. Speak your search query or type directly in the search bar.");
+    }
+  };
 
   const calculateDropdownPos = (rect: DOMRect) => {
     const DROPDOWN_HEIGHT = 320;
