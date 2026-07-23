@@ -6,7 +6,7 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "@smart-bharat/shared": ["../shared/src/index.ts"]
+      "@smart-bharat/shared": ["../shared/dist/index", "../shared/src/index.ts"]
     },
     "strict": true,
     "esModuleInterop": true,

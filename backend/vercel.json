@@ -1,9 +1,16 @@
 {
   "version": 2,
+  "buildCommand": "cd .. && npm run build:shared && cd backend && tsc",
   "builds": [
     {
       "src": "api/index.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "../shared/dist/**",
+          "../data/**"
+        ]
+      }
     }
   ],
   "routes": [
