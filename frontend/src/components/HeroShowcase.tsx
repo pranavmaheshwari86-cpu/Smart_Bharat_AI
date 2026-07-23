@@ -1,33 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function HeroShowcase() {
-  const [isMounted, setIsMounted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay policy fallback
+      });
+    }
   }, []);
-
-  if (!isMounted) {
-    return (
-      <div className="w-full relative flex items-center justify-center">
-        <div className="w-full max-w-[720px] aspect-[3/2] relative rounded-[32px] overflow-hidden border border-white/30 shadow-[0_20px_50px_rgba(0,0,0,0.2)] bg-neutral-950" />
-      </div>
-    );
-  }
 
   return (
     <div className="w-full relative flex items-center justify-center">
-      {/* Video Container Card — Exclusive to Dashboard */}
-      <div className="w-full max-w-[720px] aspect-[3/2] relative rounded-[32px] overflow-hidden border border-white/30 shadow-[0_24px_60px_rgba(0,0,0,0.25)] bg-black group flex items-center justify-center">
+      {/* Video Container Card — Instant Loading */}
+      <div className="w-full max-w-[720px] aspect-[3/2] relative rounded-[32px] overflow-hidden border border-white/30 shadow-[0_24px_60px_rgba(0,74,198,0.2)] bg-gradient-to-br from-blue-950 via-slate-900 to-black group flex items-center justify-center">
+        
+        {/* Instant Ambient Backdrop Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent animate-pulse pointer-events-none" />
+
+        {/* Hero Showcase Video */}
         <video
+          ref={videoRef}
           src="/videos/hero-video.mp4"
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover rounded-[32px] relative z-10 pointer-events-none"
+          preload="auto"
+          onLoadedData={() => setIsLoaded(true)}
+          onCanPlay={() => {
+            setIsLoaded(true);
+            videoRef.current?.play().catch(() => {});
+          }}
+          className={`w-full h-full object-cover rounded-[32px] relative z-10 pointer-events-none transition-opacity duration-500 ${
+            isLoaded ? "opacity-100" : "opacity-90"
+          }`}
         />
       </div>
     </div>
