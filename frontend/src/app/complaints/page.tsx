@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { HeroShowcase } from "@/components/HeroShowcase";
+import { ComplaintsShowcase } from "@/components/ComplaintsShowcase";
 
 const SUBCATEGORIES: Record<string, string[]> = {
   "Roads & Infrastructure": [
@@ -463,8 +463,8 @@ void main() {
               </div>
             </div>
           </div>
-          <div className="relative h-[500px] rounded-3xl overflow-hidden glass animate-fade-in-up delay-100 flex items-center justify-center border border-white/40 shadow-xl">
-            <HeroShowcase />
+          <div className="relative min-h-[460px] rounded-3xl overflow-hidden glass animate-fade-in-up delay-100 flex items-center justify-center border border-white/40 shadow-xl p-2">
+            <ComplaintsShowcase />
           </div>
         </section>
 
