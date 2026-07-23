@@ -463,7 +463,7 @@ void main() {
               </div>
             </div>
           </div>
-          <div className="relative min-h-[460px] rounded-3xl overflow-hidden glass animate-fade-in-up delay-100 flex items-center justify-center border border-white/40 shadow-xl p-2">
+          <div className="w-full h-full relative min-h-[520px] lg:min-h-[560px] flex items-center justify-center animate-fade-in-up delay-100">
             <ComplaintsShowcase />
           </div>
         </section>

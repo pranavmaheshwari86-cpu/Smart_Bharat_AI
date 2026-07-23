@@ -59,8 +59,9 @@ export function ComplaintsShowcase() {
   const activeSlide = CIVIC_SLIDES[currentIndex];
 
   return (
-    <div className="w-full h-full relative flex flex-col items-center justify-center p-2">
-      <div className="w-full max-w-[720px] aspect-[4/3] sm:aspect-[16/10] relative rounded-[32px] overflow-hidden border border-white/40 shadow-2xl bg-neutral-900 group">
+    <div className="w-full h-full min-h-[520px] lg:min-h-[560px] relative flex flex-col items-center justify-center">
+      {/* Expanded Showcase Image Card — Platform Removed */}
+      <div className="w-full h-full min-h-[520px] lg:min-h-[560px] relative rounded-[32px] overflow-hidden border border-white/30 shadow-[0_24px_60px_rgba(0,0,0,0.18)] bg-neutral-950 group">
         {/* Slides */}
         {CIVIC_SLIDES.map((slide, idx) => (
           <div
@@ -82,28 +83,28 @@ export function ComplaintsShowcase() {
         ))}
 
         {/* Slide Info Content */}
-        <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white">
+        <div className="absolute bottom-8 left-8 right-8 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white">
           <div>
-            <span className="text-xs font-semibold px-3 py-1 bg-primary/80 backdrop-blur-md rounded-full text-white inline-block mb-1">
+            <span className="text-xs font-bold tracking-wider px-4 py-1.5 bg-primary/90 backdrop-blur-md rounded-full text-white inline-block mb-2 shadow-sm uppercase">
               {activeSlide.department}
             </span>
-            <h3 className="text-lg sm:text-xl font-bold text-white drop-shadow-md">
+            <h3 className="text-xl sm:text-2xl font-bold text-white drop-shadow-md">
               {activeSlide.title}
             </h3>
           </div>
-          <span className="text-xs font-medium px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-lg text-white border border-white/20 self-start sm:self-auto">
+          <span className="text-xs font-semibold px-4 py-2 bg-white/25 backdrop-blur-md rounded-xl text-white border border-white/30 self-start sm:self-auto shadow-sm">
             {activeSlide.estTime}
           </span>
         </div>
 
         {/* Slide Indicator Dots */}
-        <div className="absolute top-6 right-6 z-20 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+        <div className="absolute top-8 right-8 z-20 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/20">
           {CIVIC_SLIDES.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                idx === currentIndex ? "w-6 bg-primary" : "w-2 bg-white/50 hover:bg-white"
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                idx === currentIndex ? "w-7 bg-primary" : "w-2.5 bg-white/50 hover:bg-white"
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
