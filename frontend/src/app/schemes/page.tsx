@@ -48,67 +48,80 @@ export default function SchemesPage() {
   const [otherSearch, setOtherSearch] = useState("");
   const otherRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0, width: 0 });
 
   const filteredOther = OTHER_SCHEME_CATEGORIES.filter(c =>
     c.toLowerCase().includes(otherSearch.toLowerCase())
   );
 
+  const calculateDropdownPos = (rect: DOMRect) => {
+    const DROPDOWN_HEIGHT = 320;
+    const VIEWPORT_H = window.innerHeight;
+    const spaceBelow = VIEWPORT_H - rect.bottom;
+    const spaceAbove = rect.top;
+
+    let top = rect.bottom + 8;
+
+    // If space below is constrained and space above is available, open ABOVE card
+    if (spaceBelow < DROPDOWN_HEIGHT && spaceAbove > DROPDOWN_HEIGHT) {
+      top = Math.max(16, rect.top - DROPDOWN_HEIGHT - 8);
+    }
+
+    return {
+      top,
+      left: Math.max(16, rect.left),
+      width: Math.max(280, rect.width),
+    };
+  };
+
   const openDropdown = () => {
-    // If already open, just close
     if (otherOpen) {
       setOtherOpen(false);
       setOtherSearch("");
       return;
     }
 
-    const DROPDOWN_HEIGHT = 380; // max dropdown height + gap
-    const VIEWPORT_H = window.innerHeight;
     const cardRect = otherRef.current?.getBoundingClientRect();
-
     if (!cardRect) {
       setOtherOpen(true);
       setOtherSearch("");
       return;
     }
 
+    const DROPDOWN_HEIGHT = 320;
+    const VIEWPORT_H = window.innerHeight;
     const spaceBelow = VIEWPORT_H - cardRect.bottom;
-    const needsScroll = spaceBelow < DROPDOWN_HEIGHT + 24;
+    const spaceAbove = cardRect.top;
 
-    if (needsScroll) {
-      // Scroll page up so the card bottom is ~DROPDOWN_HEIGHT+40px from viewport bottom
-      const scrollBy = DROPDOWN_HEIGHT + 40 - spaceBelow;
-      window.scrollBy({ top: -scrollBy, behavior: "smooth" });
+    // If neither below nor above has enough room, scroll down to bring card into view
+    if (spaceBelow < DROPDOWN_HEIGHT && spaceAbove <= DROPDOWN_HEIGHT) {
+      const scrollNeeded = DROPDOWN_HEIGHT - spaceBelow + 40;
+      window.scrollBy({ top: scrollNeeded, behavior: "smooth" });
 
-      // Wait for scroll animation (~400ms) then position + open
       setTimeout(() => {
         if (otherRef.current) {
           const rect = otherRef.current.getBoundingClientRect();
-          setDropdownPos({
-            top:   rect.bottom + 12,
-            left:  rect.left,
-            width: rect.width,
-          });
+          setDropdownPos(calculateDropdownPos(rect));
         }
         setOtherOpen(true);
         setOtherSearch("");
-      }, 420);
-    } else {
-      // Enough space — open immediately
-      setDropdownPos({
-        top:   cardRect.bottom + 12,
-        left:  cardRect.left,
-        width: cardRect.width,
-      });
-      setOtherOpen(true);
-      setOtherSearch("");
+      }, 300);
+      return;
     }
+
+    setDropdownPos(calculateDropdownPos(cardRect));
+    setOtherOpen(true);
+    setOtherSearch("");
   };
 
-
+  // Close dropdown on click outside both card AND dropdown container
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (otherRef.current && !otherRef.current.contains(e.target as Node)) {
+      if (
+        otherRef.current && !otherRef.current.contains(e.target as Node) &&
+        dropdownRef.current && !dropdownRef.current.contains(e.target as Node)
+      ) {
         setOtherOpen(false);
         setOtherSearch("");
       }
@@ -117,13 +130,13 @@ export default function SchemesPage() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Reposition on scroll / resize
+  // Dynamically reposition on scroll / window resize
   useEffect(() => {
     if (!otherOpen) return;
     const reposition = () => {
       if (otherRef.current) {
         const rect = otherRef.current.getBoundingClientRect();
-        setDropdownPos(prev => ({ ...prev, top: rect.bottom + 12, left: rect.left, width: rect.width }));
+        setDropdownPos(calculateDropdownPos(rect));
       }
     };
     window.addEventListener("scroll", reposition, true);
@@ -414,6 +427,7 @@ void main() {
                 {/* Dropdown — fixed position so it escapes stacking context / footer */}
                 {otherOpen && typeof window !== "undefined" && (
                   <div
+                    ref={dropdownRef}
                     style={{
                       position: "fixed",
                       top: dropdownPos.top,
@@ -421,7 +435,7 @@ void main() {
                       width: dropdownPos.width,
                       zIndex: 9999,
                     }}
-                    className="bg-white/98 backdrop-blur-xl rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-gray-100 overflow-hidden"
+                    className="bg-white/98 backdrop-blur-xl rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] border border-gray-200 overflow-hidden animate-fade-in"
                   >
                     {/* Header */}
                     <div className="px-4 pt-4 pb-3 border-b border-gray-100">
