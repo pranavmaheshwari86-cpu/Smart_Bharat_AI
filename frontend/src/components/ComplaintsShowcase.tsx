@@ -59,9 +59,9 @@ export function ComplaintsShowcase() {
   const activeSlide = CIVIC_SLIDES[currentIndex];
 
   return (
-    <div className="w-full h-full min-h-[520px] lg:min-h-[560px] relative flex flex-col items-center justify-center">
-      {/* Expanded Showcase Image Card — Platform Removed */}
-      <div className="w-full h-full min-h-[520px] lg:min-h-[560px] relative rounded-[32px] overflow-hidden border border-white/30 shadow-[0_24px_60px_rgba(0,0,0,0.18)] bg-neutral-950 group">
+    <div className="w-full h-full relative flex flex-col items-center justify-center">
+      {/* Expanded Landscape Showcase Image Card */}
+      <div className="w-full h-full aspect-[16/10] sm:aspect-[16/9] min-h-[340px] max-h-[440px] relative rounded-[32px] overflow-hidden border border-white/30 shadow-[0_24px_60px_rgba(0,0,0,0.18)] bg-neutral-950 group">
         {/* Slides */}
         {CIVIC_SLIDES.map((slide, idx) => (
           <div

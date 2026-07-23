@@ -445,12 +445,6 @@ void main() {
         {/* Hero Section */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-6 animate-fade-in-up py-4">
-            {/* Top Category Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold w-fit shadow-sm">
-              <span className="material-symbols-outlined text-sm">auto_awesome</span>
-              Smart Bharat AI Civic Portal 2.0
-            </div>
-
             <h1 className="font-display-lg text-display-lg text-on-surface leading-tight">
               Report a <br/> <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text italic pr-2 font-bold">Civic Issue</span>
             </h1>
@@ -515,7 +509,7 @@ void main() {
               </div>
             </div>
           </div>
-          <div className="w-full h-full relative min-h-[520px] lg:min-h-[560px] flex items-center justify-center animate-fade-in-up delay-100">
+          <div className="w-full relative aspect-[16/10] sm:aspect-[16/9] min-h-[340px] max-h-[440px] flex items-center justify-center animate-fade-in-up delay-100">
             <ComplaintsShowcase />
           </div>
         </section>
