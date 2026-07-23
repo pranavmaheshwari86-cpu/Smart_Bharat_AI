@@ -26,7 +26,7 @@
   },
   {
     "path": ".env.example",
-    "size": 2165,
+    "size": 2406,
     "type": "module"
   },
   {
@@ -36,12 +36,17 @@
   },
   {
     "path": ".gitignore",
-    "size": 384,
+    "size": 390,
     "type": "module"
   },
   {
     "path": "backend/.env",
     "size": 359,
+    "type": "module"
+  },
+  {
+    "path": "backend/api/index.ts",
+    "size": 111,
     "type": "module"
   },
   {
@@ -51,7 +56,7 @@
   },
   {
     "path": "frontend/.env",
-    "size": 1774,
+    "size": 1923,
     "type": "module"
   },
   {
@@ -61,7 +66,7 @@
   },
   {
     "path": "frontend/eslint.config.mjs",
-    "size": 468,
+    "size": 465,
     "type": "module"
   },
   {
@@ -131,12 +136,12 @@
   },
   {
     "path": "frontend/src/components/Hero.tsx",
-    "size": 11620,
+    "size": 11195,
     "type": "component"
   },
   {
     "path": "frontend/src/components/HeroShowcase.tsx",
-    "size": 5141,
+    "size": 1154,
     "type": "component"
   },
   {
@@ -160,18 +165,8 @@
     "type": "component"
   },
   {
-    "path": "frontend/src/components/ui/button.tsx",
-    "size": 2856,
-    "type": "component"
-  },
-  {
     "path": "frontend/src/components/ui/card.tsx",
     "size": 1793,
-    "type": "component"
-  },
-  {
-    "path": "frontend/src/components/ui/input.tsx",
-    "size": 886,
     "type": "component"
   },
   {
@@ -180,19 +175,14 @@
     "type": "component"
   },
   {
-    "path": "frontend/src/components/ui/label.tsx",
-    "size": 521,
-    "type": "component"
-  },
-  {
-    "path": "frontend/src/components/ui/splite.tsx",
-    "size": 540,
-    "type": "component"
-  },
-  {
     "path": "frontend/src/context/AuthContext.tsx",
     "size": 10507,
     "type": "context"
+  },
+  {
+    "path": "frontend/src/lib/ai/orchestrator.ts",
+    "size": 2697,
+    "type": "util"
   },
   {
     "path": "frontend/src/lib/api/auth.api.ts",
@@ -206,12 +196,17 @@
   },
   {
     "path": "frontend/src/lib/data.ts",
-    "size": 51829,
+    "size": 71596,
     "type": "util"
   },
   {
     "path": "frontend/src/lib/knowledge.ts",
-    "size": 12730,
+    "size": 17963,
+    "type": "util"
+  },
+  {
+    "path": "frontend/src/lib/useChatHistory.ts",
+    "size": 5591,
     "type": "util"
   },
   {
@@ -221,7 +216,7 @@
   },
   {
     "path": "frontend/tsconfig.tsbuildinfo",
-    "size": 155114,
+    "size": 158368,
     "type": "module"
   },
   {

@@ -1,5 +1,11 @@
 [
   {
+    "source": "backend/api/index.ts",
+    "target": "backend/src/app.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
     "source": "backend/src/app.ts",
     "target": "backend/src/routes/index.ts",
     "type": "imports",
@@ -224,6 +230,114 @@
   {
     "source": "frontend/src/components/SpotlightCard.tsx",
     "target": "frontend/src/components/SpotlightCard.css",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/classifier.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/memory.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/modelRouter.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/security.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/classifier.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/memory.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/rag.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/tools.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/promptBuilder.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/modelRouter.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/validator.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/orchestrator.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/promptBuilder.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/rag.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/security.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/tools.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/validator.ts",
+    "target": "frontend/src/lib/ai/types.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "frontend/src/lib/ai/validator.ts",
+    "target": "frontend/src/lib/ai/security.ts",
     "type": "imports",
     "weight": 1
   },

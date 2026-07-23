@@ -9,6 +9,8 @@ graph TD
   _gitignore[".gitignore (module)"]
   AGENTS_md["AGENTS (document)"]
   backend__env[".env (module)"]
+  backend_api_index_ts["index (module)"]
+  backend_package_lock_json["package-lock (module)"]
   backend_package_json["package (module)"]
   backend_src_app_ts["app (module)"]
   backend_src_config_index_ts["index (config)"]
@@ -27,6 +29,7 @@ graph TD
   backend_src_utils_jwt_util_ts["jwt.util (util)"]
   backend_src_utils_otp_util_ts["otp.util (util)"]
   backend_tsconfig_json["tsconfig (module)"]
+  backend_vercel_json["vercel (module)"]
   data_smart_bharat_db_json["smart_bharat_db (module)"]
   DESIGN_md["DESIGN (document)"]
   docs_firebase_auth_md["firebase-auth (document)"]
@@ -44,7 +47,7 @@ graph TD
   frontend_src_app_admin_page_tsx["page (page)"]
   frontend_src_app_ai_loading_tsx["loading (module)"]
   frontend_src_app_ai_page_tsx["page (page)"]
-  frontend_src_app_api_chat_route_ts["route (module)"]
+  frontend_src_app_api_assistant_route_ts["route (module)"]
   frontend_src_app_assistant_loading_tsx["loading (module)"]
   frontend_src_app_assistant_page_tsx["page (page)"]
   frontend_src_app_complaints_loading_tsx["loading (module)"]
@@ -60,10 +63,12 @@ graph TD
   frontend_src_app_id__id__page_tsx["page (page)"]
   frontend_src_app_layout_tsx["layout (page)"]
   frontend_src_app_login_page_tsx["page (page)"]
+  frontend_src_app_manifest_ts["manifest (module)"]
   frontend_src_app_page_tsx["page (page)"]
   frontend_src_app_privacy_page_tsx["page (page)"]
   frontend_src_app_profile_page_tsx["page (page)"]
   frontend_src_app_reset_password_page_tsx["page (page)"]
+  frontend_src_app_robots_ts["robots (module)"]
   frontend_src_app_schemes_loading_tsx["loading (module)"]
   frontend_src_app_schemes_page_tsx["page (page)"]
   frontend_src_app_schemes_track_page_tsx["page (page)"]
@@ -71,6 +76,7 @@ graph TD
   frontend_src_app_schemes__id__SchemeDetailsClient_tsx["SchemeDetailsClient (module)"]
   frontend_src_app_security_page_tsx["page (page)"]
   frontend_src_app_signup_page_tsx["page (page)"]
+  frontend_src_app_sitemap_ts["sitemap (module)"]
   frontend_src_app_standards_page_tsx["page (page)"]
   frontend_src_app_terms_page_tsx["page (page)"]
   frontend_src_app_track_page_tsx["page (page)"]
@@ -95,19 +101,26 @@ graph TD
   frontend_src_components_SmartUpload_tsx["SmartUpload (component)"]
   frontend_src_components_SpotlightCard_css["SpotlightCard (component)"]
   frontend_src_components_SpotlightCard_tsx["SpotlightCard (component)"]
-  frontend_src_components_ui_button_tsx["button (component)"]
   frontend_src_components_ui_card_tsx["card (component)"]
-  frontend_src_components_ui_input_tsx["input (component)"]
   frontend_src_components_ui_interactive_3d_robot_tsx["interactive-3d-robot (component)"]
-  frontend_src_components_ui_label_tsx["label (component)"]
-  frontend_src_components_ui_splite_tsx["splite (component)"]
   frontend_src_context_AuthContext_tsx["AuthContext (context)"]
+  frontend_src_lib_ai_classifier_ts["classifier (util)"]
+  frontend_src_lib_ai_memory_ts["memory (util)"]
+  frontend_src_lib_ai_modelRouter_ts["modelRouter (util)"]
+  frontend_src_lib_ai_orchestrator_ts["orchestrator (util)"]
+  frontend_src_lib_ai_promptBuilder_ts["promptBuilder (util)"]
+  frontend_src_lib_ai_rag_ts["rag (util)"]
+  frontend_src_lib_ai_security_ts["security (util)"]
+  frontend_src_lib_ai_tools_ts["tools (util)"]
+  frontend_src_lib_ai_types_ts["types (type)"]
+  frontend_src_lib_ai_validator_ts["validator (util)"]
   frontend_src_lib_api_auth_api_ts["auth.api (util)"]
   frontend_src_lib_api_client_ts["client (util)"]
   frontend_src_lib_auth_ts["auth (util)"]
   frontend_src_lib_data_ts["data (util)"]
   frontend_src_lib_firebase_ts["firebase (util)"]
   frontend_src_lib_knowledge_ts["knowledge (util)"]
+  frontend_src_lib_useChatHistory_ts["useChatHistory (util)"]
   frontend_src_lib_utils_ts["utils (util)"]
   frontend_tsconfig_json["tsconfig (module)"]
   frontend_tsconfig_tsbuildinfo["tsconfig (module)"]
@@ -140,6 +153,8 @@ graph TD
   shared_src_types_auth_ts["auth (type)"]
   shared_src_validations_password_ts["password (validation)"]
   shared_tsconfig_json["tsconfig (module)"]
+  vercel_json["vercel (module)"]
+  backend_api_index_ts --> backend_src_app_ts
   backend_src_app_ts --> backend_src_routes_index_ts
   backend_src_app_ts --> backend_src_config_index_ts
   backend_src_controllers_auth_controller_ts --> backend_src_services_auth_service_ts
@@ -178,5 +193,23 @@ graph TD
   frontend_src_components_DynamicForm_tsx --> frontend_src_components_SmartUpload_tsx
   frontend_src_components_SmartUpload_tsx --> frontend_src_components_DocumentSelector_tsx
   frontend_src_components_SpotlightCard_tsx --> frontend_src_components_SpotlightCard_css
+  frontend_src_lib_ai_classifier_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_memory_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_modelRouter_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_security_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_classifier_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_memory_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_rag_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_tools_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_promptBuilder_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_modelRouter_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_validator_ts
+  frontend_src_lib_ai_orchestrator_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_promptBuilder_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_rag_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_security_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_tools_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_validator_ts --> frontend_src_lib_ai_types_ts
+  frontend_src_lib_ai_validator_ts --> frontend_src_lib_ai_security_ts
   frontend_src_lib_api_auth_api_ts --> frontend_src_lib_api_client_ts
   frontend_src_lib_auth_ts --> frontend_src_lib_firebase_ts

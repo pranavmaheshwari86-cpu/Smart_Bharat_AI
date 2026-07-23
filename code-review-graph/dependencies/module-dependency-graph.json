@@ -1,6 +1,6 @@
 {
-  "totalModules": 141,
-  "totalDependencies": 40,
+  "totalModules": 155,
+  "totalDependencies": 59,
   "modules": [
     {
       "id": ".code-review-graph/.gitignore",
@@ -73,6 +73,20 @@
       "importedByCount": 0
     },
     {
+      "id": "backend/api/index.ts",
+      "layer": "backend",
+      "type": "module",
+      "importsCount": 1,
+      "importedByCount": 0
+    },
+    {
+      "id": "backend/package-lock.json",
+      "layer": "backend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
       "id": "backend/package.json",
       "layer": "backend",
       "type": "module",
@@ -84,7 +98,7 @@
       "layer": "backend",
       "type": "module",
       "importsCount": 2,
-      "importedByCount": 1
+      "importedByCount": 2
     },
     {
       "id": "backend/src/config/index.ts",
@@ -193,6 +207,13 @@
     },
     {
       "id": "backend/tsconfig.json",
+      "layer": "backend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "backend/vercel.json",
       "layer": "backend",
       "type": "module",
       "importsCount": 0,
@@ -318,7 +339,7 @@
       "importedByCount": 0
     },
     {
-      "id": "frontend/src/app/api/chat/route.ts",
+      "id": "frontend/src/app/api/assistant/route.ts",
       "layer": "frontend",
       "type": "module",
       "importsCount": 0,
@@ -430,6 +451,13 @@
       "importedByCount": 0
     },
     {
+      "id": "frontend/src/app/manifest.ts",
+      "layer": "frontend",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
       "id": "frontend/src/app/page.tsx",
       "layer": "frontend",
       "type": "page",
@@ -454,6 +482,13 @@
       "id": "frontend/src/app/reset-password/page.tsx",
       "layer": "frontend",
       "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/robots.ts",
+      "layer": "frontend",
+      "type": "module",
       "importsCount": 0,
       "importedByCount": 0
     },
@@ -503,6 +538,13 @@
       "id": "frontend/src/app/signup/page.tsx",
       "layer": "frontend",
       "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/app/sitemap.ts",
+      "layer": "frontend",
+      "type": "module",
       "importsCount": 0,
       "importedByCount": 0
     },
@@ -675,21 +717,7 @@
       "importedByCount": 0
     },
     {
-      "id": "frontend/src/components/ui/button.tsx",
-      "layer": "frontend",
-      "type": "component",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
       "id": "frontend/src/components/ui/card.tsx",
-      "layer": "frontend",
-      "type": "component",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
-      "id": "frontend/src/components/ui/input.tsx",
       "layer": "frontend",
       "type": "component",
       "importsCount": 0,
@@ -703,25 +731,81 @@
       "importedByCount": 0
     },
     {
-      "id": "frontend/src/components/ui/label.tsx",
-      "layer": "frontend",
-      "type": "component",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
-      "id": "frontend/src/components/ui/splite.tsx",
-      "layer": "frontend",
-      "type": "component",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
       "id": "frontend/src/context/AuthContext.tsx",
       "layer": "frontend",
       "type": "context",
       "importsCount": 0,
       "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/lib/ai/classifier.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/lib/ai/memory.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/lib/ai/modelRouter.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/lib/ai/orchestrator.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 9,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/lib/ai/promptBuilder.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/lib/ai/rag.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/lib/ai/security.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 2
+    },
+    {
+      "id": "frontend/src/lib/ai/tools.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 1,
+      "importedByCount": 1
+    },
+    {
+      "id": "frontend/src/lib/ai/types.ts",
+      "layer": "frontend",
+      "type": "type",
+      "importsCount": 0,
+      "importedByCount": 9
+    },
+    {
+      "id": "frontend/src/lib/ai/validator.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 2,
+      "importedByCount": 1
     },
     {
       "id": "frontend/src/lib/api/auth.api.ts",
@@ -760,6 +844,13 @@
     },
     {
       "id": "frontend/src/lib/knowledge.ts",
+      "layer": "frontend",
+      "type": "util",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/lib/useChatHistory.ts",
       "layer": "frontend",
       "type": "util",
       "importsCount": 0,
@@ -985,6 +1076,13 @@
     {
       "id": "shared/tsconfig.json",
       "layer": "shared",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "vercel.json",
+      "layer": "root",
       "type": "module",
       "importsCount": 0,
       "importedByCount": 0

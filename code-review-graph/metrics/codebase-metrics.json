@@ -1,11 +1,11 @@
 {
-  "totalAnalyzedFiles": 141,
-  "totalEdges": 40,
-  "frontendNodes": 80,
-  "backendNodes": 19,
+  "totalAnalyzedFiles": 155,
+  "totalEdges": 59,
+  "frontendNodes": 90,
+  "backendNodes": 22,
   "sharedNodes": 5,
   "circularDependencies": 0,
-  "unusedFileCandidates": 48,
+  "unusedFileCandidates": 47,
   "maxModuleSize": 1081344,
-  "highestComplexityScore": 146
+  "highestComplexityScore": 187
 }

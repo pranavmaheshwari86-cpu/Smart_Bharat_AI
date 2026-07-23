@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-23T03:10:02.768Z",
-  "totalFilesAnalyzed": 141,
-  "totalEdges": 40,
+  "generatedAt": "2026-07-23T10:16:57.640Z",
+  "totalFilesAnalyzed": 155,
+  "totalEdges": 59,
   "layers": {
-    "frontend": 80,
-    "backend": 19,
+    "frontend": 90,
+    "backend": 22,
     "shared": 5,
-    "other": 37
+    "other": 38
   },
   "circularDependenciesCount": 0
 }

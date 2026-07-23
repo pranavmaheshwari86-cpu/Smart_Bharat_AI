@@ -33,7 +33,7 @@
       "name": "auth.routes",
       "path": "backend/src/routes/auth.routes.ts",
       "language": "typescript",
-      "size": 1731,
+      "size": 1801,
       "complexity": 3,
       "exports": [
         "router"

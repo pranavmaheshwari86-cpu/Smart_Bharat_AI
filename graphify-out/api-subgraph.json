@@ -1,6 +1,19 @@
 {
   "nodes": [
     {
+      "id": "backend/api/index.ts",
+      "type": "module",
+      "layer": "backend",
+      "name": "index",
+      "path": "backend/api/index.ts",
+      "language": "typescript",
+      "size": 111,
+      "complexity": 1,
+      "exports": [
+        "handler"
+      ]
+    },
+    {
       "id": "backend/src/controllers/auth.controller.ts",
       "type": "controller",
       "layer": "backend",
@@ -20,7 +33,7 @@
       "name": "auth.routes",
       "path": "backend/src/routes/auth.routes.ts",
       "language": "typescript",
-      "size": 1731,
+      "size": 1801,
       "complexity": 3,
       "exports": [
         "router"
@@ -53,14 +66,14 @@
       ]
     },
     {
-      "id": "frontend/src/app/api/chat/route.ts",
+      "id": "frontend/src/app/api/assistant/route.ts",
       "type": "module",
       "layer": "frontend",
       "name": "route",
-      "path": "frontend/src/app/api/chat/route.ts",
+      "path": "frontend/src/app/api/assistant/route.ts",
       "language": "typescript",
-      "size": 5017,
-      "complexity": 29,
+      "size": 1023,
+      "complexity": 4,
       "exports": []
     },
     {

@@ -11,6 +11,8 @@
     <node id=".gitignore" />
     <node id="AGENTS.md" />
     <node id="backend/.env" />
+    <node id="backend/api/index.ts" />
+    <node id="backend/package-lock.json" />
     <node id="backend/package.json" />
     <node id="backend/src/app.ts" />
     <node id="backend/src/config/index.ts" />
@@ -29,6 +31,7 @@
     <node id="backend/src/utils/jwt.util.ts" />
     <node id="backend/src/utils/otp.util.ts" />
     <node id="backend/tsconfig.json" />
+    <node id="backend/vercel.json" />
     <node id="data/smart_bharat_db.json" />
     <node id="DESIGN.md" />
     <node id="docs/firebase-auth.md" />
@@ -46,7 +49,7 @@
     <node id="frontend/src/app/admin/page.tsx" />
     <node id="frontend/src/app/ai/loading.tsx" />
     <node id="frontend/src/app/ai/page.tsx" />
-    <node id="frontend/src/app/api/chat/route.ts" />
+    <node id="frontend/src/app/api/assistant/route.ts" />
     <node id="frontend/src/app/assistant/loading.tsx" />
     <node id="frontend/src/app/assistant/page.tsx" />
     <node id="frontend/src/app/complaints/loading.tsx" />
@@ -62,10 +65,12 @@
     <node id="frontend/src/app/id/[id]/page.tsx" />
     <node id="frontend/src/app/layout.tsx" />
     <node id="frontend/src/app/login/page.tsx" />
+    <node id="frontend/src/app/manifest.ts" />
     <node id="frontend/src/app/page.tsx" />
     <node id="frontend/src/app/privacy/page.tsx" />
     <node id="frontend/src/app/profile/page.tsx" />
     <node id="frontend/src/app/reset-password/page.tsx" />
+    <node id="frontend/src/app/robots.ts" />
     <node id="frontend/src/app/schemes/loading.tsx" />
     <node id="frontend/src/app/schemes/page.tsx" />
     <node id="frontend/src/app/schemes/track/page.tsx" />
@@ -73,6 +78,7 @@
     <node id="frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx" />
     <node id="frontend/src/app/security/page.tsx" />
     <node id="frontend/src/app/signup/page.tsx" />
+    <node id="frontend/src/app/sitemap.ts" />
     <node id="frontend/src/app/standards/page.tsx" />
     <node id="frontend/src/app/terms/page.tsx" />
     <node id="frontend/src/app/track/page.tsx" />
@@ -97,19 +103,26 @@
     <node id="frontend/src/components/SmartUpload.tsx" />
     <node id="frontend/src/components/SpotlightCard.css" />
     <node id="frontend/src/components/SpotlightCard.tsx" />
-    <node id="frontend/src/components/ui/button.tsx" />
     <node id="frontend/src/components/ui/card.tsx" />
-    <node id="frontend/src/components/ui/input.tsx" />
     <node id="frontend/src/components/ui/interactive-3d-robot.tsx" />
-    <node id="frontend/src/components/ui/label.tsx" />
-    <node id="frontend/src/components/ui/splite.tsx" />
     <node id="frontend/src/context/AuthContext.tsx" />
+    <node id="frontend/src/lib/ai/classifier.ts" />
+    <node id="frontend/src/lib/ai/memory.ts" />
+    <node id="frontend/src/lib/ai/modelRouter.ts" />
+    <node id="frontend/src/lib/ai/orchestrator.ts" />
+    <node id="frontend/src/lib/ai/promptBuilder.ts" />
+    <node id="frontend/src/lib/ai/rag.ts" />
+    <node id="frontend/src/lib/ai/security.ts" />
+    <node id="frontend/src/lib/ai/tools.ts" />
+    <node id="frontend/src/lib/ai/types.ts" />
+    <node id="frontend/src/lib/ai/validator.ts" />
     <node id="frontend/src/lib/api/auth.api.ts" />
     <node id="frontend/src/lib/api/client.ts" />
     <node id="frontend/src/lib/auth.ts" />
     <node id="frontend/src/lib/data.ts" />
     <node id="frontend/src/lib/firebase.ts" />
     <node id="frontend/src/lib/knowledge.ts" />
+    <node id="frontend/src/lib/useChatHistory.ts" />
     <node id="frontend/src/lib/utils.ts" />
     <node id="frontend/tsconfig.json" />
     <node id="frontend/tsconfig.tsbuildinfo" />
@@ -142,45 +155,65 @@
     <node id="shared/src/types/auth.ts" />
     <node id="shared/src/validations/password.ts" />
     <node id="shared/tsconfig.json" />
-    <edge id="e0" source="backend/src/app.ts" target="backend/src/routes/index.ts" />
-    <edge id="e1" source="backend/src/app.ts" target="backend/src/config/index.ts" />
-    <edge id="e2" source="backend/src/controllers/auth.controller.ts" target="backend/src/services/auth.service.ts" />
-    <edge id="e3" source="backend/src/controllers/auth.controller.ts" target="backend/src/repositories/user.repository.ts" />
-    <edge id="e4" source="backend/src/controllers/auth.controller.ts" target="backend/src/repositories/session.repository.ts" />
-    <edge id="e5" source="backend/src/controllers/auth.controller.ts" target="backend/src/utils/jwt.util.ts" />
-    <edge id="e6" source="backend/src/database/db.ts" target="shared/src/index.ts" />
-    <edge id="e7" source="backend/src/repositories/otp.repository.ts" target="backend/src/database/db.ts" />
-    <edge id="e8" source="backend/src/repositories/otp.repository.ts" target="shared/src/index.ts" />
-    <edge id="e9" source="backend/src/repositories/password-reset.repository.ts" target="backend/src/database/db.ts" />
-    <edge id="e10" source="backend/src/repositories/password-reset.repository.ts" target="shared/src/index.ts" />
-    <edge id="e11" source="backend/src/repositories/session.repository.ts" target="backend/src/database/db.ts" />
-    <edge id="e12" source="backend/src/repositories/session.repository.ts" target="shared/src/index.ts" />
-    <edge id="e13" source="backend/src/repositories/user.repository.ts" target="backend/src/database/db.ts" />
-    <edge id="e14" source="backend/src/repositories/user.repository.ts" target="shared/src/index.ts" />
-    <edge id="e15" source="backend/src/routes/auth.routes.ts" target="backend/src/controllers/auth.controller.ts" />
-    <edge id="e16" source="backend/src/routes/index.ts" target="backend/src/routes/auth.routes.ts" />
-    <edge id="e17" source="backend/src/routes/index.ts" target="backend/src/routes/govid.routes.ts" />
-    <edge id="e18" source="backend/src/server.ts" target="backend/src/app.ts" />
-    <edge id="e19" source="backend/src/server.ts" target="backend/src/config/index.ts" />
-    <edge id="e20" source="backend/src/server.ts" target="backend/src/database/db.ts" />
-    <edge id="e21" source="backend/src/services/auth.service.ts" target="backend/src/repositories/user.repository.ts" />
-    <edge id="e22" source="backend/src/services/auth.service.ts" target="backend/src/repositories/otp.repository.ts" />
-    <edge id="e23" source="backend/src/services/auth.service.ts" target="backend/src/repositories/session.repository.ts" />
-    <edge id="e24" source="backend/src/services/auth.service.ts" target="backend/src/repositories/password-reset.repository.ts" />
-    <edge id="e25" source="backend/src/services/auth.service.ts" target="backend/src/utils/hash.util.ts" />
-    <edge id="e26" source="backend/src/services/auth.service.ts" target="backend/src/utils/otp.util.ts" />
-    <edge id="e27" source="backend/src/services/auth.service.ts" target="shared/src/index.ts" />
-    <edge id="e28" source="backend/src/services/auth.service.ts" target="backend/src/config/index.ts" />
-    <edge id="e29" source="backend/src/services/auth.service.ts" target="backend/src/utils/jwt.util.ts" />
-    <edge id="e30" source="backend/src/utils/jwt.util.ts" target="backend/src/config/index.ts" />
-    <edge id="e31" source="frontend/src/app/layout.tsx" target="frontend/src/app/globals.css" />
-    <edge id="e32" source="frontend/src/app/schemes/[id]/page.tsx" target="frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx" />
-    <edge id="e33" source="frontend/src/components/auth/CompleteProfileModal.tsx" target="frontend/src/components/auth/OtpInput.tsx" />
-    <edge id="e34" source="frontend/src/components/auth/PasswordStrengthMeter.tsx" target="shared/src/index.ts" />
-    <edge id="e35" source="frontend/src/components/DynamicForm.tsx" target="frontend/src/components/SmartUpload.tsx" />
-    <edge id="e36" source="frontend/src/components/SmartUpload.tsx" target="frontend/src/components/DocumentSelector.tsx" />
-    <edge id="e37" source="frontend/src/components/SpotlightCard.tsx" target="frontend/src/components/SpotlightCard.css" />
-    <edge id="e38" source="frontend/src/lib/api/auth.api.ts" target="frontend/src/lib/api/client.ts" />
-    <edge id="e39" source="frontend/src/lib/auth.ts" target="frontend/src/lib/firebase.ts" />
+    <node id="vercel.json" />
+    <edge id="e0" source="backend/api/index.ts" target="backend/src/app.ts" />
+    <edge id="e1" source="backend/src/app.ts" target="backend/src/routes/index.ts" />
+    <edge id="e2" source="backend/src/app.ts" target="backend/src/config/index.ts" />
+    <edge id="e3" source="backend/src/controllers/auth.controller.ts" target="backend/src/services/auth.service.ts" />
+    <edge id="e4" source="backend/src/controllers/auth.controller.ts" target="backend/src/repositories/user.repository.ts" />
+    <edge id="e5" source="backend/src/controllers/auth.controller.ts" target="backend/src/repositories/session.repository.ts" />
+    <edge id="e6" source="backend/src/controllers/auth.controller.ts" target="backend/src/utils/jwt.util.ts" />
+    <edge id="e7" source="backend/src/database/db.ts" target="shared/src/index.ts" />
+    <edge id="e8" source="backend/src/repositories/otp.repository.ts" target="backend/src/database/db.ts" />
+    <edge id="e9" source="backend/src/repositories/otp.repository.ts" target="shared/src/index.ts" />
+    <edge id="e10" source="backend/src/repositories/password-reset.repository.ts" target="backend/src/database/db.ts" />
+    <edge id="e11" source="backend/src/repositories/password-reset.repository.ts" target="shared/src/index.ts" />
+    <edge id="e12" source="backend/src/repositories/session.repository.ts" target="backend/src/database/db.ts" />
+    <edge id="e13" source="backend/src/repositories/session.repository.ts" target="shared/src/index.ts" />
+    <edge id="e14" source="backend/src/repositories/user.repository.ts" target="backend/src/database/db.ts" />
+    <edge id="e15" source="backend/src/repositories/user.repository.ts" target="shared/src/index.ts" />
+    <edge id="e16" source="backend/src/routes/auth.routes.ts" target="backend/src/controllers/auth.controller.ts" />
+    <edge id="e17" source="backend/src/routes/index.ts" target="backend/src/routes/auth.routes.ts" />
+    <edge id="e18" source="backend/src/routes/index.ts" target="backend/src/routes/govid.routes.ts" />
+    <edge id="e19" source="backend/src/server.ts" target="backend/src/app.ts" />
+    <edge id="e20" source="backend/src/server.ts" target="backend/src/config/index.ts" />
+    <edge id="e21" source="backend/src/server.ts" target="backend/src/database/db.ts" />
+    <edge id="e22" source="backend/src/services/auth.service.ts" target="backend/src/repositories/user.repository.ts" />
+    <edge id="e23" source="backend/src/services/auth.service.ts" target="backend/src/repositories/otp.repository.ts" />
+    <edge id="e24" source="backend/src/services/auth.service.ts" target="backend/src/repositories/session.repository.ts" />
+    <edge id="e25" source="backend/src/services/auth.service.ts" target="backend/src/repositories/password-reset.repository.ts" />
+    <edge id="e26" source="backend/src/services/auth.service.ts" target="backend/src/utils/hash.util.ts" />
+    <edge id="e27" source="backend/src/services/auth.service.ts" target="backend/src/utils/otp.util.ts" />
+    <edge id="e28" source="backend/src/services/auth.service.ts" target="shared/src/index.ts" />
+    <edge id="e29" source="backend/src/services/auth.service.ts" target="backend/src/config/index.ts" />
+    <edge id="e30" source="backend/src/services/auth.service.ts" target="backend/src/utils/jwt.util.ts" />
+    <edge id="e31" source="backend/src/utils/jwt.util.ts" target="backend/src/config/index.ts" />
+    <edge id="e32" source="frontend/src/app/layout.tsx" target="frontend/src/app/globals.css" />
+    <edge id="e33" source="frontend/src/app/schemes/[id]/page.tsx" target="frontend/src/app/schemes/[id]/SchemeDetailsClient.tsx" />
+    <edge id="e34" source="frontend/src/components/auth/CompleteProfileModal.tsx" target="frontend/src/components/auth/OtpInput.tsx" />
+    <edge id="e35" source="frontend/src/components/auth/PasswordStrengthMeter.tsx" target="shared/src/index.ts" />
+    <edge id="e36" source="frontend/src/components/DynamicForm.tsx" target="frontend/src/components/SmartUpload.tsx" />
+    <edge id="e37" source="frontend/src/components/SmartUpload.tsx" target="frontend/src/components/DocumentSelector.tsx" />
+    <edge id="e38" source="frontend/src/components/SpotlightCard.tsx" target="frontend/src/components/SpotlightCard.css" />
+    <edge id="e39" source="frontend/src/lib/ai/classifier.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e40" source="frontend/src/lib/ai/memory.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e41" source="frontend/src/lib/ai/modelRouter.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e42" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/security.ts" />
+    <edge id="e43" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/classifier.ts" />
+    <edge id="e44" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/memory.ts" />
+    <edge id="e45" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/rag.ts" />
+    <edge id="e46" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/tools.ts" />
+    <edge id="e47" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/promptBuilder.ts" />
+    <edge id="e48" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/modelRouter.ts" />
+    <edge id="e49" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/validator.ts" />
+    <edge id="e50" source="frontend/src/lib/ai/orchestrator.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e51" source="frontend/src/lib/ai/promptBuilder.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e52" source="frontend/src/lib/ai/rag.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e53" source="frontend/src/lib/ai/security.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e54" source="frontend/src/lib/ai/tools.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e55" source="frontend/src/lib/ai/validator.ts" target="frontend/src/lib/ai/types.ts" />
+    <edge id="e56" source="frontend/src/lib/ai/validator.ts" target="frontend/src/lib/ai/security.ts" />
+    <edge id="e57" source="frontend/src/lib/api/auth.api.ts" target="frontend/src/lib/api/client.ts" />
+    <edge id="e58" source="frontend/src/lib/auth.ts" target="frontend/src/lib/firebase.ts" />
   </graph>
 </graphml>

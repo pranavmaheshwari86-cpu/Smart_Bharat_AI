@@ -7,8 +7,8 @@
       "name": "db",
       "path": "backend/src/database/db.ts",
       "language": "typescript",
-      "size": 1421,
-      "complexity": 4,
+      "size": 3100,
+      "complexity": 15,
       "exports": [
         "ensureDbExists",
         "readDb",

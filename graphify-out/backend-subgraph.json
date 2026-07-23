@@ -12,13 +12,37 @@
       "exports": []
     },
     {
+      "id": "backend/api/index.ts",
+      "type": "module",
+      "layer": "backend",
+      "name": "index",
+      "path": "backend/api/index.ts",
+      "language": "typescript",
+      "size": 111,
+      "complexity": 1,
+      "exports": [
+        "handler"
+      ]
+    },
+    {
+      "id": "backend/package-lock.json",
+      "type": "module",
+      "layer": "backend",
+      "name": "package-lock",
+      "path": "backend/package-lock.json",
+      "language": "json",
+      "size": 69738,
+      "complexity": 1,
+      "exports": []
+    },
+    {
       "id": "backend/package.json",
       "type": "module",
       "layer": "backend",
       "name": "package",
       "path": "backend/package.json",
       "language": "json",
-      "size": 893,
+      "size": 989,
       "complexity": 1,
       "exports": []
     },
@@ -29,8 +53,8 @@
       "name": "app",
       "path": "backend/src/app.ts",
       "language": "typescript",
-      "size": 2650,
-      "complexity": 9,
+      "size": 2917,
+      "complexity": 10,
       "exports": [
         "app"
       ]
@@ -68,8 +92,8 @@
       "name": "db",
       "path": "backend/src/database/db.ts",
       "language": "typescript",
-      "size": 1421,
-      "complexity": 4,
+      "size": 3100,
+      "complexity": 15,
       "exports": [
         "ensureDbExists",
         "readDb",
@@ -135,7 +159,7 @@
       "name": "auth.routes",
       "path": "backend/src/routes/auth.routes.ts",
       "language": "typescript",
-      "size": 1731,
+      "size": 1801,
       "complexity": 3,
       "exports": [
         "router"
@@ -244,12 +268,29 @@
       "name": "tsconfig",
       "path": "backend/tsconfig.json",
       "language": "json",
-      "size": 337,
+      "size": 373,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "backend/vercel.json",
+      "type": "module",
+      "layer": "backend",
+      "name": "vercel",
+      "path": "backend/vercel.json",
+      "language": "json",
+      "size": 378,
       "complexity": 1,
       "exports": []
     }
   ],
   "edges": [
+    {
+      "source": "backend/api/index.ts",
+      "target": "backend/src/app.ts",
+      "type": "imports",
+      "weight": 1
+    },
     {
       "source": "backend/src/app.ts",
       "target": "backend/src/routes/index.ts",

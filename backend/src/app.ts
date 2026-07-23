@@ -78,7 +78,7 @@ app.get("/health", (req, res) => {
 app.use("/api", routes);
 
 // Global Production Error Handler — never leak stack traces to client
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: any, req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error("Unhandled Backend Error:", err);
 
   const statusCode = err.status || err.statusCode || 500;
