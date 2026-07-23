@@ -476,88 +476,88 @@ void main() {
               View All <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {/* 11 Specific Cards */}
-            <button onClick={() => setSelectedCategory("Roads & Infrastructure")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Roads & Infrastructure")} className="glass-card p-7 md:p-8 rounded-3xl flex flex-col items-start gap-5 text-left spotlight-wrapper group hover:scale-[1.02] transition-all duration-300">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">add_road</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl md:text-4xl">add_road</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Roads & Infrastructure</h3>
-                <p className="text-xs text-on-surface-variant mt-1">PWD Department</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 48h</p>
+                <h3 className="text-lg md:text-xl font-bold text-on-surface">Roads & Infrastructure</h3>
+                <p className="text-sm font-medium text-on-surface-variant mt-1">PWD Department</p>
+                <p className="text-xs font-semibold text-secondary mt-3 bg-secondary-container/20 px-3 py-1.5 rounded-lg inline-block">Est. 48h</p>
               </div>
             </button>
-            <button onClick={() => setSelectedCategory("Water Supply")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Water Supply")} className="glass-card p-7 md:p-8 rounded-3xl flex flex-col items-start gap-5 text-left spotlight-wrapper group hover:scale-[1.02] transition-all duration-300">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">water_drop</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl md:text-4xl">water_drop</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Water Supply</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Jal Board</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 24h</p>
+                <h3 className="text-lg md:text-xl font-bold text-on-surface">Water Supply</h3>
+                <p className="text-sm font-medium text-on-surface-variant mt-1">Jal Board</p>
+                <p className="text-xs font-semibold text-secondary mt-3 bg-secondary-container/20 px-3 py-1.5 rounded-lg inline-block">Est. 24h</p>
               </div>
             </button>
-            <button onClick={() => setSelectedCategory("Electricity")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Electricity")} className="glass-card p-7 md:p-8 rounded-3xl flex flex-col items-start gap-5 text-left spotlight-wrapper group hover:scale-[1.02] transition-all duration-300">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">electric_bolt</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl md:text-4xl">electric_bolt</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Electricity</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Power Corp</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 12h</p>
+                <h3 className="text-lg md:text-xl font-bold text-on-surface">Electricity</h3>
+                <p className="text-sm font-medium text-on-surface-variant mt-1">Power Corp</p>
+                <p className="text-xs font-semibold text-secondary mt-3 bg-secondary-container/20 px-3 py-1.5 rounded-lg inline-block">Est. 12h</p>
               </div>
             </button>
-            <button onClick={() => setSelectedCategory("Drainage & Sewer")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Drainage & Sewer")} className="glass-card p-7 md:p-8 rounded-3xl flex flex-col items-start gap-5 text-left spotlight-wrapper group hover:scale-[1.02] transition-all duration-300">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">plumbing</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl md:text-4xl">plumbing</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Drainage & Sewer</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Jal Board</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 48h</p>
+                <h3 className="text-lg md:text-xl font-bold text-on-surface">Drainage & Sewer</h3>
+                <p className="text-sm font-medium text-on-surface-variant mt-1">Jal Board</p>
+                <p className="text-xs font-semibold text-secondary mt-3 bg-secondary-container/20 px-3 py-1.5 rounded-lg inline-block">Est. 48h</p>
               </div>
             </button>
-            <button onClick={() => setSelectedCategory("Sanitation & Waste")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Sanitation & Waste")} className="glass-card p-7 md:p-8 rounded-3xl flex flex-col items-start gap-5 text-left spotlight-wrapper group hover:scale-[1.02] transition-all duration-300">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">delete</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl md:text-4xl">delete</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Sanitation & Waste</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Municipal Corp</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 24h</p>
+                <h3 className="text-lg md:text-xl font-bold text-on-surface">Sanitation & Waste</h3>
+                <p className="text-sm font-medium text-on-surface-variant mt-1">Municipal Corp</p>
+                <p className="text-xs font-semibold text-secondary mt-3 bg-secondary-container/20 px-3 py-1.5 rounded-lg inline-block">Est. 24h</p>
               </div>
             </button>
-            <button onClick={() => setSelectedCategory("Healthcare")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Healthcare")} className="glass-card p-7 md:p-8 rounded-3xl flex flex-col items-start gap-5 text-left spotlight-wrapper group hover:scale-[1.02] transition-all duration-300">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">local_hospital</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl md:text-4xl">local_hospital</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Healthcare</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Health Dept</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 72h</p>
+                <h3 className="text-lg md:text-xl font-bold text-on-surface">Healthcare</h3>
+                <p className="text-sm font-medium text-on-surface-variant mt-1">Health Dept</p>
+                <p className="text-xs font-semibold text-secondary mt-3 bg-secondary-container/20 px-3 py-1.5 rounded-lg inline-block">Est. 72h</p>
               </div>
             </button>
-            <button onClick={() => setSelectedCategory("Traffic")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Traffic")} className="glass-card p-7 md:p-8 rounded-3xl flex flex-col items-start gap-5 text-left spotlight-wrapper group hover:scale-[1.02] transition-all duration-300">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">traffic</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl md:text-4xl">traffic</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Traffic</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Traffic Police</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 12h</p>
+                <h3 className="text-lg md:text-xl font-bold text-on-surface">Traffic</h3>
+                <p className="text-sm font-medium text-on-surface-variant mt-1">Traffic Police</p>
+                <p className="text-xs font-semibold text-secondary mt-3 bg-secondary-container/20 px-3 py-1.5 rounded-lg inline-block">Est. 12h</p>
               </div>
             </button>
 
             {/* The 12th card: Other */}
-            <button onClick={() => setSelectedCategory("Other")} className="glass-card p-6 rounded-2xl flex flex-col items-start gap-4 text-left spotlight-wrapper group">
+            <button onClick={() => setSelectedCategory("Other")} className="glass-card p-7 md:p-8 rounded-3xl flex flex-col items-start gap-5 text-left spotlight-wrapper group hover:scale-[1.02] transition-all duration-300">
               <div className="spotlight-content w-full">
-                <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-2 group-hover:bg-primary/10 transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-2xl">more_horiz</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl md:text-4xl">more_horiz</span>
                 </div>
-                <h3 className="font-body-md text-body-md font-semibold text-on-surface">Other</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Various Depts</p>
-                <p className="text-[10px] text-secondary mt-2 bg-secondary-container/20 px-2 py-1 rounded-md inline-block">Est. 72h</p>
+                <h3 className="text-lg md:text-xl font-bold text-on-surface">Other</h3>
+                <p className="text-sm font-medium text-on-surface-variant mt-1">Various Depts</p>
+                <p className="text-xs font-semibold text-secondary mt-3 bg-secondary-container/20 px-3 py-1.5 rounded-lg inline-block">Est. 72h</p>
               </div>
             </button>
           </div>
