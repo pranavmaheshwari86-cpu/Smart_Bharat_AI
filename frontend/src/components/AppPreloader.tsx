@@ -12,18 +12,24 @@ const PRELOAD_IMAGES = [
 
 export function AppPreloader() {
   useEffect(() => {
-    // Priority 2: Proactively load all showcase images into browser cache instantly
-    PRELOAD_IMAGES.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
+    const runPreload = () => {
+      // 1. Non-blocking background image caching
+      PRELOAD_IMAGES.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
 
-    // Priority 3: Proactively pre-fetch AI Assistant robot component & chat assets in background
-    const timer = setTimeout(() => {
+      // 2. Non-blocking background AI Assistant code pre-fetch
       import("@/components/ai/AIAssistant").catch(() => {});
-    }, 150);
+    };
 
-    return () => clearTimeout(timer);
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const id = (window as any).requestIdleCallback(runPreload, { timeout: 2000 });
+      return () => (window as any).cancelIdleCallback(id);
+    } else {
+      const timer = setTimeout(runPreload, 1500);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return null;
