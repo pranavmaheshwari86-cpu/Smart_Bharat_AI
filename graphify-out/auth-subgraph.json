@@ -7,7 +7,7 @@
       "name": "auth.controller",
       "path": "backend/src/controllers/auth.controller.ts",
       "language": "typescript",
-      "size": 8330,
+      "size": 8525,
       "complexity": 23,
       "exports": [
         "AuthController"
@@ -33,7 +33,7 @@
       "name": "auth.routes",
       "path": "backend/src/routes/auth.routes.ts",
       "language": "typescript",
-      "size": 1801,
+      "size": 1933,
       "complexity": 3,
       "exports": [
         "router"
@@ -46,8 +46,8 @@
       "name": "auth.service",
       "path": "backend/src/services/auth.service.ts",
       "language": "typescript",
-      "size": 13822,
-      "complexity": 43,
+      "size": 14043,
+      "complexity": 45,
       "exports": [
         "AuthService"
       ]
@@ -226,6 +226,17 @@
         "AuditLogRecord",
         "ApiResponse"
       ]
+    },
+    {
+      "id": "testsprite_tests/TC-BE-002_User_Authentication__JWT_Profile_Verification.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-BE-002_User_Authentication__JWT_Profile_Verification",
+      "path": "testsprite_tests/TC-BE-002_User_Authentication__JWT_Profile_Verification.py",
+      "language": "plaintext",
+      "size": 3607,
+      "complexity": 1,
+      "exports": []
     }
   ],
   "edges": [

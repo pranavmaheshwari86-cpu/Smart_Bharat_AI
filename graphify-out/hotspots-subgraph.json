@@ -30,6 +30,19 @@
       ]
     },
     {
+      "id": "frontend/src/app/schemes/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/schemes/page.tsx",
+      "language": "typescript",
+      "size": 30585,
+      "complexity": 49,
+      "exports": [
+        "SchemesPage"
+      ]
+    },
+    {
       "id": "scripts/graphify.js",
       "type": "script",
       "layer": "root",
@@ -50,19 +63,6 @@
       "size": 1081344,
       "complexity": 1,
       "exports": []
-    },
-    {
-      "id": "frontend/src/app/schemes/page.tsx",
-      "type": "page",
-      "layer": "frontend",
-      "name": "page",
-      "path": "frontend/src/app/schemes/page.tsx",
-      "language": "typescript",
-      "size": 26398,
-      "complexity": 37,
-      "exports": [
-        "SchemesPage"
-      ]
     },
     {
       "id": "frontend/src/app/assistant/page.tsx",
@@ -88,6 +88,19 @@
       "complexity": 54,
       "exports": [
         "DocumentSelector"
+      ]
+    },
+    {
+      "id": "frontend/src/app/complaints/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/complaints/page.tsx",
+      "language": "typescript",
+      "size": 34712,
+      "complexity": 26,
+      "exports": [
+        "ComplaintsPage"
       ]
     },
     {
@@ -117,16 +130,16 @@
       ]
     },
     {
-      "id": "frontend/src/app/complaints/page.tsx",
-      "type": "page",
-      "layer": "frontend",
-      "name": "page",
-      "path": "frontend/src/app/complaints/page.tsx",
+      "id": "backend/src/services/auth.service.ts",
+      "type": "service",
+      "layer": "backend",
+      "name": "auth.service",
+      "path": "backend/src/services/auth.service.ts",
       "language": "typescript",
-      "size": 30873,
-      "complexity": 24,
+      "size": 14043,
+      "complexity": 45,
       "exports": [
-        "ComplaintsPage"
+        "AuthService"
       ]
     },
     {
@@ -140,19 +153,6 @@
       "complexity": 32,
       "exports": [
         "IDPage"
-      ]
-    },
-    {
-      "id": "backend/src/services/auth.service.ts",
-      "type": "service",
-      "layer": "backend",
-      "name": "auth.service",
-      "path": "backend/src/services/auth.service.ts",
-      "language": "typescript",
-      "size": 13822,
-      "complexity": 43,
-      "exports": [
-        "AuthService"
       ]
     },
     {

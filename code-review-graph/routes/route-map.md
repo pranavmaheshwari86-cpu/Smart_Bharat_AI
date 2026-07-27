@@ -14,6 +14,7 @@
 | `/id` | `frontend/src/app/id/page.tsx` | Page | Public |
 | `/id/track` | `frontend/src/app/id/track/page.tsx` | Page | Public |
 | `/id/[id]` | `frontend/src/app/id/[id]/page.tsx` | Page | Public |
+| `/ids` | `frontend/src/app/ids/page.tsx` | Page | Public |
 | `/layout.tsx` | `frontend/src/app/layout.tsx` | Page | Public |
 | `/login` | `frontend/src/app/login/page.tsx` | Page | Public |
 | `/` | `frontend/src/app/page.tsx` | Page | Public |

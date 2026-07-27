@@ -161,15 +161,15 @@ export class AuthService {
   public async emailRegister(data: any) {
     const { fullName, email, password, confirmPassword, phone, countryCode, acceptTerms } = data;
 
-    if (!fullName || !email || !password || !phone) {
+    if (!fullName || !email || !password) {
       throw new Error("Please fill in all required fields.");
     }
 
-    if (!acceptTerms) {
+    if (acceptTerms !== undefined && !acceptTerms) {
       throw new Error("You must accept the Terms of Service and Privacy Policy.");
     }
 
-    if (password !== confirmPassword) {
+    if (confirmPassword && password !== confirmPassword) {
       throw new Error("Passwords do not match.");
     }
 
@@ -179,13 +179,13 @@ export class AuthService {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
-    const fullPhone = `${countryCode || "+91"}${phone.trim().replace(/\s+/g, "")}`;
+    const fullPhone = phone ? `${countryCode || "+91"}${phone.trim().replace(/\s+/g, "")}` : "";
 
     if (this.userRepo.findByEmail(normalizedEmail)) {
       throw new Error("An account with this email address already exists.");
     }
 
-    if (this.userRepo.findByPhone(fullPhone)) {
+    if (fullPhone && this.userRepo.findByPhone(fullPhone)) {
       throw new Error("An account with this phone number already exists.");
     }
 

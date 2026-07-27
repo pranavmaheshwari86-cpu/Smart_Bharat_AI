@@ -114,6 +114,18 @@
     "weight": 1
   },
   {
+    "source": "backend/src/routes/index.ts",
+    "target": "backend/src/routes/schemes.routes.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
+    "source": "backend/src/routes/index.ts",
+    "target": "backend/src/routes/complaints.routes.ts",
+    "type": "imports",
+    "weight": 1
+  },
+  {
     "source": "backend/src/server.ts",
     "target": "backend/src/app.ts",
     "type": "imports",

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 
 type UploadedDoc = {
@@ -144,74 +143,22 @@ export default function CredentialsPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-body-md text-on-surface antialiased relative overflow-hidden selection:bg-primary/20 selection:text-primary">
-      <style dangerouslySetInnerHTML={{__html: `
-        @theme {
-          --animate-float-1: float 6s ease-in-out infinite, fade 8s ease-in-out infinite;
-          --animate-float-2: float 7s ease-in-out infinite 1s, fade 9s ease-in-out infinite 1s;
-          --animate-float-3: float 5s ease-in-out infinite 2s, fade 7s ease-in-out infinite 2s;
-          --animate-float-4: float 8s ease-in-out infinite 3s, fade 10s ease-in-out infinite 3s;
-          --animate-float-5: float 6.5s ease-in-out infinite 0.5s, fade 8.5s ease-in-out infinite 0.5s;
-          --animate-float-6: float 5.5s ease-in-out infinite 1.5s, fade 7.5s ease-in-out infinite 1.5s;
-          --keyframes-float: {
-            "0%, 100%": { transform: "translateY(0px)" },
-            "50%": { transform: "translateY(-15px)" }
-          };
-          --keyframes-fade: {
-            "0%, 100%": { opacity: "0.3" },
-            "50%": { opacity: "1" }
-          };
-        }
-        
-        .ambient-glow-1 {
-            position: absolute;
-            top: -10%;
-            left: 20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(4, 83, 205, 0.08) 0%, rgba(255,255,255,0) 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .ambient-glow-2 {
-            position: absolute;
-            top: 40%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(255,255,255,0) 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .glass-card-cred {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 40px -15px rgba(4, 83, 205, 0.05);
-            border-radius: 32px;
-        }
-      `}} />
-
-      <div className="ambient-glow-1"></div>
-      <div className="ambient-glow-2"></div>
-
-      <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-10 relative z-10">
+    <div className="min-h-screen flex flex-col bg-[#FAF8F4] font-body-md text-on-surface antialiased relative selection:bg-primary/20 selection:text-primary" suppressHydrationWarning>
+      
+      <main className="flex-1 max-w-container-max w-full mx-auto px-margin-mobile md:px-gutter py-8 relative z-10">
         {/* Upload & Sync Section */}
-        <section className="mb-16 md:mb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        <section className="mb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column: Smart File Dropzone */}
-            <div className="lg:col-span-2 glass-card-cred p-8 flex flex-col justify-between h-full">
+            <div className="lg:col-span-2 bg-white border border-[#E4E0D6] rounded-[28px] p-8 shadow-apple-sm flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900">Upload New Credential</h2>
-                    <p className="text-gray-500 text-sm mt-1">Upload Aadhaar, PAN, Mark Sheets, or Certificates</p>
+                    <h2 className="text-2xl font-extrabold text-[#1C1B19]">Upload New Credential</h2>
+                    <p className="text-[#434655] text-sm font-medium mt-1">Upload Aadhaar, PAN, Mark Sheets, or Certificates</p>
                   </div>
-                  <span className="bg-[#0453cd]/10 text-[#0453cd] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#0453cd]/20 flex items-center gap-1">
-                    <span className="material-symbols-outlined text-sm">encrypted</span> Encrypted Vault
+                  <span className="bg-blue-50 text-[#2563EB] text-xs font-semibold px-3.5 py-1.5 rounded-full border border-blue-200/80 flex items-center gap-1.5 shadow-xs">
+                    <span className="material-symbols-outlined text-[16px]">lock</span> Encrypted Vault
                   </span>
                 </div>
 
@@ -219,8 +166,8 @@ export default function CredentialsPage() {
                   onClick={() => fileInputRef.current?.click()}
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
-                  className={`border-2 border-dashed rounded-3xl p-8 text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-4 group ${
-                    selectedFile ? 'border-[#0453cd] bg-[#0453cd]/5' : 'border-gray-300 hover:border-[#0453cd] hover:bg-gray-50/50'
+                  className={`border-2 border-dashed rounded-[20px] p-8 text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-4 group ${
+                    selectedFile ? 'border-[#2563EB] bg-blue-50/40' : 'border-[#E4E0D6] hover:border-[#2563EB] hover:bg-gray-50/60'
                   }`}
                 >
                   <input 
@@ -231,35 +178,35 @@ export default function CredentialsPage() {
                     accept=".pdf,.jpg,.jpeg,.png"
                   />
                   
-                  <div className="w-16 h-16 rounded-full bg-[#0453cd]/10 flex items-center justify-center text-[#0453cd] group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-3xl">upload_file</span>
+                  <div className="w-14 h-14 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563EB] group-hover:scale-105 transition-transform">
+                    <span className="material-symbols-outlined text-2xl">upload_file</span>
                   </div>
 
                   {selectedFile ? (
                     <div>
-                      <p className="font-semibold text-gray-900 text-lg">{selectedFile.name}</p>
-                      <p className="text-gray-500 text-sm mt-0.5">{formatBytes(selectedFile.size)}</p>
+                      <p className="font-bold text-[#1C1B19] text-lg">{selectedFile.name}</p>
+                      <p className="text-[#434655] text-sm mt-0.5 font-medium">{formatBytes(selectedFile.size)}</p>
                     </div>
                   ) : (
                     <div>
-                      <p className="font-semibold text-gray-900 text-lg">Drag &amp; drop file here, or browse</p>
-                      <p className="text-gray-500 text-sm mt-1">Supports PDF, JPG, PNG up to 10MB</p>
+                      <p className="font-bold text-[#1C1B19] text-lg">Drag &amp; drop file here, or browse</p>
+                      <p className="text-[#434655] text-sm mt-1 font-medium">Supports PDF, JPG, PNG up to 10MB</p>
                     </div>
                   )}
                 </div>
 
-                {/* Optional Document Type Selection */}
-                <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <label className="text-xs font-semibold text-gray-600 uppercase tracking-wider">Document Type:</label>
+                {/* Document Type Selection */}
+                <div className="mt-6 flex flex-wrap items-center gap-2.5">
+                  <label className="text-xs font-bold text-[#434655] uppercase tracking-wider mr-1">Document Type:</label>
                   {['Aadhaar Card', 'PAN Card', 'Voter ID', 'Passport', 'Income Certificate', 'Other Certificate'].map((t) => (
                     <button
                       key={t}
                       type="button"
                       onClick={() => setSelectedDocType(t)}
-                      className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
+                      className={`text-xs px-3.5 py-1.5 rounded-full border font-semibold transition-all ${
                         selectedDocType === t 
-                          ? 'bg-[#0453cd] text-white border-[#0453cd] font-semibold' 
-                          : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
+                          ? 'bg-[#2563EB] text-white border-[#2563EB] shadow-xs' 
+                          : 'bg-white text-[#434655] border-[#E4E0D6] hover:border-gray-400'
                       }`}
                     >
                       {t}
@@ -268,13 +215,13 @@ export default function CredentialsPage() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
-                <p className="text-xs text-gray-400">Files are stored securely in your browser's encrypted vault.</p>
+              <div className="mt-8 pt-6 border-t border-[#E4E0D6] flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-xs text-[#737686] font-medium">Files are stored securely in your browser's encrypted vault.</p>
                 <button
                   type="button"
                   onClick={handleUpload}
                   disabled={uploadStatus === 'uploading'}
-                  className="bg-[#0453cd] hover:bg-[#356ee7] text-white font-semibold px-8 py-3 rounded-2xl transition-all shadow-md flex items-center gap-2 disabled:opacity-50"
+                  className="w-full sm:w-auto bg-[#2563EB] hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full transition-all shadow-apple-sm hover:shadow-apple-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
                 >
                   {uploadStatus === 'uploading' ? (
                     <>
@@ -283,7 +230,7 @@ export default function CredentialsPage() {
                     </>
                   ) : uploadStatus === 'success' ? (
                     <>
-                      <span className="material-symbols-outlined text-lg">check_circle</span>
+                      <span className="material-symbols-outlined text-lg text-green-300">check_circle</span>
                       Saved!
                     </>
                   ) : (
@@ -297,18 +244,18 @@ export default function CredentialsPage() {
             </div>
 
             {/* Right Column: DigiLocker Sync */}
-            <div className="glass-card-cred p-8 flex flex-col justify-between h-full">
+            <div className="bg-white border border-[#E4E0D6] rounded-[28px] p-8 shadow-apple-sm flex flex-col justify-between">
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-[#0453cd]/10 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-3xl text-[#0453cd]">sync</span>
+                  <div className="w-14 h-14 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563EB]">
+                    <span className="material-symbols-outlined text-2xl">sync</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900">DigiLocker Sync</h3>
-                    <p className="text-[#0453cd] font-medium text-sm">Official Government Integration</p>
+                    <h3 className="text-2xl font-extrabold text-[#1C1B19]">DigiLocker Sync</h3>
+                    <p className="text-[#2563EB] font-bold text-xs uppercase tracking-wider mt-0.5">Official Government Integration</p>
                   </div>
                 </div>
-                <p className="text-gray-600 text-base leading-relaxed">
+                <p className="text-[#434655] text-base leading-relaxed font-medium">
                   Securely fetch and verify your official Aadhaar, PAN, and certificates directly from your DigiLocker account.
                 </p>
               </div>
@@ -316,13 +263,13 @@ export default function CredentialsPage() {
                 <button
                   onClick={handleDigiLockerSync}
                   disabled={isSyncing}
-                  className="w-full bg-[#0453cd] hover:bg-[#356ee7] text-white font-semibold py-4 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-3 disabled:opacity-60"
+                  className="w-full bg-[#2563EB] hover:bg-blue-700 text-white font-semibold py-3.5 rounded-full transition-all shadow-apple-sm hover:shadow-apple-lg hover:-translate-y-0.5 flex items-center justify-center gap-2.5 disabled:opacity-60 cursor-pointer"
                 >
-                  <span className={`material-symbols-outlined ${isSyncing ? 'animate-spin' : ''}`}>cloud_sync</span>
+                  <span className={`material-symbols-outlined text-xl ${isSyncing ? 'animate-spin' : ''}`}>cloud_sync</span>
                   {isSyncing ? 'Syncing with DigiLocker...' : 'Connect & Sync'}
                 </button>
-                <p className="text-center text-xs text-gray-500 mt-4 flex items-center justify-center gap-1">
-                  <span className="material-symbols-outlined text-xs">lock</span>
+                <p className="text-center text-xs text-[#737686] font-medium mt-4 flex items-center justify-center gap-1.5">
+                  <span className="material-symbols-outlined text-sm text-[#737686]">lock</span>
                   End-to-end encrypted connection
                 </p>
               </div>
@@ -330,14 +277,14 @@ export default function CredentialsPage() {
           </div>
         </section>
 
-        {/* Your Stored Credentials Grid */}
-        <section className="pt-4">
+        {/* Your Stored Credentials Section */}
+        <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#0453cd]">folder_special</span>
+            <h2 className="text-2xl font-extrabold text-[#1C1B19] flex items-center gap-2.5">
+              <span className="material-symbols-outlined text-[#2563EB] text-2xl">folder_special</span>
               Your Credentials
               {isMounted && (
-                <span className="text-sm font-normal text-gray-500 ml-2 bg-gray-100 px-3 py-0.5 rounded-full border border-gray-200">
+                <span className="text-xs font-semibold text-[#434655] bg-white px-3 py-1 rounded-full border border-[#E4E0D6] shadow-xs">
                   {uploadedDocs.length} stored
                 </span>
               )}
@@ -345,13 +292,13 @@ export default function CredentialsPage() {
           </div>
 
           {!isMounted || uploadedDocs.length === 0 ? (
-            <div className="glass-card-cred p-12 text-center flex flex-col items-center justify-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-[#0453cd]/10 text-[#0453cd] flex items-center justify-center border border-[#0453cd]/20">
+            <div className="bg-white border border-[#E4E0D6] rounded-[28px] p-12 text-center shadow-apple-sm flex flex-col items-center justify-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-100 text-[#2563EB] flex items-center justify-center">
                 <span className="material-symbols-outlined text-3xl">folder_open</span>
               </div>
               <div className="max-w-md">
-                <h3 className="text-xl font-bold text-gray-900">No Credentials Stored Yet</h3>
-                <p className="text-gray-500 text-sm mt-1">
+                <h3 className="text-xl font-extrabold text-[#1C1B19]">No Credentials Stored Yet</h3>
+                <p className="text-[#434655] text-sm font-medium mt-1.5 leading-relaxed">
                   You haven't uploaded any documents yet. Use the uploader above to save your Aadhaar, PAN, Voter ID, or click <strong>Connect &amp; Sync</strong> to pull from DigiLocker.
                 </p>
               </div>
@@ -359,24 +306,24 @@ export default function CredentialsPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {uploadedDocs.map((doc) => (
-                <div key={doc.id} className="glass-card-cred p-6 flex flex-col justify-between gap-6 group hover:shadow-xl transition-all">
+                <div key={doc.id} className="bg-white border border-[#E4E0D6] rounded-[24px] p-6 shadow-apple-sm hover:shadow-apple-md transition-all flex flex-col justify-between gap-6 group">
                   <div>
                     <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-2xl bg-[#0453cd]/10 flex items-center justify-center text-[#0453cd]">
+                      <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563EB]">
                         <span className="material-symbols-outlined text-2xl">
                           {doc.name.toLowerCase().includes('aadhaar') ? 'badge' : doc.name.toLowerCase().includes('pan') ? 'credit_card' : doc.name.endsWith('.pdf') ? 'picture_as_pdf' : 'description'}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         {doc.verified && (
-                          <span className="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                          <span className="bg-green-50 text-green-700 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-green-200 flex items-center gap-1">
                             <span className="material-symbols-outlined text-sm">check_circle</span>
                             Verified
                           </span>
                         )}
                         <button
                           onClick={() => handleRemoveDoc(doc.id)}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-gray-400 hover:text-red-500"
+                          className="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-[#737686] hover:text-red-600 cursor-pointer"
                           title="Delete Credential"
                         >
                           <span className="material-symbols-outlined text-lg">delete</span>
@@ -384,23 +331,23 @@ export default function CredentialsPage() {
                       </div>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-gray-900 truncate" title={doc.name}>{doc.name}</h3>
-                    <p className="text-xs text-[#0453cd] font-semibold uppercase tracking-wider mt-1">{doc.type}</p>
+                    <h3 className="text-lg font-bold text-[#1C1B19] truncate" title={doc.name}>{doc.name}</h3>
+                    <p className="text-xs text-[#2563EB] font-bold uppercase tracking-wider mt-1">{doc.type}</p>
                     
-                    <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                      <span className="flex items-center gap-1">
+                    <div className="mt-4 pt-4 border-t border-[#E4E0D6] flex items-center justify-between text-xs text-[#737686]">
+                      <span className="flex items-center gap-1 font-medium">
                         <span className="material-symbols-outlined text-sm">schedule</span>
                         {doc.uploadedAt}
                       </span>
-                      <span className="font-mono bg-gray-100 px-2 py-0.5 rounded text-gray-600">{doc.size}</span>
+                      <span className="font-mono bg-gray-50 border border-gray-200 px-2 py-0.5 rounded text-gray-700">{doc.size}</span>
                     </div>
                   </div>
 
-                  <div className="flex gap-3 pt-4 border-t border-gray-100">
-                    <button onClick={() => alert(`Viewing ${doc.name}`)} className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium py-2 rounded-xl transition-colors flex items-center justify-center gap-1.5 text-xs">
+                  <div className="flex gap-3 pt-4 border-t border-[#E4E0D6]">
+                    <button onClick={() => alert(`Viewing ${doc.name}`)} className="flex-1 bg-gray-50 hover:bg-gray-100 border border-gray-200 text-[#1C1B19] font-semibold py-2 rounded-full transition-colors flex items-center justify-center gap-1.5 text-xs cursor-pointer">
                       <span className="material-symbols-outlined text-sm">visibility</span> View
                     </button>
-                    <button onClick={() => alert(`Downloading ${doc.name}`)} className="flex-1 bg-[#D4AF37] hover:bg-[#c29e2f] text-white font-medium py-2 rounded-xl transition-colors shadow-sm flex items-center justify-center gap-1.5 text-xs">
+                    <button onClick={() => alert(`Downloading ${doc.name}`)} className="flex-1 bg-[#2563EB] hover:bg-blue-700 text-white font-semibold py-2 rounded-full transition-colors shadow-xs flex items-center justify-center gap-1.5 text-xs cursor-pointer">
                       <span className="material-symbols-outlined text-sm">download</span> Download
                     </button>
                   </div>

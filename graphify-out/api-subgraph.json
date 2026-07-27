@@ -20,7 +20,7 @@
       "name": "auth.controller",
       "path": "backend/src/controllers/auth.controller.ts",
       "language": "typescript",
-      "size": 8330,
+      "size": 8525,
       "complexity": 23,
       "exports": [
         "AuthController"
@@ -33,8 +33,21 @@
       "name": "auth.routes",
       "path": "backend/src/routes/auth.routes.ts",
       "language": "typescript",
-      "size": 1801,
+      "size": 1933,
       "complexity": 3,
+      "exports": [
+        "router"
+      ]
+    },
+    {
+      "id": "backend/src/routes/complaints.routes.ts",
+      "type": "route",
+      "layer": "backend",
+      "name": "complaints.routes",
+      "path": "backend/src/routes/complaints.routes.ts",
+      "language": "typescript",
+      "size": 2272,
+      "complexity": 8,
       "exports": [
         "router"
       ]
@@ -46,8 +59,8 @@
       "name": "govid.routes",
       "path": "backend/src/routes/govid.routes.ts",
       "language": "typescript",
-      "size": 512,
-      "complexity": 1,
+      "size": 1469,
+      "complexity": 2,
       "exports": [
         "router"
       ]
@@ -59,8 +72,21 @@
       "name": "index",
       "path": "backend/src/routes/index.ts",
       "language": "typescript",
-      "size": 235,
+      "size": 571,
       "complexity": 1,
+      "exports": [
+        "router"
+      ]
+    },
+    {
+      "id": "backend/src/routes/schemes.routes.ts",
+      "type": "route",
+      "layer": "backend",
+      "name": "schemes.routes",
+      "path": "backend/src/routes/schemes.routes.ts",
+      "language": "typescript",
+      "size": 2647,
+      "complexity": 8,
       "exports": [
         "router"
       ]
@@ -117,6 +143,18 @@
     {
       "source": "backend/src/routes/index.ts",
       "target": "backend/src/routes/govid.routes.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/routes/index.ts",
+      "target": "backend/src/routes/schemes.routes.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/routes/index.ts",
+      "target": "backend/src/routes/complaints.routes.ts",
       "type": "imports",
       "weight": 1
     },

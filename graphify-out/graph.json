@@ -1,6 +1,17 @@
 {
   "nodes": [
     {
+      "id": ".agents/AGENTS.md",
+      "type": "document",
+      "layer": "root",
+      "name": "AGENTS",
+      "path": ".agents/AGENTS.md",
+      "language": "markdown",
+      "size": 2089,
+      "complexity": 1,
+      "exports": []
+    },
+    {
       "id": ".code-review-graph/.gitignore",
       "type": "module",
       "layer": "root",
@@ -84,7 +95,7 @@
       "name": ".gitignore",
       "path": ".gitignore",
       "language": "plaintext",
-      "size": 390,
+      "size": 424,
       "complexity": 1,
       "exports": []
     },
@@ -152,7 +163,7 @@
       "name": "app",
       "path": "backend/src/app.ts",
       "language": "typescript",
-      "size": 2917,
+      "size": 2932,
       "complexity": 10,
       "exports": [
         "app"
@@ -178,7 +189,7 @@
       "name": "auth.controller",
       "path": "backend/src/controllers/auth.controller.ts",
       "language": "typescript",
-      "size": 8330,
+      "size": 8525,
       "complexity": 23,
       "exports": [
         "AuthController"
@@ -258,8 +269,21 @@
       "name": "auth.routes",
       "path": "backend/src/routes/auth.routes.ts",
       "language": "typescript",
-      "size": 1801,
+      "size": 1933,
       "complexity": 3,
+      "exports": [
+        "router"
+      ]
+    },
+    {
+      "id": "backend/src/routes/complaints.routes.ts",
+      "type": "route",
+      "layer": "backend",
+      "name": "complaints.routes",
+      "path": "backend/src/routes/complaints.routes.ts",
+      "language": "typescript",
+      "size": 2272,
+      "complexity": 8,
       "exports": [
         "router"
       ]
@@ -271,8 +295,8 @@
       "name": "govid.routes",
       "path": "backend/src/routes/govid.routes.ts",
       "language": "typescript",
-      "size": 512,
-      "complexity": 1,
+      "size": 1469,
+      "complexity": 2,
       "exports": [
         "router"
       ]
@@ -284,8 +308,21 @@
       "name": "index",
       "path": "backend/src/routes/index.ts",
       "language": "typescript",
-      "size": 235,
+      "size": 571,
       "complexity": 1,
+      "exports": [
+        "router"
+      ]
+    },
+    {
+      "id": "backend/src/routes/schemes.routes.ts",
+      "type": "route",
+      "layer": "backend",
+      "name": "schemes.routes",
+      "path": "backend/src/routes/schemes.routes.ts",
+      "language": "typescript",
+      "size": 2647,
+      "complexity": 8,
       "exports": [
         "router"
       ]
@@ -308,8 +345,8 @@
       "name": "auth.service",
       "path": "backend/src/services/auth.service.ts",
       "language": "typescript",
-      "size": 13822,
-      "complexity": 43,
+      "size": 14043,
+      "complexity": 45,
       "exports": [
         "AuthService"
       ]
@@ -389,7 +426,7 @@
       "name": "smart_bharat_db",
       "path": "data/smart_bharat_db.json",
       "language": "json",
-      "size": 3536,
+      "size": 5083,
       "complexity": 1,
       "exports": []
     },
@@ -514,7 +551,7 @@
       "name": "package",
       "path": "frontend/package.json",
       "language": "json",
-      "size": 1154,
+      "size": 1152,
       "complexity": 1,
       "exports": []
     },
@@ -640,8 +677,8 @@
       "name": "page",
       "path": "frontend/src/app/complaints/page.tsx",
       "language": "typescript",
-      "size": 30873,
-      "complexity": 24,
+      "size": 34712,
+      "complexity": 26,
       "exports": [
         "ComplaintsPage"
       ]
@@ -666,7 +703,7 @@
       "name": "page",
       "path": "frontend/src/app/credentials/page.tsx",
       "language": "typescript",
-      "size": 18680,
+      "size": 17474,
       "complexity": 27,
       "exports": [
         "CredentialsPage"
@@ -762,13 +799,26 @@
       ]
     },
     {
+      "id": "frontend/src/app/ids/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/ids/page.tsx",
+      "language": "typescript",
+      "size": 110,
+      "complexity": 1,
+      "exports": [
+        "IdsRedirectPage"
+      ]
+    },
+    {
       "id": "frontend/src/app/layout.tsx",
       "type": "page",
       "layer": "frontend",
       "name": "layout",
       "path": "frontend/src/app/layout.tsx",
       "language": "typescript",
-      "size": 3600,
+      "size": 3685,
       "complexity": 4,
       "exports": [
         "RootLayout",
@@ -886,8 +936,8 @@
       "name": "page",
       "path": "frontend/src/app/schemes/page.tsx",
       "language": "typescript",
-      "size": 26398,
-      "complexity": 37,
+      "size": 30585,
+      "complexity": 49,
       "exports": [
         "SchemesPage"
       ]
@@ -1050,6 +1100,19 @@
       ]
     },
     {
+      "id": "frontend/src/components/AppPreloader.tsx",
+      "type": "component",
+      "layer": "frontend",
+      "name": "AppPreloader",
+      "path": "frontend/src/components/AppPreloader.tsx",
+      "language": "typescript",
+      "size": 985,
+      "complexity": 4,
+      "exports": [
+        "AppPreloader"
+      ]
+    },
+    {
       "id": "frontend/src/components/auth/CompleteProfileModal.tsx",
       "type": "component",
       "layer": "frontend",
@@ -1128,6 +1191,19 @@
       ]
     },
     {
+      "id": "frontend/src/components/ComplaintsShowcase.tsx",
+      "type": "component",
+      "layer": "frontend",
+      "name": "ComplaintsShowcase",
+      "path": "frontend/src/components/ComplaintsShowcase.tsx",
+      "language": "typescript",
+      "size": 4134,
+      "complexity": 4,
+      "exports": [
+        "ComplaintsShowcase"
+      ]
+    },
+    {
       "id": "frontend/src/components/DocumentSelector.tsx",
       "type": "component",
       "layer": "frontend",
@@ -1199,8 +1275,8 @@
       "name": "HeroShowcase",
       "path": "frontend/src/components/HeroShowcase.tsx",
       "language": "typescript",
-      "size": 1154,
-      "complexity": 2,
+      "size": 1630,
+      "complexity": 6,
       "exports": [
         "HeroShowcase"
       ]
@@ -1625,7 +1701,7 @@
       "name": "tsconfig",
       "path": "frontend/tsconfig.tsbuildinfo",
       "language": "plaintext",
-      "size": 158368,
+      "size": 156560,
       "complexity": 1,
       "exports": []
     },
@@ -1680,7 +1756,7 @@
       "name": "changelog",
       "path": "memory/changelog.md",
       "language": "markdown",
-      "size": 4024,
+      "size": 4695,
       "complexity": 1,
       "exports": []
     },
@@ -1960,13 +2036,211 @@
       "exports": []
     },
     {
+      "id": "testsprite_tests/standard_prd.json",
+      "type": "module",
+      "layer": "root",
+      "name": "standard_prd",
+      "path": "testsprite_tests/standard_prd.json",
+      "language": "json",
+      "size": 2966,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-BE-001_Health_Check_API_Endpoint.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-BE-001_Health_Check_API_Endpoint",
+      "path": "testsprite_tests/TC-BE-001_Health_Check_API_Endpoint.py",
+      "language": "plaintext",
+      "size": 2339,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-BE-002_User_Authentication__JWT_Profile_Verification.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-BE-002_User_Authentication__JWT_Profile_Verification",
+      "path": "testsprite_tests/TC-BE-002_User_Authentication__JWT_Profile_Verification.py",
+      "language": "plaintext",
+      "size": 3607,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-FE-001_Dashboard_Hero_Video__Header_Navigation.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-FE-001_Dashboard_Hero_Video__Header_Navigation",
+      "path": "testsprite_tests/TC-FE-001_Dashboard_Hero_Video__Header_Navigation.py",
+      "language": "plaintext",
+      "size": 2652,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-FE-002_Government_Schemes_Search__Category_Modal.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-FE-002_Government_Schemes_Search__Category_Modal",
+      "path": "testsprite_tests/TC-FE-002_Government_Schemes_Search__Category_Modal.py",
+      "language": "plaintext",
+      "size": 2695,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-FE-003_Scheme_Detail_Page__Application_Process.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-FE-003_Scheme_Detail_Page__Application_Process",
+      "path": "testsprite_tests/TC-FE-003_Scheme_Detail_Page__Application_Process.py",
+      "language": "plaintext",
+      "size": 5166,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-FE-004_Foundational_Government_IDs_Portal__Wizard.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-FE-004_Foundational_Government_IDs_Portal__Wizard",
+      "path": "testsprite_tests/TC-FE-004_Foundational_Government_IDs_Portal__Wizard.py",
+      "language": "plaintext",
+      "size": 5645,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-FE-005_Civic_Complaints_Showcase__Category_Grid.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-FE-005_Civic_Complaints_Showcase__Category_Grid",
+      "path": "testsprite_tests/TC-FE-005_Civic_Complaints_Showcase__Category_Grid.py",
+      "language": "plaintext",
+      "size": 4836,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-FE-006_247_AI_Policy_Assistant_Conversational_Interface.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-FE-006_247_AI_Policy_Assistant_Conversational_Interface",
+      "path": "testsprite_tests/TC-FE-006_247_AI_Policy_Assistant_Conversational_Interface.py",
+      "language": "plaintext",
+      "size": 4839,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-FE-007_User_Credential_Vault__Digital_Wallet.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-FE-007_User_Credential_Vault__Digital_Wallet",
+      "path": "testsprite_tests/TC-FE-007_User_Credential_Vault__Digital_Wallet.py",
+      "language": "plaintext",
+      "size": 3002,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-FE-008_Mobile_Responsiveness__Viewport_Scaling.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-FE-008_Mobile_Responsiveness__Viewport_Scaling",
+      "path": "testsprite_tests/TC-FE-008_Mobile_Responsiveness__Viewport_Scaling.py",
+      "language": "plaintext",
+      "size": 4327,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/TC-SEC-001_Input_Sanitization__Injection_Prevention.py",
+      "type": "module",
+      "layer": "root",
+      "name": "TC-SEC-001_Input_Sanitization__Injection_Prevention",
+      "path": "testsprite_tests/TC-SEC-001_Input_Sanitization__Injection_Prevention.py",
+      "language": "plaintext",
+      "size": 4548,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/testsprite_frontend_test_plan.json",
+      "type": "module",
+      "layer": "root",
+      "name": "testsprite_frontend_test_plan",
+      "path": "testsprite_tests/testsprite_frontend_test_plan.json",
+      "language": "json",
+      "size": 6820,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/tmp/code_summary.yaml",
+      "type": "module",
+      "layer": "root",
+      "name": "code_summary",
+      "path": "testsprite_tests/tmp/code_summary.yaml",
+      "language": "plaintext",
+      "size": 3648,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/tmp/config.json",
+      "type": "module",
+      "layer": "root",
+      "name": "config",
+      "path": "testsprite_tests/tmp/config.json",
+      "language": "json",
+      "size": 697,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/tmp/prd_files/README.md",
+      "type": "document",
+      "layer": "root",
+      "name": "README",
+      "path": "testsprite_tests/tmp/prd_files/README.md",
+      "language": "markdown",
+      "size": 1450,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/tmp/raw_report.md",
+      "type": "document",
+      "layer": "root",
+      "name": "raw_report",
+      "path": "testsprite_tests/tmp/raw_report.md",
+      "language": "markdown",
+      "size": 11277,
+      "complexity": 1,
+      "exports": []
+    },
+    {
+      "id": "testsprite_tests/tmp/test_results.json",
+      "type": "module",
+      "layer": "root",
+      "name": "test_results",
+      "path": "testsprite_tests/tmp/test_results.json",
+      "language": "json",
+      "size": 59261,
+      "complexity": 1,
+      "exports": []
+    },
+    {
       "id": "vercel.json",
       "type": "module",
       "layer": "root",
       "name": "vercel",
       "path": "vercel.json",
       "language": "json",
-      "size": 180,
+      "size": 346,
       "complexity": 1,
       "exports": []
     }
@@ -2083,6 +2357,18 @@
     {
       "source": "backend/src/routes/index.ts",
       "target": "backend/src/routes/govid.routes.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/routes/index.ts",
+      "target": "backend/src/routes/schemes.routes.ts",
+      "type": "imports",
+      "weight": 1
+    },
+    {
+      "source": "backend/src/routes/index.ts",
+      "target": "backend/src/routes/complaints.routes.ts",
       "type": "imports",
       "weight": 1
     },

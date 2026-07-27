@@ -1,7 +1,25 @@
-import dotenv from "dotenv";
+import fs from "fs";
 import path from "path";
 
-dotenv.config({ path: path.join(__dirname, "../../.env") });
+// Native .env file loader (no external dotenv dependency needed)
+function loadEnv() {
+  const envPath = path.join(__dirname, "../../.env");
+  if (fs.existsSync(envPath)) {
+    const content = fs.readFileSync(envPath, "utf-8");
+    for (const line of content.split("\n")) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) continue;
+      const eqIdx = trimmed.indexOf("=");
+      if (eqIdx > 0) {
+        const key = trimmed.slice(0, eqIdx).trim();
+        const val = trimmed.slice(eqIdx + 1).trim().replace(/^["']|["']$/g, "");
+        if (!process.env[key]) process.env[key] = val;
+      }
+    }
+  }
+}
+
+loadEnv();
 
 export const config = {
   port: process.env.PORT || 5000,

@@ -1,5 +1,6 @@
 digraph CodebaseGraph {
   node [shape=box, fontname="Helvetica"];
+  ".agents/AGENTS.md" [label=".agents/AGENTS.md\ntype: document\nlayer: root"];
   ".code-review-graph/.gitignore" [label=".code-review-graph/.gitignore\ntype: module\nlayer: root"];
   ".code-review-graph/graph.db" [label=".code-review-graph/graph.db\ntype: module\nlayer: root"];
   ".code-review-graph/graph.db-shm" [label=".code-review-graph/graph.db-shm\ntype: module\nlayer: root"];
@@ -22,8 +23,10 @@ digraph CodebaseGraph {
   "backend/src/repositories/session.repository.ts" [label="backend/src/repositories/session.repository.ts\ntype: repository\nlayer: backend"];
   "backend/src/repositories/user.repository.ts" [label="backend/src/repositories/user.repository.ts\ntype: repository\nlayer: backend"];
   "backend/src/routes/auth.routes.ts" [label="backend/src/routes/auth.routes.ts\ntype: route\nlayer: backend"];
+  "backend/src/routes/complaints.routes.ts" [label="backend/src/routes/complaints.routes.ts\ntype: route\nlayer: backend"];
   "backend/src/routes/govid.routes.ts" [label="backend/src/routes/govid.routes.ts\ntype: route\nlayer: backend"];
   "backend/src/routes/index.ts" [label="backend/src/routes/index.ts\ntype: route\nlayer: backend"];
+  "backend/src/routes/schemes.routes.ts" [label="backend/src/routes/schemes.routes.ts\ntype: route\nlayer: backend"];
   "backend/src/server.ts" [label="backend/src/server.ts\ntype: module\nlayer: backend"];
   "backend/src/services/auth.service.ts" [label="backend/src/services/auth.service.ts\ntype: service\nlayer: backend"];
   "backend/src/utils/hash.util.ts" [label="backend/src/utils/hash.util.ts\ntype: util\nlayer: backend"];
@@ -62,6 +65,7 @@ digraph CodebaseGraph {
   "frontend/src/app/id/page.tsx" [label="frontend/src/app/id/page.tsx\ntype: page\nlayer: frontend"];
   "frontend/src/app/id/track/page.tsx" [label="frontend/src/app/id/track/page.tsx\ntype: page\nlayer: frontend"];
   "frontend/src/app/id/[id]/page.tsx" [label="frontend/src/app/id/[id]/page.tsx\ntype: page\nlayer: frontend"];
+  "frontend/src/app/ids/page.tsx" [label="frontend/src/app/ids/page.tsx\ntype: page\nlayer: frontend"];
   "frontend/src/app/layout.tsx" [label="frontend/src/app/layout.tsx\ntype: page\nlayer: frontend"];
   "frontend/src/app/login/page.tsx" [label="frontend/src/app/login/page.tsx\ntype: page\nlayer: frontend"];
   "frontend/src/app/manifest.ts" [label="frontend/src/app/manifest.ts\ntype: module\nlayer: frontend"];
@@ -84,12 +88,14 @@ digraph CodebaseGraph {
   "frontend/src/app/vault/page.tsx" [label="frontend/src/app/vault/page.tsx\ntype: page\nlayer: frontend"];
   "frontend/src/components/ai/AIAssistant.tsx" [label="frontend/src/components/ai/AIAssistant.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/ai/AssistantThreeScene.tsx" [label="frontend/src/components/ai/AssistantThreeScene.tsx\ntype: component\nlayer: frontend"];
+  "frontend/src/components/AppPreloader.tsx" [label="frontend/src/components/AppPreloader.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/auth/CompleteProfileModal.tsx" [label="frontend/src/components/auth/CompleteProfileModal.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/auth/GoogleSignInButton.tsx" [label="frontend/src/components/auth/GoogleSignInButton.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/auth/OtpInput.tsx" [label="frontend/src/components/auth/OtpInput.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/auth/OtpVerificationForm.tsx" [label="frontend/src/components/auth/OtpVerificationForm.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/auth/PasswordStrengthMeter.tsx" [label="frontend/src/components/auth/PasswordStrengthMeter.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/ClientShells.tsx" [label="frontend/src/components/ClientShells.tsx\ntype: component\nlayer: frontend"];
+  "frontend/src/components/ComplaintsShowcase.tsx" [label="frontend/src/components/ComplaintsShowcase.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/DocumentSelector.tsx" [label="frontend/src/components/DocumentSelector.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/DynamicForm.tsx" [label="frontend/src/components/DynamicForm.tsx\ntype: component\nlayer: frontend"];
   "frontend/src/components/EligibilityEngine.tsx" [label="frontend/src/components/EligibilityEngine.tsx\ntype: component\nlayer: frontend"];
@@ -154,6 +160,24 @@ digraph CodebaseGraph {
   "shared/src/types/auth.ts" [label="shared/src/types/auth.ts\ntype: type\nlayer: shared"];
   "shared/src/validations/password.ts" [label="shared/src/validations/password.ts\ntype: validation\nlayer: shared"];
   "shared/tsconfig.json" [label="shared/tsconfig.json\ntype: module\nlayer: shared"];
+  "testsprite_tests/standard_prd.json" [label="testsprite_tests/standard_prd.json\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-BE-001_Health_Check_API_Endpoint.py" [label="testsprite_tests/TC-BE-001_Health_Check_API_Endpoint.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-BE-002_User_Authentication__JWT_Profile_Verification.py" [label="testsprite_tests/TC-BE-002_User_Authentication__JWT_Profile_Verification.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-FE-001_Dashboard_Hero_Video__Header_Navigation.py" [label="testsprite_tests/TC-FE-001_Dashboard_Hero_Video__Header_Navigation.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-FE-002_Government_Schemes_Search__Category_Modal.py" [label="testsprite_tests/TC-FE-002_Government_Schemes_Search__Category_Modal.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-FE-003_Scheme_Detail_Page__Application_Process.py" [label="testsprite_tests/TC-FE-003_Scheme_Detail_Page__Application_Process.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-FE-004_Foundational_Government_IDs_Portal__Wizard.py" [label="testsprite_tests/TC-FE-004_Foundational_Government_IDs_Portal__Wizard.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-FE-005_Civic_Complaints_Showcase__Category_Grid.py" [label="testsprite_tests/TC-FE-005_Civic_Complaints_Showcase__Category_Grid.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-FE-006_247_AI_Policy_Assistant_Conversational_Interface.py" [label="testsprite_tests/TC-FE-006_247_AI_Policy_Assistant_Conversational_Interface.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-FE-007_User_Credential_Vault__Digital_Wallet.py" [label="testsprite_tests/TC-FE-007_User_Credential_Vault__Digital_Wallet.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-FE-008_Mobile_Responsiveness__Viewport_Scaling.py" [label="testsprite_tests/TC-FE-008_Mobile_Responsiveness__Viewport_Scaling.py\ntype: module\nlayer: root"];
+  "testsprite_tests/TC-SEC-001_Input_Sanitization__Injection_Prevention.py" [label="testsprite_tests/TC-SEC-001_Input_Sanitization__Injection_Prevention.py\ntype: module\nlayer: root"];
+  "testsprite_tests/testsprite_frontend_test_plan.json" [label="testsprite_tests/testsprite_frontend_test_plan.json\ntype: module\nlayer: root"];
+  "testsprite_tests/tmp/code_summary.yaml" [label="testsprite_tests/tmp/code_summary.yaml\ntype: module\nlayer: root"];
+  "testsprite_tests/tmp/config.json" [label="testsprite_tests/tmp/config.json\ntype: module\nlayer: root"];
+  "testsprite_tests/tmp/prd_files/README.md" [label="testsprite_tests/tmp/prd_files/README.md\ntype: document\nlayer: root"];
+  "testsprite_tests/tmp/raw_report.md" [label="testsprite_tests/tmp/raw_report.md\ntype: document\nlayer: root"];
+  "testsprite_tests/tmp/test_results.json" [label="testsprite_tests/tmp/test_results.json\ntype: module\nlayer: root"];
   "vercel.json" [label="vercel.json\ntype: module\nlayer: root"];
   "backend/api/index.ts" -> "backend/src/app.ts" [weight=1];
   "backend/src/app.ts" -> "backend/src/routes/index.ts" [weight=1];
@@ -174,6 +198,8 @@ digraph CodebaseGraph {
   "backend/src/routes/auth.routes.ts" -> "backend/src/controllers/auth.controller.ts" [weight=1];
   "backend/src/routes/index.ts" -> "backend/src/routes/auth.routes.ts" [weight=1];
   "backend/src/routes/index.ts" -> "backend/src/routes/govid.routes.ts" [weight=1];
+  "backend/src/routes/index.ts" -> "backend/src/routes/schemes.routes.ts" [weight=1];
+  "backend/src/routes/index.ts" -> "backend/src/routes/complaints.routes.ts" [weight=1];
   "backend/src/server.ts" -> "backend/src/app.ts" [weight=1];
   "backend/src/server.ts" -> "backend/src/config/index.ts" [weight=1];
   "backend/src/server.ts" -> "backend/src/database/db.ts" [weight=1];

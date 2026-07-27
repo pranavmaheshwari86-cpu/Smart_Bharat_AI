@@ -70,6 +70,7 @@ export class AuthController {
   public emailRegister = async (req: Request, res: Response): Promise<void> => {
     try {
       const newUser = await this.authService.emailRegister(req.body);
+      await this.authService.createSession(res, newUser, req.headers["user-agent"] || "Browser");
       res.status(201).json({
         success: true,
         user: {
@@ -77,9 +78,11 @@ export class AuthController {
           fullName: newUser.full_name,
           email: newUser.email,
           phone: newUser.phone_number,
+          profilePhoto: newUser.profile_photo,
+          role: newUser.role,
           emailVerified: true,
           phoneVerified: false,
-          profileCompleted: false,
+          profileCompleted: newUser.profile_completed,
         },
       });
     } catch (error: any) {

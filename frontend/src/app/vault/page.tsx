@@ -1,6 +1,5 @@
 import { mockCredentials, vaultCategories } from "@/lib/data";
-import { Cloud, FileText, CheckCircle2, Shield, Upload, Search, ShieldCheck } from "lucide-react";
-import Link from "next/link";
+import { Cloud, FileText, Shield, Upload, Search, ShieldCheck } from "lucide-react";
 
 export default function VaultPage() {
   return (

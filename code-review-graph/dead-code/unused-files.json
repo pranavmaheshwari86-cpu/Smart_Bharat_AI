@@ -36,7 +36,7 @@
   },
   {
     "path": ".gitignore",
-    "size": 390,
+    "size": 424,
     "type": "module"
   },
   {
@@ -95,6 +95,11 @@
     "type": "component"
   },
   {
+    "path": "frontend/src/components/AppPreloader.tsx",
+    "size": 985,
+    "type": "component"
+  },
+  {
     "path": "frontend/src/components/auth/CompleteProfileModal.tsx",
     "size": 9467,
     "type": "component"
@@ -120,6 +125,11 @@
     "type": "component"
   },
   {
+    "path": "frontend/src/components/ComplaintsShowcase.tsx",
+    "size": 4134,
+    "type": "component"
+  },
+  {
     "path": "frontend/src/components/DynamicForm.tsx",
     "size": 18913,
     "type": "component"
@@ -141,7 +151,7 @@
   },
   {
     "path": "frontend/src/components/HeroShowcase.tsx",
-    "size": 1154,
+    "size": 1630,
     "type": "component"
   },
   {
@@ -216,7 +226,7 @@
   },
   {
     "path": "frontend/tsconfig.tsbuildinfo",
-    "size": 158368,
+    "size": 156560,
     "type": "module"
   },
   {
@@ -233,5 +243,65 @@
     "path": "shared/src/validations/password.ts",
     "size": 1048,
     "type": "validation"
+  },
+  {
+    "path": "testsprite_tests/TC-BE-001_Health_Check_API_Endpoint.py",
+    "size": 2339,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-BE-002_User_Authentication__JWT_Profile_Verification.py",
+    "size": 3607,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-FE-001_Dashboard_Hero_Video__Header_Navigation.py",
+    "size": 2652,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-FE-002_Government_Schemes_Search__Category_Modal.py",
+    "size": 2695,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-FE-003_Scheme_Detail_Page__Application_Process.py",
+    "size": 5166,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-FE-004_Foundational_Government_IDs_Portal__Wizard.py",
+    "size": 5645,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-FE-005_Civic_Complaints_Showcase__Category_Grid.py",
+    "size": 4836,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-FE-006_247_AI_Policy_Assistant_Conversational_Interface.py",
+    "size": 4839,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-FE-007_User_Credential_Vault__Digital_Wallet.py",
+    "size": 3002,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-FE-008_Mobile_Responsiveness__Viewport_Scaling.py",
+    "size": 4327,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/TC-SEC-001_Input_Sanitization__Injection_Prevention.py",
+    "size": 4548,
+    "type": "module"
+  },
+  {
+    "path": "testsprite_tests/tmp/code_summary.yaml",
+    "size": 3648,
+    "type": "module"
   }
 ]

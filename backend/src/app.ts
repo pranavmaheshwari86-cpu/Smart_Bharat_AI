@@ -1,8 +1,6 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import morgan from "morgan";
-import cookieParser from "cookie-parser";
 import routes from "./routes";
 import { config } from "./config";
 
@@ -52,13 +50,36 @@ app.use(
   })
 );
 
-// Logging
-app.use(morgan(config.nodeEnv === "production" ? "combined" : "dev"));
+// Native HTTP Request Logging Middleware (replaces morgan)
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl || req.url} ${res.statusCode} ${duration}ms`);
+  });
+  next();
+});
 
-// Body & Cookie Parsers with Size Limits to Prevent JSON Bombs
+// Body & Native Cookie Parsers with Size Limits to Prevent JSON Bombs
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
-app.use(cookieParser());
+
+// Native Request Cookie Parser Middleware (replaces cookie-parser)
+app.use((req: any, _res: any, next: any) => {
+  req.cookies = req.cookies || {};
+  const cookieHeader = req.headers.cookie;
+  if (cookieHeader) {
+    for (const pair of cookieHeader.split(";")) {
+      const eqIdx = pair.indexOf("=");
+      if (eqIdx > 0) {
+        const key = pair.slice(0, eqIdx).trim();
+        const val = pair.slice(eqIdx + 1).trim();
+        req.cookies[key] = decodeURIComponent(val);
+      }
+    }
+  }
+  next();
+});
 
 // Health & Root Check Endpoints
 app.get("/", (req, res) => {

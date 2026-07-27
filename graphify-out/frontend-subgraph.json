@@ -88,7 +88,7 @@
       "name": "package",
       "path": "frontend/package.json",
       "language": "json",
-      "size": 1154,
+      "size": 1152,
       "complexity": 1,
       "exports": []
     },
@@ -214,8 +214,8 @@
       "name": "page",
       "path": "frontend/src/app/complaints/page.tsx",
       "language": "typescript",
-      "size": 30873,
-      "complexity": 24,
+      "size": 34712,
+      "complexity": 26,
       "exports": [
         "ComplaintsPage"
       ]
@@ -240,7 +240,7 @@
       "name": "page",
       "path": "frontend/src/app/credentials/page.tsx",
       "language": "typescript",
-      "size": 18680,
+      "size": 17474,
       "complexity": 27,
       "exports": [
         "CredentialsPage"
@@ -336,13 +336,26 @@
       ]
     },
     {
+      "id": "frontend/src/app/ids/page.tsx",
+      "type": "page",
+      "layer": "frontend",
+      "name": "page",
+      "path": "frontend/src/app/ids/page.tsx",
+      "language": "typescript",
+      "size": 110,
+      "complexity": 1,
+      "exports": [
+        "IdsRedirectPage"
+      ]
+    },
+    {
       "id": "frontend/src/app/layout.tsx",
       "type": "page",
       "layer": "frontend",
       "name": "layout",
       "path": "frontend/src/app/layout.tsx",
       "language": "typescript",
-      "size": 3600,
+      "size": 3685,
       "complexity": 4,
       "exports": [
         "RootLayout",
@@ -460,8 +473,8 @@
       "name": "page",
       "path": "frontend/src/app/schemes/page.tsx",
       "language": "typescript",
-      "size": 26398,
-      "complexity": 37,
+      "size": 30585,
+      "complexity": 49,
       "exports": [
         "SchemesPage"
       ]
@@ -624,6 +637,19 @@
       ]
     },
     {
+      "id": "frontend/src/components/AppPreloader.tsx",
+      "type": "component",
+      "layer": "frontend",
+      "name": "AppPreloader",
+      "path": "frontend/src/components/AppPreloader.tsx",
+      "language": "typescript",
+      "size": 985,
+      "complexity": 4,
+      "exports": [
+        "AppPreloader"
+      ]
+    },
+    {
       "id": "frontend/src/components/auth/CompleteProfileModal.tsx",
       "type": "component",
       "layer": "frontend",
@@ -702,6 +728,19 @@
       ]
     },
     {
+      "id": "frontend/src/components/ComplaintsShowcase.tsx",
+      "type": "component",
+      "layer": "frontend",
+      "name": "ComplaintsShowcase",
+      "path": "frontend/src/components/ComplaintsShowcase.tsx",
+      "language": "typescript",
+      "size": 4134,
+      "complexity": 4,
+      "exports": [
+        "ComplaintsShowcase"
+      ]
+    },
+    {
       "id": "frontend/src/components/DocumentSelector.tsx",
       "type": "component",
       "layer": "frontend",
@@ -773,8 +812,8 @@
       "name": "HeroShowcase",
       "path": "frontend/src/components/HeroShowcase.tsx",
       "language": "typescript",
-      "size": 1154,
-      "complexity": 2,
+      "size": 1630,
+      "complexity": 6,
       "exports": [
         "HeroShowcase"
       ]
@@ -1199,7 +1238,7 @@
       "name": "tsconfig",
       "path": "frontend/tsconfig.tsbuildinfo",
       "language": "plaintext",
-      "size": 158368,
+      "size": 156560,
       "complexity": 1,
       "exports": []
     }

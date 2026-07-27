@@ -1,7 +1,14 @@
 {
-  "totalModules": 155,
-  "totalDependencies": 59,
+  "totalModules": 179,
+  "totalDependencies": 61,
   "modules": [
+    {
+      "id": ".agents/AGENTS.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
     {
       "id": ".code-review-graph/.gitignore",
       "layer": "root",
@@ -157,6 +164,13 @@
       "importedByCount": 1
     },
     {
+      "id": "backend/src/routes/complaints.routes.ts",
+      "layer": "backend",
+      "type": "route",
+      "importsCount": 0,
+      "importedByCount": 1
+    },
+    {
       "id": "backend/src/routes/govid.routes.ts",
       "layer": "backend",
       "type": "route",
@@ -167,7 +181,14 @@
       "id": "backend/src/routes/index.ts",
       "layer": "backend",
       "type": "route",
-      "importsCount": 2,
+      "importsCount": 4,
+      "importedByCount": 1
+    },
+    {
+      "id": "backend/src/routes/schemes.routes.ts",
+      "layer": "backend",
+      "type": "route",
+      "importsCount": 0,
       "importedByCount": 1
     },
     {
@@ -437,6 +458,13 @@
       "importedByCount": 0
     },
     {
+      "id": "frontend/src/app/ids/page.tsx",
+      "layer": "frontend",
+      "type": "page",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
       "id": "frontend/src/app/layout.tsx",
       "layer": "frontend",
       "type": "page",
@@ -591,6 +619,13 @@
       "importedByCount": 0
     },
     {
+      "id": "frontend/src/components/AppPreloader.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
       "id": "frontend/src/components/auth/CompleteProfileModal.tsx",
       "layer": "frontend",
       "type": "component",
@@ -627,6 +662,13 @@
     },
     {
       "id": "frontend/src/components/ClientShells.tsx",
+      "layer": "frontend",
+      "type": "component",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "frontend/src/components/ComplaintsShowcase.tsx",
       "layer": "frontend",
       "type": "component",
       "importsCount": 0,
@@ -1076,6 +1118,132 @@
     {
       "id": "shared/tsconfig.json",
       "layer": "shared",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/standard_prd.json",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-BE-001_Health_Check_API_Endpoint.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-BE-002_User_Authentication__JWT_Profile_Verification.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-FE-001_Dashboard_Hero_Video__Header_Navigation.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-FE-002_Government_Schemes_Search__Category_Modal.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-FE-003_Scheme_Detail_Page__Application_Process.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-FE-004_Foundational_Government_IDs_Portal__Wizard.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-FE-005_Civic_Complaints_Showcase__Category_Grid.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-FE-006_247_AI_Policy_Assistant_Conversational_Interface.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-FE-007_User_Credential_Vault__Digital_Wallet.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-FE-008_Mobile_Responsiveness__Viewport_Scaling.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/TC-SEC-001_Input_Sanitization__Injection_Prevention.py",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/testsprite_frontend_test_plan.json",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/tmp/code_summary.yaml",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/tmp/config.json",
+      "layer": "root",
+      "type": "module",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/tmp/prd_files/README.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/tmp/raw_report.md",
+      "layer": "root",
+      "type": "document",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
+      "id": "testsprite_tests/tmp/test_results.json",
+      "layer": "root",
       "type": "module",
       "importsCount": 0,
       "importedByCount": 0

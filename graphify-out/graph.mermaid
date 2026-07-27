@@ -1,4 +1,5 @@
 graph TD
+  _agents_AGENTS_md["AGENTS (document)"]
   _code_review_graph__gitignore[".gitignore (module)"]
   _code_review_graph_graph_db["graph (module)"]
   _code_review_graph_graph_db_shm["graph (module)"]
@@ -21,8 +22,10 @@ graph TD
   backend_src_repositories_session_repository_ts["session.repository (repository)"]
   backend_src_repositories_user_repository_ts["user.repository (repository)"]
   backend_src_routes_auth_routes_ts["auth.routes (route)"]
+  backend_src_routes_complaints_routes_ts["complaints.routes (route)"]
   backend_src_routes_govid_routes_ts["govid.routes (route)"]
   backend_src_routes_index_ts["index (route)"]
+  backend_src_routes_schemes_routes_ts["schemes.routes (route)"]
   backend_src_server_ts["server (module)"]
   backend_src_services_auth_service_ts["auth.service (service)"]
   backend_src_utils_hash_util_ts["hash.util (util)"]
@@ -61,6 +64,7 @@ graph TD
   frontend_src_app_id_page_tsx["page (page)"]
   frontend_src_app_id_track_page_tsx["page (page)"]
   frontend_src_app_id__id__page_tsx["page (page)"]
+  frontend_src_app_ids_page_tsx["page (page)"]
   frontend_src_app_layout_tsx["layout (page)"]
   frontend_src_app_login_page_tsx["page (page)"]
   frontend_src_app_manifest_ts["manifest (module)"]
@@ -83,12 +87,14 @@ graph TD
   frontend_src_app_vault_page_tsx["page (page)"]
   frontend_src_components_ai_AIAssistant_tsx["AIAssistant (component)"]
   frontend_src_components_ai_AssistantThreeScene_tsx["AssistantThreeScene (component)"]
+  frontend_src_components_AppPreloader_tsx["AppPreloader (component)"]
   frontend_src_components_auth_CompleteProfileModal_tsx["CompleteProfileModal (component)"]
   frontend_src_components_auth_GoogleSignInButton_tsx["GoogleSignInButton (component)"]
   frontend_src_components_auth_OtpInput_tsx["OtpInput (component)"]
   frontend_src_components_auth_OtpVerificationForm_tsx["OtpVerificationForm (component)"]
   frontend_src_components_auth_PasswordStrengthMeter_tsx["PasswordStrengthMeter (component)"]
   frontend_src_components_ClientShells_tsx["ClientShells (component)"]
+  frontend_src_components_ComplaintsShowcase_tsx["ComplaintsShowcase (component)"]
   frontend_src_components_DocumentSelector_tsx["DocumentSelector (component)"]
   frontend_src_components_DynamicForm_tsx["DynamicForm (component)"]
   frontend_src_components_EligibilityEngine_tsx["EligibilityEngine (component)"]
@@ -153,6 +159,24 @@ graph TD
   shared_src_types_auth_ts["auth (type)"]
   shared_src_validations_password_ts["password (validation)"]
   shared_tsconfig_json["tsconfig (module)"]
+  testsprite_tests_standard_prd_json["standard_prd (module)"]
+  testsprite_tests_TC_BE_001_Health_Check_API_Endpoint_py["TC-BE-001_Health_Check_API_Endpoint (module)"]
+  testsprite_tests_TC_BE_002_User_Authentication__JWT_Profile_Verification_py["TC-BE-002_User_Authentication__JWT_Profile_Verification (module)"]
+  testsprite_tests_TC_FE_001_Dashboard_Hero_Video__Header_Navigation_py["TC-FE-001_Dashboard_Hero_Video__Header_Navigation (module)"]
+  testsprite_tests_TC_FE_002_Government_Schemes_Search__Category_Modal_py["TC-FE-002_Government_Schemes_Search__Category_Modal (module)"]
+  testsprite_tests_TC_FE_003_Scheme_Detail_Page__Application_Process_py["TC-FE-003_Scheme_Detail_Page__Application_Process (module)"]
+  testsprite_tests_TC_FE_004_Foundational_Government_IDs_Portal__Wizard_py["TC-FE-004_Foundational_Government_IDs_Portal__Wizard (module)"]
+  testsprite_tests_TC_FE_005_Civic_Complaints_Showcase__Category_Grid_py["TC-FE-005_Civic_Complaints_Showcase__Category_Grid (module)"]
+  testsprite_tests_TC_FE_006_247_AI_Policy_Assistant_Conversational_Interface_py["TC-FE-006_247_AI_Policy_Assistant_Conversational_Interface (module)"]
+  testsprite_tests_TC_FE_007_User_Credential_Vault__Digital_Wallet_py["TC-FE-007_User_Credential_Vault__Digital_Wallet (module)"]
+  testsprite_tests_TC_FE_008_Mobile_Responsiveness__Viewport_Scaling_py["TC-FE-008_Mobile_Responsiveness__Viewport_Scaling (module)"]
+  testsprite_tests_TC_SEC_001_Input_Sanitization__Injection_Prevention_py["TC-SEC-001_Input_Sanitization__Injection_Prevention (module)"]
+  testsprite_tests_testsprite_frontend_test_plan_json["testsprite_frontend_test_plan (module)"]
+  testsprite_tests_tmp_code_summary_yaml["code_summary (module)"]
+  testsprite_tests_tmp_config_json["config (module)"]
+  testsprite_tests_tmp_prd_files_README_md["README (document)"]
+  testsprite_tests_tmp_raw_report_md["raw_report (document)"]
+  testsprite_tests_tmp_test_results_json["test_results (module)"]
   vercel_json["vercel (module)"]
   backend_api_index_ts --> backend_src_app_ts
   backend_src_app_ts --> backend_src_routes_index_ts
@@ -173,6 +197,8 @@ graph TD
   backend_src_routes_auth_routes_ts --> backend_src_controllers_auth_controller_ts
   backend_src_routes_index_ts --> backend_src_routes_auth_routes_ts
   backend_src_routes_index_ts --> backend_src_routes_govid_routes_ts
+  backend_src_routes_index_ts --> backend_src_routes_schemes_routes_ts
+  backend_src_routes_index_ts --> backend_src_routes_complaints_routes_ts
   backend_src_server_ts --> backend_src_app_ts
   backend_src_server_ts --> backend_src_config_index_ts
   backend_src_server_ts --> backend_src_database_db_ts
