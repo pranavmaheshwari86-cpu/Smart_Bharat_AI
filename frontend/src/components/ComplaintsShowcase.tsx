@@ -61,7 +61,7 @@ export function ComplaintsShowcase() {
   return (
     <div className="w-full h-full relative flex flex-col items-center justify-center">
       {/* Expanded Landscape Showcase Image Card */}
-      <div className="w-full h-full aspect-[16/10] sm:aspect-[16/9] min-h-[340px] max-h-[440px] relative rounded-[32px] overflow-hidden border border-white/30 shadow-[0_24px_60px_rgba(0,0,0,0.18)] bg-neutral-950 group">
+      <div className="w-full h-full min-h-[400px] sm:min-h-[460px] lg:min-h-[500px] max-h-[580px] relative rounded-[32px] overflow-hidden border border-white/40 shadow-[0_24px_60px_rgba(0,0,0,0.22)] bg-neutral-950 group">
         {/* Slides */}
         {CIVIC_SLIDES.map((slide, idx) => (
           <div

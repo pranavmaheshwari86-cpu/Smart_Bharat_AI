@@ -62,11 +62,11 @@ export function AIAssistant() {
 
   return (
     <>
-      {/* FAB Button with WCAG accessibility */}
+      {/* FAB Button with WCAG accessibility & Safe Area support */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 p-4 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition-all duration-300 z-50 flex items-center justify-center ${
-          isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100 hover:scale-110"
+        className={`fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))] right-[calc(1.5rem+env(safe-area-inset-right,0px))] p-4 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition-all duration-300 z-50 flex items-center justify-center touch-target-min ${
+          isOpen ? "scale-0 opacity-0 pointer-events-none" : "scale-100 opacity-100 hover:scale-105"
         }`}
         aria-label="Open AI Assistant"
         aria-expanded={isOpen}
@@ -75,16 +75,16 @@ export function AIAssistant() {
         <Sparkles className="w-6 h-6 animate-pulse" aria-hidden="true" />
       </button>
 
-      {/* Accessible Chat Dialog Window */}
+      {/* Accessible Responsive Chat Dialog Window */}
       <div
         id="ai-chat-window"
         role="dialog"
         aria-modal="true"
         aria-label="Smart Bharat AI Assistant Chat Window"
-        className={`fixed bottom-6 right-6 w-full max-w-sm sm:max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right ${
+        className={`fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-[calc(0.75rem+env(safe-area-inset-right,0px))] left-[calc(0.75rem+env(safe-area-inset-left,0px))] sm:left-auto sm:right-6 w-auto sm:w-[calc(100vw-3rem)] max-w-sm sm:max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right ${
           isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
         }`}
-        style={{ height: "600px", maxHeight: "calc(100vh - 48px)" }}
+        style={{ height: "560px", maxHeight: "calc(100dvh - 5rem - env(safe-area-inset-bottom, 0px))" }}
       >
         {/* Dialog Header */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 flex justify-between items-center text-white">

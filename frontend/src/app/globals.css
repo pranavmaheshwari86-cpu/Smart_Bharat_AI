@@ -136,10 +136,24 @@
     --aadhaar-glass: rgba(255,255,255,0.75);
   }
 
+  html {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-on-background);
     overflow-x: hidden;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
   }
 
   .material-symbols-outlined {
@@ -161,11 +175,37 @@
 }
 
 @layer utilities {
+  /* Safe Area Insets for Mobile Cutouts, Dynamic Island, Folds, and Home Indicator */
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pl-safe {
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+  .pr-safe {
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Minimum Accessible Touch Target Size (WCAG 2.1 AA) */
+  .touch-target-min {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .glass-panel {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(228, 224, 214, 0.5);
+    border: 1px solid rgba(228, 224, 214, 0.6);
   }
   .text-gradient {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-tertiary) 100%);
@@ -181,6 +221,19 @@
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(28, 27, 25, 0.06), 0 4px 12px rgba(28, 27, 25, 0.04);
   }
+
+  /* Custom Sleek Scrollbar — Completely Hidden Lines */
+  .custom-scrollbar::-webkit-scrollbar,
+  .no-scrollbar::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+    display: none !important;
+  }
+  .custom-scrollbar,
+  .no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
 }
 /* Hide Spline Watermark */
 a[href*="spline.design"], a[href*="splinetool"] { display: none !important; }
@@ -192,4 +245,11 @@ a[href*="spline.design"], a[href*="splinetool"] { display: none !important; }
 }
 .animate-fade-in-up {
   animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Mobile Only Navigation Controls — Strictly Hidden on Laptops & Desktops */
+@media (min-width: 640px) {
+  .mobile-only-control {
+    display: none !important;
+  }
 }

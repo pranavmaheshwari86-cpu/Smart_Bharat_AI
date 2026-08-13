@@ -7,23 +7,10 @@
       "name": "auth.controller",
       "path": "backend/src/controllers/auth.controller.ts",
       "language": "typescript",
-      "size": 8525,
+      "size": 8455,
       "complexity": 23,
       "exports": [
         "AuthController"
-      ]
-    },
-    {
-      "id": "backend/src/repositories/session.repository.ts",
-      "type": "repository",
-      "layer": "backend",
-      "name": "session.repository",
-      "path": "backend/src/repositories/session.repository.ts",
-      "language": "typescript",
-      "size": 1096,
-      "complexity": 5,
-      "exports": [
-        "SessionRepository"
       ]
     },
     {
@@ -46,7 +33,7 @@
       "name": "auth.service",
       "path": "backend/src/services/auth.service.ts",
       "language": "typescript",
-      "size": 14043,
+      "size": 13864,
       "complexity": 45,
       "exports": [
         "AuthService"
@@ -70,7 +57,7 @@
       "name": "page",
       "path": "frontend/src/app/login/page.tsx",
       "language": "typescript",
-      "size": 22327,
+      "size": 22222,
       "complexity": 25,
       "exports": [
         "LoginPage"
@@ -83,62 +70,10 @@
       "name": "page",
       "path": "frontend/src/app/signup/page.tsx",
       "language": "typescript",
-      "size": 15362,
+      "size": 15257,
       "complexity": 17,
       "exports": [
         "SignUpPage"
-      ]
-    },
-    {
-      "id": "frontend/src/components/auth/CompleteProfileModal.tsx",
-      "type": "component",
-      "layer": "frontend",
-      "name": "CompleteProfileModal",
-      "path": "frontend/src/components/auth/CompleteProfileModal.tsx",
-      "language": "typescript",
-      "size": 9467,
-      "complexity": 15,
-      "exports": [
-        "CompleteProfileModal"
-      ]
-    },
-    {
-      "id": "frontend/src/components/auth/GoogleSignInButton.tsx",
-      "type": "component",
-      "layer": "frontend",
-      "name": "GoogleSignInButton",
-      "path": "frontend/src/components/auth/GoogleSignInButton.tsx",
-      "language": "typescript",
-      "size": 2189,
-      "complexity": 5,
-      "exports": [
-        "GoogleSignInButton"
-      ]
-    },
-    {
-      "id": "frontend/src/components/auth/OtpInput.tsx",
-      "type": "component",
-      "layer": "frontend",
-      "name": "OtpInput",
-      "path": "frontend/src/components/auth/OtpInput.tsx",
-      "language": "typescript",
-      "size": 9006,
-      "complexity": 41,
-      "exports": [
-        "OtpInput"
-      ]
-    },
-    {
-      "id": "frontend/src/components/auth/OtpVerificationForm.tsx",
-      "type": "component",
-      "layer": "frontend",
-      "name": "OtpVerificationForm",
-      "path": "frontend/src/components/auth/OtpVerificationForm.tsx",
-      "language": "typescript",
-      "size": 9005,
-      "complexity": 28,
-      "exports": [
-        "OtpVerificationForm"
       ]
     },
     {
@@ -148,7 +83,7 @@
       "name": "PasswordStrengthMeter",
       "path": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
       "language": "typescript",
-      "size": 2725,
+      "size": 2803,
       "complexity": 12,
       "exports": [
         "PasswordStrengthMeter"
@@ -247,26 +182,8 @@
       "weight": 1
     },
     {
-      "source": "backend/src/controllers/auth.controller.ts",
-      "target": "backend/src/repositories/session.repository.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
       "source": "backend/src/routes/auth.routes.ts",
       "target": "backend/src/controllers/auth.controller.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/services/auth.service.ts",
-      "target": "backend/src/repositories/session.repository.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/components/auth/CompleteProfileModal.tsx",
-      "target": "frontend/src/components/auth/OtpInput.tsx",
       "type": "imports",
       "weight": 1
     }

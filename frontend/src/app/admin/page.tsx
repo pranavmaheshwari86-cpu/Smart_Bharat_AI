@@ -19,10 +19,10 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] bg-muted/30">
+    <div className="flex flex-col md:flex-row min-h-[calc(100dvh-4rem)] pt-16 sm:pt-20 bg-muted/30">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-border/50 bg-background/95 backdrop-blur-md p-6">
-        <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-6 font-heading">
+      <aside className="w-full md:w-64 border-b md:border-b-0 md:border-r border-border/50 bg-background/95 backdrop-blur-md p-4 sm:p-6 shrink-0">
+        <h2 className="text-xs sm:text-sm font-bold text-muted-foreground uppercase tracking-wider mb-4 sm:mb-6 font-heading">
           Super Admin
         </h2>
         <nav className="space-y-2">

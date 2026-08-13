@@ -20,7 +20,7 @@
       "name": "auth.controller",
       "path": "backend/src/controllers/auth.controller.ts",
       "language": "typescript",
-      "size": 8525,
+      "size": 8455,
       "complexity": 23,
       "exports": [
         "AuthController"

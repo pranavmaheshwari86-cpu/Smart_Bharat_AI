@@ -12,7 +12,6 @@ interface DatabaseSchema {
 }
 
 function getDbFilePath(): { dbDir: string; dbFile: string } {
-  // Check if running in Vercel or production serverless read-only environment
   const isServerless =
     process.env.VERCEL === "1" ||
     process.env.VERCEL === "true" ||
@@ -52,7 +51,6 @@ export function ensureDbExists(): void {
       fs.mkdirSync(dbDir, { recursive: true });
     }
     if (!fs.existsSync(dbFile)) {
-      // Seed initial data if available in project
       const seedCandidates = [
         path.join(process.cwd(), "data/smart_bharat_db.json"),
         path.join(__dirname, "../../../data/smart_bharat_db.json"),
@@ -99,5 +97,162 @@ export function writeDb(data: DatabaseSchema): void {
     fs.renameSync(tempPath, dbFile);
   } catch (err) {
     console.error("Error writing to db file:", err);
+  }
+}
+
+// User Repository
+export class UserRepository {
+  public findById(id: string): UserRecord | null {
+    const db = readDb();
+    return db.users.find((u) => u.id === id) || null;
+  }
+
+  public findByEmail(email: string): UserRecord | null {
+    const db = readDb();
+    const normalized = email.trim().toLowerCase();
+    return db.users.find((u) => u.email.toLowerCase() === normalized) || null;
+  }
+
+  public findByPhone(phone: string): UserRecord | null {
+    const db = readDb();
+    const normalized = phone.replace(/\s+/g, "");
+    return db.users.find((u) => u.phone_number.replace(/\s+/g, "") === normalized) || null;
+  }
+
+  public findByGoogleId(googleId: string): UserRecord | null {
+    const db = readDb();
+    return db.users.find((u) => u.google_id === googleId) || null;
+  }
+
+  public save(user: UserRecord): UserRecord {
+    const db = readDb();
+    const index = db.users.findIndex((u) => u.id === user.id);
+    if (index >= 0) {
+      db.users[index] = { ...user, updated_at: new Date().toISOString() };
+    } else {
+      db.users.push(user);
+    }
+    writeDb(db);
+    return user;
+  }
+
+  public update(id: string, updates: Partial<UserRecord>): UserRecord | null {
+    const db = readDb();
+    const index = db.users.findIndex((u) => u.id === id);
+    if (index < 0) return null;
+
+    const existing = db.users[index];
+    const updated: UserRecord = {
+      ...existing,
+      ...updates,
+      updated_at: new Date().toISOString(),
+    };
+    db.users[index] = updated;
+    writeDb(db);
+    return updated;
+  }
+}
+
+// Session Repository
+export class SessionRepository {
+  public save(session: SessionRecord): SessionRecord {
+    const db = readDb();
+    const index = db.sessions.findIndex((s) => s.id === session.id);
+    if (index >= 0) {
+      db.sessions[index] = session;
+    } else {
+      db.sessions.push(session);
+    }
+    writeDb(db);
+    return session;
+  }
+
+  public findByRefreshToken(token: string): SessionRecord | null {
+    const db = readDb();
+    const session = db.sessions.find((s) => s.refresh_token === token);
+    if (!session) return null;
+    if (new Date(session.expires_at).getTime() < Date.now()) {
+      this.delete(session.id);
+      return null;
+    }
+    return session;
+  }
+
+  public delete(sessionId: string): void {
+    const db = readDb();
+    db.sessions = db.sessions.filter((s) => s.id !== sessionId);
+    writeDb(db);
+  }
+
+  public deleteByUserId(userId: string): void {
+    const db = readDb();
+    db.sessions = db.sessions.filter((s) => s.user_id !== userId);
+    writeDb(db);
+  }
+}
+
+// OTP Repository
+export class OtpRepository {
+  public save(otp: OtpRecord): OtpRecord {
+    const db = readDb();
+    db.otps = db.otps.map((o) => {
+      if (o.identifier === otp.identifier && o.purpose === otp.purpose && !o.verified) {
+        return { ...o, verified: true };
+      }
+      return o;
+    });
+    db.otps.push(otp);
+    writeDb(db);
+    return otp;
+  }
+
+  public getLatest(identifier: string, purpose: OtpRecord["purpose"]): OtpRecord | null {
+    const db = readDb();
+    const matches = db.otps
+      .filter((o) => o.identifier === identifier && o.purpose === purpose && !o.verified)
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+    return matches[0] || null;
+  }
+
+  public update(otp: OtpRecord): void {
+    const db = readDb();
+    const idx = db.otps.findIndex((o) => o.id === otp.id);
+    if (idx >= 0) {
+      db.otps[idx] = otp;
+      writeDb(db);
+    }
+  }
+}
+
+// Password Reset Repository
+export class PasswordResetRepository {
+  public save(reset: PasswordResetRecord): PasswordResetRecord {
+    const db = readDb();
+    db.password_resets = db.password_resets.map((r) =>
+      r.user_id === reset.user_id ? { ...r, used: true } : r
+    );
+    db.password_resets.push(reset);
+    writeDb(db);
+    return reset;
+  }
+
+  public findByTokenHash(tokenHash: string): PasswordResetRecord | null {
+    const db = readDb();
+    const reset = db.password_resets.find((r) => r.token_hash === tokenHash && !r.used);
+    if (!reset) return null;
+    if (new Date(reset.expires_at).getTime() < Date.now()) {
+      return null;
+    }
+    return reset;
+  }
+
+  public markUsed(id: string): void {
+    const db = readDb();
+    const idx = db.password_resets.findIndex((r) => r.id === id);
+    if (idx >= 0) {
+      db.password_resets[idx].used = true;
+      writeDb(db);
+    }
   }
 }

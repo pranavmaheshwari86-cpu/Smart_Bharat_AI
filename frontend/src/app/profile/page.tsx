@@ -22,10 +22,10 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-16">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">My Profile & Applications</h1>
-        <p className="mt-2 text-lg text-slate-600">Track the status of your schemes, IDs, and complaints.</p>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">My Profile &amp; Applications</h1>
+        <p className="mt-2 text-base sm:text-lg text-slate-600">Track the status of your schemes, IDs, and complaints.</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">

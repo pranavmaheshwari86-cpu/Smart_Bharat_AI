@@ -152,7 +152,7 @@
       "name": "package",
       "path": "backend/package.json",
       "language": "json",
-      "size": 989,
+      "size": 839,
       "complexity": 1,
       "exports": []
     },
@@ -163,8 +163,8 @@
       "name": "app",
       "path": "backend/src/app.ts",
       "language": "typescript",
-      "size": 2932,
-      "complexity": 10,
+      "size": 3603,
+      "complexity": 12,
       "exports": [
         "app"
       ]
@@ -176,8 +176,8 @@
       "name": "index",
       "path": "backend/src/config/index.ts",
       "language": "typescript",
-      "size": 828,
-      "complexity": 2,
+      "size": 1410,
+      "complexity": 7,
       "exports": [
         "config"
       ]
@@ -189,7 +189,7 @@
       "name": "auth.controller",
       "path": "backend/src/controllers/auth.controller.ts",
       "language": "typescript",
-      "size": 8525,
+      "size": 8455,
       "complexity": 23,
       "exports": [
         "AuthController"
@@ -202,64 +202,16 @@
       "name": "db",
       "path": "backend/src/database/db.ts",
       "language": "typescript",
-      "size": 3100,
-      "complexity": 15,
+      "size": 7364,
+      "complexity": 26,
       "exports": [
         "ensureDbExists",
         "readDb",
-        "writeDb"
-      ]
-    },
-    {
-      "id": "backend/src/repositories/otp.repository.ts",
-      "type": "repository",
-      "layer": "backend",
-      "name": "otp.repository",
-      "path": "backend/src/repositories/otp.repository.ts",
-      "language": "typescript",
-      "size": 1019,
-      "complexity": 3,
-      "exports": [
-        "OtpRepository"
-      ]
-    },
-    {
-      "id": "backend/src/repositories/password-reset.repository.ts",
-      "type": "repository",
-      "layer": "backend",
-      "name": "password-reset.repository",
-      "path": "backend/src/repositories/password-reset.repository.ts",
-      "language": "typescript",
-      "size": 988,
-      "complexity": 5,
-      "exports": [
+        "writeDb",
+        "UserRepository",
+        "SessionRepository",
+        "OtpRepository",
         "PasswordResetRepository"
-      ]
-    },
-    {
-      "id": "backend/src/repositories/session.repository.ts",
-      "type": "repository",
-      "layer": "backend",
-      "name": "session.repository",
-      "path": "backend/src/repositories/session.repository.ts",
-      "language": "typescript",
-      "size": 1096,
-      "complexity": 5,
-      "exports": [
-        "SessionRepository"
-      ]
-    },
-    {
-      "id": "backend/src/repositories/user.repository.ts",
-      "type": "repository",
-      "layer": "backend",
-      "name": "user.repository",
-      "path": "backend/src/repositories/user.repository.ts",
-      "language": "typescript",
-      "size": 1618,
-      "complexity": 4,
-      "exports": [
-        "UserRepository"
       ]
     },
     {
@@ -345,7 +297,7 @@
       "name": "auth.service",
       "path": "backend/src/services/auth.service.ts",
       "language": "typescript",
-      "size": 14043,
+      "size": 13864,
       "complexity": 45,
       "exports": [
         "AuthService"
@@ -426,7 +378,7 @@
       "name": "smart_bharat_db",
       "path": "data/smart_bharat_db.json",
       "language": "json",
-      "size": 5083,
+      "size": 4210,
       "complexity": 1,
       "exports": []
     },
@@ -551,7 +503,7 @@
       "name": "package",
       "path": "frontend/package.json",
       "language": "json",
-      "size": 1152,
+      "size": 1033,
       "complexity": 1,
       "exports": []
     },
@@ -588,23 +540,10 @@
       "name": "page",
       "path": "frontend/src/app/admin/page.tsx",
       "language": "typescript",
-      "size": 11319,
+      "size": 11427,
       "complexity": 6,
       "exports": [
         "AdminDashboard"
-      ]
-    },
-    {
-      "id": "frontend/src/app/ai/loading.tsx",
-      "type": "module",
-      "layer": "frontend",
-      "name": "loading",
-      "path": "frontend/src/app/ai/loading.tsx",
-      "language": "typescript",
-      "size": 2374,
-      "complexity": 1,
-      "exports": [
-        "AILoading"
       ]
     },
     {
@@ -614,10 +553,10 @@
       "name": "page",
       "path": "frontend/src/app/ai/page.tsx",
       "language": "typescript",
-      "size": 23196,
-      "complexity": 24,
+      "size": 116,
+      "complexity": 1,
       "exports": [
-        "AIPage"
+        "AIRedirectPage"
       ]
     },
     {
@@ -632,42 +571,16 @@
       "exports": []
     },
     {
-      "id": "frontend/src/app/assistant/loading.tsx",
-      "type": "module",
-      "layer": "frontend",
-      "name": "loading",
-      "path": "frontend/src/app/assistant/loading.tsx",
-      "language": "typescript",
-      "size": 1562,
-      "complexity": 1,
-      "exports": [
-        "AssistantLoading"
-      ]
-    },
-    {
       "id": "frontend/src/app/assistant/page.tsx",
       "type": "page",
       "layer": "frontend",
       "name": "page",
       "path": "frontend/src/app/assistant/page.tsx",
       "language": "typescript",
-      "size": 32054,
+      "size": 26045,
       "complexity": 30,
       "exports": [
         "AssistantPage"
-      ]
-    },
-    {
-      "id": "frontend/src/app/complaints/loading.tsx",
-      "type": "module",
-      "layer": "frontend",
-      "name": "loading",
-      "path": "frontend/src/app/complaints/loading.tsx",
-      "language": "typescript",
-      "size": 1115,
-      "complexity": 1,
-      "exports": [
-        "ComplaintsLoading"
       ]
     },
     {
@@ -677,23 +590,10 @@
       "name": "page",
       "path": "frontend/src/app/complaints/page.tsx",
       "language": "typescript",
-      "size": 34712,
-      "complexity": 26,
+      "size": 29653,
+      "complexity": 10,
       "exports": [
         "ComplaintsPage"
-      ]
-    },
-    {
-      "id": "frontend/src/app/credentials/loading.tsx",
-      "type": "module",
-      "layer": "frontend",
-      "name": "loading",
-      "path": "frontend/src/app/credentials/loading.tsx",
-      "language": "typescript",
-      "size": 1720,
-      "complexity": 1,
-      "exports": [
-        "CredentialsLoading"
       ]
     },
     {
@@ -703,8 +603,8 @@
       "name": "page",
       "path": "frontend/src/app/credentials/page.tsx",
       "language": "typescript",
-      "size": 17474,
-      "complexity": 27,
+      "size": 20934,
+      "complexity": 31,
       "exports": [
         "CredentialsPage"
       ]
@@ -742,22 +642,9 @@
       "name": "globals",
       "path": "frontend/src/app/globals.css",
       "language": "css",
-      "size": 6286,
+      "size": 7761,
       "complexity": 1,
       "exports": []
-    },
-    {
-      "id": "frontend/src/app/id/loading.tsx",
-      "type": "module",
-      "layer": "frontend",
-      "name": "loading",
-      "path": "frontend/src/app/id/loading.tsx",
-      "language": "typescript",
-      "size": 1925,
-      "complexity": 1,
-      "exports": [
-        "IDsLoading"
-      ]
     },
     {
       "id": "frontend/src/app/id/page.tsx",
@@ -766,8 +653,8 @@
       "name": "page",
       "path": "frontend/src/app/id/page.tsx",
       "language": "typescript",
-      "size": 18585,
-      "complexity": 32,
+      "size": 16340,
+      "complexity": 19,
       "exports": [
         "IDPage"
       ]
@@ -799,29 +686,17 @@
       ]
     },
     {
-      "id": "frontend/src/app/ids/page.tsx",
-      "type": "page",
-      "layer": "frontend",
-      "name": "page",
-      "path": "frontend/src/app/ids/page.tsx",
-      "language": "typescript",
-      "size": 110,
-      "complexity": 1,
-      "exports": [
-        "IdsRedirectPage"
-      ]
-    },
-    {
       "id": "frontend/src/app/layout.tsx",
       "type": "page",
       "layer": "frontend",
       "name": "layout",
       "path": "frontend/src/app/layout.tsx",
       "language": "typescript",
-      "size": 3685,
-      "complexity": 4,
+      "size": 3058,
+      "complexity": 3,
       "exports": [
         "RootLayout",
+        "viewport",
         "metadata"
       ]
     },
@@ -832,7 +707,7 @@
       "name": "page",
       "path": "frontend/src/app/login/page.tsx",
       "language": "typescript",
-      "size": 22327,
+      "size": 22222,
       "complexity": 25,
       "exports": [
         "LoginPage"
@@ -884,7 +759,7 @@
       "name": "page",
       "path": "frontend/src/app/profile/page.tsx",
       "language": "typescript",
-      "size": 4051,
+      "size": 4095,
       "complexity": 10,
       "exports": [
         "ProfilePage"
@@ -917,27 +792,14 @@
       ]
     },
     {
-      "id": "frontend/src/app/schemes/loading.tsx",
-      "type": "module",
-      "layer": "frontend",
-      "name": "loading",
-      "path": "frontend/src/app/schemes/loading.tsx",
-      "language": "typescript",
-      "size": 1796,
-      "complexity": 1,
-      "exports": [
-        "SchemesLoading"
-      ]
-    },
-    {
       "id": "frontend/src/app/schemes/page.tsx",
       "type": "page",
       "layer": "frontend",
       "name": "page",
       "path": "frontend/src/app/schemes/page.tsx",
       "language": "typescript",
-      "size": 30585,
-      "complexity": 49,
+      "size": 25854,
+      "complexity": 34,
       "exports": [
         "SchemesPage"
       ]
@@ -1002,7 +864,7 @@
       "name": "page",
       "path": "frontend/src/app/signup/page.tsx",
       "language": "typescript",
-      "size": 15362,
+      "size": 15257,
       "complexity": 17,
       "exports": [
         "SignUpPage"
@@ -1054,7 +916,7 @@
       "name": "page",
       "path": "frontend/src/app/track/page.tsx",
       "language": "typescript",
-      "size": 10235,
+      "size": 10276,
       "complexity": 9,
       "exports": [
         "TrackApplication"
@@ -1067,10 +929,10 @@
       "name": "page",
       "path": "frontend/src/app/vault/page.tsx",
       "language": "typescript",
-      "size": 4844,
-      "complexity": 3,
+      "size": 121,
+      "complexity": 1,
       "exports": [
-        "VaultPage"
+        "VaultRedirectPage"
       ]
     },
     {
@@ -1080,7 +942,7 @@
       "name": "AIAssistant",
       "path": "frontend/src/components/ai/AIAssistant.tsx",
       "language": "typescript",
-      "size": 8510,
+      "size": 8890,
       "complexity": 25,
       "exports": [
         "AIAssistant"
@@ -1113,65 +975,13 @@
       ]
     },
     {
-      "id": "frontend/src/components/auth/CompleteProfileModal.tsx",
-      "type": "component",
-      "layer": "frontend",
-      "name": "CompleteProfileModal",
-      "path": "frontend/src/components/auth/CompleteProfileModal.tsx",
-      "language": "typescript",
-      "size": 9467,
-      "complexity": 15,
-      "exports": [
-        "CompleteProfileModal"
-      ]
-    },
-    {
-      "id": "frontend/src/components/auth/GoogleSignInButton.tsx",
-      "type": "component",
-      "layer": "frontend",
-      "name": "GoogleSignInButton",
-      "path": "frontend/src/components/auth/GoogleSignInButton.tsx",
-      "language": "typescript",
-      "size": 2189,
-      "complexity": 5,
-      "exports": [
-        "GoogleSignInButton"
-      ]
-    },
-    {
-      "id": "frontend/src/components/auth/OtpInput.tsx",
-      "type": "component",
-      "layer": "frontend",
-      "name": "OtpInput",
-      "path": "frontend/src/components/auth/OtpInput.tsx",
-      "language": "typescript",
-      "size": 9006,
-      "complexity": 41,
-      "exports": [
-        "OtpInput"
-      ]
-    },
-    {
-      "id": "frontend/src/components/auth/OtpVerificationForm.tsx",
-      "type": "component",
-      "layer": "frontend",
-      "name": "OtpVerificationForm",
-      "path": "frontend/src/components/auth/OtpVerificationForm.tsx",
-      "language": "typescript",
-      "size": 9005,
-      "complexity": 28,
-      "exports": [
-        "OtpVerificationForm"
-      ]
-    },
-    {
       "id": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
       "type": "component",
       "layer": "frontend",
       "name": "PasswordStrengthMeter",
       "path": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
       "language": "typescript",
-      "size": 2725,
+      "size": 2803,
       "complexity": 12,
       "exports": [
         "PasswordStrengthMeter"
@@ -1197,7 +1007,7 @@
       "name": "ComplaintsShowcase",
       "path": "frontend/src/components/ComplaintsShowcase.tsx",
       "language": "typescript",
-      "size": 4134,
+      "size": 4136,
       "complexity": 4,
       "exports": [
         "ComplaintsShowcase"
@@ -1223,7 +1033,7 @@
       "name": "DynamicForm",
       "path": "frontend/src/components/DynamicForm.tsx",
       "language": "typescript",
-      "size": 18913,
+      "size": 19044,
       "complexity": 47,
       "exports": [
         "DynamicForm"
@@ -1249,7 +1059,7 @@
       "name": "Footer",
       "path": "frontend/src/components/Footer.tsx",
       "language": "typescript",
-      "size": 1751,
+      "size": 2178,
       "complexity": 2,
       "exports": [
         "Footer"
@@ -1262,7 +1072,7 @@
       "name": "Hero",
       "path": "frontend/src/components/Hero.tsx",
       "language": "typescript",
-      "size": 11195,
+      "size": 11864,
       "complexity": 6,
       "exports": [
         "Hero"
@@ -1275,7 +1085,7 @@
       "name": "HeroShowcase",
       "path": "frontend/src/components/HeroShowcase.tsx",
       "language": "typescript",
-      "size": 1630,
+      "size": 1671,
       "complexity": 6,
       "exports": [
         "HeroShowcase"
@@ -1288,8 +1098,8 @@
       "name": "Navbar",
       "path": "frontend/src/components/Navbar.tsx",
       "language": "typescript",
-      "size": 6530,
-      "complexity": 13,
+      "size": 13991,
+      "complexity": 30,
       "exports": [
         "Navbar"
       ]
@@ -1404,70 +1214,23 @@
       ]
     },
     {
-      "id": "frontend/src/lib/ai/classifier.ts",
-      "type": "util",
-      "layer": "frontend",
-      "name": "classifier",
-      "path": "frontend/src/lib/ai/classifier.ts",
-      "language": "typescript",
-      "size": 3219,
-      "complexity": 16,
-      "exports": [
-        "classifyUserQuery"
-      ]
-    },
-    {
-      "id": "frontend/src/lib/ai/memory.ts",
-      "type": "util",
-      "layer": "frontend",
-      "name": "memory",
-      "path": "frontend/src/lib/ai/memory.ts",
-      "language": "typescript",
-      "size": 1960,
-      "complexity": 9,
-      "exports": [
-        "processConversationMemory"
-      ]
-    },
-    {
-      "id": "frontend/src/lib/ai/modelRouter.ts",
-      "type": "util",
-      "layer": "frontend",
-      "name": "modelRouter",
-      "path": "frontend/src/lib/ai/modelRouter.ts",
-      "language": "typescript",
-      "size": 3569,
-      "complexity": 24,
-      "exports": [
-        "ModelRouteOptions",
-        "ModelRouteResponse"
-      ]
-    },
-    {
       "id": "frontend/src/lib/ai/orchestrator.ts",
       "type": "util",
       "layer": "frontend",
       "name": "orchestrator",
       "path": "frontend/src/lib/ai/orchestrator.ts",
       "language": "typescript",
-      "size": 2697,
-      "complexity": 5,
+      "size": 8212,
+      "complexity": 40,
       "exports": [
-        "AIOrchestrator"
-      ]
-    },
-    {
-      "id": "frontend/src/lib/ai/promptBuilder.ts",
-      "type": "util",
-      "layer": "frontend",
-      "name": "promptBuilder",
-      "path": "frontend/src/lib/ai/promptBuilder.ts",
-      "language": "typescript",
-      "size": 3054,
-      "complexity": 10,
-      "exports": [
+        "validateInputSecurity",
+        "classifyUserQuery",
+        "processConversationMemory",
+        "executeTools",
         "assembleSystemPrompt",
-        "formatUserMessagePayload"
+        "formatUserMessagePayload",
+        "validateAndCleanResponse",
+        "AIOrchestrator"
       ]
     },
     {
@@ -1477,37 +1240,10 @@
       "name": "rag",
       "path": "frontend/src/lib/ai/rag.ts",
       "language": "typescript",
-      "size": 3866,
-      "complexity": 18,
+      "size": 4609,
+      "complexity": 23,
       "exports": [
         "queryKnowledgeBase"
-      ]
-    },
-    {
-      "id": "frontend/src/lib/ai/security.ts",
-      "type": "util",
-      "layer": "frontend",
-      "name": "security",
-      "path": "frontend/src/lib/ai/security.ts",
-      "language": "typescript",
-      "size": 1588,
-      "complexity": 7,
-      "exports": [
-        "validateInputSecurity",
-        "sanitizeResponseOutput"
-      ]
-    },
-    {
-      "id": "frontend/src/lib/ai/tools.ts",
-      "type": "util",
-      "layer": "frontend",
-      "name": "tools",
-      "path": "frontend/src/lib/ai/tools.ts",
-      "language": "typescript",
-      "size": 1854,
-      "complexity": 6,
-      "exports": [
-        "executeTools"
       ]
     },
     {
@@ -1530,19 +1266,6 @@
         "MemoryState",
         "ValidationResult",
         "AIResponsePayload"
-      ]
-    },
-    {
-      "id": "frontend/src/lib/ai/validator.ts",
-      "type": "util",
-      "layer": "frontend",
-      "name": "validator",
-      "path": "frontend/src/lib/ai/validator.ts",
-      "language": "typescript",
-      "size": 1284,
-      "complexity": 6,
-      "exports": [
-        "validateAndCleanResponse"
       ]
     },
     {
@@ -1676,9 +1399,10 @@
       "name": "utils",
       "path": "frontend/src/lib/utils.ts",
       "language": "typescript",
-      "size": 863,
-      "complexity": 8,
+      "size": 1472,
+      "complexity": 18,
       "exports": [
+        "ClassValue",
         "cn",
         "getUserDisplayName"
       ]
@@ -1701,7 +1425,7 @@
       "name": "tsconfig",
       "path": "frontend/tsconfig.tsbuildinfo",
       "language": "plaintext",
-      "size": 156560,
+      "size": 154844,
       "complexity": 1,
       "exports": []
     },
@@ -1756,7 +1480,7 @@
       "name": "changelog",
       "path": "memory/changelog.md",
       "language": "markdown",
-      "size": 4695,
+      "size": 7177,
       "complexity": 1,
       "exports": []
     },
@@ -1778,7 +1502,7 @@
       "name": "current-status",
       "path": "memory/current-status.md",
       "language": "markdown",
-      "size": 2174,
+      "size": 3454,
       "complexity": 1,
       "exports": []
     },
@@ -1910,7 +1634,7 @@
       "name": "package",
       "path": "package.json",
       "language": "json",
-      "size": 888,
+      "size": 785,
       "complexity": 1,
       "exports": []
     },
@@ -1932,7 +1656,7 @@
       "name": "README",
       "path": "README.md",
       "language": "markdown",
-      "size": 1450,
+      "size": 16070,
       "complexity": 1,
       "exports": []
     },
@@ -1945,6 +1669,17 @@
       "language": "javascript",
       "size": 17578,
       "complexity": 17,
+      "exports": []
+    },
+    {
+      "id": "scripts/dev.js",
+      "type": "script",
+      "layer": "root",
+      "name": "dev",
+      "path": "scripts/dev.js",
+      "language": "javascript",
+      "size": 560,
+      "complexity": 1,
       "exports": []
     },
     {
@@ -2272,13 +2007,7 @@
     },
     {
       "source": "backend/src/controllers/auth.controller.ts",
-      "target": "backend/src/repositories/user.repository.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/controllers/auth.controller.ts",
-      "target": "backend/src/repositories/session.repository.ts",
+      "target": "backend/src/database/db.ts",
       "type": "imports",
       "weight": 1
     },
@@ -2290,54 +2019,6 @@
     },
     {
       "source": "backend/src/database/db.ts",
-      "target": "shared/src/index.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/repositories/otp.repository.ts",
-      "target": "backend/src/database/db.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/repositories/otp.repository.ts",
-      "target": "shared/src/index.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/repositories/password-reset.repository.ts",
-      "target": "backend/src/database/db.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/repositories/password-reset.repository.ts",
-      "target": "shared/src/index.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/repositories/session.repository.ts",
-      "target": "backend/src/database/db.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/repositories/session.repository.ts",
-      "target": "shared/src/index.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/repositories/user.repository.ts",
-      "target": "backend/src/database/db.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/repositories/user.repository.ts",
       "target": "shared/src/index.ts",
       "type": "imports",
       "weight": 1
@@ -2392,25 +2073,7 @@
     },
     {
       "source": "backend/src/services/auth.service.ts",
-      "target": "backend/src/repositories/user.repository.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/services/auth.service.ts",
-      "target": "backend/src/repositories/otp.repository.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/services/auth.service.ts",
-      "target": "backend/src/repositories/session.repository.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "backend/src/services/auth.service.ts",
-      "target": "backend/src/repositories/password-reset.repository.ts",
+      "target": "backend/src/database/db.ts",
       "type": "imports",
       "weight": 1
     },
@@ -2463,12 +2126,6 @@
       "weight": 1
     },
     {
-      "source": "frontend/src/components/auth/CompleteProfileModal.tsx",
-      "target": "frontend/src/components/auth/OtpInput.tsx",
-      "type": "imports",
-      "weight": 1
-    },
-    {
       "source": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
       "target": "shared/src/index.ts",
       "type": "imports",
@@ -2493,42 +2150,6 @@
       "weight": 1
     },
     {
-      "source": "frontend/src/lib/ai/classifier.ts",
-      "target": "frontend/src/lib/ai/types.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/memory.ts",
-      "target": "frontend/src/lib/ai/types.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/modelRouter.ts",
-      "target": "frontend/src/lib/ai/types.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/orchestrator.ts",
-      "target": "frontend/src/lib/ai/security.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/orchestrator.ts",
-      "target": "frontend/src/lib/ai/classifier.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/orchestrator.ts",
-      "target": "frontend/src/lib/ai/memory.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
       "source": "frontend/src/lib/ai/orchestrator.ts",
       "target": "frontend/src/lib/ai/rag.ts",
       "type": "imports",
@@ -2536,36 +2157,6 @@
     },
     {
       "source": "frontend/src/lib/ai/orchestrator.ts",
-      "target": "frontend/src/lib/ai/tools.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/orchestrator.ts",
-      "target": "frontend/src/lib/ai/promptBuilder.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/orchestrator.ts",
-      "target": "frontend/src/lib/ai/modelRouter.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/orchestrator.ts",
-      "target": "frontend/src/lib/ai/validator.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/orchestrator.ts",
-      "target": "frontend/src/lib/ai/types.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/promptBuilder.ts",
       "target": "frontend/src/lib/ai/types.ts",
       "type": "imports",
       "weight": 1
@@ -2573,30 +2164,6 @@
     {
       "source": "frontend/src/lib/ai/rag.ts",
       "target": "frontend/src/lib/ai/types.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/security.ts",
-      "target": "frontend/src/lib/ai/types.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/tools.ts",
-      "target": "frontend/src/lib/ai/types.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/validator.ts",
-      "target": "frontend/src/lib/ai/types.ts",
-      "type": "imports",
-      "weight": 1
-    },
-    {
-      "source": "frontend/src/lib/ai/validator.ts",
-      "target": "frontend/src/lib/ai/security.ts",
       "type": "imports",
       "weight": 1
     },

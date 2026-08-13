@@ -86,7 +86,7 @@
   },
   {
     "path": "frontend/src/components/ai/AIAssistant.tsx",
-    "size": 8510,
+    "size": 8890,
     "type": "component"
   },
   {
@@ -100,23 +100,8 @@
     "type": "component"
   },
   {
-    "path": "frontend/src/components/auth/CompleteProfileModal.tsx",
-    "size": 9467,
-    "type": "component"
-  },
-  {
-    "path": "frontend/src/components/auth/GoogleSignInButton.tsx",
-    "size": 2189,
-    "type": "component"
-  },
-  {
-    "path": "frontend/src/components/auth/OtpVerificationForm.tsx",
-    "size": 9005,
-    "type": "component"
-  },
-  {
     "path": "frontend/src/components/auth/PasswordStrengthMeter.tsx",
-    "size": 2725,
+    "size": 2803,
     "type": "component"
   },
   {
@@ -126,12 +111,12 @@
   },
   {
     "path": "frontend/src/components/ComplaintsShowcase.tsx",
-    "size": 4134,
+    "size": 4136,
     "type": "component"
   },
   {
     "path": "frontend/src/components/DynamicForm.tsx",
-    "size": 18913,
+    "size": 19044,
     "type": "component"
   },
   {
@@ -141,22 +126,22 @@
   },
   {
     "path": "frontend/src/components/Footer.tsx",
-    "size": 1751,
+    "size": 2178,
     "type": "component"
   },
   {
     "path": "frontend/src/components/Hero.tsx",
-    "size": 11195,
+    "size": 11864,
     "type": "component"
   },
   {
     "path": "frontend/src/components/HeroShowcase.tsx",
-    "size": 1630,
+    "size": 1671,
     "type": "component"
   },
   {
     "path": "frontend/src/components/Navbar.tsx",
-    "size": 6530,
+    "size": 13991,
     "type": "component"
   },
   {
@@ -191,7 +176,7 @@
   },
   {
     "path": "frontend/src/lib/ai/orchestrator.ts",
-    "size": 2697,
+    "size": 8212,
     "type": "util"
   },
   {
@@ -221,13 +206,18 @@
   },
   {
     "path": "frontend/src/lib/utils.ts",
-    "size": 863,
+    "size": 1472,
     "type": "util"
   },
   {
     "path": "frontend/tsconfig.tsbuildinfo",
-    "size": 156560,
+    "size": 154844,
     "type": "module"
+  },
+  {
+    "path": "scripts/dev.js",
+    "size": 560,
+    "type": "script"
   },
   {
     "path": "scripts/validate-graph-output.js",

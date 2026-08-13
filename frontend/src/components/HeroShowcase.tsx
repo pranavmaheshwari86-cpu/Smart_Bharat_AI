@@ -17,7 +17,7 @@ export function HeroShowcase() {
   return (
     <div className="w-full relative flex items-center justify-center">
       {/* Video Container Card — Instant Loading */}
-      <div className="w-full max-w-[720px] aspect-[3/2] relative rounded-[32px] overflow-hidden border border-white/30 shadow-[0_24px_60px_rgba(0,74,198,0.2)] bg-gradient-to-br from-blue-950 via-slate-900 to-black group flex items-center justify-center">
+      <div className="w-full max-w-[640px] aspect-[16/10] sm:aspect-[3/2] relative rounded-[24px] sm:rounded-[32px] overflow-hidden border border-white/30 shadow-[0_24px_60px_rgba(0,74,198,0.18)] bg-gradient-to-br from-blue-950 via-slate-900 to-black group flex items-center justify-center">
         
         {/* Instant Ambient Backdrop Glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent animate-pulse pointer-events-none" />
@@ -30,7 +30,7 @@ export function HeroShowcase() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           onLoadedData={() => setIsLoaded(true)}
           onCanPlay={() => {
             setIsLoaded(true);

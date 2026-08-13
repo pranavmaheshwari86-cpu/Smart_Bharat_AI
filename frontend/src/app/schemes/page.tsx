@@ -6,39 +6,35 @@ import { schemes } from "@/lib/data";
 import { SpotlightCard } from "@/components/SpotlightCard";
 
 const OTHER_SCHEME_CATEGORIES = [
-  "Agriculture", "Animal Husbandry", "Dairy Development", "Fisheries", "Horticulture",
-  "Food Processing", "Rural Development", "Urban Development", "Housing", "Water Resources",
-  "Drinking Water & Sanitation", "Health & Family Welfare", "Medical Assistance", "Nutrition",
-  "Women Empowerment", "Child Welfare", "Senior Citizens", "Persons with Disabilities (Divyangjan)",
-  "Social Welfare", "Social Security", "Education", "School Education", "Higher Education",
-  "Technical Education", "Skill Development", "Employment", "Labour & Workers", "Youth Affairs",
-  "Sports", "Entrepreneurship", "Startups", "MSME", "Industry", "Manufacturing",
-  "Commerce & Trade", "Financial Services", "Banking", "Insurance", "Pension", "Taxation",
-  "Digital India", "Science & Technology", "Innovation", "Research & Development",
-  "Artificial Intelligence", "Electronics & IT", "Telecommunications", "Cyber Security",
-  "Infrastructure", "Road Transport", "Railways", "Civil Aviation", "Shipping & Ports",
-  "Logistics", "Tourism", "Culture", "Heritage", "Minority Welfare", "Scheduled Castes (SC)",
-  "Scheduled Tribes (ST)", "Other Backward Classes (OBC)", "Economically Weaker Sections (EWS)",
-  "Tribal Affairs", "Border Area Development", "North Eastern Region Development",
-  "Jammu & Kashmir Development", "Environment", "Climate Change", "Forest & Wildlife",
-  "Renewable Energy", "Power & Electricity", "Petroleum & Natural Gas", "Mining", "Textiles",
-  "Handloom", "Handicrafts", "Khadi & Village Industries", "Cooperatives", "Consumer Affairs",
-  "Food & Public Distribution", "Legal Aid & Justice", "Police & Internal Security",
-  "Disaster Management", "Civil Defence", "Electoral Services", "Governance & Public Services",
-  "Citizen Services", "Aadhaar & Identity Services", "Digital Governance", "Scholarships",
-  "Fellowships", "Awards & Incentives", "Export Promotion", "Import & Trade Facilitation",
-  "Foreign Affairs", "NRI Services", "Defence", "Veterans & Ex-Servicemen", "Space",
-  "Atomic Energy", "Public Grievances", "Municipal Services", "Smart Cities", "Village Development",
-  "Sanitation", "Cleanliness", "Waste Management", "Water Conservation", "Irrigation",
-  "Afforestation", "Biodiversity", "Pollution Control", "Financial Inclusion",
-  "Self Help Groups (SHGs)", "Cooperative Societies", "Credit & Loans", "Subsidies",
-  "Direct Benefit Transfer (DBT)", "Income Support", "Livelihood", "Price Support",
-  "Public Procurement", "E-Governance", "Legal Documentation", "Certificates & Licenses",
-  "Civil Registration", "Transport Services", "Land Records", "Property Registration",
-  "Judiciary", "Election Services", "Consumer Protection", "Startup Funding", "Innovation Grants",
-  "Export Incentives", "Digital Payments", "Women Entrepreneurship", "Farmer Welfare",
-  "Citizen Welfare", "Public Health", "Community Development", "Volunteer Programs",
-  "Emergency Relief", "Rehabilitation",
+  "Aadhaar & Identity Services", "Afforestation", "Agriculture", "Animal Husbandry", "Artificial Intelligence",
+  "Atomic Energy", "Awards & Incentives", "Banking", "Biodiversity", "Border Area Development",
+  "Certificates & Licenses", "Child Welfare", "Citizen Protection", "Citizen Services", "Citizen Welfare",
+  "Civil Aviation", "Civil Defence", "Civil Registration", "Cleanliness", "Climate Change",
+  "Commerce & Trade", "Community Development", "Consumer Affairs", "Consumer Protection", "Cooperative Societies",
+  "Cooperatives", "Credit & Loans", "Culture", "Cyber Security", "Dairy Development",
+  "Defence", "Digital Governance", "Digital India", "Digital Payments", "Direct Benefit Transfer (DBT)",
+  "Disaster Management", "Drinking Water & Sanitation", "E-Governance", "Economically Weaker Sections (EWS)", "Education",
+  "Election Services", "Electoral Services", "Electronics & IT", "Emergency Relief", "Employment",
+  "Entrepreneurship", "Environment", "Export Incentives", "Export Promotion", "Fellowships",
+  "Financial Inclusion", "Financial Services", "Farmer Welfare", "Fisheries", "Food & Public Distribution",
+  "Food Processing", "Foreign Affairs", "Forest & Wildlife", "Governance & Public Services", "Handicrafts",
+  "Handloom", "Health & Family Welfare", "Heritage", "Higher Education", "Horticulture",
+  "Housing", "Import & Trade Facilitation", "Income Support", "Industry", "Infrastructure",
+  "Innovation", "Innovation Grants", "Insurance", "Irrigation", "Jammu & Kashmir Development",
+  "Judiciary", "Khadi & Village Industries", "Labour & Workers", "Land Records", "Legal Aid & Justice",
+  "Legal Documentation", "Livelihood", "Logistics", "Manufacturing", "Medical Assistance",
+  "Municipal Services", "Mining", "Minority Welfare", "MSME", "National Population Register (NPR) ID",
+  "North Eastern Region Development", "NRI Services", "Nutrition", "Other Backward Classes (OBC)", "Pension",
+  "Persons with Disabilities (Divyangjan)", "Petroleum & Natural Gas", "Police & Internal Security", "Pollution Control", "Power & Electricity",
+  "Price Support", "Property Registration", "Public Defence", "Public Grievances", "Public Health",
+  "Public Procurement", "Railways", "Rehabilitation", "Renewable Energy", "Research & Development",
+  "Road Transport", "Rural Development", "Sanitation", "Scholarships", "School Education",
+  "Science & Technology", "Self Help Groups (SHGs)", "Senior Citizens", "Shipping & Ports", "Skill Development",
+  "Smart Cities", "Social Security", "Social Welfare", "Space", "Sports",
+  "Startups", "Startup Funding", "Subsidies", "Taxation", "Technical Education",
+  "Telecommunications", "Textiles", "Tourism", "Transport Services", "Tribal Affairs",
+  "Urban Development", "Veterans & Ex-Servicemen", "Village Development", "Volunteer Programs", "Waste Management",
+  "Water Conservation", "Water Resources", "Women Empowerment", "Women Entrepreneurship", "Youth Affairs",
 ];
 
 export default function SchemesPage() {
@@ -53,9 +49,9 @@ export default function SchemesPage() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0, width: 0 });
 
-  const filteredOther = OTHER_SCHEME_CATEGORIES.filter(c =>
-    c.toLowerCase().includes(otherSearch.toLowerCase())
-  );
+  const filteredOther = OTHER_SCHEME_CATEGORIES
+    .filter(c => c.toLowerCase().includes(otherSearch.toLowerCase()))
+    .sort((a, b) => a.localeCompare(b));
 
   const handleSearch = () => {
     if (resultsRef.current) {
@@ -191,178 +187,25 @@ export default function SchemesPage() {
     const matchesCategory = selectedCategory ? scheme.category === selectedCategory : true;
     return matchesSearch && matchesCategory;
   });
-
-  useEffect(() => {
-    const canvas = document.getElementById('shader-canvas-ANIMATION_5') as HTMLCanvasElement;
-    if (!canvas) return;
-
-    function syncSize() {
-      const w = canvas.clientWidth || 1280;
-      const h = canvas.clientHeight || 720;
-      if (canvas.width !== w || canvas.height !== h) {
-        canvas.width = w;
-        canvas.height = h;
-      }
-    }
-    
-    let ro: ResizeObserver | null = null;
-    if (typeof ResizeObserver !== 'undefined') {
-      ro = new ResizeObserver(syncSize);
-      ro.observe(canvas);
-    }
-    syncSize();
-
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl') as WebGLRenderingContext | null;
-    if (!gl) return;
-
-    const vs = `attribute vec2 a_position;
-varying vec2 v_texCoord;
-void main() {
-  v_texCoord = a_position * 0.5 + 0.5;
-  gl_Position = vec4(a_position, 0.0, 1.0);
-}`;
-    const fs = `precision highp float;
-varying vec2 v_texCoord;
-uniform float u_time;
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
-
-// Soft noise function
-float noise(vec2 p) {
-    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-}
-
-void main() {
-    vec2 uv = v_texCoord;
-    
-    // Base colors from the design system
-    vec3 bgBase = vec3(1.0, 1.0, 1.0); // #FFFFFF
-    vec3 accentBlue = vec3(0.145, 0.388, 0.922); // #2563EB
-    vec3 accentGold = vec3(0.722, 0.576, 0.353); // #B8935A
-    
-    // Slow moving radial glows
-    float d1 = length(uv - vec2(0.8 + 0.1 * cos(u_time * 0.5), 0.2 + 0.1 * sin(u_time * 0.4)));
-    float glow1 = smoothstep(0.8, 0.0, d1) * 0.1;
-    
-    float d2 = length(uv - vec2(0.2 + 0.1 * sin(u_time * 0.6), 0.8 + 0.1 * cos(u_time * 0.5)));
-    float glow2 = smoothstep(0.7, 0.0, d2) * 0.08;
-    
-    vec3 color = bgBase;
-    color = mix(color, accentBlue, glow1);
-    color = mix(color, accentGold, glow2);
-    
-    // Fine dotted grid
-    vec2 gridUv = fract(uv * 50.0);
-    float dot = smoothstep(0.05, 0.0, length(gridUv - 0.5));
-    color = mix(color, vec3(0.894, 0.878, 0.839), dot * 0.3); // border color for dots
-    
-    // Subtle noise for texture
-    float n = noise(uv * 1000.0 + u_time * 0.01) * 0.02;
-    color += n;
-    
-    gl_FragColor = vec4(color, 1.0);
-}`;
-
-    function cs(type: number, src: string) {
-      const s = gl!.createShader(type);
-      if (!s) return null;
-      gl!.shaderSource(s, src);
-      gl!.compileShader(s);
-      return s;
-    }
-
-    const prog = gl!.createProgram();
-    if (!prog) return;
-    
-    const vsShader = cs(gl!.VERTEX_SHADER, vs);
-    const fsShader = cs(gl!.FRAGMENT_SHADER, fs);
-    if (!vsShader || !fsShader) return;
-    
-    gl!.attachShader(prog, vsShader);
-    gl!.attachShader(prog, fsShader);
-    gl!.linkProgram(prog);
-    gl!.useProgram(prog);
-    
-    const buf = gl!.createBuffer();
-    gl!.bindBuffer(gl!.ARRAY_BUFFER, buf);
-    gl!.bufferData(gl!.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl!.STATIC_DRAW);
-    
-    const pos = gl!.getAttribLocation(prog, 'a_position');
-    gl!.enableVertexAttribArray(pos);
-    gl!.vertexAttribPointer(pos, 2, gl!.FLOAT, false, 0, 0);
-    
-    const uTime = gl!.getUniformLocation(prog, 'u_time');
-    const uRes = gl!.getUniformLocation(prog, 'u_resolution');
-    const uMouse = gl!.getUniformLocation(prog, 'u_mouse');
-
-    let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width && rect.height) {
-        const nx = (event.clientX - rect.left) / rect.width;
-        const ny = 1.0 - (event.clientY - rect.top) / rect.height;
-        mouse.x = nx * canvas.width;
-        mouse.y = ny * canvas.height;
-      }
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-
-    let animationId: number;
-    function render(t: number) {
-      if (typeof ResizeObserver === 'undefined') syncSize();
-      gl!.viewport(0, 0, canvas.width, canvas.height);
-      if (uTime) gl!.uniform1f(uTime, t * 0.001);
-      if (uRes) gl!.uniform2f(uRes, canvas.width, canvas.height);
-      if (uMouse) gl!.uniform2f(uMouse, mouse.x, mouse.y);
-      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
-      animationId = requestAnimationFrame(render);
-    }
-    animationId = requestAnimationFrame(render);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationId);
-      if (ro) ro.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const cards = document.querySelectorAll('.relative.overflow-hidden.group') as NodeListOf<HTMLElement>;
-      cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      });
-    };
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => document.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <>
-      <canvas id="shader-canvas-ANIMATION_5" className="fixed inset-0 pointer-events-none z-[-1]" />
-      
-      <main className="max-w-container-max mx-auto px-margin-mobile md:px-gutter pt-24 pb-section space-y-12">
+    <main suppressHydrationWarning className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 sm:pb-24 space-y-8 sm:space-y-12">
         {/* Hero Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h1 className="font-display-lg text-display-lg text-on-surface leading-tight">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="space-y-4 sm:space-y-6">
+            <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-[56px] leading-[1.15] text-on-surface font-extrabold tracking-tight">
               Discover <span className="text-gradient font-bold italic">Government Schemes</span> matched for you
             </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[500px]">
+            <p className="font-body-lg text-base sm:text-lg text-on-surface-variant max-w-[520px] font-medium leading-relaxed">
               Our AI intelligence layer analyzes your profile to match you with the most relevant schemes, grants, and scholarships instantly.
             </p>
-            <div className="flex items-center gap-4">
-              <button onClick={() => resultsRef.current?.scrollIntoView({ behavior: 'smooth' })} className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-sm shadow-md hover:scale-105 transition-transform flex items-center gap-2">
-                Find My Schemes
-                <span className="material-symbols-outlined">arrow_forward</span>
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
+              <button onClick={() => resultsRef.current?.scrollIntoView({ behavior: 'smooth' })} className="w-full sm:w-auto bg-primary text-on-primary px-8 py-3.5 rounded-xl font-label-sm shadow-md hover:scale-105 transition-transform flex items-center justify-center gap-2 touch-target-min">
+                <span>Find My Schemes</span>
+                <span className="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_forward</span>
               </button>
-              <button onClick={() => setOtherOpen(true)} className="bg-surface-container text-on-surface px-8 py-4 rounded-xl font-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
-                <span className="material-symbols-outlined">explore</span>
-                Browse All
+              <button onClick={() => setOtherOpen(true)} className="w-full sm:w-auto bg-surface-container text-on-surface px-8 py-3.5 rounded-xl font-label-sm border border-outline-variant hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 touch-target-min">
+                <span className="material-symbols-outlined text-[20px]" aria-hidden="true">explore</span>
+                <span>Browse All</span>
               </button>
             </div>
           </div>
@@ -577,6 +420,5 @@ void main() {
           </div>
         )}
       </main>
-    </>
   );
 }

@@ -188,17 +188,19 @@ export function DynamicForm({ fields, onSubmit, submitLabel = "Submit Applicatio
           </label>
         </div>
 
-        <div className="flex gap-4 pt-4">
+        <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <button 
+            type="button"
             onClick={() => setIsReviewing(false)}
-            className="flex-1 h-12 rounded-md bg-white border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
+            className="w-full sm:flex-1 h-12 rounded-xl bg-white border border-slate-300 text-slate-700 font-semibold hover:bg-slate-50 transition-colors touch-target-min"
           >
             Back to Edit
           </button>
           <button 
+            type="button"
             onClick={handleSubmit}
             disabled={!consentChecked || isSubmitting}
-            className="flex-[2] h-12 flex items-center justify-center rounded-md bg-green-600 text-white font-medium hover:bg-green-700 transition-colors disabled:opacity-50"
+            className="w-full sm:flex-[2] h-12 flex items-center justify-center rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 touch-target-min"
           >
             {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Confirm & Submit"}
           </button>

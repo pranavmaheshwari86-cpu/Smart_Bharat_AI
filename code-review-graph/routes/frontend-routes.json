@@ -55,11 +55,6 @@
     "isProtected": false
   },
   {
-    "file": "frontend/src/app/ids/page.tsx",
-    "route": "/ids",
-    "isProtected": false
-  },
-  {
     "file": "frontend/src/app/layout.tsx",
     "route": "/layout.tsx",
     "isProtected": false

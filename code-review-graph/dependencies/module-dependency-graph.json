@@ -1,6 +1,6 @@
 {
-  "totalModules": 179,
-  "totalDependencies": 61,
+  "totalModules": 158,
+  "totalDependencies": 33,
   "modules": [
     {
       "id": ".agents/AGENTS.md",
@@ -118,7 +118,7 @@
       "id": "backend/src/controllers/auth.controller.ts",
       "layer": "backend",
       "type": "controller",
-      "importsCount": 4,
+      "importsCount": 3,
       "importedByCount": 1
     },
     {
@@ -126,35 +126,7 @@
       "layer": "backend",
       "type": "model",
       "importsCount": 1,
-      "importedByCount": 5
-    },
-    {
-      "id": "backend/src/repositories/otp.repository.ts",
-      "layer": "backend",
-      "type": "repository",
-      "importsCount": 2,
-      "importedByCount": 1
-    },
-    {
-      "id": "backend/src/repositories/password-reset.repository.ts",
-      "layer": "backend",
-      "type": "repository",
-      "importsCount": 2,
-      "importedByCount": 1
-    },
-    {
-      "id": "backend/src/repositories/session.repository.ts",
-      "layer": "backend",
-      "type": "repository",
-      "importsCount": 2,
-      "importedByCount": 2
-    },
-    {
-      "id": "backend/src/repositories/user.repository.ts",
-      "layer": "backend",
-      "type": "repository",
-      "importsCount": 2,
-      "importedByCount": 2
+      "importedByCount": 3
     },
     {
       "id": "backend/src/routes/auth.routes.ts",
@@ -202,7 +174,7 @@
       "id": "backend/src/services/auth.service.ts",
       "layer": "backend",
       "type": "service",
-      "importsCount": 9,
+      "importsCount": 6,
       "importedByCount": 1
     },
     {
@@ -346,13 +318,6 @@
       "importedByCount": 0
     },
     {
-      "id": "frontend/src/app/ai/loading.tsx",
-      "layer": "frontend",
-      "type": "module",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
       "id": "frontend/src/app/ai/page.tsx",
       "layer": "frontend",
       "type": "page",
@@ -367,13 +332,6 @@
       "importedByCount": 0
     },
     {
-      "id": "frontend/src/app/assistant/loading.tsx",
-      "layer": "frontend",
-      "type": "module",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
       "id": "frontend/src/app/assistant/page.tsx",
       "layer": "frontend",
       "type": "page",
@@ -381,23 +339,9 @@
       "importedByCount": 0
     },
     {
-      "id": "frontend/src/app/complaints/loading.tsx",
-      "layer": "frontend",
-      "type": "module",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
       "id": "frontend/src/app/complaints/page.tsx",
       "layer": "frontend",
       "type": "page",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
-      "id": "frontend/src/app/credentials/loading.tsx",
-      "layer": "frontend",
-      "type": "module",
       "importsCount": 0,
       "importedByCount": 0
     },
@@ -430,13 +374,6 @@
       "importedByCount": 1
     },
     {
-      "id": "frontend/src/app/id/loading.tsx",
-      "layer": "frontend",
-      "type": "module",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
       "id": "frontend/src/app/id/page.tsx",
       "layer": "frontend",
       "type": "page",
@@ -452,13 +389,6 @@
     },
     {
       "id": "frontend/src/app/id/[id]/page.tsx",
-      "layer": "frontend",
-      "type": "page",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
-      "id": "frontend/src/app/ids/page.tsx",
       "layer": "frontend",
       "type": "page",
       "importsCount": 0,
@@ -515,13 +445,6 @@
     },
     {
       "id": "frontend/src/app/robots.ts",
-      "layer": "frontend",
-      "type": "module",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
-      "id": "frontend/src/app/schemes/loading.tsx",
       "layer": "frontend",
       "type": "module",
       "importsCount": 0,
@@ -620,34 +543,6 @@
     },
     {
       "id": "frontend/src/components/AppPreloader.tsx",
-      "layer": "frontend",
-      "type": "component",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
-      "id": "frontend/src/components/auth/CompleteProfileModal.tsx",
-      "layer": "frontend",
-      "type": "component",
-      "importsCount": 1,
-      "importedByCount": 0
-    },
-    {
-      "id": "frontend/src/components/auth/GoogleSignInButton.tsx",
-      "layer": "frontend",
-      "type": "component",
-      "importsCount": 0,
-      "importedByCount": 0
-    },
-    {
-      "id": "frontend/src/components/auth/OtpInput.tsx",
-      "layer": "frontend",
-      "type": "component",
-      "importsCount": 0,
-      "importedByCount": 1
-    },
-    {
-      "id": "frontend/src/components/auth/OtpVerificationForm.tsx",
       "layer": "frontend",
       "type": "component",
       "importsCount": 0,
@@ -780,56 +675,14 @@
       "importedByCount": 0
     },
     {
-      "id": "frontend/src/lib/ai/classifier.ts",
-      "layer": "frontend",
-      "type": "util",
-      "importsCount": 1,
-      "importedByCount": 1
-    },
-    {
-      "id": "frontend/src/lib/ai/memory.ts",
-      "layer": "frontend",
-      "type": "util",
-      "importsCount": 1,
-      "importedByCount": 1
-    },
-    {
-      "id": "frontend/src/lib/ai/modelRouter.ts",
-      "layer": "frontend",
-      "type": "util",
-      "importsCount": 1,
-      "importedByCount": 1
-    },
-    {
       "id": "frontend/src/lib/ai/orchestrator.ts",
       "layer": "frontend",
       "type": "util",
-      "importsCount": 9,
+      "importsCount": 2,
       "importedByCount": 0
     },
     {
-      "id": "frontend/src/lib/ai/promptBuilder.ts",
-      "layer": "frontend",
-      "type": "util",
-      "importsCount": 1,
-      "importedByCount": 1
-    },
-    {
       "id": "frontend/src/lib/ai/rag.ts",
-      "layer": "frontend",
-      "type": "util",
-      "importsCount": 1,
-      "importedByCount": 1
-    },
-    {
-      "id": "frontend/src/lib/ai/security.ts",
-      "layer": "frontend",
-      "type": "util",
-      "importsCount": 1,
-      "importedByCount": 2
-    },
-    {
-      "id": "frontend/src/lib/ai/tools.ts",
       "layer": "frontend",
       "type": "util",
       "importsCount": 1,
@@ -840,14 +693,7 @@
       "layer": "frontend",
       "type": "type",
       "importsCount": 0,
-      "importedByCount": 9
-    },
-    {
-      "id": "frontend/src/lib/ai/validator.ts",
-      "layer": "frontend",
-      "type": "util",
-      "importsCount": 2,
-      "importedByCount": 1
+      "importedByCount": 2
     },
     {
       "id": "frontend/src/lib/api/auth.api.ts",
@@ -1074,6 +920,13 @@
       "importedByCount": 0
     },
     {
+      "id": "scripts/dev.js",
+      "layer": "root",
+      "type": "script",
+      "importsCount": 0,
+      "importedByCount": 0
+    },
+    {
       "id": "scripts/graphify.js",
       "layer": "root",
       "type": "script",
@@ -1099,7 +952,7 @@
       "layer": "shared",
       "type": "module",
       "importsCount": 0,
-      "importedByCount": 7
+      "importedByCount": 3
     },
     {
       "id": "shared/src/types/auth.ts",

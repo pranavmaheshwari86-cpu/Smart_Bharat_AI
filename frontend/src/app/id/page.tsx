@@ -41,6 +41,7 @@ export default function IDPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [showOthersDropdown, setShowOthersDropdown] = useState(false);
+  const [dropdownSearch, setDropdownSearch] = useState("");
 
   // Only show the primary IDs as cards on the main directory page
   const featuredIds = ["aadhaar", "pan", "passport", "driving-license", "voter-id"];
@@ -56,142 +57,8 @@ export default function IDPage() {
       return matchesSearch;
     });
 
-  // Background Shader
-  useEffect(() => {
-    const canvas = shaderCanvasRef.current;
-    if (!canvas) return;
-
-    function syncSize() {
-      const w = canvas?.clientWidth || 1280;
-      const h = canvas?.clientHeight || 720;
-      if (canvas && (canvas.width !== w || canvas.height !== h)) {
-        canvas.width = w;
-        canvas.height = h;
-      }
-    }
-
-    if (typeof ResizeObserver !== "undefined") {
-      new ResizeObserver(syncSize).observe(canvas);
-    }
-    syncSize();
-
-    const gl =
-      canvas.getContext("webgl") ||
-      (canvas.getContext("experimental-webgl") as WebGLRenderingContext);
-    if (!gl) return;
-
-    const vs = `attribute vec2 a_position;
-varying vec2 v_texCoord;
-void main() {
-  v_texCoord = a_position * 0.5 + 0.5;
-  gl_Position = vec4(a_position, 0.0, 1.0);
-}`;
-    const fs = `precision highp float;
-uniform float u_time;
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
-varying vec2 v_texCoord;
-
-void main() {
-    vec2 uv = v_texCoord;
-    vec3 color = vec3(1.0, 1.0, 0.99); // Pure White/Ivory Base
-    
-    float t = u_time * 0.15;
-    
-    // Subtle Paper Noise
-    float noise = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
-    color += (noise - 0.5) * 0.012;
-
-    // Atmospheric Haze - Soft Blue Glow (Interaction/Branding)
-    vec2 bluePos = vec2(0.8, 0.2) + 0.15 * vec2(sin(t), cos(t * 0.8));
-    float blueGlow = smoothstep(0.9, 0.0, distance(uv, bluePos));
-    color = mix(color, vec3(0.145, 0.388, 0.921), blueGlow * 0.05);
-    
-    // Atmospheric Haze - Soft Gold Accent (Premium Highlight)
-    vec2 goldPos = vec2(0.1, 0.85) + 0.1 * vec2(cos(t * 0.7), sin(t * 0.9));
-    float goldGlow = smoothstep(0.8, 0.0, distance(uv, goldPos));
-    color = mix(color, vec3(0.722, 0.576, 0.353), goldGlow * 0.03);
-
-    // Fine Technical Dotted Grid
-    vec2 gridUv = fract(uv * 50.0);
-    float dot = smoothstep(0.04, 0.0, length(gridUv - 0.5));
-    color = mix(color, vec3(0.9, 0.89, 0.87), dot * 0.15);
-
-    // Subtle Vignette for Depth
-    float vignette = smoothstep(1.5, 0.5, distance(uv, vec2(0.5)));
-    color *= 0.98 + 0.02 * vignette;
-
-    gl_FragColor = vec4(color, 1.0);
-}`;
-
-    function cs(type: number, src: string) {
-      const s = gl.createShader(type);
-      if (!s) return null;
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      return s;
-    }
-
-    const prog = gl.createProgram();
-    if (!prog) return;
-    
-    const vShader = cs(gl.VERTEX_SHADER, vs);
-    const fShader = cs(gl.FRAGMENT_SHADER, fs);
-    if (!vShader || !fShader) return;
-
-    gl.attachShader(prog, vShader);
-    gl.attachShader(prog, fShader);
-    gl.linkProgram(prog);
-    gl.useProgram(prog);
-
-    const buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-      gl.STATIC_DRAW
-    );
-    const pos = gl.getAttribLocation(prog, "a_position");
-    gl.enableVertexAttribArray(pos);
-    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-
-    const uTime = gl.getUniformLocation(prog, "u_time");
-    const uRes = gl.getUniformLocation(prog, "u_resolution");
-    const uMouse = gl.getUniformLocation(prog, "u_mouse");
-
-    let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
-    
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width && rect.height) {
-        const nx = (event.clientX - rect.left) / rect.width;
-        const ny = 1.0 - (event.clientY - rect.top) / rect.height;
-        mouse.x = nx * canvas.width;
-        mouse.y = ny * canvas.height;
-      }
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-
-    let animationFrameId: number;
-    function render(t: number) {
-      if (typeof ResizeObserver === "undefined") syncSize();
-      gl.viewport(0, 0, canvas!.width, canvas!.height);
-      if (uTime) gl.uniform1f(uTime, t * 0.001);
-      if (uRes) gl.uniform2f(uRes, canvas!.width, canvas!.height);
-      if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      animationFrameId = requestAnimationFrame(render);
-    }
-    render(0);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
   return (
-    <main className="pt-32 pb-24 min-h-screen relative font-body-md text-on-surface antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-24 min-h-screen relative font-body-md text-on-surface antialiased overflow-x-hidden no-scrollbar selection:bg-primary/20 selection:text-primary">
       <style dangerouslySetInnerHTML={{ __html: `
         @theme {
           --animate-float-1: float 6s ease-in-out infinite, fade 8s ease-in-out infinite;
@@ -239,30 +106,30 @@ void main() {
       <div className="ambient-glow-1"></div>
       <div className="ambient-glow-2"></div>
       
-      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 relative z-10 grid grid-cols-1 gap-12">
-        <div className="flex flex-col gap-12">
+      <div className="w-full relative z-10 grid grid-cols-1 gap-8 sm:gap-12">
+        <div className="flex flex-col gap-8 sm:gap-12">
           
           {/* Hero Section */}
-          <section className="relative overflow-hidden pt-4 pb-12">
+          <section className="relative overflow-hidden pt-2 sm:pt-4 pb-8 sm:pb-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center relative z-10">
               <div className="relative z-10 lg:col-span-5">
 
-                  <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-extrabold tracking-tight text-slate-900 mb-4 sm:mb-6 leading-tight">
                     Apply for <br />
                     <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text">
                       Government IDs
                     </span>
                   </h1>
-                <p className="text-xl text-slate-600 mb-10 max-w-lg leading-relaxed">
+                <p className="text-base sm:text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
                   Experience a frictionless, AI-guided application process for Aadhaar, PAN, and Passports. Highly secure, incredibly fast.
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                  <a href="#id-directory" className="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-sm w-full sm:w-auto justify-center">
-                    Browse Directory
-                    <ArrowRight className="w-5 h-5" />
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+                  <a href="#id-directory" className="bg-blue-600 text-white px-8 py-3.5 rounded-full font-semibold flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-sm w-full sm:w-auto justify-center touch-target-min">
+                    <span>Browse Directory</span>
+                    <ArrowRight className="w-5 h-5" aria-hidden="true" />
                   </a>
-                  <Link href="/id/track" onClick={(e) => { e.preventDefault(); alert("Tracking portal is currently under development. Coming soon!"); }} className="bg-white text-slate-700 border border-slate-300 px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors w-full sm:w-auto justify-center">
+                  <Link href="/id/track" onClick={(e) => { e.preventDefault(); alert("Tracking portal is currently under development. Coming soon!"); }} className="bg-white text-slate-700 border border-slate-300 px-8 py-3.5 rounded-full font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors w-full sm:w-auto justify-center touch-target-min">
                     Track Application
                   </Link>
                 </div>
@@ -275,7 +142,7 @@ void main() {
                   alt="Government IDs" 
                   width={800} 
                   height={600} 
-                  className="w-full h-auto max-w-[110%] lg:max-w-[115%] object-contain rounded-2xl drop-shadow-2xl animate-float -ml-8 lg:-ml-12" 
+                  className="w-full h-auto max-w-[100%] object-contain rounded-2xl drop-shadow-2xl animate-float" 
                   priority 
                 />
               </div>
@@ -295,7 +162,7 @@ void main() {
                   <DocumentSelector mode="navigate" />
                 </div>
                 
-                <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+                <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 no-scrollbar">
                   {["All", "Central", "State", "Free"].map(filter => (
                     <button
                       key={filter}
@@ -376,12 +243,36 @@ void main() {
                       </SpotlightCard>
                   
                   {showOthersDropdown && (
-                    <div className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl border border-slate-200 shadow-xl z-50 py-2 max-h-60 overflow-y-auto">
-                      {govIds.filter(doc => !featuredIds.includes(doc.id)).map(doc => (
-                        <Link key={doc.id} href={`/id/${doc.id}`} className="block px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm transition-colors">
-                          {doc.name}
-                        </Link>
-                      ))}
+                    <div className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl border border-slate-200 shadow-xl z-50 overflow-hidden no-scrollbar">
+                      <div className="p-2 border-b border-slate-100 bg-slate-50/90 backdrop-blur-sm sticky top-0 z-10" onClick={(e) => e.stopPropagation()}>
+                        <div className="relative">
+                          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                          <input
+                            type="text"
+                            placeholder="Search documents..."
+                            value={dropdownSearch}
+                            onChange={(e) => setDropdownSearch(e.target.value)}
+                            className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-slate-800 placeholder:text-slate-400 bg-white"
+                            autoFocus
+                          />
+                        </div>
+                      </div>
+                      <div className="max-h-52 overflow-y-auto py-1 no-scrollbar">
+                        {govIds
+                          .filter(doc => !featuredIds.includes(doc.id))
+                          .filter(doc => doc.name.toLowerCase().includes(dropdownSearch.toLowerCase()) || doc.description?.toLowerCase().includes(dropdownSearch.toLowerCase()))
+                          .sort((a, b) => a.name.localeCompare(b.name))
+                          .map(doc => (
+                            <Link key={doc.id} href={`/id/${doc.id}`} className="block px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm transition-colors">
+                              {doc.name}
+                            </Link>
+                          ))}
+                        {govIds
+                          .filter(doc => !featuredIds.includes(doc.id))
+                          .filter(doc => doc.name.toLowerCase().includes(dropdownSearch.toLowerCase()) || doc.description?.toLowerCase().includes(dropdownSearch.toLowerCase())).length === 0 && (
+                            <p className="px-4 py-3 text-xs text-slate-400 italic text-center">No documents match search.</p>
+                          )}
+                      </div>
                     </div>
                   )}
                 </div>

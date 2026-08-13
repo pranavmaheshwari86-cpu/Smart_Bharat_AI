@@ -7,11 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { getUserDisplayName } from "@/lib/utils";
 import { useChatHistory, formatRelativeTime, Message } from "@/lib/useChatHistory";
-
-const AssistantThreeScene = dynamic(
-  () => import("@/components/ai/AssistantThreeScene").then((m) => ({ default: m.AssistantThreeScene })),
-  { ssr: false }
-);
+import { InteractiveRobotSpline } from "@/components/ui/interactive-3d-robot";
 
 function AssistantPageContent() {
   const { user } = useAuth();
@@ -323,50 +319,14 @@ function AssistantPageContent() {
       <div className="ambient-glow-1"></div>
       <div className="ambient-glow-2"></div>
       
-      <div className="flex h-screen w-full relative">
+      <div className="flex h-[100dvh] w-full relative">
         {/* Sidebar (Smart Context) */}
-        <aside className="hidden md:flex flex-col w-[390px] h-full bg-surface/50 backdrop-blur-2xl border-r border-outline-variant/30 flex-shrink-0 z-20">
-          {/* Sidebar Header */}
-          <div className="p-6 pb-4 flex items-center justify-between border-b border-outline-variant/20">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-sm">
-                <span className="material-symbols-outlined text-[18px]">smart_toy</span>
-              </div>
-              <div>
-                <h2 className="font-headline-md text-[18px] text-on-surface leading-tight">Bharat AI</h2>
-                <p className="font-label-sm text-label-sm text-on-surface-variant">Enterprise Core</p>
-              </div>
-            </div>
-            <button onClick={() => alert("Editing context...")} className="p-2 rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
-              <span className="material-symbols-outlined">edit_square</span>
-            </button>
-          </div>
-          
+        <aside className="hidden lg:flex flex-col w-[270px] xl:w-[300px] h-full pt-16 sm:pt-20 bg-surface/50 backdrop-blur-2xl border-r border-outline-variant/30 flex-shrink-0 z-20">
           {/* Sidebar Navigation/History */}
-          <div className="flex-1 overflow-y-auto px-4 py-6 space-y-8">
-            {/* Main Nav */}
-            <nav className="space-y-1">
-              <Link className="flex items-center gap-3 px-4 py-3 rounded-xl bg-secondary-container text-on-secondary-container font-body-md text-body-md font-medium transition-all group" href="#">
-                <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>clinical_notes</span>
-                Workspace
-              </Link>
-              <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high font-body-md text-body-md transition-all group" href="#">
-                <span className="material-symbols-outlined">monitoring</span>
-                Analytics
-              </Link>
-              <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high font-body-md text-body-md transition-all group" href="#">
-                <span className="material-symbols-outlined">psychology</span>
-                Intelligence
-              </Link>
-              <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high font-body-md text-body-md transition-all group" href="#">
-                <span className="material-symbols-outlined">database</span>
-                Archives
-              </Link>
-            </nav>
-            
+          <div className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
             {/* Recent Contexts */}
             <div>
-              <div className="flex items-center justify-between px-4 mb-3">
+              <div className="flex items-center justify-between px-3 mb-3">
                 <h3 className="font-label-sm text-label-sm text-tertiary uppercase tracking-widest">Recent Chats</h3>
                 <button
                   onClick={startNewChat}
@@ -378,29 +338,29 @@ function AssistantPageContent() {
               </div>
               <div className="space-y-1">
                 {!isMounted || sessions.length === 0 ? (
-                  <p className="px-4 py-3 text-[13px] text-on-surface-variant/70 italic">No recent chats yet.</p>
+                  <p className="px-3 py-3 text-[13px] text-on-surface-variant/70 italic">No recent chats yet.</p>
                 ) : (
                   sessions.map((s) => (
                     <div
                       key={s.id}
                       onClick={() => selectSession(s.id)}
-                      className={`w-full text-left flex items-center justify-between px-4 py-2.5 rounded-lg cursor-pointer transition-colors group ${
+                      className={`w-full text-left flex items-center justify-between px-3 py-2.5 rounded-lg cursor-pointer transition-colors group ${
                         currentSessionId === s.id ? 'bg-primary/10 border border-primary/20' : 'hover:bg-surface-container-low'
                       }`}
                     >
-                      <div className="flex items-start gap-3 min-w-0 flex-1">
+                      <div className="flex items-start gap-2.5 min-w-0 flex-1">
                         <span className={`material-symbols-outlined text-[18px] mt-0.5 ${currentSessionId === s.id ? 'text-primary' : 'text-outline group-hover:text-primary'}`}>
                           chat_bubble
                         </span>
                         <div className="min-w-0 flex-1">
-                          <p className="font-body-md text-[14px] text-on-surface line-clamp-1">{s.title}</p>
+                          <p className="font-body-md text-[13.5px] text-on-surface line-clamp-1 leading-snug">{s.title}</p>
                           <p className="font-label-sm text-[11px] text-on-surface-variant mt-0.5">{formatRelativeTime(s.timestamp)}</p>
                         </div>
                       </div>
                       <button
                         onClick={(e) => deleteSession(s.id, e)}
                         title="Delete Chat"
-                        className="opacity-0 group-hover:opacity-100 p-1 hover:text-error transition-all"
+                        className="opacity-0 group-hover:opacity-100 p-1 hover:text-error transition-all flex-shrink-0"
                       >
                         <span className="material-symbols-outlined text-[16px]">delete</span>
                       </button>
@@ -432,72 +392,23 @@ function AssistantPageContent() {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 flex flex-col relative h-full pt-16">
+        <main className="flex-1 flex flex-col relative h-full pt-20 sm:pt-24">
           {/* Scrollable Canvas */}
-          <div className="flex-1 overflow-y-auto pt-24 pb-40 px-4 md:px-8 flex flex-col items-center">
-            <div className="w-full max-w-[768px] mx-auto flex flex-col gap-16">
-              {/* Hero Section */}
-              <section className="flex flex-col md:flex-row items-center justify-between gap-8 mt-8 md:mt-16">
-                <div className="flex-1 space-y-4 text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/30 w-fit mx-auto md:mx-0">
-                    <span className="material-symbols-outlined text-[16px] text-secondary">verified</span>
-                    <span className="font-label-sm text-label-sm text-on-surface-variant">Official Government Assistant</span>
+          <div className="flex-1 overflow-y-auto pt-4 sm:pt-6 pb-36 px-4 md:px-8 flex flex-col items-center">
+            <div className="w-full max-w-[768px] mx-auto flex flex-col gap-6">
+              {/* Hero Section — shown only when no messages */}
+              {messages.length === 0 && (
+                <section className="flex flex-col items-center text-center gap-4">
+                  <div className="space-y-4 max-w-2xl">
+                    <h2 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">
+                      Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary font-bold">Intelligence</span> Core
+                    </h2>
+                    <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[560px] mx-auto">
+                      How can I help you navigate government services, understand documents, or access benefits today?
+                    </p>
                   </div>
-                  <h2 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">
-                    Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary font-bold">Intelligence</span><br/>Core
-                  </h2>
-                  <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[500px] mx-auto md:mx-0">
-                    How can I help you navigate government services, understand documents, or access benefits today?
-                  </p>
-                </div>
-
-                {/* Network Visualization Container */}
-                <div className="w-64 h-64 md:w-80 md:h-80 relative flex-shrink-0" style={{ perspective: '1000px' }}>
-                  {/* Shader Background */}
-                  <canvas ref={shaderCanvasRef} className="absolute inset-0 w-full h-full rounded-full mix-blend-multiply opacity-80"></canvas>
-                  
-                  {/* ThreeJS Overlay (Dynamically loaded) */}
-                  <AssistantThreeScene />
-                  
-                  {/* Floating Service Cards */}
-                  <div className="absolute -top-4 -left-8 animate-float-1 z-20">
-                    <div className="glass-panel rounded-lg p-2 flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[16px] text-primary">fingerprint</span>
-                      <span className="font-label-sm text-[12px] whitespace-nowrap">Aadhaar</span>
-                    </div>
-                  </div>
-                  <div className="absolute top-12 -right-12 animate-float-2 z-20">
-                    <div className="glass-panel rounded-lg p-2 flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[16px] text-secondary">flight</span>
-                      <span className="font-label-sm text-[12px] whitespace-nowrap">Passport</span>
-                    </div>
-                  </div>
-                  <div className="absolute bottom-16 -left-12 animate-float-3 z-0 scale-90">
-                    <div className="glass-panel rounded-lg p-2 flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[16px] text-tertiary">credit_card</span>
-                      <span className="font-label-sm text-[12px] whitespace-nowrap">PAN</span>
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-8 right-0 animate-float-4 z-20">
-                    <div className="glass-panel rounded-lg p-2 flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[16px] text-primary">cloud_done</span>
-                      <span className="font-label-sm text-[12px] whitespace-nowrap">DigiLocker</span>
-                    </div>
-                  </div>
-                  <div className="absolute -top-6 right-16 animate-float-5 z-0 scale-75 opacity-80">
-                    <div className="glass-panel rounded-lg p-2 flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[16px] text-secondary">agriculture</span>
-                      <span className="font-label-sm text-[12px] whitespace-nowrap">PM-Kisan</span>
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 -right-8 animate-float-6 z-20">
-                    <div className="glass-panel rounded-lg p-2 flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[16px] text-tertiary">health_and_safety</span>
-                      <span className="font-label-sm text-[12px] whitespace-nowrap">Ayushman</span>
-                    </div>
-                  </div>
-                </div>
-              </section>
+                </section>
+              )}
 
               {/* Suggested Actions Grid — shown only when no messages */}
               {messages.length === 0 && (
@@ -569,7 +480,7 @@ function AssistantPageContent() {
                       </div>
                     </div>
                   )}
-                  <div ref={messagesEndRef} className="h-4" />
+                  <div ref={messagesEndRef} className="h-32 w-full flex-shrink-0" />
                 </div>
               )}
             </div>

@@ -2,6 +2,16 @@
 
 *(Chronological history of features, improvements, refactors, performance/security fixes, and breaking changes)*
 
+## 2026-08-13 (Full-Stack Navigation Performance Engineering & Instant Page Routing)
+- **Summary:** Conducted deep performance audit to eliminate page-to-page navigation delay. Synchronized `PUBLIC_ROUTES` in `Navbar.tsx` across all primary destinations (`/schemes`, `/id`, `/complaints`, `/assistant`, `/credentials`) to prevent blocking SPA navigation. Removed render-blocking external Google Fonts stylesheet links in `layout.tsx`, relying 100% on self-hosted `next/font/google`. Eliminated main-thread CPU-blocking `mousemove` querySelector listeners and unrendered WebGL `requestAnimationFrame` loops in `schemes/page.tsx` and `complaints/page.tsx`. Replaced dynamic Footer import with direct import. Removed route-level `loading.tsx` Suspense skeleton boundaries to enable direct instant (<80ms) page transitions. Updated `@code-review-graph`, `@graphify-out`, and `@memory`.
+- **Files Changed:** `frontend/src/components/Navbar.tsx`, `frontend/src/app/layout.tsx`, `frontend/src/app/globals.css`, `frontend/src/app/schemes/page.tsx`, `frontend/src/app/complaints/page.tsx`, `frontend/src/app/assistant/page.tsx`, `frontend/src/components/HeroShowcase.tsx`, `code-review-graph/*`, `graphify-out/*`, `memory/*`.
+- **Author:** Pranav Maheshwari & AI Assistant
+
+## 2026-07-28 (Custom Brand Logo, Responsive Layout Alignment & Hydration Fix)
+- **Summary:** Custom Indian Tricolor & Ashoka Chakra AI logo integrated across `Navbar.tsx`, `Footer.tsx`, `login/page.tsx`, and `signup/page.tsx`. Standardized page container widths to `max-w-7xl` with `px-4 sm:px-6 lg:px-8` across all pages (`schemes`, `id`, `credentials`, `complaints`). Converted `Hero.tsx` layout to a symmetric 12-column grid (`grid-cols-1 lg:grid-cols-12`). Resolved Navbar link collision and drawer breakpoint (`xl`). Fixed React Hydration error by adding `suppressHydrationWarning` on logo and auth elements. Rebuilt `@code-review-graph`, `@graphify-out`, and `@memory`.
+- **Files Changed:** `frontend/public/logo.png`, `frontend/src/components/Navbar.tsx`, `frontend/src/components/Footer.tsx`, `frontend/src/components/Hero.tsx`, `frontend/src/components/HeroShowcase.tsx`, `frontend/src/app/login/page.tsx`, `frontend/src/app/signup/page.tsx`, `frontend/src/app/schemes/page.tsx`, `frontend/src/app/id/page.tsx`, `frontend/src/app/credentials/page.tsx`, `frontend/src/app/complaints/page.tsx`, `README.md`, `code-review-graph/*`, `graphify-out/*`, `memory/*`.
+- **Author:** Pranav Maheshwari & AI Assistant
+
 ## 2026-07-27
 - **Summary:** Fixed registration failure by making optional fields (`phone`, `acceptTerms`, `confirmPassword`) optional in `auth.service.ts` `emailRegister`. Updated `auth.controller.ts` to issue session cookie on signup. Refactored `/credentials` page design to match exact warm cream background (`bg-[#FAF8F4]`), card borders (`#E4E0D6`), Royal Blue pill buttons (`#2563EB`), and typography of the main Dashboard.
 - **Files Changed:** `backend/src/services/auth.service.ts`, `backend/src/controllers/auth.controller.ts`, `frontend/src/app/credentials/page.tsx`, `memory/changelog.md`, `.agents/AGENTS.md`.

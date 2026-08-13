@@ -111,11 +111,11 @@ export default function TrackApplication() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 min-h-[calc(100vh-4rem)]">
+    <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-16 min-h-[calc(100dvh-4rem)]">
       <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
         <Link 
           href="/" 
-          className="mb-12 inline-flex items-center text-sm font-bold text-muted-foreground hover:text-foreground focus-ring rounded-sm transition-colors group font-body"
+          className="mb-8 sm:mb-12 inline-flex items-center text-sm font-bold text-muted-foreground hover:text-foreground focus-ring rounded-sm transition-colors group font-body touch-target-min"
         >
           <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
           Back to Home

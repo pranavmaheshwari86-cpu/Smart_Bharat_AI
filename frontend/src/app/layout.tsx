@@ -1,13 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/context/AuthContext";
 import { RouteGuard } from "@/components/RouteGuard";
 import { ClientShells } from "@/components/ClientShells";
 import { AppPreloader } from "@/components/AppPreloader";
-import dynamic from "next/dynamic";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
 
 // ─── next/font: self-hosted, zero layout shift, no external CDN blocking ──────
 const geistSans = Geist({
@@ -22,7 +29,6 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-// Inter & Manrope replace the blocking Google Fonts <link> tags
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -36,12 +42,6 @@ const manrope = Manrope({
   display: "swap",
   weight: ["600", "700", "800"],
 });
-
-// Footer is below the fold — defer its JS chunk (ssr still enabled)
-const Footer = dynamic(
-  () => import("@/components/Footer").then((m) => ({ default: m.Footer })),
-  { ssr: true }
-);
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://smart-bharat-ai.vercel.app";
 
@@ -85,17 +85,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600&family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
           rel="stylesheet"
-        />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-          rel="stylesheet"
         />
       </head>
       <body suppressHydrationWarning className="min-h-[100dvh] bg-background text-foreground font-sans overflow-x-hidden">

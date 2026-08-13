@@ -134,160 +134,6 @@ export default function ComplaintsPage() {
     setIsDropdownOpen(false);
   }, [selectedCategory]);
 
-  // Background Shader
-  useEffect(() => {
-    const canvas = shaderCanvasRef.current;
-    if (!canvas) return;
-
-    function syncSize() {
-      const w = canvas?.clientWidth || 1280;
-      const h = canvas?.clientHeight || 720;
-      if (canvas && (canvas.width !== w || canvas.height !== h)) {
-        canvas.width = w;
-        canvas.height = h;
-      }
-    }
-
-    let ro: ResizeObserver;
-    if (typeof ResizeObserver !== "undefined") {
-      ro = new ResizeObserver(syncSize);
-      ro.observe(canvas);
-    }
-    syncSize();
-
-    const gl =
-      canvas.getContext("webgl") ||
-      (canvas.getContext("experimental-webgl") as WebGLRenderingContext);
-    if (!gl) return;
-
-    const vs = `attribute vec2 a_position;
-varying vec2 v_texCoord;
-void main() {
-  v_texCoord = a_position * 0.5 + 0.5;
-  gl_Position = vec4(a_position, 0.0, 1.0);
-}`;
-    const fs = `precision highp float;
-varying vec2 v_texCoord;
-uniform float u_time;
-uniform vec2 u_resolution;
-
-float noise(vec2 p) {
-    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-}
-
-void main() {
-    vec2 uv = v_texCoord;
-    
-    // Base palette from design system
-    vec3 bgBase = vec3(0.98, 0.98, 0.97); // #FAFAF8
-    vec3 accentBlue = vec3(0.145, 0.388, 0.922); // #2563EB
-    vec3 accentGold = vec3(0.722, 0.576, 0.353); // #B8935A
-    
-    // Ambient radial glows - slow and breathing
-    float d1 = length(uv - vec2(0.2 + 0.1 * cos(u_time * 0.2), 0.8 + 0.1 * sin(u_time * 0.1)));
-    float glow1 = smoothstep(0.8, 0.0, d1) * 0.06;
-    
-    float d2 = length(uv - vec2(0.8 + 0.1 * sin(u_time * 0.3), 0.2 + 0.1 * cos(u_time * 0.2)));
-    float glow2 = smoothstep(0.7, 0.0, d2) * 0.05;
-    
-    vec3 color = bgBase;
-    color = mix(color, accentBlue, glow1);
-    color = mix(color, accentGold, glow2);
-    
-    // Fine dotted grid overlay
-    vec2 gridUv = fract(uv * 50.0);
-    float dot = smoothstep(0.1, 0.05, length(gridUv - 0.5));
-    color = mix(color, vec3(0.85, 0.83, 0.8), dot * 0.1);
-    
-    // Subtle noise for paper texture
-    float n = noise(uv * 1000.0 + u_time * 0.01) * 0.02;
-    color += n;
-    
-    gl_FragColor = vec4(color, 1.0);
-}`;
-    function cs(type: number, src: string) {
-      const s = gl.createShader(type);
-      if (!s) return null;
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      return s;
-    }
-    const prog = gl.createProgram();
-    if (!prog) return;
-
-    const vShader = cs(gl.VERTEX_SHADER, vs);
-    const fShader = cs(gl.FRAGMENT_SHADER, fs);
-    if (!vShader || !fShader) return;
-
-    gl.attachShader(prog, vShader);
-    gl.attachShader(prog, fShader);
-    gl.linkProgram(prog);
-    gl.useProgram(prog);
-
-    const buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-      gl.STATIC_DRAW
-    );
-    const pos = gl.getAttribLocation(prog, "a_position");
-    gl.enableVertexAttribArray(pos);
-    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-
-    const uTime = gl.getUniformLocation(prog, "u_time");
-    const uRes = gl.getUniformLocation(prog, "u_resolution");
-    const uMouse = gl.getUniformLocation(prog, "u_mouse");
-
-    const mouse = { x: canvas.width / 2, y: canvas.height / 2 };
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width && rect.height) {
-        const nx = (event.clientX - rect.left) / rect.width;
-        const ny = 1.0 - (event.clientY - rect.top) / rect.height;
-        mouse.x = nx * canvas.width;
-        mouse.y = ny * canvas.height;
-      }
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-
-    let animationFrameId: number;
-    function render(t: number) {
-      if (typeof ResizeObserver === "undefined") syncSize();
-      gl!.viewport(0, 0, canvas!.width, canvas!.height);
-      if (uTime) gl!.uniform1f(uTime, t * 0.001);
-      if (uRes) gl!.uniform2f(uRes, canvas!.width, canvas!.height);
-      if (uMouse) gl!.uniform2f(uMouse, mouse.x, mouse.y);
-      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
-      animationFrameId = requestAnimationFrame(render);
-    }
-    render(0);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
-      if (ro) ro.disconnect();
-    };
-  }, []);
-
-  // Spotlight Interaction
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const wrappers = document.querySelectorAll(
-        ".spotlight-wrapper"
-      ) as NodeListOf<HTMLElement>;
-      wrappers.forEach((wrapper) => {
-        const rect = wrapper.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        wrapper.style.setProperty("--x", `${x}px`);
-        wrapper.style.setProperty("--y", `${y}px`);
-      });
-    };
-    document.addEventListener("mousemove", handleMouseMove);
-    return () => document.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
   return (
     <div className="font-body-md text-on-surface antialiased overflow-hidden selection:bg-primary/20 selection:text-primary min-h-screen">
       <style dangerouslySetInnerHTML={{
@@ -441,15 +287,15 @@ void main() {
       <div className="ambient-glow-2"></div>
 
       {/* Main Canvas */}
-      <main className="pt-[100px] pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-12 lg:gap-16">
+      <main className="pt-24 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col gap-8 sm:gap-12 lg:gap-16">
         {/* Hero Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col gap-6 animate-fade-in-up py-4">
-            <h1 className="font-display-lg text-display-lg text-on-surface leading-tight">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="flex flex-col gap-4 sm:gap-6 animate-fade-in-up py-4">
+            <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-[56px] leading-[1.15] text-on-surface font-extrabold tracking-tight">
               Report a <br/> <span className="bg-gradient-to-r from-[#2b61cd] via-[#7c87a5] to-[#ae8d5b] text-transparent bg-clip-text italic pr-2 font-bold">Civic Issue</span>
             </h1>
 
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[600px] font-medium leading-relaxed">
+            <p className="font-body-lg text-base sm:text-lg text-on-surface-variant max-w-[600px] font-medium leading-relaxed">
               Describe your issue naturally in English or Hindi. Our AI engine automatically extracts geolocation, routes your request to Jal Board, PWD, or Power Corp, and tracks real-time status.
             </p>
 
@@ -509,7 +355,7 @@ void main() {
               </div>
             </div>
           </div>
-          <div className="w-full relative aspect-[16/10] sm:aspect-[16/9] min-h-[340px] max-h-[440px] flex items-center justify-center animate-fade-in-up delay-100">
+          <div className="w-full relative min-h-[400px] sm:min-h-[460px] lg:min-h-[500px] max-h-[580px] flex items-center justify-center animate-fade-in-up delay-100">
             <ComplaintsShowcase />
           </div>
         </section>

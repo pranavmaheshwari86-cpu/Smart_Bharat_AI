@@ -49,6 +49,12 @@ export function queryKnowledgeBase(query: string, topK: number = 4): RAGSearchRe
       }
     }
 
+    if (normalizedQuery.includes("passport") && (idItem.id.includes("passport") || idItem.name.toLowerCase().includes("passport"))) score += 20;
+    if ((normalizedQuery.includes("pan") || normalizedQuery.includes("pancard")) && (idItem.id.includes("pan") || idItem.name.toLowerCase().includes("pan"))) score += 20;
+    if (normalizedQuery.includes("aadhaar") && (idItem.id.includes("aadhaar") || idItem.name.toLowerCase().includes("aadhaar"))) score += 20;
+    if (normalizedQuery.includes("voter") && (idItem.id.includes("voter") || idItem.name.toLowerCase().includes("voter"))) score += 20;
+    if ((normalizedQuery.includes("license") || normalizedQuery.includes("driving")) && idItem.name.toLowerCase().includes("driving")) score += 20;
+
     if (score > 0) {
       results.push({
         title: idItem.name,

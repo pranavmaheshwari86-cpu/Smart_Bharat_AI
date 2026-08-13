@@ -1,7 +1,4 @@
-import { UserRepository } from "../repositories/user.repository";
-import { OtpRepository } from "../repositories/otp.repository";
-import { SessionRepository } from "../repositories/session.repository";
-import { PasswordResetRepository } from "../repositories/password-reset.repository";
+import { UserRepository, OtpRepository, SessionRepository, PasswordResetRepository } from "../database/db";
 import { 
   hashPassword, 
   comparePassword, 
