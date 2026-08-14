@@ -30,7 +30,8 @@ export function HeroShowcase() {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
+          suppressHydrationWarning
           onLoadedData={() => setIsLoaded(true)}
           onCanPlay={() => {
             setIsLoaded(true);
