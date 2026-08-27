@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { schemes } from "@/lib/data";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -44,10 +44,6 @@ export default function SchemesPage() {
   const [otherSearch, setOtherSearch] = useState("");
   const [isListening, setIsListening] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
-  const otherRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0, width: 0 });
 
   const filteredOther = OTHER_SCHEME_CATEGORIES
     .filter(c => c.toLowerCase().includes(otherSearch.toLowerCase()))
@@ -88,98 +84,6 @@ export default function SchemesPage() {
       alert("Voice search activated. Speak your search query or type directly in the search bar.");
     }
   };
-
-  const calculateDropdownPos = (rect: DOMRect) => {
-    const DROPDOWN_HEIGHT = 320;
-    const VIEWPORT_H = window.innerHeight;
-    const spaceBelow = VIEWPORT_H - rect.bottom;
-    const spaceAbove = rect.top;
-
-    let top = rect.bottom + 8;
-
-    // If space below is constrained and space above is available, open ABOVE card
-    if (spaceBelow < DROPDOWN_HEIGHT && spaceAbove > DROPDOWN_HEIGHT) {
-      top = Math.max(16, rect.top - DROPDOWN_HEIGHT - 8);
-    }
-
-    return {
-      top,
-      left: Math.max(16, rect.left),
-      width: Math.max(280, rect.width),
-    };
-  };
-
-  const openDropdown = () => {
-    if (otherOpen) {
-      setOtherOpen(false);
-      setOtherSearch("");
-      return;
-    }
-
-    const cardRect = otherRef.current?.getBoundingClientRect();
-    if (!cardRect) {
-      setOtherOpen(true);
-      setOtherSearch("");
-      return;
-    }
-
-    const DROPDOWN_HEIGHT = 320;
-    const VIEWPORT_H = window.innerHeight;
-    const spaceBelow = VIEWPORT_H - cardRect.bottom;
-    const spaceAbove = cardRect.top;
-
-    // If neither below nor above has enough room, scroll down to bring card into view
-    if (spaceBelow < DROPDOWN_HEIGHT && spaceAbove <= DROPDOWN_HEIGHT) {
-      const scrollNeeded = DROPDOWN_HEIGHT - spaceBelow + 40;
-      window.scrollBy({ top: scrollNeeded, behavior: "smooth" });
-
-      setTimeout(() => {
-        if (otherRef.current) {
-          const rect = otherRef.current.getBoundingClientRect();
-          setDropdownPos(calculateDropdownPos(rect));
-        }
-        setOtherOpen(true);
-        setOtherSearch("");
-      }, 300);
-      return;
-    }
-
-    setDropdownPos(calculateDropdownPos(cardRect));
-    setOtherOpen(true);
-    setOtherSearch("");
-  };
-
-  // Close dropdown on click outside both card AND dropdown container
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (
-        otherRef.current && !otherRef.current.contains(e.target as Node) &&
-        dropdownRef.current && !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setOtherOpen(false);
-        setOtherSearch("");
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
-
-  // Dynamically reposition on scroll / window resize
-  useEffect(() => {
-    if (!otherOpen) return;
-    const reposition = () => {
-      if (otherRef.current) {
-        const rect = otherRef.current.getBoundingClientRect();
-        setDropdownPos(calculateDropdownPos(rect));
-      }
-    };
-    window.addEventListener("scroll", reposition, true);
-    window.addEventListener("resize", reposition);
-    return () => {
-      window.removeEventListener("scroll", reposition, true);
-      window.removeEventListener("resize", reposition);
-    };
-  }, [otherOpen]);
 
   const filteredSchemes = schemes.filter(scheme => {
     const matchesSearch = scheme.name.toLowerCase().includes(searchQuery.toLowerCase()) || 

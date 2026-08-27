@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, CheckCircle2, Clock, FileText, AlertCircle, Building2, MapPin } from "lucide-react";
+import { Search, CheckCircle2, FileText, AlertCircle, Building2, MapPin, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 
 // Mock state machine transitions for demonstration
 const mockTrackingData: Record<string, any> = {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Mail, Lock, User, Eye, EyeOff, CheckCircle2, ShieldCheck, Sparkles, X, ArrowLeft } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Sparkles, X, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { UploadCloud, File as FileIcon, X, CheckCircle, AlertCircle, HardDrive } from "lucide-react";
+import { UploadCloud, X, CheckCircle, AlertCircle, HardDrive } from "lucide-react";
 import { DocumentSelector } from "./DocumentSelector";
 
 interface SmartUploadProps {
@@ -135,6 +135,7 @@ export function SmartUpload({ id, label, acceptedFormats = [".pdf", ".jpg", ".pn
           onClick={() => inputRef.current?.click()}
         >
           <input
+            id={id}
             ref={inputRef}
             type="file"
             className="hidden"

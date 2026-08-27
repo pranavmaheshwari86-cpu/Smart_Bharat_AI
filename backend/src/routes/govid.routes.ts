@@ -11,14 +11,14 @@ const SERVICES = [
   { id: "ration-card", name: "Ration Card", category: "Welfare", processingTime: "10-20 Days" },
 ];
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
     success: true,
     services: SERVICES,
   });
 });
 
-router.get("/categories", (req: Request, res: Response) => {
+router.get("/categories", (_req: Request, res: Response) => {
   const categories = Array.from(new Set(SERVICES.map((s) => s.category)));
   res.status(200).json({
     success: true,
@@ -26,7 +26,7 @@ router.get("/categories", (req: Request, res: Response) => {
   });
 });
 
-router.get("/documents", (req: Request, res: Response) => {
+router.get("/documents", (_req: Request, res: Response) => {
   res.status(200).json({
     success: true,
     documents: SERVICES,

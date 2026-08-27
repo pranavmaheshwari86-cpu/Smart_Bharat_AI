@@ -1,8 +1,7 @@
-"use client";
-
 import { useState, useRef, useEffect } from "react";
-import { MessageSquare, X, Send, Bot, User, Sparkles, Loader2 } from "lucide-react";
+import { X, Send, Bot, User, Sparkles } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Message {
   id: string;
@@ -20,12 +19,18 @@ const PREDEFINED_QUESTIONS = [
 export function AIAssistant() {
   const pathname = usePathname();
   const router = useRouter();
+  const { t, currentLanguageObj } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: "1", type: "bot", text: "Namaste! I am your Smart Bharat AI Assistant. How can I help you today?" },
+    { id: "1", type: "bot", text: t("ai_welcome", "Namaste! I am your Smart Bharat AI Assistant. How can I help you today?") },
   ]);
+
+  useEffect(() => {
+    setMessages([
+      { id: "1", type: "bot", text: t("ai_welcome", "Namaste! I am your Smart Bharat AI Assistant. How can I help you today?") },
+    ]);
+  }, [t]);
   const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLInputElement>(null);
 
@@ -35,7 +40,7 @@ export function AIAssistant() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isTyping]);
+  }, [messages]);
 
   // Focus input when chat opens & handle Escape key to close
   useEffect(() => {
@@ -93,8 +98,8 @@ export function AIAssistant() {
               <Bot className="w-6 h-6 text-white" aria-hidden="true" />
             </div>
             <div>
-              <h2 className="font-bold text-lg leading-tight">Smart Bharat AI</h2>
-              <p className="text-xs text-blue-100">Always here to help</p>
+              <h2 className="font-bold text-lg leading-tight">{t("ai_title", "Smart Bharat AI")}</h2>
+              <p className="text-xs text-blue-100">{t("ai_subtitle", "Always here to help")} ({currentLanguageObj.nativeName})</p>
             </div>
           </div>
           <button
@@ -136,27 +141,13 @@ export function AIAssistant() {
             </div>
           ))}
 
-          {isTyping && (
-            <div className="flex justify-start" aria-label="AI is typing">
-              <div className="flex gap-3 max-w-[85%]">
-                <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center shrink-0" aria-hidden="true">
-                  <Bot size={16} />
-                </div>
-                <div className="px-4 py-3 rounded-2xl bg-white border border-slate-200 rounded-tl-sm shadow-sm flex items-center gap-1.5">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></span>
-                  <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-75"></span>
-                  <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-150"></span>
-                </div>
-              </div>
-            </div>
-          )}
           <div ref={messagesEndRef} />
         </div>
 
         {/* Suggested Questions */}
         {messages.length === 1 && (
           <div className="p-3 bg-white border-t border-slate-100">
-            <p className="text-xs font-semibold text-slate-500 mb-2 px-1">Suggested for you:</p>
+            <p className="text-xs font-semibold text-slate-500 mb-2 px-1">{t("ai_suggested_title", "Suggested for you:")}</p>
             <div className="flex flex-wrap gap-2">
               {PREDEFINED_QUESTIONS.map((q, idx) => (
                 <button
@@ -189,16 +180,16 @@ export function AIAssistant() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask anything about govt schemes..."
+              placeholder={t("ai_placeholder", "Ask anything about govt schemes...")}
               className="flex-1 bg-slate-100 border-transparent focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-full px-4 py-3 text-sm transition-all"
             />
             <button
               type="submit"
-              disabled={!input.trim() || isTyping}
+              disabled={!input.trim()}
               aria-label="Send message to AI Assistant"
               className="w-12 h-12 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white rounded-full flex items-center justify-center transition-colors shrink-0 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              {isTyping ? <Loader2 size={20} className="animate-spin" /> : <Send size={18} className="ml-1" />}
+              <Send size={18} className="ml-1" />
             </button>
           </form>
         </div>

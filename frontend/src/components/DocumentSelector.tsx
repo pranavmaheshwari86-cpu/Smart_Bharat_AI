@@ -4,13 +4,12 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { 
-  Search, Star, Clock, ChevronDown, Check, X,
+  Search, Star, ChevronDown, Check, X,
   IdCard, Fingerprint, Book, FileBadge,
-  Baby, ScrollText, HeartHandshake, MapPin,
-  Home, IndianRupee, Users, Scale, HeartPulse,
+  Home, Users, HeartPulse,
   Hospital, Briefcase, HardHat, GraduationCap,
-  BookOpen, Tractor, Wheat, Building2, Store,
-  Receipt, FileText, File, ShieldCheck, FileWarning
+  BookOpen, Tractor, Wheat, Store,
+  Receipt, FileText, ShieldCheck
 } from 'lucide-react';
 
 type Category = 
@@ -333,7 +332,7 @@ export function DocumentSelector({
                   No documents found for "{query}"
                 </div>
               ) : (
-                renderedItems.map((item, i) => {
+                renderedItems.map((item) => {
                   if (item.type === 'header') {
                     return (
                       <div key={`header-${item.label}`} className="px-3 py-2 mt-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant/70">

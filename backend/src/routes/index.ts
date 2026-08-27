@@ -6,7 +6,7 @@ import complaintsRoutes from "./complaints.routes";
 
 const router = Router();
 
-router.get("/health", (req, res) => {
+router.get("/health", (_req, res) => {
   res.status(200).json({ status: "UP", service: "Smart Bharat AI API", timestamp: new Date().toISOString() });
 });
 

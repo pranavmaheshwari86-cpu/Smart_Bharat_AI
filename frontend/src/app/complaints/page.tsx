@@ -114,7 +114,6 @@ export default function ComplaintsPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const shaderCanvasRef = useRef<HTMLCanvasElement>(null);
 
   // Close dropdown on outside click
   useEffect(() => {

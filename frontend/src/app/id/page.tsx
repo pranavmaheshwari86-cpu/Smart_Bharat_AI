@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
+import { useState } from "react";
 import { DocumentSelector } from "@/components/DocumentSelector";
 import { govIds } from "@/lib/data";
-import { Search, Filter, Fingerprint, IdCard, Book, FileText, ArrowRight, IndianRupee, Globe, Plane, Gauge, Archive } from "lucide-react";
+import { Search, Fingerprint, IdCard, Book, FileText, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -35,10 +34,7 @@ const DocumentBackground = ({ id }: { id: string }) => {
 };
 
 export default function IDPage() {
-  const shaderCanvasRef = useRef<HTMLCanvasElement>(null);
-  
   // Search and Filter State
-  const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [showOthersDropdown, setShowOthersDropdown] = useState(false);
   const [dropdownSearch, setDropdownSearch] = useState("");
@@ -49,12 +45,10 @@ export default function IDPage() {
   const filteredIds = govIds
     .filter(doc => featuredIds.includes(doc.id))
     .filter(doc => {
-      const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            doc.description.toLowerCase().includes(searchQuery.toLowerCase());
-      if (activeFilter === "All") return matchesSearch;
-      if (activeFilter === "Central") return matchesSearch && doc.issuingAuthority?.toLowerCase().includes("india");
-      if (activeFilter === "Free") return matchesSearch && doc.fees?.toLowerCase().includes("free");
-      return matchesSearch;
+      if (activeFilter === "All") return true;
+      if (activeFilter === "Central") return doc.issuingAuthority?.toLowerCase().includes("india");
+      if (activeFilter === "Free") return doc.fees?.toLowerCase().includes("free");
+      return true;
     });
 
   return (

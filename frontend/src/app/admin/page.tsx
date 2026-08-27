@@ -7,11 +7,10 @@ import {
   Database, 
   FileText, 
   Users, 
-  Settings, 
   Activity,
   AlertCircle
 } from "lucide-react";
-import { schemes, govIds, vaultCategories } from "@/lib/data";
+import { schemes, govIds } from "@/lib/data";
 
 type TabType = "dashboard" | "schemas" | "applications" | "users";
 

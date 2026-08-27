@@ -237,12 +237,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return data;
   };
 
-  const sendPhoneOtp = async (phone: string, countryCode = "+91", verifier?: any) => {
+  const sendPhoneOtp = async (phone: string, _countryCode = "+91", verifier?: any) => {
     const result = await sendOTP(phone, verifier);
     return result;
   };
 
-  const verifyPhoneOtp = async (phone: string, otp: string, confirmationResult?: any, purpose?: string, userEmail?: string) => {
+  const verifyPhoneOtp = async (phone: string, otp: string, confirmationResult?: any, _purpose?: string, userEmail?: string) => {
     const validConfResult = (typeof confirmationResult === "object" && confirmationResult !== null && "confirm" in confirmationResult) ? confirmationResult : null;
     const result = await verifyOTP(validConfResult, otp);
     if (result.success && result.user) {

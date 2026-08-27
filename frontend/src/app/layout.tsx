@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/context/AuthContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { RouteGuard } from "@/components/RouteGuard";
 import { ClientShells } from "@/components/ClientShells";
 import { AppPreloader } from "@/components/AppPreloader";
@@ -94,14 +95,16 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning className="min-h-[100dvh] bg-background text-foreground font-sans overflow-x-hidden">
         <AuthProvider>
-          <AppPreloader />
-          <RouteGuard>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-            {/* ClientShells hosts ssr:false components (AIAssistant chat widget) */}
-            <ClientShells />
-          </RouteGuard>
+          <LanguageProvider>
+            <AppPreloader />
+            <RouteGuard>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+              {/* ClientShells hosts ssr:false components (AIAssistant chat widget) */}
+              <ClientShells />
+            </RouteGuard>
+          </LanguageProvider>
         </AuthProvider>
       </body>
     </html>

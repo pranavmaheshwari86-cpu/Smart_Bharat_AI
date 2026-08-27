@@ -2,15 +2,15 @@
 
 import { useEffect, useRef, useState, Suspense } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { getUserDisplayName } from "@/lib/utils";
 import { useChatHistory, formatRelativeTime, Message } from "@/lib/useChatHistory";
-import { InteractiveRobotSpline } from "@/components/ui/interactive-3d-robot";
+import { useLanguage } from "@/context/LanguageContext";
 
 function AssistantPageContent() {
   const { user } = useAuth();
+  const { language, currentLanguageObj, t } = useLanguage();
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q");
 
@@ -36,6 +36,8 @@ function AssistantPageContent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: history.map((m) => ({ role: m.role, content: m.content })),
+          language,
+          languageName: currentLanguageObj.name,
         }),
       });
       const data = await res.json();
@@ -404,7 +406,7 @@ function AssistantPageContent() {
                       Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary font-bold">Intelligence</span> Core
                     </h2>
                     <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[560px] mx-auto">
-                      How can I help you navigate government services, understand documents, or access benefits today?
+                      {t("ai_welcome", "How can I help you navigate government services, understand documents, or access benefits today?")}
                     </p>
                   </div>
                 </section>
@@ -413,36 +415,36 @@ function AssistantPageContent() {
               {/* Suggested Actions Grid — shown only when no messages */}
               {messages.length === 0 && (
               <section className="w-full">
-                <h3 className="font-label-sm text-label-sm text-tertiary uppercase tracking-widest mb-4 px-2">Suggested Actions</h3>
+                <h3 className="font-label-sm text-label-sm text-tertiary uppercase tracking-widest mb-4 px-2">{t("ai_suggested_title", "Suggested Actions")}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <button onClick={() => handleSendMessage("Find Schemes")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage(t("ai_find_schemes", "Find Schemes"))} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-primary">account_balance</span>
                     </div>
                     <div className="relative z-10">
-                      <h4 className="font-body-lg text-[16px] font-medium text-on-surface mb-1 group-hover:text-primary transition-colors">Find Schemes</h4>
-                      <p className="font-body-md text-[14px] text-on-surface-variant">Discover eligibility for state &amp; central programs.</p>
+                      <h4 className="font-body-lg text-[16px] font-medium text-on-surface mb-1 group-hover:text-primary transition-colors">{t("ai_find_schemes", "Find Schemes")}</h4>
+                      <p className="font-body-md text-[14px] text-on-surface-variant">{t("ai_find_schemes_desc", "Discover eligibility for state & central programs.")}</p>
                     </div>
                   </button>
-                  <button onClick={() => handleSendMessage("Explain Document")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage(t("ai_explain_doc", "Explain Document"))} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-secondary">description</span>
                     </div>
                     <div className="relative z-10">
-                      <h4 className="font-body-lg text-[16px] font-medium text-on-surface mb-1 group-hover:text-secondary transition-colors">Explain Document</h4>
-                      <p className="font-body-md text-[14px] text-on-surface-variant">Upload official forms for simple explanations.</p>
+                      <h4 className="font-body-lg text-[16px] font-medium text-on-surface mb-1 group-hover:text-secondary transition-colors">{t("ai_explain_doc", "Explain Document")}</h4>
+                      <p className="font-body-md text-[14px] text-on-surface-variant">{t("ai_explain_doc_desc", "Upload official forms for simple explanations.")}</p>
                     </div>
                   </button>
-                  <button onClick={() => handleSendMessage("Healthcare Nav")} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
+                  <button onClick={() => handleSendMessage(t("ai_healthcare", "Healthcare Nav"))} className="glass-card p-5 text-left group flex flex-col gap-4 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-tertiary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="w-12 h-12 rounded-xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center shadow-sm relative z-10">
                       <span className="material-symbols-outlined text-[24px] text-tertiary">local_hospital</span>
                     </div>
                     <div className="relative z-10">
-                      <h4 className="font-body-lg text-[16px] font-medium text-on-surface mb-1 group-hover:text-tertiary transition-colors">Healthcare Nav</h4>
-                      <p className="font-body-md text-[14px] text-on-surface-variant">Locate AB-PMJAY empaneled hospitals near you.</p>
+                      <h4 className="font-body-lg text-[16px] font-medium text-on-surface mb-1 group-hover:text-tertiary transition-colors">{t("ai_healthcare", "Healthcare Nav")}</h4>
+                      <p className="font-body-md text-[14px] text-on-surface-variant">{t("ai_healthcare_desc", "Locate AB-PMJAY empaneled hospitals near you.")}</p>
                     </div>
                   </button>
                 </div>
@@ -495,7 +497,7 @@ function AssistantPageContent() {
               >
                 <input
                   className="flex-1 bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-outline py-3 outline-none"
-                  placeholder="Ask about schemes, upload documents, or request guidance..."
+                  placeholder={t("ai_placeholder", "Ask about schemes, upload documents, or request guidance...")}
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
@@ -515,7 +517,7 @@ function AssistantPageContent() {
               
               {/* Footer Info */}
               <div className="text-center mt-3">
-                <p className="font-label-sm text-[11px] text-outline">Smart Bharat AI may display inaccurate info. Always verify official government sources.</p>
+                <p className="font-label-sm text-[11px] text-outline">{t("ai_disclaimer", "Smart Bharat AI may display inaccurate info. Always verify official government sources.")}</p>
               </div>
             </div>
           </div>

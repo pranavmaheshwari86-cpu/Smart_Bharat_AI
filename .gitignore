@@ -1,40 +1,50 @@
-# dependencies
-node_modules
-/node_modules
-**/node_modules
+# Dependencies
+node_modules/
+**/node_modules/
 /.pnp
 .pnp.*
 
-# build outputs
-dist
-/dist
-**/dist
-.next
-/.next
-**/.next
+# Build outputs & caches
+dist/
+**/dist/
+.next/
+**/.next/
 /out/
-/build
+/build/
+*.tsbuildinfo
+next-env.d.ts
 shared/src/**/*.js
 shared/src/**/*.d.ts
 
-# testing & logs
-/coverage
+# Environment & Secrets (Keep .env.example for repository reference)
+.env
+.env.*
+*.env
+!.env.example
+
+# Testing & Logs
+/coverage/
 /test-results/
 /playwright-report/
 /blob-report/
 *.log
 npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+testsprite_tests/
+e2e/
 
-# misc & runtime
+# Generated graph & analysis outputs (regenerated via scripts)
+.code-review-graph/
+code-review-graph/
+graphify-out/
+
+# OS & Editor & Agent artifacts
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/
 .swarm/
-*.tsbuildinfo
-next-env.d.ts
+.impeccable/
+.agents/
 *.tmp*
-
-# environment files
-.env
-.env.*
-*.env
-
-testsprite_tests\tmp\config.json

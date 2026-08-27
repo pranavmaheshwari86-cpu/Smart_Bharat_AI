@@ -82,7 +82,7 @@ app.use((req: any, _res: any, next: any) => {
 });
 
 // Health & Root Check Endpoints
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.status(200).json({
     service: "Smart Bharat AI Backend API",
     status: "ONLINE",
@@ -91,7 +91,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/health", (req, res) => {
+app.get("/health", (_req, res) => {
   res.status(200).json({ status: "UP", timestamp: new Date().toISOString() });
 });
 
@@ -99,7 +99,7 @@ app.get("/health", (req, res) => {
 app.use("/api", routes);
 
 // Global Production Error Handler — never leak stack traces to client
-app.use((err: any, req: express.Request, res: express.Response, _next: express.NextFunction) => {
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error("Unhandled Backend Error:", err);
 
   const statusCode = err.status || err.statusCode || 500;

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { useAuth } from "@/context/AuthContext";
 
 type UploadedDoc = {
   id: string;
@@ -15,7 +14,6 @@ type UploadedDoc = {
 const STORAGE_KEY = "smart_bharat_uploaded_credentials";
 
 export default function CredentialsPage() {
-  const { user } = useAuth();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [customDocName, setCustomDocName] = useState<string>('');
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success'>('idle');

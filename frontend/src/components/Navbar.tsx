@@ -7,25 +7,28 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { User, LogOut, Menu, X, ChevronRight } from "lucide-react";
 import { getUserDisplayName } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const AUTH_ROUTES = ["/login", "/signup", "/forgot-password", "/reset-password"];
 const PUBLIC_ROUTES = ["/", "/schemes", "/id", "/complaints", "/assistant", "/credentials", "/signup", "/login", "/forgot-password", "/reset-password", "/privacy", "/terms"];
 
-const NAV_LINKS = [
-  { name: "Dashboard", href: "/" },
-  { name: "Schemes", href: "/schemes" },
-  { name: "IDs", href: "/id" },
-  { name: "Complaints", href: "/complaints" },
-  { name: "Assistant", href: "/assistant" },
-  { name: "Credentials", href: "/credentials" },
-];
-
 export function Navbar() {
   const { user, isAuthenticated, signOut } = useAuth();
+  const { t } = useLanguage();
   const pathname = usePathname();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { name: t("nav_dashboard", "Dashboard"), href: "/" },
+    { name: t("nav_schemes", "Schemes"), href: "/schemes" },
+    { name: t("nav_ids", "IDs"), href: "/id" },
+    { name: t("nav_complaints", "Complaints"), href: "/complaints" },
+    { name: t("nav_assistant", "Assistant"), href: "/assistant" },
+    { name: t("nav_credentials", "Credentials"), href: "/credentials" },
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -103,7 +106,7 @@ export function Navbar() {
 
           {/* Center: Desktop Navigation Links */}
           <div className="hidden md:flex items-center justify-center gap-1 lg:gap-2 flex-1 mx-2 lg:mx-4">
-            {NAV_LINKS.map((link) => {
+            {navLinks.map((link) => {
               const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
               return (
                 <Link
@@ -130,7 +133,7 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Right: Auth Controls & Mobile Hamburger */}
+          {/* Right: Auth Controls, Sign Out & Language Selector */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0" suppressHydrationWarning>
             {!isUserLoggedIn ? (
               <div className="hidden sm:flex items-center gap-2">
@@ -139,15 +142,17 @@ export function Navbar() {
                   prefetch={true}
                   className="text-on-surface font-label-md text-label-md hover:text-primary transition-colors px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 rounded-full touch-target-min"
                 >
-                  Sign In
+                  {t("nav_signin", "Sign In")}
                 </Link>
                 <Link
                   href="/signup"
                   prefetch={true}
                   className="bg-primary hover:bg-primary/90 text-white font-label-md text-label-md px-5 py-2.5 rounded-full transition-all hover:shadow-apple-sm focus:outline-none focus:ring-2 focus:ring-primary/40 touch-target-min"
                 >
-                  Get Started
+                  {t("nav_signup", "Get Started")}
                 </Link>
+                {/* Change language option on right side */}
+                <LanguageSelector />
               </div>
             ) : (
               <div className="hidden sm:flex items-center gap-3">
@@ -179,13 +184,16 @@ export function Navbar() {
                 {/* Sign Out Button */}
                 <button
                   onClick={() => signOut()}
-                  aria-label="Sign Out"
+                  aria-label={t("nav_signout", "Sign Out")}
                   className="flex items-center gap-1.5 text-xs font-semibold text-on-surface-variant hover:text-error transition-colors px-3 py-2 rounded-full hover:bg-error/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-error/40 touch-target-min"
-                  title="Sign Out"
+                  title={t("nav_signout", "Sign Out")}
                 >
                   <LogOut className="w-4 h-4" aria-hidden="true" />
-                  <span>Sign Out</span>
+                  <span>{t("nav_signout", "Sign Out")}</span>
                 </button>
+
+                {/* Change language option placed on the right side of the Sign Out button */}
+                <LanguageSelector />
               </div>
             )}
 
@@ -258,7 +266,7 @@ export function Navbar() {
               <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider px-3 mb-1">
                 Navigation
               </span>
-              {NAV_LINKS.map((link) => {
+              {navLinks.map((link) => {
                 const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
                 return (
                   <Link
@@ -278,6 +286,11 @@ export function Navbar() {
                 );
               })}
             </div>
+
+            {/* Mobile Language Selector */}
+            <div className="mt-2">
+              <LanguageSelector isMobile={true} />
+            </div>
           </div>
 
           {/* Drawer Footer Actions */}
@@ -289,14 +302,14 @@ export function Navbar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="w-full text-center py-3 text-on-surface font-label-md text-sm border border-slate-300 rounded-full hover:bg-slate-50 transition-colors"
                 >
-                  Sign In
+                  {t("nav_signin", "Sign In")}
                 </Link>
                 <Link
                   href="/signup"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="w-full text-center py-3 bg-primary text-white font-label-md text-sm rounded-full shadow-md hover:bg-primary/90 transition-colors"
                 >
-                  Get Started
+                  {t("nav_signup", "Get Started")}
                 </Link>
               </>
             ) : (
@@ -308,7 +321,7 @@ export function Navbar() {
                 className="w-full flex items-center justify-center gap-2 py-3 text-error font-semibold text-sm bg-error/10 hover:bg-error/20 rounded-full transition-colors"
               >
                 <LogOut className="w-4 h-4" />
-                Sign Out
+                {t("nav_signout", "Sign Out")}
               </button>
             )}
           </div>

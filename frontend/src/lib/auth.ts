@@ -134,7 +134,7 @@ export const sendOTP = async (
 export const verifyOTP = async (
   confirmationResult: ConfirmationResult | null,
   otpCode: string,
-  verificationId?: string
+  _verificationId?: string
 ): Promise<{ success: boolean; user?: FirebaseAuthUser; error?: string }> => {
   if (!otpCode || otpCode.trim().length !== 6) {
     return { success: false, error: "Please enter a complete 6-digit OTP code." };

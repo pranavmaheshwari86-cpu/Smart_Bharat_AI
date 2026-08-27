@@ -1,18 +1,17 @@
 "use client";
 
 import { useState, use } from "react";
-import { notFound, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import { govIds } from "@/lib/data";
 import { DynamicForm } from "@/components/DynamicForm";
 import { 
   ArrowLeft, CheckCircle2, Fingerprint, Clock, IndianRupee, 
-  Building2, Globe, FileText, Sparkles, MessageCircleQuestion,
+  Building2, FileText, Sparkles, MessageCircleQuestion,
   ChevronDown, ChevronUp, ExternalLink
 } from "lucide-react";
 import Link from "next/link";
 
 export default function GovIdDetailsPage({ params }: { params: Promise<{ id: string }> }) {
-  const router = useRouter();
   const { id } = use(params);
   const idDoc = govIds.find(i => i.id === id);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);

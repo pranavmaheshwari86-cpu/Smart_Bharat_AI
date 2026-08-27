@@ -23,7 +23,7 @@ const MOCK_USER_PROFILE: Record<string, string> = {
   phone: "9876543210"
 };
 
-export function DynamicForm({ fields, onSubmit, submitLabel = "Submit Application", formId = "default" }: DynamicFormProps) {
+export function DynamicForm({ fields, onSubmit, submitLabel = "Review Application", formId = "default" }: DynamicFormProps) {
   const [formData, setFormData] = useState<Record<string, unknown>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -389,7 +389,7 @@ export function DynamicForm({ fields, onSubmit, submitLabel = "Submit Applicatio
           type="submit" 
           className="flex-[2] h-12 flex items-center justify-center rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-sm"
         >
-          Review Application
+          {submitLabel}
         </button>
       </div>
     </form>

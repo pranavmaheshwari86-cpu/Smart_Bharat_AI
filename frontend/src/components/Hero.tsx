@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { HeroShowcase } from "@/components/HeroShowcase";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Hero() {
+  const { t } = useLanguage();
+
   return (
     <main className="flex-grow pt-16">
       {/* Background Shader (Simulated with simple div for now as per template) */}
@@ -16,16 +19,17 @@ export function Hero() {
           {/* Left: Content */}
           <div className="w-full lg:col-span-6 flex flex-col items-start gap-4 sm:gap-6 z-10 relative py-2 sm:py-4">
             <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[58px] leading-[1.15] text-on-surface font-extrabold tracking-tight drop-shadow-sm">
-              Simplified Access to <span className="text-gradient font-bold italic pr-1">Government Services</span>
+              {t("hero_title_1", "Simplified Access to")}{" "}
+              <span className="text-gradient font-bold italic pr-1">{t("hero_title_2", "Government Services")}</span>
             </h1>
             
             <p className="font-body-lg text-base sm:text-lg text-on-surface-variant max-w-[540px] font-medium leading-relaxed">
-              Navigate bureaucracy instantly. Find the exact schemes you qualify for, generate required documents, and track applications without the wait.
+              {t("hero_subtitle", "Navigate bureaucracy instantly. Find the exact schemes you qualify for, generate required documents, and track applications without the wait.")}
             </p>
             
             <div className="flex flex-col sm:flex-row items-center gap-4 mt-2 w-full sm:w-auto">
               <Link href="/schemes" className="w-full sm:w-auto bg-primary text-white px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg shadow-apple-sm hover:shadow-apple-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3 touch-target-min">
-                Get Started
+                {t("hero_btn_schemes", "Get Started")}
                 <span className="material-symbols-outlined text-[24px]" aria-hidden="true">arrow_forward</span>
               </Link>
             </div>
