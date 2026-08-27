@@ -47,4 +47,6 @@ Thumbs.db
 .swarm/
 .impeccable/
 .agents/
+AGENTS.md
+DESIGN.md
 *.tmp*
